@@ -27,7 +27,7 @@
 							    <h4 class="card-title">Login</h4>
 							    <form runat="server" method="POST" class="my-login-validation" novalidate="">
 								    <div class="form-group">
-									    <asp:Label runat="server" for="email">E-Mail Address</asp:Label>
+									    <asp:Label runat="server" for="email">Username</asp:Label>
                                         <%-- type="email" --%>
 									    <asp:TextBox runat="server" id="email" class="form-control" name="email" ></asp:TextBox>
 									    <div class="invalid-feedback">
