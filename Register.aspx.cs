@@ -19,7 +19,7 @@ public partial class Register : System.Web.UI.Page
         //{
 
 
-            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["Project"].ConnectionString);
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
             sc.Open();
 
             System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand

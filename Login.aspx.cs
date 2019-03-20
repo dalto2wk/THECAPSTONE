@@ -52,7 +52,7 @@ public partial class Login : System.Web.UI.Page
 
             
 
-            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["Project"].ConnectionString);
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
             sc.Open();
 
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
@@ -94,7 +94,7 @@ public partial class Login : System.Web.UI.Page
 
 
 
-            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["Project"].ConnectionString);
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
             sc.Open();
 
             System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
