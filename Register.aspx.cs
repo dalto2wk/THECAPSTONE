@@ -46,8 +46,8 @@ public partial class Register : System.Web.UI.Page
             insert.Parameters.AddWithValue("@description", desc);
             insert.Parameters.AddWithValue("@cpTitle", cpTitle);   
             insert.Parameters.AddWithValue("@cpName", cpName);
-            insert.Parameters.AddWithValue("@cpUsername", cpUsername );
-            insert.Parameters.AddWithValue("@cpPassword", cpPassword);
+            insert.Parameters.AddWithValue("@cpUsername", cpUsername);
+            insert.Parameters.AddWithValue("@cpPassword", PasswordHash.HashPassword(cpPassword));
             insert.Parameters.AddWithValue("@LastUpdatedBy", "484Team");
             insert.ExecuteNonQuery();
 
