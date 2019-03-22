@@ -64,12 +64,12 @@
 					<div class="col-sm-12">
 						<section class="row">
 							<div class="col-md-12 col-lg-8">
-								<%--<div class="jumbotron">
+								<div class="jumbotron">
 									<h1 class="mb-4">Hello, <asp:literal runat="server" ID="helloEmpName"></asp:literal>!</h1>
 									<p class="lead">Welcome to the Cued In family! This is your Dashboard. Here you will find basic information on students available as well as an overview of your current activity as a verified employer.</p>
 									<p>Students have a similar dashboard and will be able to see postings as soon as you upload them.</p>
 									<p class="lead"><a class="btn btn-primary btn-lg mt-2" href="JobPostForm.aspx" role="button">Create Listing</a></p>
-								</div>--%>
+								</div>
                             
 								<div class="card mb-4">
 									<div class="card-block">
