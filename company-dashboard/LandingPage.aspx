@@ -35,7 +35,7 @@
 					<li class="nav-item"><a class="nav-link active" href="index.html"><em class="fas fa-tachometer-alt"></em> Dashboard <span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="student.html"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
 					<li class="nav-item"><a class="nav-link" href="school.html"><em class="fas fa-school"></em> School Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="listing.html"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
+					<li class="nav-item"><a class="nav-link" href="ViewListings.aspx"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
 					<li class="nav-item"><a class="nav-link" href="profile.html"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 				</ul>
 				<a href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
@@ -217,7 +217,9 @@
 										<div class="divider"></div>
 										<div id="calendar"></div>
 										<div class="divider"></div>
-										
+								</div>
+                                    </div>
+                                
 								<div class="card mb-4">
 									<div class="card-block">
 										<h3 class="card-title">Todo List</h3>
@@ -272,7 +274,8 @@
 														<input type="checkbox" runat="server" class="custom-control-input" id="customCheck5">
 														<label class="custom-control-label custom-control-description" runat="server" for="customCheck5">Get feedback</label>
 													<div class="float-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-												</div>
+												    </div>
+                                                </div>
 											</li>
 										</ul>
 										<div class="card-footer todo-list-footer">
