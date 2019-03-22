@@ -37,7 +37,7 @@
 					<li class="nav-item"><a class="nav-link" href="listing.html"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
 					<li class="nav-item"><a class="nav-link" href="profile.html"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 				</ul>
-				<a href="login.html" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
+				<a href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
 			</nav>
 			<main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
 				<header class="page-header row justify-center">
