@@ -34,7 +34,7 @@
 					<li class="nav-item"><a class="nav-link active" href="index.html"><em class="fas fa-tachometer-alt"></em> Dashboard <span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="student.html"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
 					<li class="nav-item"><a class="nav-link" href="school.html"><em class="fas fa-school"></em> School Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="listing.html"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
+					<li class="nav-item"><a class="nav-link" href="ViewListings.aspx"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
 					<li class="nav-item"><a class="nav-link" href="profile.html"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 				</ul>
 				<a href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
@@ -57,7 +57,8 @@
 					</div>
 					<div class="clear"></div>
 				</header>
-                </div>
+                </main>
+            </div>
         </div>
         
     <!-- Bootstrap core JavaScript
