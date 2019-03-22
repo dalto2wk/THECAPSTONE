@@ -25,7 +25,7 @@
 		<div runat="server" class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 				<div class="sitelogo">
-				<a href="index.html"><img src="images/logo.jpg" alt="logo"></a>
+				<a href="LandingPage.aspx"><img src="images/logo.jpg" alt="logo"></a>
 			</div>
 													
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
@@ -37,7 +37,7 @@
 					<li class="nav-item"><a class="nav-link" href="listing.html"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
 					<li class="nav-item"><a class="nav-link" href="forms.html"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 				</ul>
-				<a runat="server" href="Login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
+				<a runat="server" href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
 			</nav>
 			<main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
 				<header class="page-header row justify-center">

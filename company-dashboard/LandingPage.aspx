@@ -22,6 +22,7 @@
     
 </head>
 <body>
+    <form class="form" action="#" runat="server">
 	<div class="container-fluid" id="wrapper">
 		<div class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
@@ -57,16 +58,19 @@
 					</div>
 					<div class="clear"></div>
 				</header>
+                
 				<section class="row">
+                  
 					<div class="col-sm-12">
 						<section class="row">
 							<div class="col-md-12 col-lg-8">
-								<div class="jumbotron">
+								<%--<div class="jumbotron">
 									<h1 class="mb-4">Hello, <asp:literal runat="server" ID="helloEmpName"></asp:literal>!</h1>
 									<p class="lead">Welcome to the Cued In family! This is your Dashboard. Here you will find basic information on students available as well as an overview of your current activity as a verified employer.</p>
 									<p>Students have a similar dashboard and will be able to see postings as soon as you upload them.</p>
 									<p class="lead"><a class="btn btn-primary btn-lg mt-2" href="JobPostForm.aspx" role="button">Create Listing</a></p>
-								</div>
+								</div>--%>
+                            
 								<div class="card mb-4">
 									<div class="card-block">
 										<h3 class="card-title">Current Desirability</h3>
@@ -84,7 +88,7 @@
 								</div>
 								<div class="card mb-4">
 									<div class="card-block">
-										<h3 class="card-title">Recent Orders</h3>
+										<h3 class="card-title">Recent Applications</h3>
 										<div class="dropdown card-title-btn-container">
 											<button class="btn btn-sm btn-subtle" type="button" runat="server"><em class="fa fa-list-ul"></em> View All</button>
 											<button class="btn btn-sm btn-subtle dropdown-toggle" type="button" runat="server" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>
@@ -94,42 +98,17 @@
 										</div>
 										<div class="table-responsive">
                                             <%-- Should eventually connect to DB may neeed to add more runat="server" tags --%>
-											<table class="table table-striped" runat="server">
-												<thead>
-													<tr>
-														<th>Student ID #</th>
-														<th>Name</th>
-														<th>Interest</th>
-														<th>Status</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>0001</td>
-														<td>Student Name 1</td>
-														<td>Construction</td>
-														<td>submitted application</td>
-													</tr>
-													<tr>
-														<td>0002</td>
-														<td>Student Name 2</td>
-														<td>Operations</td>
-														<td>expressed interest</td>
-													</tr>
-													<tr>
-														<td>0003</td>
-														<td>Student Name 3</td>
-														<td>Mechanic</td>
-														<td>Pending review</td>
-													</tr>
-													<tr>
-														<td>0004</td>
-														<td>Student Name 4</td>
-														<td>Culinary</td>
-														<td>Viewed listing</td>
-													</tr>
-												</tbody>
-											</table>
+                                            <asp:GridView ID="recentApplicationsGV"  runat="server" AutoGenerateColumns="False" DataKeyNames="applicationID" CssClass="table table-striped" UseAccessibleHeader="true" DataSourceID="SqlDataSource1">
+                                                <Columns>
+                                                    <asp:BoundField DataField="applicationID" HeaderText="Application ID" InsertVisible="False" ReadOnly="True" SortExpression="applicationID" />
+                                                    <asp:BoundField DataField="jobTitle" HeaderText="Job Title" SortExpression="jobTitle" />
+                                                    <asp:BoundField DataField="companyName" HeaderText="Company Name" SortExpression="companyName" />
+                                                    <asp:BoundField DataField="postingID" HeaderText="Posting ID" SortExpression="postingID" />
+                                                </Columns>
+
+
+                                            </asp:GridView>
+										    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:AWSString %>" SelectCommand="SELECT [applicationID], [jobTitle], [companyName], [postingID] FROM [Application]"></asp:SqlDataSource>
 										</div>
 									</div>
 								</div>
@@ -257,7 +236,8 @@
 														<input type="checkbox" runat="server" class="custom-control-input" id="customCheck1">
 														<label class="custom-control-label custom-control-description" runat="server" for="customCheck1">call with conselor</label>
 													<div class="float-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-												</div>
+												    </div>
+                                                </div>
 											</li>
 											<li class="todo-list-item">
 												<div class="checkbox mt-1 mb-2">
@@ -265,7 +245,8 @@
 														<input type="checkbox" runat="server" class="custom-control-input" id="customCheck2">
 														<label class="custom-control-label custom-control-description" runat="server" for="customCheck2">update posting</label>
 													<div class="float-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-												</div>
+												    </div>
+                                                </div>
 											</li>
 											<li class="todo-list-item">
 												<div class="checkbox mt-1 mb-2">
@@ -273,7 +254,8 @@
 														<input type="checkbox" runat="server" class="custom-control-input" id="customCheck3">
 														<label class="custom-control-label custom-control-description" runat="server" for="customCheck3">Reply to Jane</label>
 													<div class="float-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-												</div>
+												    </div>
+                                                </div>
 											</li>
 											<li class="todo-list-item" runat="server">
 												<div class="checkbox mt-1 mb-2">
@@ -281,7 +263,8 @@
 														<input type="checkbox" runat="server" class="custom-control-input" id="customCheck4">
 														<label class="custom-control-label custom-control-description" runat="server" for="customCheck4">new posting</label>
 													<div class="float-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-												</div>
+												    </div>
+                                                </div>
 											</li>
 											<li class="todo-list-item" runat="server">
 												<div class="checkbox mt-1 mb-2">
@@ -302,9 +285,10 @@
 								</div>
 							</div>
 						</section>
-				
 					</div>
+                    
 				</section>
+                
 			</main>
 		</div>
 	</div>
@@ -330,7 +314,7 @@
 	</script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    
+    </form>
 	</body>
 </html>
 
