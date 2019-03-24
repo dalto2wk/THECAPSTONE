@@ -49,7 +49,7 @@
 						<img src="images/profile-pic.jpg" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
 						<div class="username mt-1">
 							<h4 class="mb-1"><asp:Literal runat="server" id="loggedInUser" /></h4>
-							<h6 class="text-muted">Admin</h6>
+							<h6 class="text-muted">Employer</h6>
 						</div>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="#"><em class="fa fa-user-circle mr-1"></em> View Profile</a>
@@ -186,7 +186,7 @@
 												<img src="images/profile-pic2.jpg" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;">
 											</div>
 											<div class="col-sm-9 col-md-10">
-												<h6 class="pt-1">John Doe</h6>
+												<h6 class="pt-1"><asp:Literal runat="server" id="ApplicantOne" /></h6>
 												<div class="progress progress-custom">
 													<div runat="server" id="testprogress" class="progress-bar bg-primary" ></div>
 												</div>
@@ -197,7 +197,7 @@
 												<img src="images/profile-pic2.jpg" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;">
 											</div>
 											<div class="col-sm-9 col-md-10">
-												<h6 class="pt-1">Jane Smith</h6>
+												<h6 class="pt-1"><asp:Literal runat="server" id="ApplicantTwo" /></h6>
 												<div class="progress progress-custom">
 													<div class="progress-bar bg-primary" style="width: 50%" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
@@ -208,7 +208,7 @@
 												<img src="images/profile-pic2.jpg" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;">
 											</div>
 											<div class="col-sm-9 col-md-10">
-												<h6 class="pt-1">Max Neil</h6>
+												<h6 class="pt-1"><asp:Literal runat="server" id="ApplicantThree" /></h6>
 												<div class="progress progress-custom">
 													<div class="progress-bar bg-primary" style="width: 25%" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
