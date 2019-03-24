@@ -188,7 +188,7 @@
 											<div class="col-sm-9 col-md-10">
 												<h6 class="pt-1">John Doe</h6>
 												<div class="progress progress-custom">
-													<div class="progress-bar bg-primary" style="width: 75%" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+													<div runat="server" id="testprogress" class="progress-bar bg-primary" ></div>
 												</div>
 											</div>
 										</div>

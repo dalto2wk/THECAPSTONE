@@ -18,13 +18,14 @@ public class Student {
 	private String email;
 	private String phone;
 	private School schoolID;
+    private double GPA;
 	
 	
 	
 	
 	public Student(String firstName, String lastName, String middleName, String houseNbr, String street, String city,
 			String state, String country, String zip, String dateOfBirth, String academicYear, String email,
-			String phone, School schoolID) {
+			String phone, School schoolID, double GPA) {
 		setStudentID();
 		setFirstName(firstName);
 		setLastName(lastName);
@@ -40,9 +41,19 @@ public class Student {
 		setEmail(email);
 		setPhone(phone);
 		setSchoolID(schoolID);
-		
+        setGPA(GPA);
 	}
-	public int getStudentID() {
+
+    public void setGPA(double GPA)
+    {
+        this.GPA = GPA;
+    }
+    public double getGPA()
+    {
+        return this.GPA;
+    }
+
+    public int getStudentID() {
 		return this.StudentID;
 	}
 	public void setStudentID() {

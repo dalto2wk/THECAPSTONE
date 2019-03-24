@@ -7,7 +7,7 @@ public class Posting {
 	private int postingID;
 	private String postingTitle;
 	private String description;
-	private String interests;
+	
 	private String jobRequirements;
 	private String contactInfo;
 	private Employer emp;
@@ -15,11 +15,11 @@ public class Posting {
     private string lastUpdated;
 
 
-    public Posting(String postingTitle, String description, String interests, String jobRequirements,
+    public Posting(String postingTitle, String description, String jobRequirements,
 			String contactInfo, Employer empID) {
 		setPostingTitle(postingTitle);
 		setDescription(description);
-		setInterests(interests);
+		
 		setJobRequirements(jobRequirements);
 		setContactInfo(contactInfo);
 		setEmp(empID);
@@ -44,12 +44,7 @@ public class Posting {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getInterests() {
-		return this.interests;
-	}
-	public void setInterests(String interests) {
-		this.interests = interests;
-	}
+	
 	public String getJobRequirements() {
 		return this.jobRequirements;
 	}

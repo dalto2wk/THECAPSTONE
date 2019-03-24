@@ -45,7 +45,7 @@ public partial class Login : System.Web.UI.Page
 
     protected void getPassword(String pass, String username)
     {
-        
+
         try
         {
 
@@ -90,18 +90,18 @@ public partial class Login : System.Web.UI.Page
                 
 
                 String sqlResult = select.ExecuteScalar().ToString();
-                //Debug.WriteLine(sqlResult + " is the Result: result");
+            //Debug.WriteLine(sqlResult + " is the Result: result");
 
 
 
-                //String sqlResult = select.ExecuteScalar().ToString();
+            //String sqlResult = select.ExecuteScalar().ToString();
 
 
 
 
-               
-            }
+
         }
+    }
         catch
         {
            
