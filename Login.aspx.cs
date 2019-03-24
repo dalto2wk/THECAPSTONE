@@ -68,17 +68,19 @@ public partial class Login : System.Web.UI.Page
         
 
         SqlDataReader reader = select.ExecuteReader(); // create a reader
-            Debug.WriteLine("First: ");
+            
             if (reader.HasRows) // if the username exists, it will continue
             {
-                Debug.WriteLine("Second: ");
+                
                 while (reader.Read()) // this will read the single record that matches the entered username
                 {
                     string storedHash = reader["cpPassword"].ToString(); // store the database password into this variable
-                    Debug.WriteLine("Password status: " + PasswordHash.ValidatePassword(pass, storedHash));
+                    
                     if (PasswordHash.ValidatePassword(password.Text, storedHash)) // if the entered password matches what is stored, it will show success
                     {
+                        Session["username"] = email.Text;
                         Response.Redirect("company-dashboard/LandingPage.aspx");
+                        //Need to verify when to remove session variables * probably should be done upon logging out
                     }
                   
                        
@@ -88,7 +90,7 @@ public partial class Login : System.Web.UI.Page
                 
 
                 String sqlResult = select.ExecuteScalar().ToString();
-                Debug.WriteLine(sqlResult + " is the Result: result");
+                //Debug.WriteLine(sqlResult + " is the Result: result");
 
 
 

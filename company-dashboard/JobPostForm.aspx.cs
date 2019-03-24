@@ -10,14 +10,15 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        loggedInUser.Text = Session["username"].ToString();
-        
+        //loggedInUser.Text = Session["username"].ToString();
 
-        if (IsPostBack == true || IsPostBack == false)
-        {
-            loggedInUser.Text = Session["username"].ToString();
-            
-        }
+
+        //if (IsPostBack == true || IsPostBack == false)
+        //{
+        //    loggedInUser.Text = Session["username"].ToString();
+
+        //}
+        loggedInUser.Text = Session["username"].ToString();
 
     }
 
@@ -34,7 +35,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
     {
         String postingTitle = txtJobTitle.Value;
         String requirements = txtRequirements.Value;
-        String interest = ddlInterest.Value;
+        String interest = cboxInterests.SelectedValue;
         String description = txtDescription.Value;
         String cpName = txtCpName.Value;
         //String cpPhone = txtCpPhone.Value;

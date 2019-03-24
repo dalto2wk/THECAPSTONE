@@ -9,6 +9,6 @@ public partial class ViewListings : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        loggedInUser.Text = Session["username"].ToString();
     }
 }

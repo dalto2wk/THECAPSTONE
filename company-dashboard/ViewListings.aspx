@@ -59,6 +59,12 @@
 				</header>
                 </main>
             </div>
+            <div class="table-responsive">
+
+
+
+
+            </div>
         </div>
         
     <!-- Bootstrap core JavaScript
