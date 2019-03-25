@@ -38,6 +38,7 @@ public partial class Register : System.Web.UI.Page
             String cpPassword = password.Value;
             String cpPhone = Phone.Value;
             String cpEmail = email.Value;
+
         Employer emp = new Employer(businessName, Convert.ToInt32(businessSize), industryName, desc, cpName, cpUsername, cpPassword, cpEmail, cpPhone, 1);
 
         insert.Parameters.AddWithValue("@businessName", businessName);
