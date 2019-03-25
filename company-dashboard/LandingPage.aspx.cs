@@ -18,10 +18,6 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
         sc.Open();
 
 
-        String firstName;
-        String lastName;
-        Double GPA;
-
         System.Data.SqlClient.SqlCommand topCandidate = new System.Data.SqlClient.SqlCommand
         {
             Connection = sc,
@@ -36,19 +32,41 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
         };
 
         SqlDataReader reader = topCandidate.ExecuteReader();
-        int row = 0;
+        int rows = 0;
         ArrayList names = new ArrayList();
-        ArrayList nameInterest = new ArrayList();
-        int multiplier = 0;
+        ArrayList GPA = new ArrayList();
+        ArrayList interest = new ArrayList();
 
         while (reader.Read())
         {
-            row++;
-            names.Add(reader.GetString(0) + reader.GetString(1));
+            
+            names.Add(reader.GetString(0) + " " + reader.GetString(1));
+            GPA.Add(reader.GetDecimal(2));
+            interest.Add(reader.GetString(3));
+            rows++;
         }
 
-        Debug.WriteLine(row);
+        ArrayList finalValues = new ArrayList();
+
+        double gpaCounter = 0;
+        for(int i=0; i<rows; i++)
+        {
+            gpaCounter = Convert.ToDouble(GPA[0]) + .5;
+            
+            if (i > 0)
+            {
+                if(names[i] == names[i-1])
+                {
+                    gpaCounter += .5;
+                }
+                finalValues.Add(gpaCounter);
+            }
+            
+        }
+        Debug.WriteLine(rows);
         Debug.WriteLine(names[0]);
+        Debug.WriteLine(GPA[0]);
+        Debug.WriteLine(interest[0]);
 
 
         loggedInUser.Text = Session["username"].ToString();
