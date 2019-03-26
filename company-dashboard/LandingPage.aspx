@@ -180,26 +180,31 @@
 								<div class="card mb-4">
 									<div class="card-block">
 										<h3 class="card-title">Top Candidates</h3>
-										<h6 class="card-subtitle mb-2 text-muted">Most active this week</h6>
+                                        <!-- SubTitle displaying the Posting Title-->
+										<h6 class="card-subtitle mb-2 text-muted"><asp:Literal ID="topCandidateSubTitle" runat="server"/></h6>
 										<div class="user-progress justify-center">
 											<div class="col-sm-3 col-md-2" style="padding: 0;">
 												<img src="images/profile-pic2.jpg" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;">
 											</div>
 											<div class="col-sm-9 col-md-10">
+                                                <!-- Top Candidate 1 display info-->
 												<h6 class="pt-1"><asp:Literal runat="server" id="ApplicantOne" /></h6>
 												<div class="progress progress-custom">
+                                                    <!-- Information for Top Candidate-->
 													<div runat="server" id="testprogress" class="progress-bar bg-primary" ></div>
 												</div>
 											</div>
-										</div>
+										</div>                   
 										<div class="user-progress justify-center">
 											<div class="col-sm-3 col-md-2" style="padding: 0;">
 												<img src="images/profile-pic2.jpg" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;">
 											</div>
 											<div class="col-sm-9 col-md-10">
+                                                 <!-- Top Candidate 2 display info-->
 												<h6 class="pt-1"><asp:Literal runat="server" id="ApplicantTwo" /></h6>
 												<div class="progress progress-custom">
-													<div class="progress-bar bg-primary" style="width: 50%" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <!-- Information for Second-Most Top Candidate-->
+													<div runat="server" id="testprogress2" class="progress-bar bg-primary"></div>
 												</div>
 											</div>
 										</div>
