@@ -16,7 +16,7 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
     {
 
         ArrayList topCandidate = new ArrayList();
-
+        
         ///Connect to database
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         sc.Open();

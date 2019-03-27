@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Listing.aspx.cs" Inherits="company_dashboard_Listing" %>
+
+<!DOCTYPE html>
+
+
 
 
 <html lang="en">
@@ -28,22 +32,6 @@
             <div class="row">
                 <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
                     <div class="sitelogo">
-
-
-
-                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView">
-                                            <Columns>
-                                                <asp:BoundField DataField="Job Listing Title" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
-                                                <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
-                                                <%--<asp:CommandField ShowEditButton="True"  ControlStyle-CssClass="btn btn-primary" ShowHeader="True" EditText="Edit Listing" HeaderText="Action"></asp:CommandField>--%>
-                                                <asp:TemplateField ShowHeader="true" HeaderText="Action">
-                                                    <ItemTemplate>
-                                                        <asp:Button ID="Button" OnClick="Button_Click1" CommandName="editListing"  CssClass="btn btn-primary" Text="Edit Listing"   runat="server" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                
-                                            </Columns>
-                                        </asp:GridView>
                         <img src="images/logo.jpg" alt="logo"><a href="LandingPage.aspx"></a>
                     </div>
 
@@ -97,12 +85,26 @@
                                     </div>
                                     <br>
                                     <div class="table-responsive">
+
                                         <%-- Correct query - SELECT        Posting.postingTitle AS 'Job Listing Title', COUNT(Application.studentID) AS 'Number Of Applicants'
 FROM            Posting INNER JOIN
                          Application ON Posting.postingID = Application.postingID group by Posting.postingTitle --%>
 
 
-
+                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView" OnRowCommand="EditBtn">
+                                            <Columns>
+                                                <asp:BoundField DataField="Job Listing Title" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
+                                                <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
+                                                <asp:ButtonField ButtonType="Button" ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Edit Listing"  />
+                                                <%--<asp:CommandField ShowEditButton="True"  ControlStyle-CssClass="btn btn-primary" ShowHeader="True" EditText="Edit Listing" HeaderText="Action"></asp:CommandField>--%>
+                                                <%--<asp:TemplateField ShowHeader="true" HeaderText="Action">
+                                                    <ItemTemplate>
+                                                        <asp:Button ID="Button"  CommandName="editListing"  CssClass="btn btn-primary" Text="Edit Listing"   runat="server" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>--%>
+                                                
+                                            </Columns>
+                                        </asp:GridView>
                                         <%--	<table class="table table-striped">
 												<thead>
 													<tr>
