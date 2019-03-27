@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
+using System.Diagnostics;
 
 public partial class Register : System.Web.UI.Page
 {
@@ -52,6 +53,7 @@ public partial class Register : System.Web.UI.Page
             insert.Parameters.AddWithValue("@LastUpdatedBy", "484Team");
             insert.ExecuteNonQuery();
 
+        
         Response.Redirect("Login.aspx");
             //double check that this works and add some emp id is getting retrieved from db
             

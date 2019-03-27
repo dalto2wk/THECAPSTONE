@@ -11,15 +11,20 @@ public partial class Listing : System.Web.UI.Page
         //loggedInUser.Text = Session["username"].ToString();
         
     }
-    protected void Button_Click1(object sender, EventArgs e)
+    protected void Button_Click1(object sender, GridViewCommandEventArgs e)
     {
 
         //var closeLink = (Control)sender;
         //GridViewRow row = (GridViewRow)closeLink.NamingContainer;
         //string firstCell = row.Cells[0].Text;
 
+        if (e.CommandName == "editListing")
+        {
+            int i = Convert.ToInt32(e.CommandArgument);
+            
+        }
 
-
+        Debug.WriteLine("if this works i swear");
 
 
         
