@@ -49,8 +49,8 @@
                             <a class="btn btn-stripped dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="images/profile-pic.jpg" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
                                 <div class="username mt-1">
-                                    <h4 class="mb-1">Username</h4>
-                                    <h6 class="text-muted">Admin</h6>
+                                    <h4 class="mb-1"><asp:Literal runat="server" id="loggedInUser" /></h4>
+                                    <h6 class="text-muted">Employer</h6>
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink">
