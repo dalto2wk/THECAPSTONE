@@ -16,54 +16,77 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
     {
 
         ArrayList topCandidate = new ArrayList();
+        ArrayList postingInterest = new ArrayList();
 
         ///Connect to database
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         sc.Open();
         System.Data.SqlClient.SqlCommand getTopCandidate = new System.Data.SqlClient.SqlCommand
 
-  //////////////////////////////////////////THE FOLLOWING CODE IS FOR THE TOP CANDIDATES CHART //////////////////////////////////////////////////
         {
-
             ///select the firstname, lastname, GPA, and interest name from all the students who applied to
             ///a particular job posting
             Connection = sc,
-            CommandText = "SELECT Student.ID, Student.FirstName, Student.LastName, Student.GPA from Student"
-        };
+            CommandText = "SELECT Student.StudentID, Student.FirstName, Student.LastName, Student.GPA, Student_Interest.interestID" +
+            "FROM Student INNER JOIN Student_Interest ON Student.StudentID = Student_Interest.studentID " +
+            "INNER JOIN Application ON Student.StudentID = Application.studentID INNER JOIN " +
+            "Posting ON Application.postingID = Posting.postingID where Posting.PostingID = 8;"
+    };
 
         //create an array list to store the names, GPAs, and interests all separately
-        //SqlDataReader reader = getTopCandidate.ExecuteReader();
+        SqlDataReader reader = getTopCandidate.ExecuteReader();
 
         int id = 0;
         String firstName = "";
         String lastName = "";
         double GPA = 0;
+        int studentInterestID = 0;
 
 
         //separate out data and fill arraylists
-        //while (reader.Read())
-        //{
-        //    id = (reader.GetInt32(0));
-        //    firstName = (reader.GetString(1));
-        //    lastName = (reader.GetString(2));
-        //    GPA = (reader.GetDouble(3));
-        //    topCandidate.Add(new TopCandidate(id, firstName, lastName, GPA));
-        //}
+        while (reader.Read())
+        {
+            id = (reader.GetInt32(0));
+            firstName = (reader.GetString(1));
+            lastName = (reader.GetString(2));
+            GPA = (reader.GetDouble(3));
+            studentInterestID = (reader.GetInt32(4));
+
+            if (topCandidate.Count == 0)
+            {
+                topCandidate.Add(new TopCandidate(id, firstName, lastName, GPA));
+            }
+            for(int i=0; i<topCandidate.Count; i++)
+            {
+                if((((TopCandidate)topCandidate[i]).getFirstName() + ((TopCandidate)topCandidate[i]).getLastName()).Equals(firstName + lastName) == )
+                {
+                    ((TopCandidate)topCandidate[i]).fillStudentInterests(studentInterestID);
+                }
+            }
+            topCandidate.Add(new TopCandidate(id, firstName, lastName, GPA));
+
+        }
 
         sc.Close();
 
+        sc.Open();
+        System.Data.SqlClient.SqlCommand getPostingInterest = new System.Data.SqlClient.SqlCommand
 
-        //for(int i=0; i<topCandidate.Count; i++)
-        //{
-        //    sc.Open();
-        //    System.Data.SqlClient.SqlCommand getStudentInterest = new System.Data.SqlClient.SqlCommand
-        //    {
-        //        Connection = sc,
-        //        CommandText = "SELECT Interest.name FROM Student_Interest INNER JOIN Interest " +
-        //        "ON Student_Interest.interestID = Interest.interestID where StudentID = " + ((TopCandidate)topCandidate[i]).
-        //    };
-            
-        //}
+        {
+            Connection = sc,
+            CommandText = "SELECT Posting.postingID, Posting_Interest.interestID FROM Posting INNER JOIN " +
+            "Posting_Interest ON Posting.postingID = Posting_Interest.postingID where Posting.postingID = 8"
+        };
+
+        SqlDataReader reader2 = getPostingInterest.ExecuteReader();
+        
+        while (reader2.Read())
+        {
+            postingInterest.Add(1);
+        }
+
+
+
 
 
 
