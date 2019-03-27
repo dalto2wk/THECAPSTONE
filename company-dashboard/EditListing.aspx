@@ -51,7 +51,7 @@
                                 <div class="username mt-1">
                                     <h4 class="mb-1">
                                         <asp:Literal runat="server" ID="loggedInUser" /></h4>
-                                    <h6 class="text-muted">Admin</h6>
+                                    <h6 class="text-muted">Employer</h6>
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink">
