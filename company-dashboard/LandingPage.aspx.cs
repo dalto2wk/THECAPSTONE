@@ -132,7 +132,7 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
 
 
 
-        loggedInUser.Text = Session["username"].ToString();
+        //loggedInUser.Text = Session["username"].ToString();
 
         //recentApplicationsGV.UseAccessibleHeader = true;
         //recentApplicationsGV.HeaderRow.TableSection = TableRowSection.TableHeader;

@@ -18,7 +18,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         //    loggedInUser.Text = Session["username"].ToString();
 
         //}
-        loggedInUser.Text = Session["username"].ToString();
+        //loggedInUser.Text = Session["username"].ToString();
 
     }
 

@@ -82,7 +82,8 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <button class="btn btn-info margin" type="button"><span class="fa fa-search"></span>&nbsp;Search</button>
+                                                <button class="btn btn-info margin" type="button"><span class="fa fa-
+                                                    "></span>&nbsp;Search</button>
                                             </div>
                                             <input type="text" class="form-control">
                                         </div>

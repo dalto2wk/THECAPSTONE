@@ -74,7 +74,12 @@
 										</div>
 										<br>
 										<div class="table-responsive">
-											<table class="table table-striped">
+                                            <form runat="server">
+                                            <asp:gridview  runat="server" CssClass="table table-striped"  ID="studentApplicationTable" AutoGenerateColumns="true" DataSourceID="StudentApplicationGridView">
+                                            </asp:gridview>
+                                            <asp:SqlDataSource runat="server" ID="StudentApplicationGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT CONCAT_WS(Student.FirstName, ' ', Student.LastName) AS 'Name', School.SchoolName AS 'School Name', Application.jobTitle AS 'Applied to' FROM Student INNER JOIN School ON Student.schoolID = School.SchoolID INNER JOIN Application ON Student.StudentID = Application.studentID"></asp:SqlDataSource>
+                                                </form>
+											<!--<table class="table table-striped"> 
 												<thead>
 													<tr>
 														<th>Student Name</th>
@@ -129,7 +134,7 @@
 														</td>
 													</tr>
 												</tbody>
-											</table>
+											</table>-->
 										</div>
 									</div>
 								</div>
