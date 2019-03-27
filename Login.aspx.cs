@@ -30,16 +30,9 @@ public partial class Login : System.Web.UI.Page
         
         
     }
-
- 
-
-    protected String getUserName()
+ protected String getUserName()
     {
-        String result ="";
-
-        
-
-        
+        String result ="";       
         return result;
     }
 
@@ -48,9 +41,6 @@ public partial class Login : System.Web.UI.Page
 
         try
         {
-
-
-
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
             sc.Open();
@@ -86,19 +76,12 @@ public partial class Login : System.Web.UI.Page
                        
                 }
 
-
-                
-
                 String sqlResult = select.ExecuteScalar().ToString();
             //Debug.WriteLine(sqlResult + " is the Result: result");
 
-
+ 
 
             //String sqlResult = select.ExecuteScalar().ToString();
-
-
-
-
 
         }
     }
@@ -126,14 +109,9 @@ public partial class Login : System.Web.UI.Page
                 Connection = sc,
                 CommandText = "select cpName from Employer where cpPassword = '" + password + "' and cpUserName = '" + username + "'"
             };
+      
 
-
-            
-
-            String sqlResult = select.ExecuteScalar().ToString();
-            
-
-
+            String sqlResult = select.ExecuteScalar().ToString();           
 
             //String sqlResult = select.ExecuteScalar().ToString();
 

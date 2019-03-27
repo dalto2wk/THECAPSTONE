@@ -32,7 +32,7 @@
 				<ul class="nav nav-pills flex-column sidebar-nav">
                     <!-- Fix these links to go somewhere -->
 					<li class="nav-item"><a class="nav-link active" href="Login.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="student.html"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
+					<li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
 					<li class="nav-item"><a class="nav-link" href="school.html"><em class="fas fa-school"></em> School Contact</a></li>
 					<li class="nav-item"><a class="nav-link" href="listing.html"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
 					<li class="nav-item"><a class="nav-link" href="forms.html"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
@@ -64,6 +64,7 @@
 								<div runat="server" class="card mb-4">
 									<div runat="server" class="card-block">
 										<h3 class="card-title">Listing Information</h3>
+                                        <%-- action = # makes form stay on same page after submission --%>
 										<form class="form" action="#" runat="server">
 											<div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">Job Title</label>
