@@ -26,7 +26,7 @@
             <div class="row">
                 <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
                     <div class="sitelogo">
-                        <img src="images/logo.jpg" alt="logo"><a href="index.html"></a>
+                        <img src="images/logo.jpg" alt="logo"><a href="LandingPage.aspx"></a>
                     </div>
 
 
@@ -87,7 +87,7 @@ FROM            Posting INNER JOIN
                                             <Columns>
                                                 <asp:BoundField DataField="Job Listing Title" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
                                                 <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
-                                                <asp:CommandField ShowEditButton="True" ShowHeader="True" HeaderText="Action"></asp:CommandField>
+                                                <asp:CommandField ShowEditButton="True" ControlStyle-CssClass="btn btn-primary" ShowHeader="True" EditText="Edit Listing" HeaderText="Action"></asp:CommandField>
                                             </Columns>
                                         </asp:GridView>
                                         <%--	<table class="table table-striped">
