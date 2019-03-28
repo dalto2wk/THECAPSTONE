@@ -15,8 +15,10 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
 
     protected void EditBtn(object sender, GridViewCommandEventArgs e)
     {
-
-
+        int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
+        GridViewRow row = GridView1.Rows[buttonRowIndex];
+        Debug.WriteLine(row.Cells[0].ToString());
+        //Session["listingToEdit"] = 
         Response.Redirect("EditListing.aspx");
     }
 }
