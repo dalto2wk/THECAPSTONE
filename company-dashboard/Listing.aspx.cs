@@ -17,8 +17,11 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
     {
         int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
         GridViewRow row = GridView1.Rows[buttonRowIndex];
-        Debug.WriteLine(row.Cells[0].ToString());
-        //Session["listingToEdit"] = 
+        Debug.WriteLine(row.Cells[0].Text);
+        string postingName = "";
+        postingName = row.Cells[0].Text;
+        Session["postingTitleToEdit"] = postingName;
+        
         Response.Redirect("EditListing.aspx");
     }
 }
