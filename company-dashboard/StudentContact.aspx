@@ -75,9 +75,17 @@
 										<br>
 										<div class="table-responsive">
                                             <form runat="server">
-                                            <asp:gridview  runat="server" CssClass="table table-striped"  ID="studentApplicationTable" AutoGenerateColumns="true" DataSourceID="StudentApplicationGridView">
-                                            </asp:gridview>
-                                            <asp:SqlDataSource runat="server" ID="StudentApplicationGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT CONCAT_WS(Student.FirstName, ' ', Student.LastName) AS 'Name', School.SchoolName AS 'School Name', Application.jobTitle AS 'Applied to' FROM Student INNER JOIN School ON Student.schoolID = School.SchoolID INNER JOIN Application ON Student.StudentID = Application.studentID"></asp:SqlDataSource>
+                                                <asp:GridView runat="server" CssClass="table table-striped" AutoGenerateColumns="False" ID="studentApplicationTable" DataSourceID="StudentApplicationGridView">
+
+                                                    <Columns>
+
+                                                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name"></asp:BoundField>
+                                                        <asp:BoundField DataField="School Name" HeaderText="School Name" SortExpression="School Name"></asp:BoundField>
+                                                        <asp:BoundField DataField="Applied to" HeaderText="Applied to" SortExpression="Applied to"></asp:BoundField>
+                                                        <asp:ButtonField ControlStyle-CssClass="btn btn-primary" Text="View Resume" ButtonType="Button" ShowHeader="True" HeaderText="Action"></asp:ButtonField>
+                                                    </Columns>
+                                                </asp:gridview>
+                                            <asp:SqlDataSource runat="server" ID="StudentApplicationGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT CONCAT_WS(' ', Student.FirstName, Student.LastName) AS 'Name', School.SchoolName AS 'School Name', Application.jobTitle AS 'Applied to' FROM Student INNER JOIN School ON Student.schoolID = School.SchoolID INNER JOIN Application ON Student.StudentID = Application.studentID"></asp:SqlDataSource>
                                                 </form>
 											<!--<table class="table table-striped"> 
 												<thead>
