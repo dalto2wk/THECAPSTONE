@@ -15,15 +15,16 @@ public class PDFReadAndWrite
         {
             System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
             cn.Open();
-            //file path 
-            //file:///C:/Users/WK/Downloads/William%20Dalton%20Resume%202018.pdf
-            //Add a pdf file in the below code to add to database
-            FileStream fStream = File.OpenRead("C:\\Users\\WK\\Downloads\\William Dalton Resume 2018.pdf");
+        //file path 
+        //file:///C:/Users/WK/Downloads/William%20Dalton%20Resume%202018.pdf
+        //Add a pdf file in the below code to add to database
+        //C:\\Users\\WK\\Downloads\\ProjectResumesSamples\\Jon Snow.pdf
+        FileStream fStream = File.OpenRead("C:\\Users\\WK\\Downloads\\ProjectResumesSamples\\Jon Snow.pdf");
             byte[] contents = new byte[fStream.Length];
             fStream.Read(contents, 0, (int)fStream.Length);
             fStream.Close();
 
-            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("insert into savePDF values (@data)", cn);
+            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("Update Application set resume = (@data) where studentID = 3", cn);
             cmd.Parameters.AddWithValue("@Data", contents);
             cmd.ExecuteNonQuery();
             cn.Close();
