@@ -15,6 +15,8 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
 
     protected void EditBtn(object sender, GridViewCommandEventArgs e)
     {
-        Debug.WriteLine("if this works i swear");
+
+
+        Response.Redirect("EditListing.aspx");
     }
 }
