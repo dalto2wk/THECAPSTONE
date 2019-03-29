@@ -87,7 +87,7 @@ FROM            Posting INNER JOIN
                                             <Columns>
                                                 <asp:BoundField DataField="Job Listing Title" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
                                                 <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
-                                                <asp:CommandField ShowEditButton="True" Css ShowHeader="True" HeaderText="Action"></asp:CommandField>
+                                                <asp:CommandField ShowEditButton="True" ShowHeader="True" HeaderText="Action"></asp:CommandField>
                                             </Columns>
                                         </asp:GridView>
                                         <%--	<table class="table table-striped">

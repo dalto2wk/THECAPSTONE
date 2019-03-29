@@ -213,9 +213,11 @@
 												<img src="images/profile-pic2.jpg" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;">
 											</div>
 											<div class="col-sm-9 col-md-10">
+                                                <!-- Top Candidate 3 display info-->
 												<h6 class="pt-1"><asp:Literal runat="server" id="ApplicantThree" /></h6>
 												<div class="progress progress-custom">
-													<div class="progress-bar bg-primary" style="width: 25%" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <!-- Information for Third-Most Top Candidate-->
+													<div runat="server" id="testprogress3" class="progress-bar bg-primary"></div>
 												</div>
 											</div>
 										</div>
