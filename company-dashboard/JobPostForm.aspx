@@ -25,18 +25,19 @@
 		<div runat="server" class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 				<div class="sitelogo">
-				<a href="index.html"><img src="images/logo.jpg" alt="logo"></a>
+				<a href="LandingPage.aspx"><img src="images/logo.jpg" alt="logo"></a>
 			</div>
 													
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
 				<ul class="nav nav-pills flex-column sidebar-nav">
-					<li class="nav-item"><a class="nav-link active" href="index.html"><em class="fas fa-tachometer-alt"></em> Dashboard <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="student.html"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="school.html"><em class="fas fa-school"></em> School Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="listing.html"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
-					<li class="nav-item"><a class="nav-link" href="forms.html"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
+                    <!-- Fix these links to go somewhere -->
+					<li class="nav-item"><a class="nav-link active" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
+					<li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact</a></li>
+					<li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
+					<li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 				</ul>
-				<a href="login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
+				<a runat="server" href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
 			</nav>
 			<main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
 				<header class="page-header row justify-center">
@@ -63,12 +64,47 @@
 								<div runat="server" class="card mb-4">
 									<div runat="server" class="card-block">
 										<h3 class="card-title">Listing Information</h3>
+                                        <%-- action = # makes form stay on same page after submission --%>
 										<form class="form" action="#" runat="server">
 											<div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">Job Title</label>
 												<div runat="server" class="col-md-9">
 													<input id="txtJobTitle" type="text" name="regular" runat="server" class="form-control" >
 												</div>
+											</div>
+                                            <div runat="server" class="form-group row">
+												<label class="col-md-3 col-form-label" runat="server">State</label>
+												<div runat="server" class="col-md-9">
+                                                    <asp:DropDownList ID="DropDownList_State" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceState" DataTextField="State" DataValueField="State" SelectionMode="Single" OnSelectedIndexChanged="StateSelection_Change" AutoPostBack="true"></asp:DropDownList>
+                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceState" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT DISTINCT [State] FROM [cities] ORDER BY [State]"></asp:SqlDataSource>
+                                     
+												</div>
+											</div>
+                                             <div runat="server" class="form-group row">
+												<label class="col-md-3 col-form-label" runat="server">City</label>
+												<div runat="server" class="col-md-9">
+                                                    <asp:DropDownList ID="DropDownList_City" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceCity" DataTextField="CityCounty" DataValueField="CityCounty" SelectionMode="Single" OnSelectedIndexChanged="CitySelection_Change" AutoPostBack="true"></asp:DropDownList>
+                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceCity" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT DISTINCT [CityCounty] FROM [cities] ORDER BY [CityCounty]"></asp:SqlDataSource>
+                                                    
+												</div>
+											</div>
+                                            <div runat="server" class="form-group row">
+												<label class="col-md-3 col-form-label" runat="server">School</label>
+												<div runat="server" class="col-md-9">
+													<%--<select id="ddlInterest" class="custom-select form-control" runat="server">
+														<option selected runat="server">What category does this job fit to attract students</option>
+														<option value="Mechanics" runat="server">Mechanics</option>
+														<option value="Technology" runat="server">Technology</option>
+														<option value="Business - General" runat="server">Business - General</option>
+														<option value="Culinary" runat="server">Culinary</option>
+														<option value="Construction" runat="server">Construction</option>
+														<option value="Other" runat="server">Other</option>
+													</select>--%>
+                                                   <%-- <asp:CheckBoxList ID="cboxInterests" runat="server" DataSourceID="PostingInterest" DataTextField="name" DataValueField="name"></asp:CheckBoxList>--%>
+                                                    <asp:ListBox ID="listBoxSchool" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceSchool" DataTextField="SchoolName" DataValueField="SchoolName" SelectionMode="Multiple" AutoPostBack="true"></asp:ListBox>
+                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceSchool" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand=""></asp:SqlDataSource>
+                                                    
+                                                </div>
 											</div>
 											<div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server"> Requirements/Credentials</label>
@@ -79,7 +115,7 @@
 											<div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">Student Interest</label>
 												<div runat="server" class="col-md-9">
-													<select id="ddlInterest" class="custom-select form-control" runat="server">
+													<%--<select id="ddlInterest" class="custom-select form-control" runat="server">
 														<option selected runat="server">What category does this job fit to attract students</option>
 														<option value="Mechanics" runat="server">Mechanics</option>
 														<option value="Technology" runat="server">Technology</option>
@@ -87,8 +123,11 @@
 														<option value="Culinary" runat="server">Culinary</option>
 														<option value="Construction" runat="server">Construction</option>
 														<option value="Other" runat="server">Other</option>
-													</select>
-												</div>
+													</select>--%>
+                                                   <%-- <asp:CheckBoxList ID="cboxInterests" runat="server" DataSourceID="PostingInterest" DataTextField="name" DataValueField="name"></asp:CheckBoxList>--%>
+                                                    <asp:ListBox ID="listBoxInterests" CssClass="form-control" runat="server" DataSourceID="PostingInterest" DataTextField="name" DataValueField="interestID" SelectionMode="Multiple"></asp:ListBox>
+                                                    <asp:SqlDataSource runat="server" ID="PostingInterest" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT [interestID], [name] FROM [Interest]"></asp:SqlDataSource>
+                                                </div>
 											</div>
 											<div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">Description</label>

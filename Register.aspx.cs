@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
+using System.Diagnostics;
 
 public partial class Register : System.Web.UI.Page
 {
@@ -38,6 +39,7 @@ public partial class Register : System.Web.UI.Page
             String cpPassword = password.Value;
             String cpPhone = Phone.Value;
             String cpEmail = email.Value;
+
         Employer emp = new Employer(businessName, Convert.ToInt32(businessSize), industryName, desc, cpName, cpUsername, cpPassword, cpEmail, cpPhone, 1);
 
         insert.Parameters.AddWithValue("@businessName", businessName);
@@ -46,11 +48,13 @@ public partial class Register : System.Web.UI.Page
             insert.Parameters.AddWithValue("@description", desc);
             insert.Parameters.AddWithValue("@cpTitle", cpTitle);   
             insert.Parameters.AddWithValue("@cpName", cpName);
-            insert.Parameters.AddWithValue("@cpUsername", cpUsername );
-            insert.Parameters.AddWithValue("@cpPassword", cpPassword);
+            insert.Parameters.AddWithValue("@cpUsername", cpUsername);
+            insert.Parameters.AddWithValue("@cpPassword", PasswordHash.HashPassword(cpPassword));
             insert.Parameters.AddWithValue("@LastUpdatedBy", "484Team");
             insert.ExecuteNonQuery();
 
+        
+        Response.Redirect("Login.aspx");
             //double check that this works and add some emp id is getting retrieved from db
             
 
