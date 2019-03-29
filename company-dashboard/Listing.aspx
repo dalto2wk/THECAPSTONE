@@ -155,9 +155,9 @@ FROM            Posting INNER JOIN
 													</tr>
 												</tbody>
 											</table>--%>
-                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT        Posting.postingTitle AS 'Job Listing Title', COUNT(Application.studentID) AS 'Number Of Applicants'
+                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    Posting.PostingID AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', COUNT(Application.studentID) AS 'Number Of Applicants'
 FROM            Posting INNER JOIN
-                         Application ON Posting.postingID = Application.postingID group by Posting.postingTitle"></asp:SqlDataSource>
+                         Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid"></asp:SqlDataSource>
                                     </div>
                                 </div>
                             </div>

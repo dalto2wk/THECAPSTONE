@@ -43,7 +43,7 @@
                     <header class="page-header row justify-center">
                         <div class="col-md-6 col-lg-8">
                             <%--Maybe pull the listing name from the page that sends to this--%>
-                            <h1 class="float-left text-center text-md-left">Edit Listing</h1>
+                            <h1 class="float-left text-center text-md-left">Edit Listing - <asp:Literal ID="listingToEdit" runat="server"></asp:Literal></h1>
                         </div>
                         <div class="dropdown user-dropdown col-md-6 col-lg-4 text-center text-md-right">
                             <a class="btn btn-stripped dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
