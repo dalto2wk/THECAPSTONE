@@ -72,6 +72,40 @@
 													<input id="txtJobTitle" type="text" name="regular" runat="server" class="form-control" >
 												</div>
 											</div>
+                                            <div runat="server" class="form-group row">
+												<label class="col-md-3 col-form-label" runat="server">State</label>
+												<div runat="server" class="col-md-9">
+                                                    <asp:DropDownList ID="DropDownList_State" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceState" DataTextField="State" DataValueField="State" SelectionMode="Single" OnSelectedIndexChanged="StateSelection_Change" AutoPostBack="true"></asp:DropDownList>
+                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceState" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT DISTINCT [State] FROM [cities] ORDER BY [State]"></asp:SqlDataSource>
+                                     
+												</div>
+											</div>
+                                             <div runat="server" class="form-group row">
+												<label class="col-md-3 col-form-label" runat="server">City</label>
+												<div runat="server" class="col-md-9">
+                                                    <asp:DropDownList ID="DropDownList_City" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceCity" DataTextField="CityCounty" DataValueField="CityCounty" SelectionMode="Single" OnSelectedIndexChanged="CitySelection_Change" AutoPostBack="true"></asp:DropDownList>
+                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceCity" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT DISTINCT [CityCounty] FROM [cities] ORDER BY [CityCounty]"></asp:SqlDataSource>
+                                                    
+												</div>
+											</div>
+                                            <div runat="server" class="form-group row">
+												<label class="col-md-3 col-form-label" runat="server">School</label>
+												<div runat="server" class="col-md-9">
+													<%--<select id="ddlInterest" class="custom-select form-control" runat="server">
+														<option selected runat="server">What category does this job fit to attract students</option>
+														<option value="Mechanics" runat="server">Mechanics</option>
+														<option value="Technology" runat="server">Technology</option>
+														<option value="Business - General" runat="server">Business - General</option>
+														<option value="Culinary" runat="server">Culinary</option>
+														<option value="Construction" runat="server">Construction</option>
+														<option value="Other" runat="server">Other</option>
+													</select>--%>
+                                                   <%-- <asp:CheckBoxList ID="cboxInterests" runat="server" DataSourceID="PostingInterest" DataTextField="name" DataValueField="name"></asp:CheckBoxList>--%>
+                                                    <asp:ListBox ID="listBoxSchool" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceSchool" DataTextField="SchoolName" DataValueField="SchoolName" SelectionMode="Multiple" AutoPostBack="true"></asp:ListBox>
+                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceSchool" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand=""></asp:SqlDataSource>
+                                                    
+                                                </div>
+											</div>
 											<div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server"> Requirements/Credentials</label>
 												<div runat="server" class="col-md-9">
