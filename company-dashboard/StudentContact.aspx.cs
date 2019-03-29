@@ -50,7 +50,7 @@ public partial class company_dashboard_StudentContact : System.Web.UI.Page
     protected void pdfWrite(String firstname, String lastName)
     {
         //sql needed- select resume from application inner join student on application.studentid = student.studentid where student.firstname = 'Sansa'
-        //string savedFilePath = Server.MapPath("~\\Files\\Report.pdf");
+        string savedFilePath = Server.MapPath("~\\TempFiles\\Report.pdf");
         System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         cn.Open();
 
@@ -63,18 +63,18 @@ public partial class company_dashboard_StudentContact : System.Web.UI.Page
         if (dr.Read())
         {
             byte[] fileData = (byte[])dr.GetValue(0);
-            Response.BinaryWrite(fileData);
-            //System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
+            //Response.BinaryWrite(fileData);
+            System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
 
-            //System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
+            System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
 
-            //bw.Write(fileData);
-            //bw.Close();
+            bw.Write(fileData);
+            bw.Close();
         }
 
         dr.Close();
         //the below way stores to solution using response.binarywrite is better
-        //Response.Redirect("~\\Files\\Report.pdf");
+        Response.Redirect("~\\TempFiles\\Report.pdf");
 
     }
 }
