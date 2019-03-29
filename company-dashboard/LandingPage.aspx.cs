@@ -84,6 +84,8 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
             studentInterestID = (reader.GetInt32(4));
 
             topCandidate.Add(new TopCandidate(id, firstName, lastName, GPA, studentInterestID, 0));
+        
+
 
         }
         sc.Close();

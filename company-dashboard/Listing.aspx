@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Listing.aspx.cs" Inherits="company_dashboard_Listing" %>
+
+<!DOCTYPE html>
+
+
+
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -26,19 +32,19 @@
             <div class="row">
                 <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
                     <div class="sitelogo">
-                        <img src="images/logo.jpg" alt="logo"><a href="index.html"></a>
+                        <img src="images/logo.jpg" alt="logo"><a href="LandingPage.aspx"></a>
                     </div>
 
 
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
                     <ul class="nav nav-pills flex-column sidebar-nav">
-                        <li class="nav-item"><a class="nav-link" href="index.html"><em class="fas fa-tachometer-alt"></em>Dashboard <span class="sr-only">(current)</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em>Dashboard <span class="sr-only">(current)</span></a></li>
                         <li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em>Student Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="school.html"><em class="fas fa-school"></em>School Contact</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="listing.html"><em class="fas fa-clipboard-list"></em>View Listings</a></li>
-                        <li class="nav-item"><a class="nav-link" href="profile.html"><em class="fas fa-user-edit"></em>Edit Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em>School Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em>View Listings</a></li>
+                        <li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em>Edit Profile</a></li>
                     </ul>
-                    <a href="login.html" class="logout-button"><em class="fa fa-power-off"></em>Signout</a>
+                    <a href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em>Signout</a>
                 </nav>
                 <main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
                     <header class="page-header row justify-center">
@@ -49,8 +55,9 @@
                             <a class="btn btn-stripped dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="images/profile-pic.jpg" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
                                 <div class="username mt-1">
-                                    <h4 class="mb-1">Username</h4>
-                                    <h6 class="text-muted">Admin</h6>
+                                    <h4 class="mb-1">
+                                        <asp:Literal runat="server" ID="loggedInUser" /></h4>
+                                    <h6 class="text-muted">Employer</h6>
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink">
@@ -70,24 +77,33 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <button class="btn btn-info margin" type="button"><span class="fa fa-search"></span>&nbsp;Search</button>
+                                                <button class="btn btn-info margin" type="button"><span class="fa fa-
+                                                    "></span>&nbsp;Search</button>
                                             </div>
                                             <input type="text" class="form-control">
                                         </div>
                                     </div>
                                     <br>
                                     <div class="table-responsive">
+
                                         <%-- Correct query - SELECT        Posting.postingTitle AS 'Job Listing Title', COUNT(Application.studentID) AS 'Number Of Applicants'
 FROM            Posting INNER JOIN
                          Application ON Posting.postingID = Application.postingID group by Posting.postingTitle --%>
 
 
-
-                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView">
+                                       <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView" OnRowCommand="EditBtn">
                                             <Columns>
+                                                <asp:BoundField DataField="Posting ID" Visible="false" HeaderText="Posting ID" SortExpression="Posting ID" ></asp:BoundField>
                                                 <asp:BoundField DataField="Job Listing Title" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
                                                 <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
-                                                <asp:CommandField ShowEditButton="True" ShowHeader="True" HeaderText="Action"></asp:CommandField>
+                                                <asp:ButtonField ButtonType="Button" ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Edit Listing"  />
+                                                <%--<asp:CommandField ShowEditButton="True"  ControlStyle-CssClass="btn btn-primary" ShowHeader="True" EditText="Edit Listing" HeaderText="Action"></asp:CommandField>--%>
+                                                <%--<asp:TemplateField ShowHeader="true" HeaderText="Action">
+                                                    <ItemTemplate>
+                                                        <asp:Button ID="Button"  CommandName="editListing"  CssClass="btn btn-primary" Text="Edit Listing"   runat="server" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>--%>
+                                                
                                             </Columns>
                                         </asp:GridView>
                                         <%--	<table class="table table-striped">

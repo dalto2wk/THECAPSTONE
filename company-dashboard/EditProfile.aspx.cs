@@ -11,7 +11,47 @@ public partial class EditProfile : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+       // Session["username"] = "DukeDog";
+        industry.Value = Session["username"].ToString();
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+
+        if (!IsPostBack)
+        {
+            System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand
+            {
+                Connection = sc,
+                //CommandText = "Insert into Employer values (@businessName, @size, @industry, @description, @cpTitle, @cpName, @cpUserName, @cpPassword, @LastUpdatedBy, GETDATE())"
+                CommandText = "select businessName from Employer where cpUserName = '" + Session["username"].ToString() + "'"
+            };
+
+
+            CompanyName.Value = insert.ExecuteScalar().ToString();
+
+            insert.CommandText = "select size from Employer where cpUserName = '" + Session["username"].ToString() + "'";
+            size.Value = insert.ExecuteScalar().ToString();
+
+            insert.CommandText = "select industry from Employer where cpUserName = '" + Session["username"].ToString() + "'";
+            industry.Value = insert.ExecuteScalar().ToString();
+
+            insert.CommandText = "select description from Employer where cpUserName = '" + Session["username"].ToString() + "'";
+            description.Value = insert.ExecuteScalar().ToString();
+
+            insert.CommandText = "select cptitle from Employer where cpUserName = '" + Session["username"].ToString() + "'";
+            title.Value = insert.ExecuteScalar().ToString();
+
+            insert.CommandText = "select cpName from Employer where cpUserName = '" + Session["username"].ToString() + "'";
+            ContactName.Value = insert.ExecuteScalar().ToString();
+
+            insert.CommandText = "select cpUserName from Employer where cpUserName = '" + Session["username"].ToString() + "'";
+            username.Value = insert.ExecuteScalar().ToString();
+
+            insert.CommandText = "select email from Employer where cpUserName = '" + Session["username"].ToString() + "'";
+            email.Value = insert.ExecuteScalar().ToString();
+
+            insert.CommandText = "select cpPhone from Employer where cpUserName = '" + Session["username"].ToString() + "'";
+            Phone.Value = insert.ExecuteScalar().ToString();
+        }
     }
 
     protected void RegisterBtnClick(object sender, EventArgs e)
@@ -23,16 +63,43 @@ public partial class EditProfile : System.Web.UI.Page
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         sc.Open();
 
-        System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand
+        System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand
         {
             Connection = sc,
             //CommandText = "Insert into Employer values (@businessName, @size, @industry, @description, @cpTitle, @cpName, @cpUserName, @cpPassword, @LastUpdatedBy, GETDATE())"
-            CommandText = "select businessName from Employer where cpUserName = '" + Session["username"].ToString() + "'" 
-        };
+            CommandText = "Update employer  set " +
+             "businessName = @businessName," +
+             "size  = @size, " +
+             "industry = @industry, " +
+             "description = @description, " +
+             "cpTitle = @cpTitle, " +
+             "cpName = @cpName, " +
+             "cpUserName = @cpUserName, " +
+             "cpPassword = @cpPassword, " +
+             "email = @email, " +
+             "cpPhone = @phone," +
+             "lastUpdated = @lastUpdated"+
+             " where cpUserName = '" + Session["username"].ToString() + "'"
 
-        String test = insert.ExecuteScalar().ToString();
-        CompanyName.Value = test;
-        
+    };
+
+        update.Parameters.AddWithValue("@businessName", CompanyName.Value);
+        update.Parameters.AddWithValue("@size", size.Value);
+        update.Parameters.AddWithValue("@industry", industry.Value);
+        update.Parameters.AddWithValue("@description", description.Value);
+        update.Parameters.AddWithValue("@cpTitle", title.Value);
+        update.Parameters.AddWithValue("@cpName", ContactName.Value);
+        update.Parameters.AddWithValue("@cpUserName", username.Value);
+        update.Parameters.AddWithValue("@cpPassword", PasswordHash.HashPassword(password.Value));
+        update.Parameters.AddWithValue("@email", email.Value);
+        update.Parameters.AddWithValue("@Phone", Phone.Value);
+        update.Parameters.AddWithValue("@lastUpdated", DateTime.Now);
+
+        update.ExecuteScalar();
+
+
+
+
 
 
         //String businessName = CompanyName.Value;

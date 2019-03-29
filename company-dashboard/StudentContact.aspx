@@ -26,19 +26,19 @@
 		<div class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 			<div class="sitelogo">
-				<img src="images/logo.jpg" alt="logo"><a href="index.html"></a>
+				<img src="images/logo.jpg" alt="logo"><a href="LandingPage.aspx"></a>
 			</div>
 
 													
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
 				<ul class="nav nav-pills flex-column sidebar-nav">
-					<li class="nav-item"><a class="nav-link" href="index.html"><em class="fas fa-tachometer-alt"></em> Dashboard <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link active" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="school.html"><em class="fas fa-school"></em> School Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="listing.html"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
-					<li class="nav-item"><a class="nav-link" href="profile.html"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
+					<li class="nav-item"><a class="nav-link active" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
+					<li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact</a></li>
+					<li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
+					<li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 				</ul>
-				<a href="login.html" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
+				<a href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
 			</nav>
 			<main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
 				<header class="page-header row justify-center">
@@ -48,8 +48,8 @@
 					<div class="dropdown user-dropdown col-md-6 col-lg-4 text-center text-md-right"><a class="btn btn-stripped dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<img src="images/profile-pic.jpg" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
 						<div class="username mt-1">
-							<h4 class="mb-1">Username</h4>
-							<h6 class="text-muted">Admin</h6>
+							<h4 class="mb-1"><asp:Literal runat="server" ID="loggedInUser" /></h4>
+							<h6 class="text-muted">Employer</h6>
 						</div>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="#"><em class="fa fa-user-circle mr-1"></em> View Profile</a>
@@ -74,7 +74,20 @@
 										</div>
 										<br>
 										<div class="table-responsive">
-											<table class="table table-striped">
+                                            <form runat="server">
+                                                <asp:GridView runat="server" CssClass="table table-striped" OnRowCommand="viewResume" AutoGenerateColumns="False" ID="studentApplicationTable" DataSourceID="StudentApplicationGridView">
+
+                                                    <Columns>
+
+                                                        <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name"></asp:BoundField>
+                                                        <asp:BoundField DataField="School Name" HeaderText="School Name" SortExpression="School Name"></asp:BoundField>
+                                                        <asp:BoundField DataField="Applied to" HeaderText="Applied to" SortExpression="Applied to"></asp:BoundField>
+                                                        <asp:ButtonField ControlStyle-CssClass="btn btn-primary" Text="View Resume" ButtonType="Button" ShowHeader="True" HeaderText="Action"></asp:ButtonField>
+                                                    </Columns>
+                                                </asp:gridview>
+                                            <asp:SqlDataSource runat="server" ID="StudentApplicationGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT CONCAT_WS(' ', Student.FirstName, Student.LastName) AS 'Name', School.SchoolName AS 'School Name', Application.jobTitle AS 'Applied to' FROM Student INNER JOIN School ON Student.schoolID = School.SchoolID INNER JOIN Application ON Student.StudentID = Application.studentID"></asp:SqlDataSource>
+                                                </form>
+											<!--<table class="table table-striped"> 
 												<thead>
 													<tr>
 														<th>Student Name</th>
@@ -129,7 +142,7 @@
 														</td>
 													</tr>
 												</tbody>
-											</table>
+											</table>-->
 										</div>
 									</div>
 								</div>
