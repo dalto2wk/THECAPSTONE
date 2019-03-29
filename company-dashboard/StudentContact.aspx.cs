@@ -19,7 +19,13 @@ public partial class company_dashboard_StudentContact : System.Web.UI.Page
     {
         int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
         GridViewRow row = studentApplicationTable.Rows[buttonRowIndex];
-
+        string fullname = row.Cells[0].Text;
+        string fname = "";
+        string lname = "";
+        string[] splitName = fullname.Split(' ');
+        fname = splitName[0];
+        lname = splitName[1];
+        pdfWrite(fname, lname);
         //calls method for converting test data pdf into binary and inserting to db
         //pdfProcessToDB();
     }
@@ -41,24 +47,27 @@ public partial class company_dashboard_StudentContact : System.Web.UI.Page
         cmd.ExecuteNonQuery();
         cn.Close();
     }
-    protected void pdfWrite()
+    protected void pdfWrite(String firstname, String lastName)
     {
+        //sql needed- select resume from application inner join student on application.studentid = student.studentid where student.firstname = 'Sansa'
         //string savedFilePath = Server.MapPath("~\\Files\\Report.pdf");
-        System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection("Data Source=localhost;Initial Catalog=PDFTest;Integrated Security=True");
+        System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         cn.Open();
 
-        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select pdf from savePDF where ID= 1", cn);
-
+        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select resume from application inner join student on application.studentid = student.studentid where student.firstname = @FName and student.lastname = @LName", cn);
+        cmd.Parameters.AddWithValue("@FName", firstname);
+        cmd.Parameters.AddWithValue("@LName", lastName);
 
         System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
 
         if (dr.Read())
         {
             byte[] fileData = (byte[])dr.GetValue(0);
+            Response.BinaryWrite(fileData);
             //System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
 
             //System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
-            //Response.BinaryWrite(fileData);
+
             //bw.Write(fileData);
             //bw.Close();
         }
