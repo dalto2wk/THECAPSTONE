@@ -9,6 +9,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        loggedInUser.Text = Session["username"].ToString();
+        //    loggedInUser.Text = Session["username"].ToString();
+        listingToEdit.Text = Session["postingTitleToEdit"].ToString();
     }
 }

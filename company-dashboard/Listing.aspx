@@ -93,6 +93,7 @@ FROM            Posting INNER JOIN
 
                                         <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView" OnRowCommand="EditBtn">
                                             <Columns>
+                                                <asp:BoundField DataField="Posting ID" Visible="false" HeaderText="Posting ID" SortExpression="Posting ID" ></asp:BoundField>
                                                 <asp:BoundField DataField="Job Listing Title" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
                                                 <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
                                                 <asp:ButtonField ButtonType="Button" ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Edit Listing"  />
@@ -154,9 +155,9 @@ FROM            Posting INNER JOIN
 													</tr>
 												</tbody>
 											</table>--%>
-                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT        Posting.postingTitle AS 'Job Listing Title', COUNT(Application.studentID) AS 'Number Of Applicants'
+                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    Posting.PostingID AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', COUNT(Application.studentID) AS 'Number Of Applicants'
 FROM            Posting INNER JOIN
-                         Application ON Posting.postingID = Application.postingID group by Posting.postingTitle"></asp:SqlDataSource>
+                         Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid"></asp:SqlDataSource>
                                     </div>
                                 </div>
                             </div>
