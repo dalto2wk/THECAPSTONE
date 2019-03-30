@@ -147,7 +147,7 @@
                                             <div runat="server" class="row">
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 
-                                                    <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Submit" runat="server"></asp:Button>
+                                                    <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Edit Listing" runat="server"></asp:Button>
                                                 </div>
                                             </div>
 
