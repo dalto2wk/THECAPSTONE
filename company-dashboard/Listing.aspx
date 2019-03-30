@@ -91,7 +91,7 @@ FROM            Posting INNER JOIN
                          Application ON Posting.postingID = Application.postingID group by Posting.postingTitle --%>
 
 
-                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView" OnRowCommand="EditBtn">
+                                       <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView" OnRowCommand="EditBtn">
                                             <Columns>
                                                 <asp:BoundField DataField="Posting ID" Visible="false" HeaderText="Posting ID" SortExpression="Posting ID" ></asp:BoundField>
                                                 <asp:BoundField DataField="Job Listing Title" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>

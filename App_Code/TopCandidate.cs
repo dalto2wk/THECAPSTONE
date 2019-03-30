@@ -13,17 +13,20 @@ public class TopCandidate
     String firstName;
     String lastName;
     double GPA;
+    int studentInterestID;
     double finalValue;
 
-    ArrayList studentInterest = new ArrayList();
+    public static ArrayList studentInterest = new ArrayList();
 
   
-public TopCandidate(int studentID, String firstName, String lastName, double GPA)
+public TopCandidate(int studentID, String firstName, String lastName, double GPA, int studentInterestID, double finalValue)
     {
         setStudentID(studentID);
         setFirstName(firstName);
         setLastName(lastName);
         setGPA(GPA);
+        setStudentInterestID(studentInterestID);
+        setFinalValue(finalValue);
     }
 
     public void setStudentID(int studentID)
@@ -60,4 +63,26 @@ public TopCandidate(int studentID, String firstName, String lastName, double GPA
     {
         return this.GPA;
     }
+
+    public void setStudentInterestID(int studentInterestID)
+    {
+        this.studentInterestID = studentInterestID;
+    }
+    public int getStudentInterestID()
+    {
+        return this.studentInterestID;
+    }
+
+    public void setFinalValue(double finalValue)
+    {
+        this.finalValue = finalValue;
+    }
+    public double getFinalValue()
+    {
+        return this.finalValue;
+    }
+
+
+    
+   
 }
