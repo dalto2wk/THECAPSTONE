@@ -25,7 +25,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <form runat="server" class="form">
+    <form runat="server" method="post" class="form">
 
 
         <div class="container-fluid" id="wrapper">
@@ -61,9 +61,10 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#"><em class="fa fa-user-circle mr-1"></em>View Profile</a>
-                                <a class="dropdown-item" href="#"><em class="fa fa-sliders mr-1"></em>Preferences</a>
-                                <a class="dropdown-item" href="#"><em class="fa fa-power-off mr-1"></em>Logout</a>
+                                <a class="dropdown-item" href="EditProfile.aspx"><em class="fa fa-user-circle mr-1"></em>View Profile</a>
+
+                                <a class="dropdown-item" href="/Login.aspx"><em class="fa fa-power-off mr-1"></em>Logout</a>
+
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -77,7 +78,8 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <button class="btn btn-info margin" type="button"><span class="fa fa-
+                                                <button class="btn btn-info margin" type="button">
+                                                    <span class="fa fa-
                                                     "></span>&nbsp;Search</button>
                                             </div>
                                             <input type="text" class="form-control">
@@ -91,19 +93,18 @@ FROM            Posting INNER JOIN
                          Application ON Posting.postingID = Application.postingID group by Posting.postingTitle --%>
 
 
-                                       <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView" OnRowCommand="EditBtn">
+                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView" OnRowCommand="EditBtn">
                                             <Columns>
-                                                <asp:BoundField DataField="Posting ID" Visible="false" HeaderText="Posting ID" SortExpression="Posting ID" ></asp:BoundField>
+                                                <asp:BoundField DataField="Posting ID"  HeaderText="Posting ID" SortExpression="Posting ID"></asp:BoundField>
                                                 <asp:BoundField DataField="Job Listing Title" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
                                                 <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
-                                                <asp:ButtonField ButtonType="Button" ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Edit Listing"  />
+                                                <asp:ButtonField ButtonType="Button"  ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Edit Listing" />
                                                 <%--<asp:CommandField ShowEditButton="True"  ControlStyle-CssClass="btn btn-primary" ShowHeader="True" EditText="Edit Listing" HeaderText="Action"></asp:CommandField>--%>
                                                 <%--<asp:TemplateField ShowHeader="true" HeaderText="Action">
                                                     <ItemTemplate>
                                                         <asp:Button ID="Button"  CommandName="editListing"  CssClass="btn btn-primary" Text="Edit Listing"   runat="server" />
                                                     </ItemTemplate>
                                                 </asp:TemplateField>--%>
-                                                
                                             </Columns>
                                         </asp:GridView>
                                         <%--	<table class="table table-striped">
