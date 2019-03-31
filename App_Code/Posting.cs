@@ -13,20 +13,79 @@ public class Posting {
 	private Employer emp;
     private string lastUpdatedBy;
     private string lastUpdated;
+    private string cpEmail;
+    private string cpPhone;
+    private string postStart;
+    private string postEnd;
+    private string opportunityStartDate;
+
 
 
     public Posting(String postingTitle, String description, String jobRequirements,
-			String contactInfo, Employer empID) {
+            String contactInfo, Employer empID, string cpPhone,string cpEmail, string postStart, string postEnd, string opportunityStartDate) {
 		setPostingTitle(postingTitle);
-		setDescription(description);
-		
+        setDescription(description);
 		setJobRequirements(jobRequirements);
 		setContactInfo(contactInfo);
 		setEmp(empID);
         setLastUpdatedBy();
         setLastUpdated();
+        setcpPhone(cpPhone);
+        setcpEmail(cpEmail);
+        setPostStart(postStart);
+        setPostEnd(postEnd);
+        setOppStart(opportunityStartDate);
+        
     }
-	public int getPostingID() {
+    public string getStartDate()
+    {
+        return this.postStart;
+    }
+    public string getPostEndDate()
+    {
+        return this.postEnd;
+    }
+    public string getOpportunityStartDate()
+    {
+        return this.opportunityStartDate;
+    }
+
+    public string getCpEmail()
+    {
+        return this.cpEmail;
+    }
+    public string getCpPhone()
+    {
+        return this.cpPhone;
+    }
+
+    public void setOppStart(string opportunityStartDate)
+    {
+        this.opportunityStartDate = opportunityStartDate;
+    }
+
+    public void setPostEnd(string postEnd)
+    {
+        this.postEnd = postEnd;
+
+    }
+
+    public void setPostStart(string postStart)
+    {
+        this.postStart = postStart;
+    }
+
+    public void setcpEmail(string cpEmail)
+    {
+        this.cpEmail = cpEmail;
+    }
+
+    public void setcpPhone(string cpPhone)
+    {
+        this.cpPhone = cpPhone;
+    }
+
+    public int getPostingID() {
 		return this.postingID;
 	}
 	public void setPostingID() {

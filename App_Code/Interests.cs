@@ -9,15 +9,15 @@ public class Interests {
 	
 	
 	
-	public Interests(String name) {
-		setInterestID();
+	public Interests(String name, int id) {
+		setInterestID(id);
 		setName(name);
 	}
 	public int getInterestID() {
 		return this.interestID;
 	}
-	public void setInterestID() {
-		//implement to db
+	public void setInterestID(int id) {
+        this.interestID = id;
 	}
 	public String getName() {
 		return this.name;
