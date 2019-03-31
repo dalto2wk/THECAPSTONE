@@ -137,6 +137,7 @@ public partial class EditProfile : System.Web.UI.Page
         //{
 
         //}
+        sc.Close();
     }
 }
 
