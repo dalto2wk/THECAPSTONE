@@ -12,7 +12,7 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        
     }
 
     protected void EditBtn(object sender, GridViewCommandEventArgs e)
@@ -20,15 +20,17 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
         
         int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
         GridViewRow row = GridView1.Rows[buttonRowIndex];
-        Debug.WriteLine(row.Cells[1].Text);
+        
         string postingID = row.Cells[0].Text;
+        
         string postingName = "";
         postingName = row.Cells[1].Text;
-        Session["listingID"] = postingID;
+        
         Session["postingTitleToEdit"] = postingName;
+        Session["postID"] = postingID;
 
         dbWork();
-        Debug.WriteLine(Session["title"].ToString());
+        
         Response.Redirect("EditListing.aspx");
         
     }
@@ -46,10 +48,10 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
         {
             Connection = sc,
             CommandText = "select Posting.postingTitle, posting.jobRequirements, posting.description, Posting.cpName, posting.cpPhone" +
-            ",posting.cpemail, posting.postStart, posting.postEnd,posting.opportunitystartdate from posting where posting.postingID =@id"
+            ",posting.cpemail, posting.postStart, posting.postEnd,posting.opportunitystartdate from posting where posting.postingID = @id"
         };
-        Debug.WriteLine(Session["listingID"].ToString());
-        postingInfo.Parameters.AddWithValue("@id", Session["listingID"].ToString());
+        
+        postingInfo.Parameters.AddWithValue("@id", Session["postID"].ToString());
 
         SqlDataReader reader = postingInfo.ExecuteReader();
         string jobTitle = "";
@@ -64,16 +66,30 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
         string postEnd = "";
         string opportunityStartDate = "";
 
-        reader.Read();
-      
-        Session["title"] = reader.GetString(0);
-        Session["requirements"] = reader.GetString(1);
-        Session["description"] = reader.GetString(2);
-        Session["cpname"] = reader.GetString(3);
-        Session["cpphone"] = reader.GetString(4);
-        Session["cpemail"] = reader.GetString(5);
-        Session["poststart"] = reader.GetString(6);
-        Session["postend"] = reader.GetString(7);
-        Session["oppstart"] = reader.GetString(8);
+        Session["title"] = "";
+        Session["requirements"] = "";
+        Session["description"] = "";
+        Session["cpname"] = "";
+        Session["cpphone"] = "";
+        Session["cpemail"] = "";
+        Session["poststart"] = "";
+        Session["postend"] = "";
+        Session["oppstart"] = "";
+
+        while (reader.Read())
+        {
+            
+            Session["title"] = reader.GetString(0);
+            Session["requirements"] = reader.GetString(1);
+            Session["description"] = reader.GetString(2);
+            Session["cpname"] = reader.GetString(3);
+            Session["cpphone"] = reader.GetString(4);
+            Session["cpemail"] = reader.GetString(5);
+            Session["poststart"] = reader.GetDateTime(6);
+            Session["postend"] = reader.GetDateTime(7);
+            Session["oppstart"] = reader.GetDateTime(8);
+        }
+
+       
     }
 }

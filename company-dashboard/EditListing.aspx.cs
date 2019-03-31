@@ -17,7 +17,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         listingToEdit.Text = Session["postingTitleToEdit"].ToString();
         //populateListing();     
 
-        string currListingID = Session["listingID"].ToString();
+        //string currListingID = Session["listingID"].ToString();
         //System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
 
         //sc.Open();
