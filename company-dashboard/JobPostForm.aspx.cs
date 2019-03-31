@@ -49,11 +49,15 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         
         String description = txtDescription.Value;
         String cpName = txtCpName.Value;
-        //String cpPhone = txtCpPhone.Value;
-        //String cpEmail = txtCpEmail.Value;
+        String cpPhone = txtCpPhone.Value;
+        String cpEmail = txtCpEmail.Value;
+        String postingStartDate = postStart.Value;
+        String postingEndDate = postEnd.Value;
+        String oppStartDate = opportunityStartDate.Value;
+
         //fix the emp id to pull from what is in sql from the login 
         Employer emp = new Employer("James Madison University", 20000, "Higher Education", "college", "Bill Jon", "BJ123", "password", "bj123@gmail.com", "555-555-5555", 16);
-        Posting post = new Posting(postingTitle, description,requirements, cpName, emp);
+        Posting post = new Posting(postingTitle, description,requirements, cpName, emp,cpPhone, cpEmail,postingStartDate, postingEndDate, oppStartDate);
 
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         sc.Open();
@@ -61,7 +65,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         System.Data.SqlClient.SqlCommand posting = new System.Data.SqlClient.SqlCommand
         {
             Connection = sc,
-            CommandText = "Insert into Posting values (@postingTitle, @description, @jobRequirements, @cpName, @employerID, @LastUpdatedBy, @LastUpdated)"
+            CommandText = "Insert into Posting values (@postingTitle, @description, @jobRequirements, @cpName, @employerID, @LastUpdatedBy, @LastUpdated ,@cpEmail,@cpPhone,@postStart,@postEnd,@opportunityStartDate)"
         };
         //change employer id to match that of the logged in user
 
@@ -72,6 +76,12 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         posting.Parameters.AddWithValue("@employerID", post.getEmp().getEmpID());
         posting.Parameters.AddWithValue("@LastUpdatedBy", post.getLastUpdatedBy());
         posting.Parameters.AddWithValue("@LastUpdated", post.getLastUpdated());
+        posting.Parameters.AddWithValue("@cpEmail", post.getCpEmail());
+        posting.Parameters.AddWithValue("@cpPhone", post.getCpPhone());
+        posting.Parameters.AddWithValue("@postStart", post.getStartDate());
+        posting.Parameters.AddWithValue("@postEnd", post.getPostEndDate());
+        posting.Parameters.AddWithValue("@opportunityStartDate", post.getOpportunityStartDate());
+
 
 
 

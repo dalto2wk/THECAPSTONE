@@ -21,7 +21,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <form class="form" action="#" runat="server">
+    <form class="form" method="POST" action="#"  runat="server">
         <div class="container-fluid" id="wrapper">
             <div class="row">
                 <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
@@ -55,9 +55,9 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#"><em class="fa fa-user-circle mr-1"></em>View Profile</a>
-                                <a class="dropdown-item" href="#"><em class="fa fa-sliders mr-1"></em>Preferences</a>
-                                <a class="dropdown-item" href="#"><em class="fa fa-power-off mr-1"></em>Logout</a>
+                                <a class="dropdown-item" href="EditProfile.aspx"><em class="fa fa-user-circle mr-1"></em>View Profile</a>
+                                
+                                <a class="dropdown-item" href="/Login.aspx"><em class="fa fa-power-off mr-1"></em>Logout</a>
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -74,13 +74,13 @@
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Job Title</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtJobTitle" type="text" name="regular" runat="server" class="form-control">
+                                                    <input ID="txtJobTitle" type="text" name="regular" runat="server" class="form-control">
                                                 </div>
                                             </div>
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Requirements/Credentials</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtRequirements" type="text" name="regular" runat="server" class="form-control">
+                                                    <input ID="txtRequirements" type="text" name="regular" runat="server" class="form-control">
                                                 </div>
                                             </div>
                                             <div runat="server" class="form-group row">
@@ -103,10 +103,34 @@
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Description</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtDescription" type="text" name="regular" runat="server" class="form-control"><span class="help-block">Students will see this when viewing listings.</span>
+                                                    <input ID="txtDescription" type="text" name="regular" runat="server" class="form-control"><span class="help-block">Students will see this when viewing listings.</span>
                                                 </div>
 
                                             </div>
+                                            <div runat="server" class="form-group row">
+												<label class="col-md-3 col-form-label" runat="server">Posting Date</label>
+												<div runat="server" class="col-md-9">
+												<input ID="txtpostStart"  runat="server" data-provide="datepicker" class="form-control">
+
+												</div>
+                                                
+											</div>
+                                            <div runat="server" class="form-group row">
+												<label class="col-md-3 col-form-label" runat="server">Posting End Date</label>
+												<div runat="server" class="col-md-9">
+												<input ID="txtpostEnd"  runat="server" data-provide="datepicker" class="form-control">
+
+												</div>
+                                                
+											</div>
+                                            <div runat="server" class="form-group row">
+												<label class="col-md-3 col-form-label" runat="server">Opportunity Start Date</label>
+												<div runat="server" class="col-md-9">
+												<input ID="txtopportunityStartDate"  data-provide="datepicker" runat="server" class="form-control">
+
+												</div>
+                                                
+											</div>
 
                                             <br>
 
@@ -114,19 +138,19 @@
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Contact Name</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtCpName" type="text" name="regular" runat="server" class="form-control">
+                                                    <input ID="txtCpName" type="text" name="regular" runat="server" class="form-control">
                                                 </div>
                                             </div>
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Phone</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtCpPhone" type="text" name="regular" class="form-control" runat="server">
+                                                    <input ID="txtCpPhone" type="text" name="regular" class="form-control" runat="server">
                                                 </div>
                                             </div>
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">E-mail</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtCpEmail" type="text" name="regular" class="form-control" runat="server">
+                                                    <input ID="txtCpEmail" type="text" name="regular" class="form-control" runat="server">
                                                 </div>
                                             </div>
                                             <br>
@@ -147,7 +171,7 @@
                                             <div runat="server" class="row">
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 
-                                                    <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Submit" runat="server"></asp:Button>
+                                                    <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Edit Listing" runat="server" OnClick="updateBtnClick"></asp:Button>
                                                 </div>
                                             </div>
 
