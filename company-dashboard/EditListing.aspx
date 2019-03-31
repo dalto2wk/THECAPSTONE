@@ -107,6 +107,30 @@
                                                 </div>
 
                                             </div>
+                                            <div runat="server" class="form-group row">
+												<label class="col-md-3 col-form-label" runat="server">Posting Date</label>
+												<div runat="server" class="col-md-9">
+												<input id="txtpostStart"  runat="server" data-provide="datepicker" class="form-control">
+
+												</div>
+                                                
+											</div>
+                                            <div runat="server" class="form-group row">
+												<label class="col-md-3 col-form-label" runat="server">Posting End Date</label>
+												<div runat="server" class="col-md-9">
+												<input id="txtpostEnd"  runat="server" data-provide="datepicker" class="form-control">
+
+												</div>
+                                                
+											</div>
+                                            <div runat="server" class="form-group row">
+												<label class="col-md-3 col-form-label" runat="server">Opportunity Start Date</label>
+												<div runat="server" class="col-md-9">
+												<input id="txtopportunityStartDate"  data-provide="datepicker" runat="server" class="form-control">
+
+												</div>
+                                                
+											</div>
 
                                             <br>
 
