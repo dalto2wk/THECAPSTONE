@@ -27,15 +27,63 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             txtpostStart.Value = String.Format("{0:MM/dd/yyyy}", Session["poststart"].ToString());
             txtpostEnd.Value = String.Format("{0:MM/dd/yyyy}", Session["postend"].ToString());
             txtopportunityStartDate.Value = String.Format("{0:MM/dd/yyyy}", Session["oppstart"].ToString());
+            List<Interests> interests = getPostingInterests();
+
+            Debug.WriteLine(listBoxInterests.Items.Count);
+            
+            for (int i = 0; i < interests.Count; i++)
+            {
+                foreach (ListItem item in listBoxInterests.Items)
+                {
+                    if (item.Value.Equals(interests[i].getName()))
+                    {
+                        item.Selected = true;
+                    }
+                }
+            }
+
+
         }
-      
+        
+
 
 
 
 
     }
 
-    
+    protected List<Interests> getPostingInterests()
+    {
+        List<Interests> result = new List<Interests>();
+
+        //query SELECT        Interest.name,interest.interestID
+        //FROM Posting INNER JOIN
+        //                 Posting_Interest ON Posting.postingID = Posting_Interest.postingID INNER JOIN
+        //                 Interest ON Posting_Interest.interestID = Interest.interestID where posting.postingID = 8
+
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        {
+            Connection = sc,
+
+            CommandText = "SELECT        Interest.name,interest.interestID FROM Posting INNER JOIN " +
+                         "Posting_Interest ON Posting.postingID = Posting_Interest.postingID INNER JOIN " +
+                         "Interest ON Posting_Interest.interestID = Interest.interestID where posting.postingID = @postingID"
+
+        };
+        select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+
+        SqlDataReader reader = select.ExecuteReader();
+
+        while (reader.Read())
+        {
+            result.Add(new Interests(reader.GetString(0), reader.GetInt32(1)));
+        }
+
+        return result;
+    }
 
     protected void updateBtnClick(object sender, EventArgs e)
     {

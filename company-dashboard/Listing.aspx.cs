@@ -54,17 +54,7 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
         postingInfo.Parameters.AddWithValue("@id", Session["postID"].ToString());
 
         SqlDataReader reader = postingInfo.ExecuteReader();
-        string jobTitle = "";
-        string requirements = "";
-        //may need to be list 
-        string interests = "";
-        string description = "";
-        string cpname = "";
-        string cphone = "";
-        string cpemail = "";
-        string postStart = "";
-        string postEnd = "";
-        string opportunityStartDate = "";
+        
 
         Session["title"] = "";
         Session["requirements"] = "";
