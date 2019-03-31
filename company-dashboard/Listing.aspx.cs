@@ -85,9 +85,9 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
             Session["cpname"] = reader.GetString(3);
             Session["cpphone"] = reader.GetString(4);
             Session["cpemail"] = reader.GetString(5);
-            Session["poststart"] = reader.GetDateTime(6);
-            Session["postend"] = reader.GetDateTime(7);
-            Session["oppstart"] = reader.GetDateTime(8);
+            Session["poststart"] = String.Format("{0:MM/dd/yyyy}", reader.GetDateTime(6));
+            Session["postend"] = String.Format("{0:MM/dd/yyyy}", reader.GetDateTime(7));
+            Session["oppstart"] = String.Format("{0:MM/dd/yyyy}", reader.GetDateTime(8));
         }
 
        

@@ -15,71 +15,31 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
         //    loggedInUser.Text = Session["username"].ToString();
         listingToEdit.Text = Session["postingTitleToEdit"].ToString();
-        //populateListing();     
 
-        //string currListingID = Session["listingID"].ToString();
-        //System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-
-        //sc.Open();
-        //if (!IsPostBack)
-        //{
-
-
-        //    System.Data.SqlClient.SqlCommand postingInfo = new System.Data.SqlClient.SqlCommand
-
-        //    {
-        //        Connection = sc,
-        //        CommandText = "select Posting.postingTitle, posting.jobRequirements, posting.description, Posting.cpName, posting.cpPhone" +
-        //        ",posting.cpemail, posting.postStart, posting.postEnd,posting.opportunitystartdate from posting where posting.postingID =@id"
-        //    };
-        //    postingInfo.Parameters.AddWithValue("@id", currListingID);
-
-        //    SqlDataReader reader = postingInfo.ExecuteReader();
-
-        txtJobTitle.Value = Session["title"].ToString();
-        txtRequirements.Value = Session["requirements"].ToString();
-        txtDescription.Value = Session["description"].ToString();
-        txtCpName.Value = Session["cpname"].ToString();
-        txtCpPhone.Value = Session["cpphone"].ToString();
-        txtCpEmail.Value = Session["cpemail"].ToString();
-        txtpostStart.Value = Session["poststart"].ToString();
-        txtpostEnd.Value = Session["postend"].ToString();
-        txtopportunityStartDate.Value = Session["oppstart"].ToString();
-
-        //while (reader.Read())
-        //{
-        //    txtJobTitle.Value = reader.GetString(0);
-        //    txtRequirements.Value = reader.GetString(1);
-        //    txtDescription.Value = reader.GetString(2);
-        //    txtCpName.Value = reader.GetString(3);
-        //    txtCpPhone.Value = reader.GetString(4);
-        //    txtCpEmail.Value = reader.GetString(5);
-        //    txtpostEnd.Value = reader.GetString(6);
-        //    txtpostEnd.Value = reader.GetString(7);
-        //    txtopportunityStartDate.Value = reader.GetString(8);
-
-        //}
-
-
-
-
-        //System.Data.SqlClient.SqlCommand postInterests = new System.Data.SqlClient.SqlCommand
-
-        //{
-        //    Connection = sc,
-        //    CommandText = "SELECT Posting.postingID, Posting_Interest.interestID FROM Posting INNER JOIN " +
-        //    "Posting_Interest ON Posting.postingID = Posting_Interest.postingID where Posting.postingID = 8"
-        //};
+        if (!IsPostBack)
+        {
+            txtJobTitle.Value = Session["title"].ToString();
+            txtRequirements.Value = Session["requirements"].ToString();
+            txtDescription.Value = Session["description"].ToString();
+            txtCpName.Value = Session["cpname"].ToString();
+            txtCpPhone.Value = Session["cpphone"].ToString();
+            txtCpEmail.Value = Session["cpemail"].ToString();
+            txtpostStart.Value = String.Format("{0:MM/dd/yyyy}", Session["poststart"].ToString());
+            txtpostEnd.Value = String.Format("{0:MM/dd/yyyy}", Session["postend"].ToString());
+            txtopportunityStartDate.Value = String.Format("{0:MM/dd/yyyy}", Session["oppstart"].ToString());
+        }
+      
 
 
 
 
     }
 
-    //sc.Close();
+    
 
     protected void updateBtnClick(object sender, EventArgs e)
     {
+        //Response.Redirect("Listing.aspx");
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         sc.Open();
 
