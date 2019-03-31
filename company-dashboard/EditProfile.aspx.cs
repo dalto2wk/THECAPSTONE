@@ -52,6 +52,8 @@ public partial class EditProfile : System.Web.UI.Page
             insert.CommandText = "select cpPhone from Employer where cpUserName = '" + Session["username"].ToString() + "'";
             Phone.Value = insert.ExecuteScalar().ToString();
         }
+        sc.Close();
+
     }
 
     protected void RegisterBtnClick(object sender, EventArgs e)

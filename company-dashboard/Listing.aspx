@@ -25,7 +25,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <form runat="server" class="form">
+    <form runat="server" method="post" class="form">
 
 
         <div class="container-fluid" id="wrapper">
@@ -98,7 +98,7 @@ FROM            Posting INNER JOIN
                                                 <asp:BoundField DataField="Posting ID" Visible="false" HeaderText="Posting ID" SortExpression="Posting ID"></asp:BoundField>
                                                 <asp:BoundField DataField="Job Listing Title" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
                                                 <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
-                                                <asp:ButtonField ButtonType="Button" ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Edit Listing" />
+                                                <asp:ButtonField ButtonType="Button"  ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Edit Listing" />
                                                 <%--<asp:CommandField ShowEditButton="True"  ControlStyle-CssClass="btn btn-primary" ShowHeader="True" EditText="Edit Listing" HeaderText="Action"></asp:CommandField>--%>
                                                 <%--<asp:TemplateField ShowHeader="true" HeaderText="Action">
                                                     <ItemTemplate>
