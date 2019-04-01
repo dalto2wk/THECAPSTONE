@@ -181,11 +181,11 @@
 									<div class="card-block">
 										<h3 class="card-title">Top Candidates</h3>
                                         <!-- SubTitle displaying the Posting Title-->
-										<h6 class="card-subtitle mb-2 text-muted"><asp:Literal ID="topCandidateSubTitle" runat="server"/></h6>
-										<div class="user-progress justify-center">
+										<h6 class="card-subtitle mb-2 text-muted"><asp:Literal ID="topCandidateSubTitle" runat="server"/></h6>                                     
+										<div class="user-progress justify-center">                                         
 											<div class="col-sm-3 col-md-2" style="padding: 0;">
 												<img src="images/profile-pic2.jpg" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;">
-											</div>
+											</div>                                          
 											<div class="col-sm-9 col-md-10">
                                                 <!-- Top Candidate 1 display info-->
 												<h6 class="pt-1"><asp:Literal runat="server" id="ApplicantOne" /></h6>
@@ -218,9 +218,16 @@
 												<div class="progress progress-custom">
                                                     <!-- Information for Third-Most Top Candidate-->
 													<div runat="server" id="testprogress3" class="progress-bar bg-primary"></div>
-												</div>
-											</div>
+												</div>                                                                                               
+											</div>                                            
 										</div>
+                                         <!-- DropDown List to choose Posting for Top Candidates-->
+                                        <br />
+                                        <div  class="col-sm-9 col-md-10">
+                                            <asp:DropDownList ID="ddlTopCandidate" runat="server" Width="280px" autoPostBack="true" CssClass="form-control" DataSourceID="SqlDataSource2" DataTextField="postingTitle" DataValueField="postingID" OnPreRender="topCandidate"> 
+                                            </asp:DropDownList>
+                                            <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [postingID], [postingTitle] FROM [Posting]"></asp:SqlDataSource>
+                                        </div>
 										<div class="divider"></div>
 										<div id="calendar"></div>
 										<div class="divider"></div>
