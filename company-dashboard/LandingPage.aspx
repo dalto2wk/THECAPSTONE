@@ -224,7 +224,7 @@
                                          <!-- DropDown List to choose Posting for Top Candidates-->
                                         <br />
                                         <div  class="col-sm-9 col-md-10">
-                                            <asp:DropDownList ID="ddlTopCandidate" runat="server" Width="280px" autoPostBack="true" CssClass="form-control" DataSourceID="SqlDataSource2" DataTextField="postingTitle" DataValueField="postingID" OnPreRender="topCandidate"> 
+                                            <asp:DropDownList ID="ddlTopCandidate" runat="server" Width="120%" autoPostBack="true" CssClass="form-control" DataSourceID="SqlDataSource2" DataTextField="postingTitle" DataValueField="postingID" OnPreRender="topCandidate"> 
                                             </asp:DropDownList>
                                             <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [postingID], [postingTitle] FROM [Posting]"></asp:SqlDataSource>
                                         </div>
