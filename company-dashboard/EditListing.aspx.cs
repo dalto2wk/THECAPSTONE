@@ -113,21 +113,61 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
         update.ExecuteNonQuery();
 
+        //will need this for delete logic delete from posting_interest where postingid = 9 and interestID = 3
+        List<Interests> interests = getPostingInterests();
+
+        foreach (ListItem item in listBoxInterests.Items) {
+
+                if (item.Selected == true)
+                {
+                    int count = 0; 
+                    for (int i = 0; i < interests.Count; i++)
+                    {
+                        if (item.Text.Equals(interests[i].getName()))
+                        {
+                            count++;
+                        }
+
+                    }
+                    if(count != 0)
+                    {
+                        continue;
+                    } else if(count == 0)
+                    {
+                        PostingInterest pi = new PostingInterest(Convert.ToInt32(Session["postID"].ToString()), Convert.ToInt32(item.Value));
+                        //do the sql
+                        System.Data.SqlClient.SqlCommand postingInterests = new System.Data.SqlClient.SqlCommand
+                        {
+                            Connection = sc,
+                            CommandText = "Insert into Posting_Interest values (@postingID, @interestID, @LastUpdatedBy, @LastUpdated)"
+                        };
+                        postingInterests.Parameters.AddWithValue("@postingID", pi.getPostingID());
+                        postingInterests.Parameters.AddWithValue("@interestID", pi.getInterestID());
+                        postingInterests.Parameters.AddWithValue("@LastUpdatedBy", pi.getLastUpdatedBy());
+                        postingInterests.Parameters.AddWithValue("@LastUpdated", pi.getLastUpdated());
+
+                        postingInterests.ExecuteNonQuery();
+                    }
+                }
+
+        }
+        
+
         sc.Close();
     }
 
     protected void Page_PreRender(object sender, EventArgs e)
     {
-        Debug.WriteLine(listBoxInterests.Items.Count);
+        
 
         List<Interests> interests = getPostingInterests();
-        Debug.WriteLine(interests[0].getName());
+        
 
         for (int i = 0; i < interests.Count; i++)
         {
             foreach (ListItem item in listBoxInterests.Items)
             {
-                //Debug.WriteLine(item.Value);
+                
                 if (item.Text.Equals(interests[i].getName()))
                 {
                     item.Selected = true;
