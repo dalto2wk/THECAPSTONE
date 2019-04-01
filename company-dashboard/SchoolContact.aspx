@@ -26,19 +26,19 @@
 		<div class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 			<div class="sitelogo">
-				<img src="images/logo.jpg" alt="logo"><a href="index.html"></a>
+				<img src="images/logo.jpg" alt="logo"><a href="LandingPage.aspx"></a>
 			</div>
 
 
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
 				<ul class="nav nav-pills flex-column sidebar-nav">
-					<li class="nav-item"><a class="nav-link" href="index.html"><em class="fas fa-tachometer-alt"></em> Dashboard <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="student.html"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
-					<li class="nav-item"><a class="nav-link active" href="school.html"><em class="fas fa-school"></em> School Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="listing.html"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
-					<li class="nav-item"><a class="nav-link" href="profile.html"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
+					<li class="nav-item"><a class="nav-link active" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard </a></li>
+					<li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
+					<li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
+					<li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 				</ul>
-				<a href="login.html" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
+				<a href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
 			</nav>
 			<main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
 				<header class="page-header row justify-center">
@@ -48,13 +48,13 @@
 					<div class="dropdown user-dropdown col-md-6 col-lg-4 text-center text-md-right"><a class="btn btn-stripped dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<img src="images/profile-pic.jpg" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
 						<div class="username mt-1">
-							<h4 class="mb-1">Username</h4>
-							<h6 class="text-muted">Admin</h6>
+							<h4 class="mb-1"><asp:Literal runat="server" id="loggedInUser" /></h4>
+							<h6 class="text-muted">Employer</h6>
 						</div>
 						</a>
-						<div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="#"><em class="fa fa-user-circle mr-1"></em> View Profile</a>
-						     <a class="dropdown-item" href="#"><em class="fa fa-sliders mr-1"></em> Preferences</a>
-						     <a class="dropdown-item" href="#"><em class="fa fa-power-off mr-1"></em> Logout</a></div>
+						<div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="EditProfile.aspx"><em class="fa fa-user-circle mr-1"></em> View Profile</a>
+
+						     <a class="dropdown-item" href="/Login.aspx"><em class="fa fa-power-off mr-1"></em> Logout</a></div>
 					</div>
 					<div class="clear"></div>
 				</header>
