@@ -27,20 +27,9 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             txtpostStart.Value = String.Format("{0:MM/dd/yyyy}", Session["poststart"].ToString());
             txtpostEnd.Value = String.Format("{0:MM/dd/yyyy}", Session["postend"].ToString());
             txtopportunityStartDate.Value = String.Format("{0:MM/dd/yyyy}", Session["oppstart"].ToString());
-            List<Interests> interests = getPostingInterests();
-
-            Debug.WriteLine(listBoxInterests.Items.Count);
             
-            for (int i = 0; i < interests.Count; i++)
-            {
-                foreach (ListItem item in listBoxInterests.Items)
-                {
-                    if (item.Value.Equals(interests[i].getName()))
-                    {
-                        item.Selected = true;
-                    }
-                }
-            }
+
+            
 
 
         }
@@ -51,6 +40,8 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
 
     }
+
+    
 
     protected List<Interests> getPostingInterests()
     {
@@ -123,6 +114,26 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         update.ExecuteNonQuery();
 
         sc.Close();
+    }
+
+    protected void Page_PreRender(object sender, EventArgs e)
+    {
+        Debug.WriteLine(listBoxInterests.Items.Count);
+
+        List<Interests> interests = getPostingInterests();
+        Debug.WriteLine(interests[0].getName());
+
+        for (int i = 0; i < interests.Count; i++)
+        {
+            foreach (ListItem item in listBoxInterests.Items)
+            {
+                //Debug.WriteLine(item.Value);
+                if (item.Text.Equals(interests[i].getName()))
+                {
+                    item.Selected = true;
+                }
+            }
+        }
     }
 }
 
