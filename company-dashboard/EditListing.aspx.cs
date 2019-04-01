@@ -116,6 +116,24 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         //will need this for delete logic delete from posting_interest where postingid = 9 and interestID = 3
         List<Interests> interests = getPostingInterests();
 
+        foreach(ListItem item in listBoxInterests.Items)
+        {
+            for(int i = 0; i < interests.Count; i++)
+            {
+                if (item.Text.Equals(interests[i].getName()) && item.Selected == false){
+                    System.Data.SqlClient.SqlCommand deleteInterests = new System.Data.SqlClient.SqlCommand
+                    {
+                        Connection = sc,
+                        CommandText = "delete from posting_interest where postingid = @postingID and interestID = @interestID"
+                    };
+                    deleteInterests.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+                    deleteInterests.Parameters.AddWithValue("@interestID", item.Value);
+                    deleteInterests.ExecuteNonQuery();
+                }
+            }
+        }
+
+
         foreach (ListItem item in listBoxInterests.Items) {
 
                 if (item.Selected == true)
@@ -151,6 +169,8 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                 }
 
         }
+
+
         
 
         sc.Close();
