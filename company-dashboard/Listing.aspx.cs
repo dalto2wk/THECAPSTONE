@@ -31,6 +31,8 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
 
         dbWork();
         
+        
+
         Response.Redirect("EditListing.aspx");
         
     }
@@ -79,7 +81,7 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
             Session["postend"] = String.Format("{0:MM/dd/yyyy}", reader.GetDateTime(7));
             Session["oppstart"] = String.Format("{0:MM/dd/yyyy}", reader.GetDateTime(8));
         }
-
+        sc.Close();
        
     }
 }

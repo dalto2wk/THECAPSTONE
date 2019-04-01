@@ -72,7 +72,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         {
             result.Add(new Interests(reader.GetString(0), reader.GetInt32(1)));
         }
-
+        sc.Close();
         return result;
     }
 
