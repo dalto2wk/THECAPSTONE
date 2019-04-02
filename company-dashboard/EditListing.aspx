@@ -31,10 +31,10 @@
 
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
                     <ul class="nav nav-pills flex-column sidebar-nav">
-                        <li class="nav-item"><a class="nav-link active" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em>Dashboard <span class="sr-only">(current)</span></a></li>
+                        <li class="nav-item"><a class="nav-link active" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em>Dashboard </a></li>
                         <li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em>Student Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em>School Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em>View Listings</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em>View Listings <span class="sr-only">(current)</span></a></li>
                         <li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em>Edit Profile</a></li>
                     </ul>
                     <a href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em>Signout</a>
@@ -96,7 +96,7 @@
 														<option value="Other" runat="server">Other</option>
 													</select>--%>
                                                     <%-- <asp:CheckBoxList ID="cboxInterests" runat="server" DataSourceID="PostingInterest" DataTextField="name" DataValueField="name"></asp:CheckBoxList>--%>
-                                                    <asp:ListBox ID="listBoxInterests" CssClass="form-control" runat="server" DataSourceID="PostingInterest" DataTextField="name" DataValueField="interestID" SelectionMode="Multiple"></asp:ListBox>
+                                                    <asp:ListBox ID="listBoxInterests" CssClass="form-control" runat="server" DataSourceID="PostingInterest" DataTextField="name" DataValueField="interestID" SelectionMode="Multiple" OnPreRender="Page_PreRender"></asp:ListBox>
                                                     <asp:SqlDataSource runat="server" ID="PostingInterest" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT [interestID], [name] FROM [Interest]"></asp:SqlDataSource>
                                                 </div>
                                             </div>
@@ -171,7 +171,7 @@
                                             <div runat="server" class="row">
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 
-                                                    <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Edit Listing" runat="server" OnClick="updateBtnClick"></asp:Button>
+                                                    <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Confirm Changes" runat="server" OnClick="updateBtnClick"></asp:Button>
                                                 </div>
                                             </div>
 
