@@ -21,7 +21,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <form runat="server">
+    <form id="form1" runat="server">
     <div class="container-fluid" id="wrapper">
         <div class="row">
             <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
