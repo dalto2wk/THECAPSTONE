@@ -155,7 +155,7 @@ FROM            Posting INNER JOIN
 													</tr>
 												</tbody>
 											</table>--%>
-                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    CAST(Posting.PostingID AS VARCHAR) AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', CAST(COUNT(Application.studentID) AS VARCHAR) AS 'Number Of Applicants' FROM Posting INNER JOIN Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid" FilterExpression="[Posting ID] LIKE '123%' OR [Job Listing Title] LIKE '%{0}%' OR [Number of Applicants] LIKE '123%'">
+                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    CAST(Posting.PostingID AS VARCHAR) AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', CAST(COUNT(Application.studentID) AS VARCHAR) AS 'Number Of Applicants' FROM Posting INNER JOIN Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid" FilterExpression="[Posting ID] LIKE '%{1}%' OR [Job Listing Title] LIKE '%{0}%' OR [Number of Applicants] LIKE '%{1}%'">
                                         <FilterParameters>
                                                 <asp:ControlParameter Name="Posting ID" ControlID="searchbox" PropertyName="Text" />
                                                 <asp:ControlParameter Name="Job Listing Title" ControlID="searchbox" PropertyName="Text" />
