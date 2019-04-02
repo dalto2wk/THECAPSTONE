@@ -5,6 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link rel="icon" href="images/favicon.ico">
@@ -28,10 +29,12 @@
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 			<div class="sitelogo">
 				<img src="images/logo.jpg" alt="logo"><a href="LandingPage.aspx"></a>
+
 			</div>
 													
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
 				<ul class="nav nav-pills flex-column sidebar-nav">
+
 					<li class="nav-item"><a class="nav-link active" href="index.html"><em class="fas fa-tachometer-alt"></em> Dashboard <span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="student.html"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
 					<li class="nav-item"><a class="nav-link" href="school.html"><em class="fas fa-school"></em> School Contact</a></li>
@@ -66,24 +69,25 @@
                                         <div runat="server" class="card-block">
                                             <h4 class="card-title">Company Information</h4>
 							
+
 								<div class="form-group">
 									<label for="name" runat="server">Company Name</label>
-									<input id="CompanyName" type="text" class="form-control" runat="server" name="name" required autofocus>
+									<input id="Text1" type="text" class="form-control" runat="server" name="name" required autofocus>
 								</div>
 
 								<div class="form-group">
 									<label for="industry" runat="server">Industry</label>
-									<input id="industry" type="industry" runat="server" class="form-control" name="industry" required>
+									<input id="industry1" type="industry" runat="server" class="form-control" name="industry" required>
 								</div>
 
 								<div class="form-group">
 									<label for="size" runat="server">Size</label>
-									<input id="size" type="size" class="form-control" runat="server" name="size" required data-eye>
+									<input id="size1" type="size" class="form-control" runat="server" name="size" required data-eye>
 								</div>
 
 								<div class="form-group">
 									<label for="description">Description</label>
-									<input id="description" type="description" runat="server" class="form-control" name="description" required data-eye>
+									<input id="description1" type="description" runat="server" class="form-control" name="description" required data-eye>
 								</div>
 
 				<br>
@@ -92,37 +96,37 @@
 							
 								<div class="form-group">
 									<label for="name" runat="server">Your Name</label>
-									<input id="ContactName" type="text" class="form-control" runat="server" name="name" required autofocus>
+									<input id="Text2" type="text" class="form-control" runat="server" name="name" required autofocus>
 								</div>
 
 								<div class="form-group">
 									<label for="title" runat="server">Title</label>
-									<input id="title" type="title" class="form-control" runat="server" name="title" required>
+									<input id="title1" type="title" class="form-control" runat="server" name="title" required>
 								</div>
 
 								<div class="form-group">
 									<label for="username" runat="server">Username</label>
-									<input id="username" type="username" class="form-control" runat="server" name="username" required data-eye>
+									<input id="username1" type="username" class="form-control" runat="server" name="username" required data-eye>
 								</div>
 
 								<div class="form-group">
 									<label for="password" runat="server">Password</label>
-									<input id="password" type="password" runat="server" class="form-control" name="password" required data-eye>
+									<input id="password1" type="password" runat="server" class="form-control" name="password" required data-eye>
 								</div>
 
 								<div class="form-group">
 									<label for="Phone" runat="server">Phone</label>
-									<input id="Phone" type="Phone" class="form-control" runat="server" name="Phone" required data-eye>
+									<input id="Phone1" type="Phone" class="form-control" runat="server" name="Phone" required data-eye>
 								</div>
 
 								<div class="form-group">
 									<label for="email" runat="server">E-mail</label>
-									<input id="email" type="e-mail" class="form-control" runat="server" name="e-mail" required data-eye>
+									<input id="email1" type="e-mail" class="form-control" runat="server" name="e-mail" required data-eye>
 								</div>
 
 								<div class="form-group">
 									<div class="custom-checkbox custom-control">
-										<input type="checkbox" name="agree" id="agree" class="custom-control-input" runat="server" required="">
+										<input type="checkbox" name="agree" id="Checkbox1" class="custom-control-input" runat="server" required="">
 										<label for="agree" class="custom-control-label" runat="server">I agree to the <a href="#">Terms and Conditions</a></label>
 										<div class="invalid-feedback">
 											You must agree with our Terms and Conditions
@@ -131,9 +135,10 @@
 								</div>
 
 								<div class="form-group m-0">
-									<asp:Button type="submit" id="btnRegister" text="Register" OnClick="RegisterBtnClick" runat="server" class="btn btn-primary btn-block">
+									<asp:Button type="submit" id="Button1" text="Register" OnClick="RegisterBtnClick" runat="server" class="btn btn-primary btn-block">
 									</asp:Button>
 								</div>
+
 
                                             
 
@@ -167,3 +172,4 @@
     </form>
 </body>
     </html>
+
