@@ -15,8 +15,6 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //loggedInUser.Text = Session["username"].ToString();
-        TopCandidate();
-        
         
     }
 
@@ -38,8 +36,10 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
         {
             Connection = sc,
             CommandText = "SELECT Posting.postingID, Posting_Interest.interestID FROM Posting INNER JOIN " +
-            "Posting_Interest ON Posting.postingID = Posting_Interest.postingID where Posting.postingID = 8"
+            "Posting_Interest ON Posting.postingID = Posting_Interest.postingID where Posting.postingID = @ddlTopCandidate"      
         };
+
+        getPostingInterest.Parameters.AddWithValue("@ddlTopCandidate", ddlTopCandidate.SelectedValue);
 
         SqlDataReader reader2 = getPostingInterest.ExecuteReader();
         ///add the posting interests into the postingInterest arraylist
@@ -60,8 +60,9 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
             CommandText = "SELECT Student.StudentID, Student.FirstName, Student.LastName, Student.GPA, Student_Interest.interestID " +
             "FROM Student INNER JOIN Student_Interest ON Student.StudentID = Student_Interest.studentID " +
             "INNER JOIN Application ON Student.StudentID = Application.studentID INNER JOIN " +
-            "Posting ON Application.postingID = Posting.postingID where Posting.PostingID = 8"
+            "Posting ON Application.postingID = Posting.postingID where Posting.PostingID = @ddlTopCandidate"
         };
+        getTopCandidate.Parameters.AddWithValue("@ddlTopCandidate", ddlTopCandidate.SelectedValue);
 
         //create an array list to store the names, GPAs, and interests all separately
         SqlDataReader reader = getTopCandidate.ExecuteReader();
@@ -102,7 +103,7 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
                 {
                     if (((TopCandidate)topCandidate[i]).getStudentInterestID().Equals(postingInterest[j]))
                     {
-                        ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i]).getGPA() + .5);
+                        ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i]).getGPA() + .3);
                     }
                 }
             }
@@ -111,7 +112,7 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
             {
                 if (((TopCandidate)topCandidate[i]).getFirstName() + ((TopCandidate)topCandidate[i]).getLastName() == ((TopCandidate)topCandidate[i - 1]).getFirstName() + ((TopCandidate)topCandidate[i - 1]).getLastName())
                 {
-                    ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i - 1]).getFinalValue() + .5);
+                    ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i - 1]).getFinalValue() + .3);
                     topCandidate.RemoveAt(i - 1);
                     i--;
                 }
@@ -122,7 +123,7 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
                     {
                         if (((TopCandidate)topCandidate[i]).getStudentInterestID().Equals(postingInterest[j]))
                         {
-                            ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i]).getGPA() + .5);
+                            ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i]).getGPA() + .3);
                         }
                     }
                 }
@@ -136,7 +137,7 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
         sortedList.Reverse();
 
         ///determine the maximum possible value for a posting
-        double maxFinalValue = 4.0 + (postingInterest.Count * .5);
+        double maxFinalValue = 4.0 + (postingInterest.Count * .3);
 
 
         ////////////////Put data into Graph on Landing Page////////////////
@@ -145,8 +146,10 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
         System.Data.SqlClient.SqlCommand getPostingTitle = new System.Data.SqlClient.SqlCommand
         {
             Connection = sc,
-            CommandText = "Select PostingTitle from Posting where postingID = 8;"
+            CommandText = "Select PostingTitle from Posting where postingID = @ddlTopCandidate;"
         };
+        getPostingTitle.Parameters.AddWithValue("@ddlTopCandidate", ddlTopCandidate.SelectedValue);
+
         String postingSubTitle = getPostingTitle.ExecuteScalar().ToString();
         getPostingTitle.ExecuteNonQuery();
         sc.Close();
@@ -157,13 +160,13 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
 
         ///Add student information above the progress bar
         ApplicantOne.Text = sortedList[0].getFirstName() + " " + sortedList[0].getLastName() +
-            "  Score: " + sortedList[0].getFinalValue();
+            "  (Score: " + sortedList[0].getFinalValue() + ")";
 
         ApplicantTwo.Text = sortedList[1].getFirstName() + " " + sortedList[1].getLastName() +
-            "  Score: " + sortedList[1].getFinalValue();
+            "  (Score: " + sortedList[1].getFinalValue() + ")";
 
         ApplicantThree.Text = sortedList[2].getFirstName() + " " + sortedList[2].getLastName() +
-            "  Score: " + sortedList[2].getFinalValue();
+            "  (Score: " + sortedList[2].getFinalValue() + ")";
 
         ///Display the Data on the chart for the Top Candidate
         String highestPercentage = (sortedList[0].getFinalValue() / maxFinalValue).ToString(".%");
@@ -189,12 +192,19 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
 
         String thirdHighestPercentage = (sortedList[2].getFinalValue() / maxFinalValue).ToString(".%");
         testprogress3.Style.Add("width", thirdHighestPercentage);
-
+        
         //testprogress.Style.Add("role", "progressbar");
         //testprogress.Style.Add("aria-valuenow", "25");
         //testprogress.Style.Add("aria-valuemin", "0");
         //testprogress.Style.Add("aria-valuemax", "100");
         //Old HTML: style="width: 75%" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    }
+
+    /// <summary>
+    /// Call the method in the prerender (a page event that comes after 
+    protected void topCandidate(object sender, EventArgs e)
+    {
+        TopCandidate();
     }
 }
