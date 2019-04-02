@@ -12,7 +12,14 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //loggedInUser.Text = Session["username"].ToString();
+        if (Session["username"] == null)
+        {
+            Response.Redirect("/Login.aspx");
+        }
+        else
+        {
+            loggedInUser.Text = Session["username"].ToString();
+        }
 
 
         //if (IsPostBack == true || IsPostBack == false)
@@ -22,15 +29,20 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         //}
         //loggedInUser.Text = Session["username"].ToString();
 
-        if(!IsPostBack)
-        {
-            //String State = DropDownList_State.SelectedValue;
-            //String City = DropDownList_City.SelectedValue; 
+        //if (!IsPostBack)
+        //{
+        //    //String State = DropDownList_State.SelectedValue;
+        //    //String City = DropDownList_City.SelectedValue; 
             
-        }
+        //}
 
        
 
+    }
+    public void logoutClick(object sender, EventArgs e)
+    {
+        Session.Abandon();
+        Response.Redirect("/Login.aspx");
     }
 
     protected void submitPostingBtnClick(object sender, EventArgs e)
