@@ -11,6 +11,7 @@ public class Posting {
 	private String jobRequirements;
 	private String contactInfo;
 	private Employer emp;
+    private School schoolName;
     private string lastUpdatedBy;
     private string lastUpdated;
     private string cpEmail;
@@ -22,12 +23,13 @@ public class Posting {
 
 
     public Posting(String postingTitle, String description, String jobRequirements,
-            String contactInfo, Employer empID, string cpPhone,string cpEmail, string postStart, string postEnd, string opportunityStartDate) {
+            String contactInfo, Employer empID, School schoolName, string cpPhone,string cpEmail, string postStart, string postEnd, string opportunityStartDate) {
 		setPostingTitle(postingTitle);
         setDescription(description);
 		setJobRequirements(jobRequirements);
 		setContactInfo(contactInfo);
 		setEmp(empID);
+        setSchoolName(schoolName);
         setLastUpdatedBy();
         setLastUpdated();
         setcpPhone(cpPhone);
@@ -37,6 +39,17 @@ public class Posting {
         setOppStart(opportunityStartDate);
         
     }
+
+    public void setSchoolName(School schoolName)
+    {
+        this.schoolName = schoolName;
+    }
+
+    public School getSchoolName()
+    {
+        return this.schoolName;
+    }
+
     public string getStartDate()
     {
         return this.postStart;
