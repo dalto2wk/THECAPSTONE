@@ -66,7 +66,7 @@
                                 <a class="dropdown-item" runat="server" onServerClick="logoutClick" ><em class="fa fa-power-off mr-1"></em> Logout</a></div>
 
                             </div>
-                        </div>
+                        
                         <div class="clear"></div>
                     </header>
                     <section class="row">
