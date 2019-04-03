@@ -69,6 +69,7 @@ public partial class Login : System.Web.UI.Page
                     if (PasswordHash.ValidatePassword(password.Text, storedHash)) // if the entered password matches what is stored, it will show success
                     {
                         Session["username"] = email.Text;
+                        
                         Response.Redirect("company-dashboard/LandingPage.aspx");
                         //Need to verify when to remove session variables * probably should be done upon logging out
                     }

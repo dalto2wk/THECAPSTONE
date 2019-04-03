@@ -33,13 +33,13 @@
 
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
 				<ul class="nav nav-pills flex-column sidebar-nav">
-					<li class="nav-item"><a class="nav-link active" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard </a></li>
+					<li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard </a></li>
 					<li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
+					<li class="nav-item"><a class="nav-link active" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> Job Listings</a></li>
 					<li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 				</ul>
-				<a href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
+				<a  runat="server" class="logout-button" onServerClick="logoutClick"><em class="fa fa-power-off"></em> Signout</a>
 			</nav>
 			<main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
 				<header class="page-header row justify-center">
@@ -55,8 +55,8 @@
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="EditProfile.aspx"><em class="fa fa-user-circle mr-1"></em> View Profile</a>
 
-						     <a class="dropdown-item" href="/Login.aspx"><em class="fa fa-power-off mr-1"></em> Logout</a></div>
-					</div>
+						     <a class="dropdown-item" runat="server" onServerClick="logoutClick" ><em class="fa fa-power-off mr-1"></em> Logout</a></div>
+					
 					<div class="clear"></div>
 				</header>
 				<section class="row">
@@ -170,13 +170,14 @@ FROM            School INNER JOIN
                                        </div> 
                                       </div>                
                                            <script type='text/javascript'> var divElement = document.getElementById('viz1554157927266'); var vizElement = divElement.getElementsByTagName('object')[0];
-                                               vizElement.style.width = '1000px'; vizElement.style.height = '827px'; var scriptElement = document.createElement('script');
+                                               vizElement.style.width = '1000px'; vizElement.style.height = '200px'; var scriptElement = document.createElement('script');
                                                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                
 
                                            </script>
 
+										
+										<div class="table-responsive">
 
-										<!--<div class="table-responsive">
 											<table class="table table-striped">
 												<thead>
 													<tr>
