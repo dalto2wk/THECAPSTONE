@@ -207,6 +207,65 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             }
         }
     }
+    protected void StateSelection_Change(object sender, EventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        //   DataTable dt = new DataTable();
+        System.Data.SqlClient.SqlCommand newCity = new System.Data.SqlClient.SqlCommand();
+        newCity.Connection = sc;
+        String State = DropDownList_State.SelectedValue;
+
+
+
+        SqlDataSourceCity.SelectCommand = "select citycounty from cities where state = '" + State + "'";
+        SqlDataSourceCity.DataBind();
+
+
+
+        /*
+        try
+        {
+            sc.Open();
+            newCity.CommandText = "SELECT CityCounty FROM cities WHERE State = " + DropDownList_State.SelectedValue;
+            string sqlStatement = "SELECT ColumnName * FROM TableName";
+            SqlCommand sqlCmd = new SqlCommand(sqlStatement, sc);
+            SqlDataAdapter sqlDa = new SqlDataAdapter(sqlCmd);
+            sqlDa.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                DropDownList_City.DataSource = dt;
+                DropDownList_City.DataTextField = "CityCounty"; // the items to be displayed in the list items
+                DropDownList_City.DataValueField = "CityCounty"; // the id of the items displayed
+                DropDownList_City.DataBind();
+                sc.Close();
+            }
+        }
+        catch (System.Data.SqlClient.SqlException ex)
+        {
+            string msg = "Fetch Error:";
+            msg += ex.Message;
+            throw new Exception(msg);
+        }
+        finally
+        {
+            sc.Close();
+        }
+        */
+
+    }
+
+    protected void CitySelection_Change(object sender, EventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+
+        System.Data.SqlClient.SqlCommand newSchool = new System.Data.SqlClient.SqlCommand();
+        newSchool.Connection = sc;
+        String State = DropDownList_State.SelectedValue;
+        String City = DropDownList_City.SelectedValue;
+
+        PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State + "' and CityCounty = '" + City + "'";
+        PostingSchool.DataBind();
+    }
 }
 
     
