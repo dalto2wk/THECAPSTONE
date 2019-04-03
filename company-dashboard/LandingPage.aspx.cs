@@ -22,7 +22,39 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
         {
             loggedInUser.Text = Session["username"].ToString();
         }
+
+
+        List<String> notifications = new List<String>();
         
+        ///Connect to database
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+
+        ///Grab the posting interests from the posting
+        sc.Open();
+        System.Data.SqlClient.SqlCommand getMostRecentApplication = new System.Data.SqlClient.SqlCommand
+
+        {
+            Connection = sc,
+            CommandText = "SELECT Student.FirstName, Student.LastName, Application.jobTitle, Application.LastUpdated FROM Student " +
+            "INNER JOIN Application ON Student.StudentID = Application.studentID order by Application.LastUpdated"
+        };
+
+        SqlDataReader reader = getMostRecentApplication.ExecuteReader();
+        ///add the posting interests into the postingInterest arraylist
+        while (reader.Read())
+        {
+            notifications.Add(reader.GetString(0));
+            notifications.Add(reader.GetString(1));
+            notifications.Add(reader.GetString(2));
+        }
+        sc.Close();
+
+        notifications.Reverse();
+
+
+        notificationTitle1.Text = notifications[2] + " " + notifications[1] + " just applied for the " + notifications[0] + " position!";
+        notificationTitle2.Text = notifications[5] + " " + notifications[4] + " just applied for the " + notifications[3] + " position!";
+        notificationTitle3.Text = notifications[8] + " " + notifications[7] + " just applied for the " + notifications[6] + " position!";
 
     }
 
