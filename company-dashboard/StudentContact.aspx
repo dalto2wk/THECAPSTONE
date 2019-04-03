@@ -88,8 +88,11 @@
                                                 <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name"></asp:BoundField>
                                                 <asp:BoundField DataField="School Name" HeaderText="School Name" SortExpression="School Name"></asp:BoundField>
                                                 <asp:BoundField DataField="Applied to" HeaderText="Applied to" SortExpression="Applied to"></asp:BoundField>
-                                                <asp:ButtonField ControlStyle-CssClass="btn btn-primary" Text="View Resume" ButtonType="Button" ShowHeader="True" HeaderText="Action"></asp:ButtonField>
-                                            </Columns>
+                                             
+                                                <asp:ButtonField CommandName="viewResume" ControlStyle-CssClass="btn btn-primary" Text="View Resume" ButtonType="Button" ShowHeader="True" HeaderText="view Resume"></asp:ButtonField>                                              
+                                                <asp:ButtonField CommandName="viewStudentInformation" ControlStyle-CssClass="btn btn-primary" Text="View Student" ButtonType="Button" ShowHeader="True" HeaderText="Student Information"></asp:ButtonField>
+                                                                                   
+                                                   </Columns>
                                         </asp:GridView>
                                         <asp:SqlDataSource runat="server" ID="StudentApplicationGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT CONCAT_WS(' ', Student.FirstName, Student.LastName) AS 'Name', School.SchoolName AS 'School Name', Application.jobTitle AS 'Applied to' FROM Student INNER JOIN School ON Student.schoolID = School.SchoolID INNER JOIN Application ON Student.StudentID = Application.studentID" FilterExpression="[Name] LIKE '%{0}%' OR [School Name] LIKE '%{0}%' OR [Applied To] LIKE '%{0}%'">
                                             <FilterParameters>
