@@ -17,8 +17,8 @@ public partial class EditProfile : System.Web.UI.Page
         }
         else
         {
-            // uncomment when this page is stragiht
-            //loggedInUser.Text = Session["username"].ToString();
+            
+           loggedInUser.Text = Session["username"].ToString();
         }
         industry.Value = Session["username"].ToString();
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
