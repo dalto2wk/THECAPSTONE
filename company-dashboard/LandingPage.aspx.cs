@@ -22,7 +22,32 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
         {
             loggedInUser.Text = Session["username"].ToString();
         }
-        
+
+        ///Connect to database
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+
+        ///Grab the posting interests from the posting
+        sc.Open();
+        System.Data.SqlClient.SqlCommand getMostRecentApplication = new System.Data.SqlClient.SqlCommand
+
+        {
+            Connection = sc,
+            CommandText = "SELECT Posting.postingID, Posting_Interest.interestID FROM Posting INNER JOIN " +
+            "Posting_Interest ON Posting.postingID = Posting_Interest.postingID where Posting.postingID = @ddlTopCandidate"
+        };
+
+        getMostRecentApplication.Parameters.AddWithValue("@ddlTopCandidate", ddlTopCandidate.SelectedValue);
+
+        SqlDataReader reader2 = getMostRecentApplication.ExecuteReader();
+        ///add the posting interests into the postingInterest arraylist
+        while (reader2.Read())
+        {
+            getMostRecentApplication.Add(reader2.GetInt32(1));
+        }
+        sc.Close();
+
+
+        notificationTitle1.Text = "Woo";
 
     }
 

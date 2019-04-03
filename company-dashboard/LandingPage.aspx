@@ -95,55 +95,7 @@
 					<div class="col-sm-12">
 						<section class="row">
 							<div class="col-md-12 col-lg-8">
-								<div class="jumbotron">
-									<h1 class="mb-4">Hello, <asp:literal runat="server" ID="helloEmpName"></asp:literal>!</h1>
-									<p class="lead">Welcome to the Cued In family! This is your Dashboard. Here you will find basic information on students available as well as an overview of your current activity as a verified employer.</p>
-									<p>Students have a similar dashboard and will be able to see postings as soon as you upload them.</p>
-									<p class="lead"><a class="btn btn-primary btn-lg mt-2" href="JobPostForm.aspx" role="button">Create Listing</a></p>
-								</div>
-                            
-								<div class="card mb-4">
-									<div class="card-block">
-										<h3 class="card-title">Current Desirability</h3>
-										<div class="dropdown card-title-btn-container">
-											<button class="btn btn-sm btn-subtle dropdown-toggle" type="button" runat="server" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>
-											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#"><em class="fa fa-search mr-1"></em> More info</a>
-												<a class="dropdown-item" href="#"><em class="fa fa-thumb-tack mr-1"></em> Pin Window</a>
-												<a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close Window</a></div>
-										</div>
-										<h6 class="card-subtitle mb-2 text-muted">Students are interested in these areas</h6>
-										<div class="canvas-wrapper">
-											<canvas class="chart" id="doughnut-chart" height="300" width="600"></canvas>
-										</div>
-									</div>
-								</div>
-								<div class="card mb-4">
-									<div class="card-block">
-										<h3 class="card-title">Recent Applications</h3>
-										<div class="dropdown card-title-btn-container">
-											<button class="btn btn-sm btn-subtle" type="button" runat="server"><em class="fa fa-list-ul"></em> View All</button>
-											<button class="btn btn-sm btn-subtle dropdown-toggle" type="button" runat="server" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>
-											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#"><em class="fa fa-search mr-1"></em> More info</a>
-											    <a class="dropdown-item" href="#"><em class="fa fa-thumb-tack mr-1"></em> Pin Window</a>
-											    <a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close Window</a></div>
-										</div>
-										<div class="table-responsive">
-                                            <%-- Should eventually connect to DB may neeed to add more runat="server" tags --%>
-                                            <asp:GridView ID="recentApplicationsGV"  runat="server" AutoGenerateColumns="False" DataKeyNames="applicationID" CssClass="table table-striped" UseAccessibleHeader="true" DataSourceID="SqlDataSource1">
-                                                <Columns>
-                                                    <asp:BoundField DataField="applicationID" HeaderText="Application ID" InsertVisible="False" ReadOnly="True" SortExpression="applicationID" />
-                                                    <asp:BoundField DataField="jobTitle" HeaderText="Job Title" SortExpression="jobTitle" />
-                                                    <asp:BoundField DataField="companyName" HeaderText="Company Name" SortExpression="companyName" />
-                                                    <asp:BoundField DataField="postingID" HeaderText="Posting ID" SortExpression="postingID" />
-                                                </Columns>
-
-
-                                            </asp:GridView>
-										    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:AWSString %>" SelectCommand="SELECT [applicationID], [jobTitle], [companyName], [postingID] FROM [Application]"></asp:SqlDataSource>
-										</div>
-									</div>
-								</div>
-								<div class="card mb-8">
+							<div class="card mb-8">
 									<div class="card-block">
 										<h3 class="card-title">Notifications</h3>
 										<div class="dropdown card-title-btn-container">
@@ -164,7 +116,7 @@
 															<div class="text-muted">Jun</div>
 														</div>
 														<div class="col-10">
-															<h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
+															<h4><asp:Literal ID="notificationTitle1" runat="server"/></h4>
 															<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
 														</div>
 													</div>
@@ -207,6 +159,51 @@
 										</div>
 									</div>
 								</div>
+                                <br />
+
+                            
+								<div class="card mb-4">
+									<div class="card-block">
+										<h3 class="card-title">Current Desirability</h3>
+										<div class="dropdown card-title-btn-container">
+											<button class="btn btn-sm btn-subtle dropdown-toggle" type="button" runat="server" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>
+											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#"><em class="fa fa-search mr-1"></em> More info</a>
+												<a class="dropdown-item" href="#"><em class="fa fa-thumb-tack mr-1"></em> Pin Window</a>
+												<a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close Window</a></div>
+										</div>
+										<h6 class="card-subtitle mb-2 text-muted">Students are interested in these areas</h6>
+										<div class="canvas-wrapper">
+											<canvas class="chart" id="doughnut-chart" height="300" width="600"></canvas>
+										</div>
+									</div>
+								</div>
+								<div class="card mb-4">
+									<div class="card-block">
+										<h3 class="card-title">Recent Applications</h3>
+										<div class="dropdown card-title-btn-container">
+											<button class="btn btn-sm btn-subtle" type="button" runat="server"><em class="fa fa-list-ul"></em> View All</button>
+											<button class="btn btn-sm btn-subtle dropdown-toggle" type="button" runat="server" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>
+											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#"><em class="fa fa-search mr-1"></em> More info</a>
+											    <a class="dropdown-item" href="#"><em class="fa fa-thumb-tack mr-1"></em> Pin Window</a>
+											    <a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close Window</a></div>
+										</div>
+										<div class="table-responsive">
+                                            <%-- Should eventually connect to DB may neeed to add more runat="server" tags --%>
+                                            <asp:GridView ID="recentApplicationsGV"  runat="server" AutoGenerateColumns="False" DataKeyNames="applicationID" CssClass="table table-striped" UseAccessibleHeader="true" DataSourceID="SqlDataSource1">
+                                                <Columns>
+                                                    <asp:BoundField DataField="applicationID" HeaderText="Application ID" InsertVisible="False" ReadOnly="True" SortExpression="applicationID" />
+                                                    <asp:BoundField DataField="jobTitle" HeaderText="Job Title" SortExpression="jobTitle" />
+                                                    <asp:BoundField DataField="companyName" HeaderText="Company Name" SortExpression="companyName" />
+                                                    <asp:BoundField DataField="postingID" HeaderText="Posting ID" SortExpression="postingID" />
+                                                </Columns>
+
+
+                                            </asp:GridView>
+										    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:AWSString %>" SelectCommand="SELECT [applicationID], [jobTitle], [companyName], [postingID] FROM [Application]"></asp:SqlDataSource>
+										</div>
+									</div>
+								</div>
+					
 							</div>
 							<div class="col-md-12 col-lg-4">
 								<div class="card mb-4">

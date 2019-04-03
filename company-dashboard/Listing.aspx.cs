@@ -289,6 +289,6 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
 
     protected void btnCreateNewListing_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("JobPostForm.aspx");
     }
 }
