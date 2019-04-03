@@ -132,7 +132,7 @@
 															<div class="text-muted">Jun</div>
 														</div>
 														<div class="col-10">
-															<h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
+															<h4><asp:Literal ID="notificationTitle2" runat="server"/></h4>
 															<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
 														</div>
 													</div>
@@ -148,7 +148,7 @@
 															<div class="text-muted">Jun</div>
 														</div>
 														<div class="col-10">
-															<h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
+															<h4><asp:Literal ID="notificationTitle3" runat="server"/></h4>
 															<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
 														</div>
 													</div>
