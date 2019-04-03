@@ -11,7 +11,17 @@ public partial class EditProfile : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-       // Session["username"] = "DukeDog";
+        
+        if (Session["username"] == null)
+        {
+            Response.Redirect("/Login.aspx");
+        }
+        else
+        {
+            
+           loggedInUser.Text = Session["username"].ToString();
+        }
+        
         industry.Value = Session["username"].ToString();
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         sc.Open();
@@ -25,7 +35,7 @@ public partial class EditProfile : System.Web.UI.Page
                 CommandText = "select businessName from Employer where cpUserName = '" + Session["username"].ToString() + "'"
             };
 
-
+            
             CompanyName.Value = insert.ExecuteScalar().ToString();
 
             insert.CommandText = "select size from Employer where cpUserName = '" + Session["username"].ToString() + "'";
@@ -55,7 +65,11 @@ public partial class EditProfile : System.Web.UI.Page
         sc.Close();
 
     }
-
+    public void logoutClick(object sender, EventArgs e)
+    {
+        Session.Abandon();
+        Response.Redirect("/Login.aspx");
+    }
     protected void RegisterBtnClick(object sender, EventArgs e)
     {
         //try

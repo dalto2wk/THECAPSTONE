@@ -38,7 +38,7 @@
 					<li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
 					<li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 				</ul>
-				<a runat="server" href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
+				<a  runat="server" class="logout-button" onServerClick="logoutClick"><em class="fa fa-power-off"></em> Signout</a>
 			</nav>
 			<main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
 				<header class="page-header row justify-center">
@@ -54,7 +54,7 @@
 						</a>
 						<div runat="server" class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="EditProfile.aspx"><em class="fa fa-user-circle mr-1"></em> View Profile</a>
 							 
-							 <a class="dropdown-item" href="/Login.aspx"><em class="fa fa-power-off mr-1"></em> Logout</a></div>
+							 <a class="dropdown-item" runat="server" onServerClick="logoutClick" ><em class="fa fa-power-off mr-1"></em> Logout</a></div>
 					</div>
 					<div runat="server" class="clear"></div>
 				</header>
@@ -102,8 +102,9 @@
 														<option value="Other" runat="server">Other</option>
 													</select>--%>
                                                    <%-- <asp:CheckBoxList ID="cboxInterests" runat="server" DataSourceID="PostingInterest" DataTextField="name" DataValueField="name"></asp:CheckBoxList>--%>
-                                                    <asp:ListBox ID="listBoxSchool" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceSchool" DataTextField="SchoolName" DataValueField="SchoolName" SelectionMode="Multiple" AutoPostBack="true"></asp:ListBox>
-                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceSchool" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand=""></asp:SqlDataSource>
+                                                    <asp:ListBox ID="listBoxSchool" CssClass="form-control" runat="server" DataSourceID="PostingSchool" DataTextField="SchoolName" DataValueField="SchoolID" SelectionMode="Multiple" AutoPostBack="true"></asp:ListBox>
+                                                    <asp:SqlDataSource runat="server" ID="PostingSchool" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT [SchoolID], [SchoolName] FROM [School]"></asp:SqlDataSource>
+                                                    <%--<asp:SqlDataSource runat="server" ID="SqlDataSourceSchool" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand=""></asp:SqlDataSource>--%>
                                                     
                                                 </div>
 											</div>
