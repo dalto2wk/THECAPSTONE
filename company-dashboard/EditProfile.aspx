@@ -34,12 +34,11 @@
 													
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
 				<ul class="nav nav-pills flex-column sidebar-nav">
-
-					<li class="nav-item"><a class="nav-link active" href="index.html"><em class="fas fa-tachometer-alt"></em> Dashboard <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="student.html"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="school.html"><em class="fas fa-school"></em> School Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="ViewListings.aspx"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
-					<li class="nav-item"><a class="nav-link" href="profile.html"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
+					<li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard </a></li>
+					<li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
+					<li class="nav-item"><a class="nav-link active" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> Job Listings</a></li>
+					<li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 				</ul>
 				<a href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
 			</nav>
@@ -72,56 +71,56 @@
 
 								<div class="form-group">
 									<label for="name" runat="server">Company Name</label>
-									<input id="Text1" type="text" class="form-control" runat="server" name="name" required autofocus>
+									<input id="CompanyName" type="text" class="form-control" runat="server" name="name" required autofocus>
 								</div>
 
 								<div class="form-group">
 									<label for="industry" runat="server">Industry</label>
-									<input id="industry1" type="industry" runat="server" class="form-control" name="industry" required>
+									<input id="industry" type="industry" runat="server" class="form-control" name="industry" required>
 								</div>
 
 								<div class="form-group">
 									<label for="size" runat="server">Size</label>
-									<input id="size1" type="size" class="form-control" runat="server" name="size" required data-eye>
+									<input id="size" type="size" class="form-control" runat="server" name="size" required data-eye>
 								</div>
 
 								<div class="form-group">
 									<label for="description">Description</label>
-									<input id="description1" type="description" runat="server" class="form-control" name="description" required data-eye>
+									<input id="description" type="description" runat="server" class="form-control" name="description" required data-eye>
 								</div>
 
-				<br>
+				                <br>
                             
 								<h4 class="card-title">Contact Information</h4>
 							
 								<div class="form-group">
 									<label for="name" runat="server">Your Name</label>
-									<input id="Text2" type="text" class="form-control" runat="server" name="name" required autofocus>
+									<input id="ContactName" type="text" class="form-control" runat="server" name="name" required autofocus>
 								</div>
 
 								<div class="form-group">
 									<label for="title" runat="server">Title</label>
-									<input id="title1" type="title" class="form-control" runat="server" name="title" required>
+									<input id="title" type="title" class="form-control" runat="server" name="title" required>
 								</div>
 
 								<div class="form-group">
 									<label for="username" runat="server">Username</label>
-									<input id="username1" type="username" class="form-control" runat="server" name="username" required data-eye>
+									<input id="username" type="username" class="form-control" runat="server" name="username" required data-eye>
 								</div>
 
 								<div class="form-group">
 									<label for="password" runat="server">Password</label>
-									<input id="password1" type="password" runat="server" class="form-control" name="password" required data-eye>
+									<input id="password" type="password" runat="server" class="form-control" name="password" required data-eye>
 								</div>
 
 								<div class="form-group">
 									<label for="Phone" runat="server">Phone</label>
-									<input id="Phone1" type="Phone" class="form-control" runat="server" name="Phone" required data-eye>
+									<input id="Phone" type="Phone" class="form-control" runat="server" name="Phone" required data-eye>
 								</div>
 
 								<div class="form-group">
 									<label for="email" runat="server">E-mail</label>
-									<input id="email1" type="e-mail" class="form-control" runat="server" name="e-mail" required data-eye>
+									<input id="email" type="e-mail" class="form-control" runat="server" name="e-mail" required data-eye>
 								</div>
 
 								<div class="form-group">
