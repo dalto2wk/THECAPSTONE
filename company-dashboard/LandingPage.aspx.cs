@@ -14,10 +14,23 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {
-        //loggedInUser.Text = Session["username"].ToString();
+        if(Session["username"] == null)
+        {
+            Response.Redirect("/Login.aspx");
+        }
+        else
+        {
+            loggedInUser.Text = Session["username"].ToString();
+        }
         
+
     }
 
+    public void logoutClick(object sender, EventArgs e)
+    {
+        Session.Abandon();
+        Response.Redirect("/Login.aspx");
+    }
     public void TopCandidate()
     {
         ///////////////////////////////////Top Candidate Code////////////////////////////////////////////

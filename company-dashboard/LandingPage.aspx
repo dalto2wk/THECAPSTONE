@@ -38,7 +38,38 @@
 					<li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
 					<li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 				</ul>
-				<a href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
+
+
+         
+                <p>
+                <div class="social">
+              
+                     <button class="btn btn-info btn-circle margin" type="button">
+                        <span class="fab fa-facebook"></span>
+                    </button>
+        
+
+                    <button class="btn btn-info btn-circle margin" type="button">
+                        <span class="fab fa-twitter"></span>
+                    </button>
+
+                     <button class="btn btn-info btn-circle margin" type="button">
+                        <span class="fab fa-linkedin"></span>
+                    </button>
+                </div>
+                </p>
+
+
+                <!-- href="https://twitter.com/cued__in" href="https://www.facebook.com/cuedin/" --->
+                
+
+
+
+
+
+
+				<a  runat="server" class="logout-button" onServerClick="logoutClick"><em class="fa fa-power-off"></em> Signout</a>
+
 			</nav>
 			<main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
 				<header class="page-header row justify-center">
@@ -54,7 +85,7 @@
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="EditProfile.aspx"><em class="fa fa-user-circle mr-1"></em> View Profile</a>
 
-						     <a class="dropdown-item" href="/Login.aspx"><em class="fa fa-power-off mr-1"></em> Logout</a></div>
+						     <a class="dropdown-item" runat="server" onServerClick="logoutClick" ><em class="fa fa-power-off mr-1"></em> Logout</a></div>
 					</div>
 					<div class="clear"></div>
 				</header>
@@ -172,6 +203,7 @@
 												</div>
 												<div class="clear"></div>
 											</div><!--End .article-->
+                                       
 										</div>
 									</div>
 								</div>
@@ -191,7 +223,7 @@
 												<h6 class="pt-1"><asp:Literal runat="server" id="ApplicantOne" /></h6>
 												<div class="progress progress-custom">
                                                     <!-- Information for Top Candidate-->
-													<div runat="server" id="testprogress" class="progress-bar bg-primary" ></div>
+													<div runat="server" id="testprogress" class="progress-bar" role="progressbar" ></div>
 												</div>
 											</div>
 										</div>                   
@@ -204,7 +236,7 @@
 												<h6 class="pt-1"><asp:Literal runat="server" id="ApplicantTwo" /></h6>
 												<div class="progress progress-custom">
                                                     <!-- Information for Second-Most Top Candidate-->
-													<div runat="server" id="testprogress2" class="progress-bar bg-primary"></div>
+													<div runat="server" id="testprogress2" class="progress-bar" role="progressbar"></div>
 												</div>
 											</div>
 										</div>
@@ -217,7 +249,7 @@
 												<h6 class="pt-1"><asp:Literal runat="server" id="ApplicantThree" /></h6>
 												<div class="progress progress-custom">
                                                     <!-- Information for Third-Most Top Candidate-->
-													<div runat="server" id="testprogress3" class="progress-bar bg-primary"></div>
+													<div runat="server" id="testprogress3" class="progress-bar" role="progressbar"></div>
 												</div>                                                                                               
 											</div>                                            
 										</div>
