@@ -7,6 +7,8 @@ using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Data;
 
 public partial class company_dashboard_StudentContact : System.Web.UI.Page
 {

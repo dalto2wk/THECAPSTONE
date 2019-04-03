@@ -155,8 +155,10 @@ FROM            School INNER JOIN
                                                 <asp:ControlParameter Name="email" ControlID="searchbox" PropertyName="Text" />
                                             </FilterParameters>
                                         </asp:SqlDataSource>
+
                                   <div class ="table-responsive">
                     <div class='tableauPlaceholder' id='viz1554157927266' style='position: relative'><noscript><a href='#'><img alt=' ' 
+
 
                                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cu&#47;Cued-In_15541566149620&#47;Dashboard1&#47;1_rss.png' 
                                            style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' 
