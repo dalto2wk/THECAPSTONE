@@ -26,6 +26,11 @@ public class School {
 		setCountry(country);
 		setZip(zip);
 	}
+
+    public School(String name)
+    {
+        setName(name);
+    }
 	public int getSchoolID() {
 		return this.schoolID;
 	}
