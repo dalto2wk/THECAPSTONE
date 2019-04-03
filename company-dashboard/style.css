@@ -188,6 +188,10 @@ code {
   box-shadow: none;
 }
 
+.btn-info {
+    background-color: #102b3f !important;
+}
+
 .btn-xs {
   font-size: 0.6rem;
   padding: 0.5rem 1rem;
@@ -209,12 +213,19 @@ code {
 }
 
 .btn-circle {
-  width: 2.8rem;
-  height: 2.8rem;
-  font-size: 1rem;
-  padding: 0;
-  border-radius: 50%;
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 1rem;
+    padding: 0;
+    border: none;
+    color: #102b3f;
 }
+
+ .btn-circle:hover, .btn-circle:focus, .btn-circle:active {
+        color: #81c341;
+        background-color: none;
+        outline: none;
+    }
 
 .btn-subtle {
   border: none;
@@ -344,6 +355,15 @@ code {
   width: 85%;
   text-align: center;
   border-radius: 0.3rem;
+}
+
+.sidebar .social {
+  position: absolute;
+  bottom: 40px;
+  left: 20px;
+  width: 85%;
+  text-align: center;
+  border-radius: 0.5rem;
 }
 
 .sidebar .nav ul.children {
@@ -532,6 +552,7 @@ code {
   background-color: #f7f7f7;
   padding: 0;
   height: 6px;
+  color:#81c341 !important;
 }
 
 .progress-label {
@@ -543,6 +564,7 @@ code {
 
 .progress-bar {
   height: 6px;
+  background-color: #81c341
 }
 
 #calendar, .datepicker-inline {
