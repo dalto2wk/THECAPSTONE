@@ -11,6 +11,16 @@ public partial class company_dashboard_StudentDetails : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["username"] == null)
+        {
+            Response.Redirect("/Login.aspx");
+        }
+        else
+        {
+            loggedInUser.Text = Session["username"].ToString();
+        }
+
+
         List<int> interestIDs = new List<int>();
         List<String> Interests = new List<String>();
 
@@ -68,5 +78,11 @@ public partial class company_dashboard_StudentDetails : System.Web.UI.Page
         select.CommandText = "select schoolName from school where schoolId = '" + schoolID.ToString() + "'";
         lblSchool.InnerText = select.ExecuteScalar().ToString();
 
-    }    
+    }
+
+    public void logoutClick(object sender, EventArgs e)
+    {
+        Session.Abandon();
+        Response.Redirect("/Login.aspx");
+    }
 }
