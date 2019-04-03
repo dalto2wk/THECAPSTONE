@@ -21,6 +21,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
+    <form id="form1" runat="server">
     <div class="container-fluid" id="wrapper">
         <div class="row">
             <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
@@ -67,17 +68,19 @@
                             <div class="card-block">
                                 <h3 class="card-title">View Student Candidates</h3>
                                 <div class="dropdown card-title-btn-container">
-
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <button class="btn btn-info margin" type="button"><span class="fa fa-search"></span>&nbsp;Search</button>
+                                            
+                                            <asp:button runat="server" text="Search" class="btn btn-info margin" type="button"></asp:button>
                                         </div>
-                                        <input type="text" class="form-control">
+
+                                        <asp:TextBox id="searchbox" runat="server" type="text" class="form-control"></asp:TextBox>
                                     </div>
+
                                 </div>
                                 <br>
                                 <div class="table-responsive">
-                                    <form runat="server">
+                                    
                                         <asp:GridView runat="server" CssClass="table table-striped" OnRowCommand="viewResume" AutoGenerateColumns="False" ID="studentApplicationTable" DataSourceID="StudentApplicationGridView">
 
                                             <Columns>
@@ -91,7 +94,13 @@
                                                                                    
                                                    </Columns>
                                         </asp:GridView>
-                                        <asp:SqlDataSource runat="server" ID="StudentApplicationGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT CONCAT_WS(' ', Student.FirstName, Student.LastName) AS 'Name', School.SchoolName AS 'School Name', Application.jobTitle AS 'Applied to' FROM Student INNER JOIN School ON Student.schoolID = School.SchoolID INNER JOIN Application ON Student.StudentID = Application.studentID"></asp:SqlDataSource>
+                                        <asp:SqlDataSource runat="server" ID="StudentApplicationGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT CONCAT_WS(' ', Student.FirstName, Student.LastName) AS 'Name', School.SchoolName AS 'School Name', Application.jobTitle AS 'Applied to' FROM Student INNER JOIN School ON Student.schoolID = School.SchoolID INNER JOIN Application ON Student.StudentID = Application.studentID" FilterExpression="[Name] LIKE '%{0}%' OR [School Name] LIKE '%{0}%' OR [Applied To] LIKE '%{0}%'">
+                                            <FilterParameters>
+                                                <asp:ControlParameter Name="Name" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="School Name" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="Applied To" ControlID="searchbox" PropertyName="Text" />
+                                            </FilterParameters>
+                                        </asp:SqlDataSource>
                                     </form>
                                     <!--<table class="table table-striped"> 
 												<thead>
@@ -283,7 +292,7 @@
 
 
     <!-- Bootstrap core JavaScript
-    ================================================== -->
+    ============================================ -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="dist/js/bootstrap.min.js"></script>

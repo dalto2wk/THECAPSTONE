@@ -22,6 +22,7 @@
 
 </head>
 <body>
+    <form id="form1" runat="server">
 	<div class="container-fluid" id="wrapper">
 		<div class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
@@ -120,15 +121,43 @@
 
 											</div>
 
-													<input class="form-control" type="text" name="placeholder" placeholder="School Name">
+													<asp:Textbox runat="server" class="form-control" type="text" name="placeholder" id="searchbox"></asp:Textbox>
 												</div>
 
 										</div>
 										</div>
 
 										</div>
-                                       <div class ="table-responsive">
-                                      <div class='tableauPlaceholder' id='viz1554157927266' style='position: relative'><noscript><a href='#'><img alt=' ' 
+
+                                      
+										<br>
+                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource1">
+                                            <Columns>
+                                                <asp:BoundField DataField="SchoolName"  HeaderText="School" SortExpression="School"></asp:BoundField>
+                                                <asp:BoundField DataField="CityCounty" HeaderText="City" SortExpression="City"></asp:BoundField>
+                                                <asp:BoundField DataField="state" HeaderText="State" ReadOnly="True" SortExpression="State"></asp:BoundField>
+                                                <asp:BoundField DataField="firstName" HeaderText="Counselor First Name" ReadOnly="True" SortExpression="Counselor First Name"></asp:BoundField>
+                                                <asp:BoundField DataField="lastName" HeaderText="Counselor Last Name" ReadOnly="True" SortExpression="Counselor Last Name"></asp:BoundField>
+                                                <asp:BoundField DataField="email" HeaderText="Counselor E-mail" ReadOnly="True" SortExpression="Counselor E-mail"></asp:BoundField>
+                                                <asp:BoundField DataField="phoneNumber" HeaderText="Counselor Phone Number" ReadOnly="True" SortExpression="Counselor Phone Number"></asp:BoundField>
+                                            </Columns>
+                                        </asp:GridView>
+
+                                        <asp:SqlDataSource runat="server" ID="Sqldatasource1" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT        School.SchoolName, School.CityCounty, School.state, Counselor.firstName, Counselor.lastName, Counselor.email, Counselor.phoneNumber
+FROM            School INNER JOIN
+                         Counselor ON School.SchoolID = Counselor.schoolID" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%' OR [firstName] LIKE '%{0}%' OR [lastName] LIKE '%{0}%' OR [email] LIKE '%{0}%'">
+                                        <FilterParameters>
+                                                <asp:ControlParameter Name="SchoolName" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="CityCounty" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="state" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="firstName" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="lastName" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="email" ControlID="searchbox" PropertyName="Text" />
+                                            </FilterParameters>
+                                        </asp:SqlDataSource>
+                                  <div class ="table-responsive">
+                    <div class='tableauPlaceholder' id='viz1554157927266' style='position: relative'><noscript><a href='#'><img alt=' ' 
+
                                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cu&#47;Cued-In_15541566149620&#47;Dashboard1&#47;1_rss.png' 
                                            style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' 
                                            value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' 
@@ -143,8 +172,9 @@
                                                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                
 
                                            </script>
-										<br>
-										<div class="table-responsive">
+
+
+										<!--<div class="table-responsive">
 											<table class="table table-striped">
 												<thead>
 													<tr>
@@ -205,7 +235,7 @@
 													</tr>
 												</tbody>
 											</table>
-										</div>
+										</div>-->
 									</div>
 								</div>
 							</div>
@@ -235,5 +265,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 
+        </form>
 	</body>
 </html> 
