@@ -23,9 +23,16 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
             loggedInUser.Text = Session["username"].ToString();
         }
 
+        ///call the notifications method here in the page load
+        notifications();
 
+
+    }
+
+    public void notifications()
+    {
         List<String> notifications = new List<String>();
-        
+
         ///Connect to database
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
 
