@@ -21,6 +21,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
+    <form id="form1" runat="server">
     <div class="container-fluid" id="wrapper">
         <div class="row">
             <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
@@ -31,13 +32,13 @@
 
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
                 <ul class="nav nav-pills flex-column sidebar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em>Dashboard </a></li>
-                    <li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em>Student Contact <span class="sr-only">(current)</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em>School Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em>View Listings</a></li>
-                    <li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em>Edit Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em>Dashboard </a></li>
+                    <li class="nav-item"><a class="nav-link active" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact <span class="sr-only">(current)</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> Job Listings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
                 </ul>
-                <a href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em>Signout</a>
+                <a  runat="server" class="logout-button" onServerClick="logoutClick"><em class="fa fa-power-off"></em> Signout</a>
             </nav>
             <main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
                 <header class="page-header row justify-center">
@@ -56,9 +57,9 @@
                         <div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="EditProfile.aspx"><em class="fa fa-user-circle mr-1"></em>View Profile</a>
 
-                            <a class="dropdown-item" href="/Login.aspx"><em class="fa fa-power-off mr-1"></em>Logout</a>
+                            <a class="dropdown-item" runat="server" onServerClick="logoutClick" ><em class="fa fa-power-off mr-1"></em> Logout</a></div>
                         </div>
-                    </div>
+                    
                     <div class="clear"></div>
                 </header>
                 <section class="row">
@@ -67,17 +68,19 @@
                             <div class="card-block">
                                 <h3 class="card-title">View Student Candidates</h3>
                                 <div class="dropdown card-title-btn-container">
-
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <button class="btn btn-info margin" type="button"><span class="fa fa-search"></span>&nbsp;Search</button>
+                                            
+                                            <asp:button runat="server" text="Search" class="btn btn-info margin" type="button"></asp:button>
                                         </div>
-                                        <input type="text" class="form-control">
+
+                                        <asp:TextBox id="searchbox" runat="server" type="text" class="form-control"></asp:TextBox>
                                     </div>
+
                                 </div>
                                 <br>
                                 <div class="table-responsive">
-                                    <form runat="server">
+                                    
                                         <asp:GridView runat="server" CssClass="table table-striped" OnRowCommand="viewResume" AutoGenerateColumns="False" ID="studentApplicationTable" DataSourceID="StudentApplicationGridView">
 
                                             <Columns>
@@ -85,10 +88,19 @@
                                                 <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name"></asp:BoundField>
                                                 <asp:BoundField DataField="School Name" HeaderText="School Name" SortExpression="School Name"></asp:BoundField>
                                                 <asp:BoundField DataField="Applied to" HeaderText="Applied to" SortExpression="Applied to"></asp:BoundField>
-                                                <asp:ButtonField ControlStyle-CssClass="btn btn-primary" Text="View Resume" ButtonType="Button" ShowHeader="True" HeaderText="Action"></asp:ButtonField>
-                                            </Columns>
+                                             
+                                                <asp:ButtonField CommandName="viewResume" ControlStyle-CssClass="btn btn-primary" Text="View Resume" ButtonType="Button" ShowHeader="True" HeaderText="view Resume"></asp:ButtonField>                                              
+                                                <asp:ButtonField CommandName="viewStudentInformation" ControlStyle-CssClass="btn btn-primary" Text="View Student" ButtonType="Button" ShowHeader="True" HeaderText="Student Information"></asp:ButtonField>
+                                                                                   
+                                                   </Columns>
                                         </asp:GridView>
-                                        <asp:SqlDataSource runat="server" ID="StudentApplicationGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT CONCAT_WS(' ', Student.FirstName, Student.LastName) AS 'Name', School.SchoolName AS 'School Name', Application.jobTitle AS 'Applied to' FROM Student INNER JOIN School ON Student.schoolID = School.SchoolID INNER JOIN Application ON Student.StudentID = Application.studentID"></asp:SqlDataSource>
+                                        <asp:SqlDataSource runat="server" ID="StudentApplicationGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT CONCAT_WS(' ', Student.FirstName, Student.LastName) AS 'Name', School.SchoolName AS 'School Name', Application.jobTitle AS 'Applied to' FROM Student INNER JOIN School ON Student.schoolID = School.SchoolID INNER JOIN Application ON Student.StudentID = Application.studentID" FilterExpression="[Name] LIKE '%{0}%' OR [School Name] LIKE '%{0}%' OR [Applied To] LIKE '%{0}%'">
+                                            <FilterParameters>
+                                                <asp:ControlParameter Name="Name" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="School Name" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="Applied To" ControlID="searchbox" PropertyName="Text" />
+                                            </FilterParameters>
+                                        </asp:SqlDataSource>
                                     </form>
                                     <!--<table class="table table-striped"> 
 												<thead>
@@ -280,7 +292,7 @@
 
 
     <!-- Bootstrap core JavaScript
-    ================================================== -->
+    ============================================ -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="dist/js/bootstrap.min.js"></script>

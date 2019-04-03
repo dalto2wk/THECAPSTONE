@@ -25,7 +25,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <form runat="server" method="post" class="form">
+    <form runat="server" method="post" class="form" id="form1">
 
 
         <div class="container-fluid" id="wrapper">
@@ -38,18 +38,18 @@
 
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
                     <ul class="nav nav-pills flex-column sidebar-nav">
-                        <li class="nav-item"><a class="nav-link active" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em>Dashboard <span class="sr-only">(current)</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em>Dashboard <span class="sr-only">(current)</span></a></li>
                         <li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em>Student Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em>School Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em>View Listings</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> Job Listings</a></li>
                         <li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em>Edit Profile</a></li>
                     </ul>
-                    <a href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em>Signout</a>
+                    <a  runat="server" class="logout-button" onServerClick="logoutClick"><em class="fa fa-power-off"></em> Signout</a>
                 </nav>
                 <main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
                     <header class="page-header row justify-center">
                         <div class="col-md-6 col-lg-8">
-                            <h1 class="float-left text-center text-md-left">View Lisitings</h1>
+                            <h1 class="float-left text-center text-md-left">Job Lisitings</h1>
                         </div>
                         <div class="dropdown user-dropdown col-md-6 col-lg-4 text-center text-md-right">
                             <a class="btn btn-stripped dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -63,26 +63,25 @@
                             <div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="EditProfile.aspx"><em class="fa fa-user-circle mr-1"></em>View Profile</a>
 
-                                <a class="dropdown-item" href="/Login.aspx"><em class="fa fa-power-off mr-1"></em>Logout</a>
+                                <a class="dropdown-item" runat="server" onServerClick="logoutClick" ><em class="fa fa-power-off mr-1"></em> Logout</a></div>
 
                             </div>
-                        </div>
+
                         <div class="clear"></div>
                     </header>
                     <section class="row">
                         <div class="col-sm-12">
                             <div class="card mb-4">
                                 <div class="card-block">
-                                    <h3 class="card-title">Your Job Posts</h3>
+                                    <h3 class="card-title">Your Job Listings</h3>
                                     <div class="dropdown card-title-btn-container">
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <button class="btn btn-info margin" type="button">
-                                                    <span class="fa fa-
-                                                    "></span>&nbsp;Search</button>
+                                                <asp:button runat="server" class="btn btn-info margin" text="Search" type="button">
+                                                    </asp:button>
                                             </div>
-                                            <input type="text" class="form-control">
+                                            <asp:TextBox id="searchbox" runat="server" type="text" class="form-control"></asp:TextBox>
                                         </div>
                                     </div>
                                     <br>
@@ -156,11 +155,18 @@ FROM            Posting INNER JOIN
 													</tr>
 												</tbody>
 											</table>--%>
-                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    Posting.PostingID AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', COUNT(Application.studentID) AS 'Number Of Applicants'
-FROM            Posting INNER JOIN
-                         Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid"></asp:SqlDataSource>
+                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    CAST(Posting.PostingID AS VARCHAR) AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', CAST(COUNT(Application.studentID) AS VARCHAR) AS 'Number Of Applicants' FROM Posting INNER JOIN Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid" FilterExpression="[Posting ID] LIKE '%{1}%' OR [Job Listing Title] LIKE '%{0}%' OR [Number of Applicants] LIKE '%{1}%'">
+                                        <FilterParameters>
+                                                <asp:ControlParameter Name="Posting ID" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="Job Listing Title" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="Number of Applicants" ControlID="searchbox" PropertyName="Text" />
+                                            </FilterParameters>
+                                        </asp:SqlDataSource>
                                     </div>
                                 </div>
+                                <br />
+                                <h3 class="card-title">&nbsp;&nbsp;Create New Job Listing:&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="btnCreateNewListing" ButtonType="Button" runat="server" OnClick="btnCreateNewListing_Click" ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Create New Listing" Width="20%" /> </h3>
+                                          
                             </div>
                         </div>
                     </section>

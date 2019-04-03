@@ -7,27 +7,60 @@ using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Data;
 
 public partial class company_dashboard_StudentContact : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //loggedInUser.Text = Session["username"].ToString();
+
+        if (Session["username"] == null)
+        {
+            Response.Redirect("/Login.aspx");
+        }
+        else
+        {
+            loggedInUser.Text = Session["username"].ToString();
+        }
+    }
+    public void logoutClick(object sender, EventArgs e)
+    {
+        Session.Abandon();
+        Response.Redirect("/Login.aspx");
     }
 
     protected void viewResume(object sender, GridViewCommandEventArgs e)
     {
-        int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
-        GridViewRow row = studentApplicationTable.Rows[buttonRowIndex];
-        string fullname = row.Cells[0].Text;
-        string fname = "";
-        string lname = "";
-        string[] splitName = fullname.Split(' ');
-        fname = splitName[0];
-        lname = splitName[1];
-        pdfWrite(fname, lname);
-        //calls method for converting test data pdf into binary and inserting to db
-        //pdfProcessToDB();
+        if (e.CommandName == "viewResume")
+        {
+            int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
+            GridViewRow row = studentApplicationTable.Rows[buttonRowIndex];
+            string fullname = row.Cells[0].Text;
+            string fname = "";
+            string lname = "";
+            string[] splitName = fullname.Split(' ');
+            fname = splitName[0];
+            lname = splitName[1];
+            pdfWrite(fname, lname);
+            //calls method for converting test data pdf into binary and inserting to db
+            //pdfProcessToDB();
+        }
+        else if (e.CommandName == "viewStudentInformation")
+        {
+            int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
+            GridViewRow row = studentApplicationTable.Rows[buttonRowIndex];
+            string fullname = row.Cells[0].Text;
+            string fname = "";
+            string lname = "";
+            string[] splitName = fullname.Split(' ');
+            fname = splitName[0];
+            lname = splitName[1];
+            Session["fName"] = fname;
+            Session["lName"] = lname;
+            Response.Redirect("StudentDetails.aspx");
+
+        }
     }
     protected void pdfProcessToDB()
     {
