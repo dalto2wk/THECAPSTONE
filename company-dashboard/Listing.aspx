@@ -25,7 +25,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <form runat="server" method="post" class="form">
+    <form runat="server" method="post" class="form" id="form1">
 
 
         <div class="container-fluid" id="wrapper">
@@ -78,11 +78,10 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <button class="btn btn-info margin" type="button">
-                                                    <span class="fa fa-
-                                                    "></span>&nbsp;Search</button>
+                                                <asp:button runat="server" class="btn btn-info margin" text="Search" type="button">
+                                                    </asp:button>
                                             </div>
-                                            <input type="text" class="form-control">
+                                            <asp:TextBox id="searchbox" runat="server" type="text" class="form-control"></asp:TextBox>
                                         </div>
                                     </div>
                                     <br>
@@ -156,9 +155,13 @@ FROM            Posting INNER JOIN
 													</tr>
 												</tbody>
 											</table>--%>
-                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    Posting.PostingID AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', COUNT(Application.studentID) AS 'Number Of Applicants'
-FROM            Posting INNER JOIN
-                         Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid"></asp:SqlDataSource>
+                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    CAST(Posting.PostingID AS VARCHAR) AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', CAST(COUNT(Application.studentID) AS VARCHAR) AS 'Number Of Applicants' FROM Posting INNER JOIN Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid" FilterExpression="[Posting ID] LIKE '%{1}%' OR [Job Listing Title] LIKE '%{0}%' OR [Number of Applicants] LIKE '%{1}%'">
+                                        <FilterParameters>
+                                                <asp:ControlParameter Name="Posting ID" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="Job Listing Title" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="Number of Applicants" ControlID="searchbox" PropertyName="Text" />
+                                            </FilterParameters>
+                                        </asp:SqlDataSource>
                                     </div>
                                 </div>
                             </div>

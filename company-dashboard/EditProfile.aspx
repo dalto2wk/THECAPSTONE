@@ -88,7 +88,7 @@
 								</div>
 
 								<div class="form-group m-0">
-									<asp:Button type="submit" id="btnRegister" text="Register" OnClick="RegisterBtnClick" runat="server" class="btn btn-primary btn-block">
+									<asp:Button type="submit" id="btnRegister" text="Edit Profile" OnClick="RegisterBtnClick" runat="server" class="btn btn-primary btn-block">
 									</asp:Button>
 								</div>
 								<div class="mt-4 text-center">
