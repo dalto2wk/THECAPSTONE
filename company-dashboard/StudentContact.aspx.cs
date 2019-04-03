@@ -96,18 +96,30 @@ public partial class company_dashboard_StudentContact : System.Web.UI.Page
         if (dr.Read())
         {
             byte[] fileData = (byte[])dr.GetValue(0);
-            //Response.BinaryWrite(fileData);
-            System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
+            //this to the response.bw is new
+            Response.Clear();
+            Response.AddHeader("Content-Disposition", "attachment; filename= " + firstname + "_" + lastName + "_Resume.pdf");
+            Response.AddHeader("Content-Length", fileData.Length.ToString());
+            Response.ContentType = "application/pdf";
+            Response.BinaryWrite(fileData);
+            //System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
 
-            System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
+            //System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
 
-            bw.Write(fileData);
-            bw.Close();
+            //bw.Write(fileData);
+
+            //bw.Close();
+
+            
         }
 
         dr.Close();
+
+        //Response.Write(fileData);
+        
+
         //the below way stores to solution using response.binarywrite is better
-        Response.Redirect("~\\TempFiles\\Report.pdf");
+        //old Response.Redirect("~\\TempFiles\\Report.pdf");
 
     }
 }
