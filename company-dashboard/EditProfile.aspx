@@ -126,15 +126,7 @@
 									<input id="email" type="e-mail" class="form-control" runat="server" name="e-mail" required data-eye>
 								</div>
 
-								<div class="form-group">
-									<div class="custom-checkbox custom-control">
-										<input type="checkbox" name="agree" id="Checkbox1" class="custom-control-input" runat="server" required="">
-										<label for="agree" class="custom-control-label" runat="server">I agree to the <a href="#">Terms and Conditions</a></label>
-										<div class="invalid-feedback">
-											You must agree with our Terms and Conditions
-										</div>
-									</div>
-								</div>
+								
 
 								<div class="form-group m-0">
 
