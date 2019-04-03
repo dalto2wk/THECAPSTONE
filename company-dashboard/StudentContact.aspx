@@ -101,7 +101,7 @@
                                                 <asp:ControlParameter Name="Applied To" ControlID="searchbox" PropertyName="Text" />
                                             </FilterParameters>
                                         </asp:SqlDataSource>
-                                    </form>
+                                    
                                     <!--<table class="table table-striped"> 
 												<thead>
 													<tr>
@@ -168,118 +168,129 @@
 
                     <div class="col-md-12 col-lg-8">
                         <div class="card mb-8">
+
                             <div class="card-block">
-                                <h3 class="card-title">Notifications</h3>
-                                <div class="dropdown card-title-btn-container">
-                                    <button class="btn btn-sm btn-subtle" type="button"><em class="fa fa-list-ul"></em>View All</button>
-                                    <button class="btn btn-sm btn-subtle dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#"><em class="fa fa-search mr-1"></em>More info</a>
-                                        <a class="dropdown-item" href="#"><em class="fa fa-thumb-tack mr-1"></em>Pin Window</a>
-                                        <a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em>Close Window</a>
-                                    </div>
-                                </div>
-                                <h6 class="card-subtitle mb-2 text-muted">stay in touch</h6>
-                                <div class="divider" style="margin-top: 1rem;"></div>
-                                <div class="articles-container">
-                                    <div class="article border-bottom">
-                                        <div class="col-xs-12">
-                                            <div class="row">
-                                                <div class="col-2 date">
-                                                    <div class="large">30</div>
-                                                    <div class="text-muted">Jun</div>
-                                                </div>
-                                                <div class="col-10">
-                                                    <h4><a href="#">Max Neil just joined cued-in and is interested in Information Technology</a></h4>
-                                                    <p>View her profile or send her a message if you think she may be a good fit for a work-based learning opportunity at your company.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                    <!--End .article-->
-
-                                    <div class="article">
-                                        <div class="col-xs-12">
-                                            <div class="row">
-                                                <div class="col-2 date">
-                                                    <div class="large">30</div>
-                                                    <div class="text-muted">Jun</div>
-                                                </div>
-                                                <div class="col-10">
-                                                    <h4><a href="#">Time for a new listing!</a></h4>
-                                                    <p>You haven't posted in a while. Let students know about more opportunities. Go to your dashboard to create a new listing or update your current ones. </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                    <!--End .article-->
-
-                                    <div class="article">
-                                        <div class="col-xs-12">
-                                            <div class="row">
-                                                <div class="col-2 date">
-                                                    <div class="large">31</div>
-                                                    <div class="text-muted">Jun</div>
-                                                </div>
-                                                <div class="col-10">
-                                                    <h4><a href="#">New message from Jane Smith</a></h4>
-                                                    <p>Jane Smith has contacted you inquiring about the high school seniors summer program listing. Respond as soon as possible!</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                    <!--End .article-->
-                                </div>
-                            </div>
+										<h3 class="card-title">Notifications</h3>
+										<div class="dropdown card-title-btn-container">
+											<button class="btn btn-sm btn-subtle" runat="server" type="button"><em class="fa fa-list-ul"></em> View All</button>
+											<button class="btn btn-sm btn-subtle dropdown-toggle" runat="server" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>
+											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#"><em class="fa fa-search mr-1"></em> More info</a>
+											    <a class="dropdown-item" href="#"><em class="fa fa-thumb-tack mr-1"></em> Pin Window</a>
+											    <a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close Window</a></div>
+										</div>
+										<h6 class="card-subtitle mb-2 text-muted">stay in touch</h6>
+										<div class="divider" style="margin-top: 1rem;"></div>
+										<div class="articles-container">
+											<div class="article border-bottom">
+												<div class="col-xs-12">
+													<div class="row">
+														<div class="col-2 date">
+															<div class="large">1</div>
+															<div class="text-muted">Apr</div>
+														</div>
+														<div class="col-10">
+															<h4><asp:Literal ID="notificationTitle1" runat="server"/></h4>
+															<p>Check the Top Candidates graph or view the student's information to see if their the right candidate for the job!</p>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div><!--End .article-->
+											
+											<div class="article">
+												<div class="col-xs-12">
+													<div class="row">
+														<div class="col-2 date">
+															<div class="large">1</div>
+															<div class="text-muted">Apr</div>
+														</div>
+														<div class="col-10">
+															<h4><asp:Literal ID="notificationTitle2" runat="server"/></h4>
+															<p>Check the Top Candidates graph or view the student's information to see if their the right candidate for the job!</p>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div><!--End .article-->
+											
+											<div class="article">
+												<div class="col-xs-12">
+													<div class="row">
+														<div class="col-2 date">
+															<div class="large">31</div>
+															<div class="text-muted">Mar</div>
+														</div>
+														<div class="col-10">
+															<h4><asp:Literal ID="notificationTitle3" runat="server"/></h4>
+															<p>Check the Top Candidates graph or view the student's information to see if their the right candidate for the job!</p>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div><!--End .article-->
+										</div>
+									</div>
                         </div>
 
                     </div>
                     <div class="col-md-12 col-lg-4">
                         <div class="card mb-4">
-                            <div class="card-block">
-                                <h3 class="card-title">Top Candidates</h3>
-                                <h6 class="card-subtitle mb-2 text-muted">Most active this week</h6>
-                                <div class="user-progress justify-center">
-                                    <div class="col-sm-3 col-md-2" style="padding: 0;">
-                                        <img src="images/profile-pic2.jpg" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;">
-                                    </div>
-                                    <div class="col-sm-9 col-md-10">
-                                        <h6 class="pt-1">John Doe</h6>
-                                        <div class="progress progress-custom">
-                                            <div class="progress-bar" style="width: 75%" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="card-block">
+										<h3 class="card-title">Top Candidates</h3>
+                                        <!-- SubTitle displaying the Posting Title-->
+										<h6 class="card-subtitle mb-2 text-muted"><asp:Literal ID="topCandidateSubTitle" runat="server"/></h6>                                     
+										<div class="user-progress justify-center">                                         
+											<div class="col-sm-3 col-md-2" style="padding: 0;">
+												<img src="images/profile-pic2.jpg" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;">
+											</div>                                          
+											<div class="col-sm-9 col-md-10">
+                                                <!-- Top Candidate 1 display info-->
+												<h6 class="pt-1"><asp:Literal runat="server" id="ApplicantOne" /></h6>
+												<div class="progress progress-custom">
+                                                    <!-- Information for Top Candidate-->
+													<div runat="server" id="testprogress" class="progress-bar bg-primary" ></div>
+												</div>
+											</div>
+										</div>                   
+										<div class="user-progress justify-center">
+											<div class="col-sm-3 col-md-2" style="padding: 0;">
+												<img src="images/profile-pic2.jpg" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;">
+											</div>
+											<div class="col-sm-9 col-md-10">
+                                                 <!-- Top Candidate 2 display info-->
+												<h6 class="pt-1"><asp:Literal runat="server" id="ApplicantTwo" /></h6>
+												<div class="progress progress-custom">
+                                                    <!-- Information for Second-Most Top Candidate-->
+													<div runat="server" id="testprogress2" class="progress-bar bg-primary"></div>
+												</div>
+											</div>
+										</div>
+										<div class="user-progress justify-center">
+											<div class="col-sm-3 col-md-2" style="padding: 0;">
+												<img src="images/profile-pic2.jpg" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;">
+											</div>
+											<div class="col-sm-9 col-md-10">
+                                                <!-- Top Candidate 3 display info-->
+												<h6 class="pt-1"><asp:Literal runat="server" id="ApplicantThree" /></h6>
+												<div class="progress progress-custom">
+                                                    <!-- Information for Third-Most Top Candidate-->
+													<div runat="server" id="testprogress3" class="progress-bar bg-primary"></div>
+												</div>                                                                                               
+											</div>                                            
+										</div>
+                                         <!-- DropDown List to choose Posting for Top Candidates-->
+                                        <br />
+                                        <div  class="col-sm-9 col-md-10">
+                                            <asp:DropDownList ID="ddlTopCandidate" runat="server" Width="120%" autoPostBack="true" CssClass="form-control" DataSourceID="SqlDataSource2" DataTextField="postingTitle" DataValueField="postingID" OnPreRender="topCandidate"> 
+                                            </asp:DropDownList>
+                                            <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [postingID], [postingTitle] FROM [Posting]"></asp:SqlDataSource>
                                         </div>
+										<div class="divider"></div>
+										<div id="calendar"></div>
+										<div class="divider"></div>
+								</div>
                                     </div>
-                                </div>
-                                <div class="user-progress justify-center">
-                                    <div class="col-sm-3 col-md-2" style="padding: 0;">
-                                        <img src="images/profile-pic2.jpg" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;">
-                                    </div>
-                                    <div class="col-sm-9 col-md-10">
-                                        <h6 class="pt-1">Jane Smith</h6>
-                                        <div class="progress progress-custom">
-                                            <div class="progress-bar" style="width: 50%" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="user-progress justify-center">
-                                    <div class="col-sm-3 col-md-2" style="padding: 0;">
-                                        <img src="images/profile-pic2.jpg" alt="profile photo" class="circle profile-photo" style="width: 100%; max-width: 100px;">
-                                    </div>
-                                    <div class="col-sm-9 col-md-10">
-                                        <h6 class="pt-1">Max Neil</h6>
-                                        <div class="progress progress-custom">
-                                            <div class="progress-bar" style="width: 25%" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="divider"></div>
-                                <div id="calendar"></div>
-                                <div class="divider"></div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
 
                 </section>

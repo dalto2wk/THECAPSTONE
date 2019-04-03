@@ -94,12 +94,12 @@
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">30</div>
-															<div class="text-muted">Jun</div>
+															<div class="large">1</div>
+															<div class="text-muted">Apr</div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle1" runat="server"/></h4>
-															<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
+															<p>Check the Top Candidates graph or view the student's information to see if their the right candidate for the job!</p>
 														</div>
 													</div>
 												</div>
@@ -110,12 +110,12 @@
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">30</div>
-															<div class="text-muted">Jun</div>
+															<div class="large">1</div>
+															<div class="text-muted">Apr</div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle2" runat="server"/></h4>
-															<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
+															<p>Check the Top Candidates graph or view the student's information to see if their the right candidate for the job!</p>
 														</div>
 													</div>
 												</div>
@@ -127,11 +127,11 @@
 													<div class="row">
 														<div class="col-2 date">
 															<div class="large">31</div>
-															<div class="text-muted">Jun</div>
+															<div class="text-muted">Mar</div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle3" runat="server"/></h4>
-															<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
+															<p>Check the Top Candidates graph or view the student's information to see if their the right candidate for the job!</p>
 														</div>
 													</div>
 												</div>
@@ -139,6 +139,7 @@
 											</div><!--End .article-->
 										</div>
 									</div>
+
 								</div>
                                 <br />
 
