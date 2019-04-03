@@ -103,7 +103,7 @@
 													</select>--%>
                                                    <%-- <asp:CheckBoxList ID="cboxInterests" runat="server" DataSourceID="PostingInterest" DataTextField="name" DataValueField="name"></asp:CheckBoxList>--%>
                                                     <asp:ListBox ID="listBoxSchool" CssClass="form-control" runat="server" DataSourceID="PostingSchool" DataTextField="SchoolName" DataValueField="SchoolID" SelectionMode="Multiple" AutoPostBack="true"></asp:ListBox>
-                                                    <asp:SqlDataSource runat="server" ID="PostingSchool" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT [SchoolID], [SchoolName] FROM [School]"></asp:SqlDataSource>
+                                                    <asp:SqlDataSource runat="server" ID="PostingSchool" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand=""></asp:SqlDataSource>
                                                     <%--<asp:SqlDataSource runat="server" ID="SqlDataSourceSchool" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand=""></asp:SqlDataSource>--%>
                                                     
                                                 </div>
