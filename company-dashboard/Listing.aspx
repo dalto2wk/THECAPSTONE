@@ -41,7 +41,7 @@
                         <li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em>Dashboard <span class="sr-only">(current)</span></a></li>
                         <li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em>Student Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em>School Contact</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="Listing.aspx"><em class="fas fa-clipboard-list"></em>View Listings</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> Job Listings</a></li>
                         <li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em>Edit Profile</a></li>
                     </ul>
                     <a  runat="server" class="logout-button" onServerClick="logoutClick"><em class="fa fa-power-off"></em> Signout</a>
@@ -49,7 +49,7 @@
                 <main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
                     <header class="page-header row justify-center">
                         <div class="col-md-6 col-lg-8">
-                            <h1 class="float-left text-center text-md-left">View Lisitings</h1>
+                            <h1 class="float-left text-center text-md-left">Job Lisitings</h1>
                         </div>
                         <div class="dropdown user-dropdown col-md-6 col-lg-4 text-center text-md-right">
                             <a class="btn btn-stripped dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,14 +66,14 @@
                                 <a class="dropdown-item" runat="server" onServerClick="logoutClick" ><em class="fa fa-power-off mr-1"></em> Logout</a></div>
 
                             </div>
-                        
+
                         <div class="clear"></div>
                     </header>
                     <section class="row">
                         <div class="col-sm-12">
                             <div class="card mb-4">
                                 <div class="card-block">
-                                    <h3 class="card-title">Your Job Posts</h3>
+                                    <h3 class="card-title">Your Job Listings</h3>
                                     <div class="dropdown card-title-btn-container">
 
                                         <div class="input-group">
@@ -164,6 +164,9 @@ FROM            Posting INNER JOIN
                                         </asp:SqlDataSource>
                                     </div>
                                 </div>
+                                <br />
+                                <h3 class="card-title">&nbsp;&nbsp;Create New Job Listing:&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="btnCreateNewListing" ButtonType="Button" runat="server" OnClick="btnCreateNewListing_Click" ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Create New Listing" Width="20%" /> </h3>
+                                          
                             </div>
                         </div>
                     </section>
