@@ -143,14 +143,14 @@
                                         </asp:GridView>
 
                                         <asp:SqlDataSource runat="server" ID="Sqldatasource1" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  School.SchoolID,       School.SchoolName, School.CityCounty, School.state, School.Approval_Status
-FROM            School " FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%' OR [firstName] LIKE '%{0}%' OR [lastName] LIKE '%{0}%' OR [email] LIKE '%{0}%'">
+FROM            School " FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
                                         <FilterParameters>
                                                 <asp:ControlParameter Name="SchoolName" ControlID="searchbox" PropertyName="Text" />
                                                 <asp:ControlParameter Name="CityCounty" ControlID="searchbox" PropertyName="Text" />
                                                 <asp:ControlParameter Name="state" ControlID="searchbox" PropertyName="Text" />
-                                                <asp:ControlParameter Name="firstName" ControlID="searchbox" PropertyName="Text" />
+                                               <%-- <asp:ControlParameter Name="firstName" ControlID="searchbox" PropertyName="Text" />
                                                 <asp:ControlParameter Name="lastName" ControlID="searchbox" PropertyName="Text" />
-                                                <asp:ControlParameter Name="email" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="email" ControlID="searchbox" PropertyName="Text" />--%>
                                             </FilterParameters>
                                         </asp:SqlDataSource>
 
@@ -168,7 +168,7 @@ FROM            School " FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCou
                                        </div> 
                                       </div>                
                                            <script type='text/javascript'> var divElement = document.getElementById('viz1554157927266'); var vizElement = divElement.getElementsByTagName('object')[0];
-                                               vizElement.style.width = '1000px'; vizElement.style.height = '200px'; var scriptElement = document.createElement('script');
+                                               vizElement.style.width = '1000px'; vizElement.style.height = '800px'; var scriptElement = document.createElement('script');
                                                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                
 
                                            </script>

@@ -198,12 +198,12 @@
                 								<div class="col-md-10">
                     							<div class="input-group">
                         							<input runat="server" type="hidden" id="filename" name="filename" value="">
-                                                    <asp:FileUpload ID="FileUpload1" runat="server" />
-<%--                        							<input runat="server"  type="file" id="uploadedFile" name="uploadedFile" class="form-control form-control-sm" accept="application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">--%>
-                        						<%--<div class="input-group-btn">
-                            						<%--<input runat="server" type="submit" value="Upload" class="rounded-0 btn btn-primary">--%>
+                                                    <%--<asp:FileUpload ID="FileUpload1" runat="server" />--%>
+                        							<input runat="server"  type="file" id="uploadedFile" name="uploadedFile" class="form-control form-control-sm" accept="application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                        						<div class="input-group-btn">
+                            						<input runat="server" type="submit" value="Upload" class="rounded-0 btn btn-primary">
                                                     
-                        						<%--</div>--%>
+                        						</div>
                     							
                 								</div>
                 							</div>
