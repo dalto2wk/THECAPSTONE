@@ -160,7 +160,7 @@
 									</div>
 								</div>--%>
 								<div class="card mb-4">
-									<div class="card-block">
+									<div class="card-block col-sm-12">
 										<h3 class="card-title">Recent Applications</h3>
 										<div class="dropdown card-title-btn-container">
 											<button class="btn btn-sm btn-subtle" type="button" runat="server"><em class="fa fa-list-ul"></em> View All</button>

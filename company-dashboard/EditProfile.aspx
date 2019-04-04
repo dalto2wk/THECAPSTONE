@@ -39,7 +39,7 @@
 					<li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard <span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
 					<li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
+					<li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> Job Listings</a></li>
 					<li class="nav-item"><a class="nav-link active" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 
 				</ul>
@@ -48,7 +48,7 @@
 			<main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
 				<header class="page-header row justify-center">
 					<div class="col-md-6 col-lg-8" >
-						<h1 class="float-left text-center text-md-left">Dashboard</h1>
+						<h1 class="float-left text-center text-md-left">Profile</h1>
 					</div>
 					<div class="dropdown user-dropdown col-md-6 col-lg-4 text-center text-md-right"><a class="btn btn-stripped dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<img src="images/profile-pic.jpg" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
@@ -127,10 +127,10 @@
 								</div>
 
 								
-
+                                            <br />
 								<div class="form-group m-0">
 
-									<asp:Button type="submit" id="btnRegister" text="Edit Profile" OnClick="RegisterBtnClick" runat="server" class="btn btn-primary btn-block">
+									<asp:Button type="submit" id="btnRegister" text="Edit Profile" OnClick="RegisterBtnClick" runat="server" class="btn btn-primary text-center">
 
 									</asp:Button>
 								</div>

@@ -127,9 +127,9 @@
 										</div>
 										</div>
 
-										</div>
+										
 
-                                      
+                                      <div class="table-responsive col-sm-12"></div>
 										<br>
                                         <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource1" OnRowCommand="viewInfo">
                                             <Columns>
@@ -141,6 +141,7 @@
                                                 <asp:ButtonField CommandName="viewInfo" ControlStyle-CssClass="btn btn-primary" Text="View Info" ButtonType="Button" ShowHeader="True" HeaderText="Info"></asp:ButtonField>                                              
                                             </Columns>
                                         </asp:GridView>
+                    
 
                                         <asp:SqlDataSource runat="server" ID="Sqldatasource1" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  School.SchoolID,       School.SchoolName, School.CityCounty, School.state, School.Approval_Status
 FROM            School " FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
@@ -153,6 +154,9 @@ FROM            School " FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCou
                                                 <asp:ControlParameter Name="email" ControlID="searchbox" PropertyName="Text" />--%>
                                             </FilterParameters>
                                         </asp:SqlDataSource>
+
+                     <br />
+                        </div>
 
                                   <div class ="table-responsive">
                     <div class='tableauPlaceholder' id='viz1554157927266' style='position: relative'><noscript><a href='#'><img alt=' ' 
@@ -168,16 +172,17 @@ FROM            School " FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCou
                                        </div> 
                                       </div>                
                                            <script type='text/javascript'> var divElement = document.getElementById('viz1554157927266'); var vizElement = divElement.getElementsByTagName('object')[0];
-                                               vizElement.style.width = '1000px'; vizElement.style.height = '800px'; var scriptElement = document.createElement('script');
+                                               vizElement.style.width = '1200px'; vizElement.style.height = '900px'; var scriptElement = document.createElement('script');
                                                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                
 
                                            </script>
 
-										
+									</div>	
 										
 									</div>
 								</div>
 							</div>
+           
 						</section>
 
 
