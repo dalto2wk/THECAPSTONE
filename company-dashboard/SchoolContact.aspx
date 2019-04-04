@@ -131,21 +131,19 @@
 
                                       
 										<br>
-                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource1">
+                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource1" OnRowCommand="viewInfo">
                                             <Columns>
+                                                <asp:BoundField DataField="SchoolID"  HeaderText="School ID" SortExpression="School"></asp:BoundField>
                                                 <asp:BoundField DataField="SchoolName"  HeaderText="School" SortExpression="School"></asp:BoundField>
                                                 <asp:BoundField DataField="CityCounty" HeaderText="City" SortExpression="City"></asp:BoundField>
                                                 <asp:BoundField DataField="state" HeaderText="State" ReadOnly="True" SortExpression="State"></asp:BoundField>
-                                                <asp:BoundField DataField="firstName" HeaderText="Counselor First Name" ReadOnly="True" SortExpression="Counselor First Name"></asp:BoundField>
-                                                <asp:BoundField DataField="lastName" HeaderText="Counselor Last Name" ReadOnly="True" SortExpression="Counselor Last Name"></asp:BoundField>
-                                                <asp:BoundField DataField="email" HeaderText="Counselor E-mail" ReadOnly="True" SortExpression="Counselor E-mail"></asp:BoundField>
-                                                <asp:BoundField DataField="phoneNumber" HeaderText="Counselor Phone Number" ReadOnly="True" SortExpression="Counselor Phone Number"></asp:BoundField>
+                                                <asp:BoundField DataField="Approval_Status" HeaderText="Approval Status" ReadOnly="True" SortExpression="Approval Status"></asp:BoundField>
+                                                <asp:ButtonField CommandName="viewInfo" ControlStyle-CssClass="btn btn-primary" Text="View Info" ButtonType="Button" ShowHeader="True" HeaderText="Info"></asp:ButtonField>                                              
                                             </Columns>
                                         </asp:GridView>
 
-                                        <asp:SqlDataSource runat="server" ID="Sqldatasource1" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT        School.SchoolName, School.CityCounty, School.state, Counselor.firstName, Counselor.lastName, Counselor.email, Counselor.phoneNumber
-FROM            School INNER JOIN
-                         Counselor ON School.SchoolID = Counselor.schoolID" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%' OR [firstName] LIKE '%{0}%' OR [lastName] LIKE '%{0}%' OR [email] LIKE '%{0}%'">
+                                        <asp:SqlDataSource runat="server" ID="Sqldatasource1" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  School.SchoolID,       School.SchoolName, School.CityCounty, School.state, School.Approval_Status
+FROM            School " FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%' OR [firstName] LIKE '%{0}%' OR [lastName] LIKE '%{0}%' OR [email] LIKE '%{0}%'">
                                         <FilterParameters>
                                                 <asp:ControlParameter Name="SchoolName" ControlID="searchbox" PropertyName="Text" />
                                                 <asp:ControlParameter Name="CityCounty" ControlID="searchbox" PropertyName="Text" />
@@ -157,7 +155,7 @@ FROM            School INNER JOIN
                                         </asp:SqlDataSource>
 
                                   <div class ="table-responsive">
-                    <!--<div class='tableauPlaceholder' id='viz1554157927266' style='position: relative'><noscript><a href='#'><img alt=' ' 
+                    <div class='tableauPlaceholder' id='viz1554157927266' style='position: relative'><noscript><a href='#'><img alt=' ' 
 
 
                                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cu&#47;Cued-In_15541566149620&#47;Dashboard1&#47;1_rss.png' 
@@ -173,74 +171,10 @@ FROM            School INNER JOIN
                                                vizElement.style.width = '1000px'; vizElement.style.height = '200px'; var scriptElement = document.createElement('script');
                                                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                
 
-                                           </script>-->
-
-                                      <div class='tableauPlaceholder' id='viz1554302533995' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;48&#47;484Capstone&#47;Sheet2&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='484Capstone&#47;Sheet2' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;48&#47;484Capstone&#47;Sheet2&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1554302533995');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                                           </script>
 
 										
-										<div class="table-responsive">
-
-											<table class="table table-striped">
-												<thead>
-													<tr>
-														<th>School Name</th>
-														<th>Location</th>
-														<th>Status</th>
-														<th>Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-
-														<td>East Rockingham High School</td>
-														<td>East Rockingham, VA</td>
-														<td>approved</td>
-														<td>
-															<div class="btn-group">
-															<button type="button" class="btn btn-primary">Apply</button>
-															<button type="button" class="btn btn-secondary">View Info</button>
-															</div>
-														</td>
-													</tr>
-													<tr>
-
-														<td>Spotswood High School</td>
-														<td>Spotswood, VA</td>
-														<td>pending approval</td>
-														<td>
-															<div class="btn-group">
-															<button type="button" class="btn btn-primary">Apply</button>
-															<button type="button" class="btn btn-secondary">View Info</button>
-															</div>
-														</td>
-													</tr>
-													<tr>
-
-														<td>Turner Ashby High School</td>
-														<td>Bridgewater, VA</td>
-														<td>approved</td>
-														<td>
-															<div class="btn-group">
-															<button type="button" class="btn btn-primary">apply</button>
-															<button type="button" class="btn btn-secondary">View info</button>
-															</div>
-														</td>
-													</tr>
-													<tr>
-
-														<td>Broadway High School</td>
-														<td>Broadway, VA</td>
-														<td>applied</td>
-														<td>
-															<div class="btn-group">
-															<button type="button" class="btn btn-primary">apply</button>
-															<button type="button" class="btn btn-secondary">View info</button>
-															</div>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>-->
+										
 									</div>
 								</div>
 							</div>

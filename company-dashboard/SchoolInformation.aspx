@@ -10,7 +10,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link rel="icon" href="images/favicon.ico">
-	<title>Student Information</title>
+	<title>School Information</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -34,11 +34,11 @@
 													
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
 				<ul class="nav nav-pills flex-column sidebar-nav">
-					<li class="nav-item"><a class="nav-link active" href="index.html"><em class="fas fa-tachometer-alt"></em> Dashboard <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="student.html"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="school.html"><em class="fas fa-school"></em> School Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="ViewListings.aspx"><em class="fas fa-clipboard-list"></em> View Listings</a></li>
-					<li class="nav-item"><a class="nav-link" href="profile.html"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
+					<li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard </a></li>
+					<li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
+					<li class="nav-item"><a class="nav-link active" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> Job Listings</a></li>
+					<li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 				</ul>
 				<a  runat="server" class="logout-button" onServerClick="logoutClick"><em class="fa fa-power-off"></em> Signout</a>
 			</nav>
@@ -72,17 +72,21 @@
                 <label class="col-md-3 col-form-label" runat="server">Street Address</label>
                 <label class="col-md-3 col-form-label" runat="server" id="lblStreet"></label>
                 <br />
-                <label class="col-md-3 col-form-label" runat="server">Electives Offered</label>
-                <label class="col-md-3 col-form-label" runat="server" id="lblElectives"></label>
+                <label class="col-md-3 col-form-label" runat="server">Counselor First Name</label>
+                <label class="col-md-3 col-form-label" runat="server" id="lblCounselorFN"></label>
                 <br />
-                <label class="col-md-3 col-form-label" runat="server">Name</label>
-                <label class="col-md-3 col-form-label" runat="server" id="lblName"></label>
+                <label class="col-md-3 col-form-label" runat="server">Counselor Last Name</label>
+                <label class="col-md-3 col-form-label" runat="server" id="lblCounselorLN"></label>
                 <br />
-                <label class="col-md-3 col-form-label" runat="server">Phone Number</label>
-                <label class="col-md-3 col-form-label" runat="server" id="lblPhone"></label>
+                <label class="col-md-3 col-form-label" runat="server">Counselor E-mail</label>
+                <label class="col-md-3 col-form-label" runat="server" id="lblCounselorEM"></label>
                 <br />
-                <label class="col-md-3 col-form-label" runat="server">Email</label>
-                <label class="col-md-3 col-form-label" runat="server" id="lblEmail"></label>
+                <label class="col-md-3 col-form-label" runat="server">Counselor Phone Number</label>
+                <label class="col-md-3 col-form-label" runat="server" id="lblCounselorPN"></label>
+                <br />
+                <label class="col-md-3 col-form-label" runat="server">Number of Electives Offered</label>
+                <label class="col-md-3 col-form-label" runat="server" id="electives"></label>
+
                
                 </main>
             </div>
