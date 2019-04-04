@@ -20,7 +20,8 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         {
             loggedInUser.Text = Session["username"].ToString();
         }
-
+        DropDownList_State.SelectedIndex = 46;
+        DropDownList_City.SelectedIndex = 7028;
 
         //if (IsPostBack == true || IsPostBack == false)
         //{
