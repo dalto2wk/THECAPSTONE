@@ -35,9 +35,20 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             txtpostStart.Value = String.Format("{0:MM/dd/yyyy}", Session["poststart"].ToString());
             txtpostEnd.Value = String.Format("{0:MM/dd/yyyy}", Session["postend"].ToString());
             txtopportunityStartDate.Value = String.Format("{0:MM/dd/yyyy}", Session["oppstart"].ToString());
-            
+            DropDownList_State.SelectedIndex = 46;
+            DropDownList_City.SelectedIndex = 7028;
+
+
+            String State = DropDownList_State.SelectedValue;
+            String City = DropDownList_City.SelectedValue;
+
+            PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State + "' and CityCounty = '" + City + "'";
+            PostingSchool.DataBind();
 
             
+
+            //46 and 7028
+
 
 
         }
@@ -88,6 +99,34 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         return result;
     }
 
+    protected List<School> getPostingSchools()
+    {
+        List<School> result = new List<School>();
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        {
+            Connection = sc,
+
+            CommandText = "SELECT        School.SchoolName,School.SchoolID FROM Posting INNER JOIN " +
+                         "Posting_School ON Posting.postingID = Posting_School.postingID INNER JOIN " +
+                         "School ON Posting_School.SchoolID = School.SchoolID where posting.postingID = @postingID"
+
+        };
+        select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+
+        SqlDataReader reader = select.ExecuteReader();
+
+        while (reader.Read())
+        {
+            result.Add(new School(reader.GetString(0), reader.GetInt32(1)));
+        }
+        sc.Close();
+
+        return result;        
+    }
+
     protected void updateBtnClick(object sender, EventArgs e)
     {
         //Response.Redirect("Listing.aspx");
@@ -127,6 +166,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
         //will need this for delete logic delete from posting_interest where postingid = 9 and interestID = 3
         List<Interests> interests = getPostingInterests();
+        List<School> school = getPostingSchools();
 
         foreach(ListItem item in listBoxInterests.Items)
         {
@@ -182,8 +222,68 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
         }
 
+        //schoolforeachloops
 
-        
+        foreach (ListItem item in listBoxSchool.Items)
+        {
+            for (int i = 0; i < school.Count; i++)
+            {
+                if (item.Text.Equals(school[i].getName()) && item.Selected == false)
+                {
+                    System.Data.SqlClient.SqlCommand deleteSchools = new System.Data.SqlClient.SqlCommand
+                    {
+                        Connection = sc,
+                        CommandText = "delete from posting_School where postingid = @postingID and SchoolID = @SchoolID"
+                    };
+                    deleteSchools.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+                    deleteSchools.Parameters.AddWithValue("@SchoolID", item.Value);
+                    deleteSchools.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        foreach (ListItem item in listBoxSchool.Items)
+        {
+
+            if (item.Selected == true)
+            {
+                int count = 0;
+                for (int i = 0; i < school.Count; i++)
+                {
+                    if (item.Text.Equals(school[i].getName()))
+                    {
+                        count++;
+                    }
+
+                }
+                if (count != 0)
+                {
+                    continue;
+                }
+                else if (count == 0)
+                {
+                    PostingSchool ps = new PostingSchool(Convert.ToInt32(Session["postID"].ToString()), Convert.ToInt32(item.Value));
+                    //do the sql
+                    System.Data.SqlClient.SqlCommand postingSchools = new System.Data.SqlClient.SqlCommand
+                    {
+                        Connection = sc,
+                        CommandText = "Insert into Posting_School values (@postingID, @SchoolID, @LastUpdatedBy, @LastUpdated)"
+                    };
+                    postingSchools.Parameters.AddWithValue("@postingID", ps.getPostingID());
+                    postingSchools.Parameters.AddWithValue("@SchoolID", ps.getSchoolID());
+                    postingSchools.Parameters.AddWithValue("@LastUpdatedBy", ps.getLastUpdatedBy());
+                    postingSchools.Parameters.AddWithValue("@LastUpdated", ps.getLastUpdated());
+
+                    postingSchools.ExecuteNonQuery();
+                }
+            }
+
+        }
+
+
+
+
 
         sc.Close();
     }
@@ -193,6 +293,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         
 
         List<Interests> interests = getPostingInterests();
+        List<School> school = getPostingSchools();
         
 
         for (int i = 0; i < interests.Count; i++)
@@ -201,6 +302,18 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             {
                 
                 if (item.Text.Equals(interests[i].getName()))
+                {
+                    item.Selected = true;
+                }
+            }
+        }
+
+        for (int i = 0; i < school.Count; i++)
+        {
+            foreach (ListItem item in listBoxSchool.Items)
+            {
+
+                if (item.Text.Equals(school[i].getName()))
                 {
                     item.Selected = true;
                 }
