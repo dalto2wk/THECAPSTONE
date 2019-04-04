@@ -10,7 +10,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link rel="icon" href="images/favicon.ico">
-	<title>Student Information</title>
+	<title>School Information</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -72,17 +72,21 @@
                 <label class="col-md-3 col-form-label" runat="server">Street Address</label>
                 <label class="col-md-3 col-form-label" runat="server" id="lblStreet"></label>
                 <br />
-                <label class="col-md-3 col-form-label" runat="server">Electives Offered</label>
-                <label class="col-md-3 col-form-label" runat="server" id="lblElectives"></label>
+                <label class="col-md-3 col-form-label" runat="server">Counselor First Name</label>
+                <label class="col-md-3 col-form-label" runat="server" id="lblCounselorFN"></label>
                 <br />
-                <label class="col-md-3 col-form-label" runat="server">Name</label>
-                <label class="col-md-3 col-form-label" runat="server" id="lblName"></label>
+                <label class="col-md-3 col-form-label" runat="server">Counselor Last Name</label>
+                <label class="col-md-3 col-form-label" runat="server" id="lblCounselorLN"></label>
                 <br />
-                <label class="col-md-3 col-form-label" runat="server">Phone Number</label>
-                <label class="col-md-3 col-form-label" runat="server" id="lblPhone"></label>
+                <label class="col-md-3 col-form-label" runat="server">Counselor E-mail</label>
+                <label class="col-md-3 col-form-label" runat="server" id="lblCounselorEM"></label>
                 <br />
-                <label class="col-md-3 col-form-label" runat="server">Email</label>
-                <label class="col-md-3 col-form-label" runat="server" id="lblEmail"></label>
+                <label class="col-md-3 col-form-label" runat="server">Counselor Phone Number</label>
+                <label class="col-md-3 col-form-label" runat="server" id="lblCounselorPN"></label>
+                <br />
+                <label class="col-md-3 col-form-label" runat="server">Number of Electives Offered</label>
+                <label class="col-md-3 col-form-label" runat="server" id="electives"></label>
+
                
                 </main>
             </div>
