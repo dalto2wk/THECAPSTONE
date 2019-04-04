@@ -84,7 +84,7 @@
                                              <div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">City</label>
 												<div runat="server" class="col-md-9">
-                                                    <asp:DropDownList ID="DropDownList_City" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceCity" DataTextField="CityCounty" DataValueField="CityCounty" SelectionMode="Single" OnSelectedIndexChanged="CitySelection_Change" AutoPostBack="true"></asp:DropDownList>
+                                                    <asp:DropDownList ID="DropDownList_City" CssClass="form-control" runat="server"  DataSourceID="SqlDataSourceCity" DataTextField="CityCounty" DataValueField="CityCounty" SelectionMode="Single" OnSelectedIndexChanged="CitySelection_Change" AutoPostBack="true"></asp:DropDownList>
                                                     <asp:SqlDataSource runat="server" ID="SqlDataSourceCity" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT DISTINCT [CityCounty] FROM [cities] ORDER BY [CityCounty]"></asp:SqlDataSource>
                                                     
 												</div>

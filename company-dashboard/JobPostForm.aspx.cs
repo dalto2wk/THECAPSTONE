@@ -162,7 +162,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
                     PostingSchool postSchool = new PostingSchool(currPostingID, Convert.ToInt32(listBoxSchool.Items[i].Value));
 
                     postingSchool.Parameters.AddWithValue("@postingID", postSchool.getPostingID());
-                    postingSchool.Parameters.AddWithValue("@SchoolID", postSchool.getInterestID());
+                    postingSchool.Parameters.AddWithValue("@SchoolID", postSchool.getSchoolID());
                     postingSchool.Parameters.AddWithValue("@LastUpdatedBy", postSchool.getLastUpdatedBy());
                     postingSchool.Parameters.AddWithValue("@LastUpdated", postSchool.getLastUpdated());
 
