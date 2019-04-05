@@ -540,7 +540,8 @@ code {
 }
 
 .user-progress {
-  margin-top: 1rem;
+    margin-top: 1rem;
+    color: #81c341 !important;
 }
 .user-progress .profile-photo {
   max-height: 75px;
@@ -548,23 +549,24 @@ code {
 }
 
 .progress-custom {
-  margin-top: 0.25rem;
-  background-color: #f7f7f7;
-  padding: 0;
-  height: 6px;
-  color:#81c341 !important;
+    margin-top: 0.25rem;
+    background-color: #81c341 !important;
+    padding: 0;
+    height: 6px;
+    color: #81c341 !important;
 }
 
 .progress-label {
-  text-align: center !important;
-  color: #81c341 !important;
-  font-size: 0.75rem;
-  margin-top: -0.25rem;
+    text-align: center !important;
+    color: #81c341 !important;
+    font-size: 0.75rem;
+    margin-top: -0.25rem;
+    color: #81c341 !important;
 }
 
 .progress-bar {
   height: 6px;
-  background-color: #81c341
+  background-color: #81c341 !important;
 }
 
 #calendar, .datepicker-inline {
