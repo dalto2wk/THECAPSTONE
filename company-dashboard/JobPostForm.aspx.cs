@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 public partial class company_dashboard_JobPostForm : System.Web.UI.Page
 {
@@ -20,8 +21,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         {
             loggedInUser.Text = Session["username"].ToString();
         }
-        DropDownList_State.SelectedIndex = 46;
-        DropDownList_City.SelectedIndex = 7028;
+       
 
         //if (IsPostBack == true || IsPostBack == false)
         //{
@@ -100,11 +100,13 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         posting.ExecuteNonQuery();
 
 
+      
+
 
 
         String count = "";
         count = listBoxInterests.Items.Count.ToString();
-        int counter = Int32.Parse(count) ;
+        int counter = Int32.Parse(count);
         int currPostingID = getMaxPostingID();
 
         if (listBoxInterests.SelectedIndex < 0)
@@ -172,9 +174,35 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
             }
         }
 
+        if (DropDownList_City.SelectedIndex < 0)
+        {
+
+        }
+
+        else
+        {
+            System.Data.SqlClient.SqlCommand postingLocation = new System.Data.SqlClient.SqlCommand
+            {
+                Connection = sc,
+                CommandText = "Insert into Posting_Location values (@PostingID, @LocationID)"
+            };
 
 
-           sc.Close();
+
+            PostingLocation postLocation = new PostingLocation(currPostingID, Convert.ToInt32(DropDownList_City.SelectedValue));
+
+            postingLocation.Parameters.AddWithValue("@postingID", postLocation.getPostingID());
+            postingLocation.Parameters.AddWithValue("@LocationID", postLocation.getLocationID());
+   
+
+            postingLocation.ExecuteNonQuery();
+
+
+
+        }
+
+
+        sc.Close();
     }
 
 
@@ -203,11 +231,12 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
      //   DataTable dt = new DataTable();
         System.Data.SqlClient.SqlCommand newCity = new System.Data.SqlClient.SqlCommand();
         newCity.Connection = sc;
-        String State = DropDownList_State.SelectedValue;
+        String State = DropDownList_State.SelectedItem.Text;
 
 
 
-        SqlDataSourceCity.SelectCommand = "select citycounty from cities where state = '" + State + "'";
+        SqlDataSourceCity.SelectCommand = "select locationID, citycounty from cities where state = '" + State + "'";
+        Debug.WriteLine(SqlDataSourceCity.SelectCommand);
         SqlDataSourceCity.DataBind();
 
 
@@ -256,10 +285,11 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
 
         System.Data.SqlClient.SqlCommand newSchool = new System.Data.SqlClient.SqlCommand();
         newSchool.Connection = sc;
-        String State = DropDownList_State.SelectedValue;
-        String City = DropDownList_City.SelectedValue;
+        String State = DropDownList_State.SelectedItem.Text;
+        String City = DropDownList_City.SelectedItem.Text;
 
         PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State + "' and CityCounty = '" + City + "'";
+        Debug.WriteLine(PostingSchool.SelectCommand);
         PostingSchool.DataBind();
     }
 

@@ -35,15 +35,10 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             txtpostStart.Value = String.Format("{0:MM/dd/yyyy}", Session["poststart"].ToString());
             txtpostEnd.Value = String.Format("{0:MM/dd/yyyy}", Session["postend"].ToString());
             txtopportunityStartDate.Value = String.Format("{0:MM/dd/yyyy}", Session["oppstart"].ToString());
-            DropDownList_State.SelectedIndex = 46;
-            DropDownList_City.SelectedIndex = 7028;
+         
 
 
-            String State = DropDownList_State.SelectedValue;
-            String City = DropDownList_City.SelectedValue;
-
-            PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State + "' and CityCounty = '" + City + "'";
-            PostingSchool.DataBind();
+         
 
             
 
@@ -97,6 +92,35 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         }
         sc.Close();
         return result;
+        
+    }
+
+    protected Location getPostingState()
+    {
+        Location result = null;
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        {
+            Connection = sc,
+
+            CommandText = "SELECT        cities.State, cities.LocationID FROM Posting INNER JOIN " +
+                         "Posting_Location ON Posting.postingID = Posting_Location.postingID INNER JOIN " +
+                         "cities ON Posting_Location.LocationID = cities.LocationID where posting.postingID = @postingID"
+
+        };
+        select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+
+        SqlDataReader reader = select.ExecuteReader();
+
+        while (reader.Read())
+        {
+            result = new Location(reader.GetString(0), reader.GetInt32(1));
+        }
+        sc.Close();
+
+        return result;
     }
 
     protected List<School> getPostingSchools()
@@ -109,9 +133,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         {
             Connection = sc,
 
-            CommandText = "SELECT        School.SchoolName,School.SchoolID FROM Posting INNER JOIN " +
-                         "Posting_School ON Posting.postingID = Posting_School.postingID INNER JOIN " +
-                         "School ON Posting_School.SchoolID = School.SchoolID where posting.postingID = @postingID"
+            CommandText = "SELECT        School.SchoolName FROM            School INNER JOIN Posting_School ON School.SchoolID = Posting_School.SchoolID INNER JOIN Posting_Location ON Posting_School.PostingID = Posting_Location.PostingID where school.state = 'VA' and School.CityCounty = 'Harrisonburg' "
 
         };
         select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
@@ -120,12 +142,42 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
         while (reader.Read())
         {
-            result.Add(new School(reader.GetString(0), reader.GetInt32(1)));
+            result.Add(new School(reader.GetString(0)));
         }
         sc.Close();
 
         return result;        
     }
+
+    protected Location getPostingCity()
+    {
+        Location result = null;
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        {
+            Connection = sc,
+
+            CommandText = "SELECT        cities.CityCounty, cities.LocationID FROM Posting INNER JOIN " +
+                         "Posting_Location ON Posting.postingID = Posting_Location.postingID INNER JOIN " +
+                         "cities ON Posting_Location.LocationID = cities.LocationID where posting.postingID = @postingID"
+
+        };
+        select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+
+        SqlDataReader reader = select.ExecuteReader();
+
+        while (reader.Read())
+        {
+            result = new Location(reader.GetString(0), reader.GetInt32(1));
+        }
+        sc.Close();
+
+        return result;
+    }
+
+
 
     protected void updateBtnClick(object sender, EventArgs e)
     {
@@ -167,6 +219,10 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         //will need this for delete logic delete from posting_interest where postingid = 9 and interestID = 3
         List<Interests> interests = getPostingInterests();
         List<School> school = getPostingSchools();
+       // List<Location> State = getPostingState();
+       // List<Location> City = getPostingCity();
+
+
 
         foreach(ListItem item in listBoxInterests.Items)
         {
@@ -294,7 +350,32 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
         List<Interests> interests = getPostingInterests();
         List<School> school = getPostingSchools();
+        Location State = getPostingState();
+        Location City = getPostingCity();
+
+      
         
+            foreach (ListItem item in DropDownList_City.Items)
+            {
+                if (item.Text.Equals(City.getName()))
+                {
+                    item.Selected = true;
+                }
+            
+
+        }
+
+
+        
+            foreach (ListItem item in DropDownList_State.Items)
+            {
+                if (item.Text.Equals(State.getName()))
+                {
+                    item.Selected = true;
+                }
+            
+            
+        }
 
         for (int i = 0; i < interests.Count; i++)
         {
