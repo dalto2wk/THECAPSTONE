@@ -84,7 +84,7 @@
                                              <div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">City</label>
 												<div runat="server" class="col-md-9">
-                                                    <asp:DropDownList ID="DropDownList_City" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceCity" DataTextField="CityCounty" DataValueField="CityCounty" SelectionMode="Single" OnSelectedIndexChanged="CitySelection_Change" AutoPostBack="true"></asp:DropDownList>
+                                                    <asp:DropDownList ID="DropDownList_City" CssClass="form-control" runat="server"  DataSourceID="SqlDataSourceCity" DataTextField="CityCounty" DataValueField="CityCounty" SelectionMode="Single" OnSelectedIndexChanged="CitySelection_Change" AutoPostBack="true"></asp:DropDownList>
                                                     <asp:SqlDataSource runat="server" ID="SqlDataSourceCity" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT DISTINCT [CityCounty] FROM [cities] ORDER BY [CityCounty]"></asp:SqlDataSource>
                                                     
 												</div>
@@ -185,6 +185,33 @@
 												</div>
 											</div>
 											<br>
+                                            <div class="container">
+											<%--<form id="fileUploadForm" 
+      												action="/"
+      												enctype="multipart/form-data">--%>
+    											<fieldset>
+       										 	<div class="form-horizontal">
+            									<div class="form-group row">
+            									<label class="col-md-3 col-form-label">Media Upload</label>
+               									
+                								
+                								<div class="col-md-10">
+                    							<div class="input-group">
+                        							<input runat="server" type="hidden" id="filename" name="filename" value="">
+                                                    <%--<asp:FileUpload ID="FileUpload1" runat="server" />--%>
+                        							<input runat="server"  type="file" id="uploadedFile" name="uploadedFile" class="form-control form-control-sm" accept="application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                        						<div class="input-group-btn">
+                            						<input runat="server" type="submit" value="Upload" class="rounded-0 btn btn-primary">
+                                                    
+                        						</div>
+                    							
+                								</div>
+                							</div>
+            								</div>                        
+        									</div>
+    										</fieldset>    
+											<%--</form>--%>
+											</div>
 										<div runat="server" class="row">
 											<div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 												<div runat="server" class="custom-control custom-radio">

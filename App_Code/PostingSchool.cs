@@ -17,7 +17,7 @@ public class PostingSchool
     public PostingSchool(int postingID, int SchoolID)
     {
         setPostingID(postingID);
-        setInterestID(SchoolID);
+        setSchoolID(SchoolID);
         setLastUpdatedBy();
         setLastUpdated();
 
@@ -30,11 +30,11 @@ public class PostingSchool
     {
         this.postingID = postingID;
     }
-    public int getInterestID()
+    public int getSchoolID()
     {
         return this.SchoolID;
     }
-    public void setInterestID(int interestID)
+    public void setSchoolID(int interestID)
     {
         this.SchoolID = interestID;
     }

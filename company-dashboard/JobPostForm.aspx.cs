@@ -20,7 +20,8 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         {
             loggedInUser.Text = Session["username"].ToString();
         }
-
+        DropDownList_State.SelectedIndex = 46;
+        DropDownList_City.SelectedIndex = 7028;
 
         //if (IsPostBack == true || IsPostBack == false)
         //{
@@ -70,9 +71,9 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         //fix the emp id to pull from what is in sql from the login 
         School schoolName = new School(listBoxSchool.SelectedValue);
         Employer emp = new Employer("James Madison University", 20000, "Higher Education", "college", "Bill Jon", "BJ123", "password", "bj123@gmail.com", "555-555-5555", 16);
-        Posting post = new Posting(postingTitle, description,requirements, cpName, emp, cpPhone, cpEmail,postingStartDate, postingEndDate, oppStartDate);
+        Posting post = new Posting(postingTitle, description,requirements, cpName, emp,  cpPhone, cpEmail,postingStartDate, postingEndDate, oppStartDate);
 
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ProjectConnectionString"].ConnectionString);
         sc.Open();
 
         System.Data.SqlClient.SqlCommand posting = new System.Data.SqlClient.SqlCommand
@@ -95,21 +96,22 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         posting.Parameters.AddWithValue("@postEnd", post.getPostEndDate());
         posting.Parameters.AddWithValue("@opportunityStartDate", post.getOpportunityStartDate());
 
+
         posting.ExecuteNonQuery();
-        
 
 
 
 
         String count = "";
         count = listBoxInterests.Items.Count.ToString();
-        int counter = Int32.Parse(count);
+        int counter = Int32.Parse(count) ;
         int currPostingID = getMaxPostingID();
 
-        if(listBoxInterests.SelectedIndex < 0)
+        if (listBoxInterests.SelectedIndex < 0)
         {
 
-        } else
+        }
+        else
         {
             for (int i = 0; i < counter; i++)
             {
@@ -117,20 +119,20 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
                 {
                     System.Data.SqlClient.SqlCommand postingInterests = new System.Data.SqlClient.SqlCommand
                     {
-                        
+
                         Connection = sc,
                         CommandText = "Insert into Posting_Interest values (@postingID, @interestID, @LastUpdatedBy, @LastUpdated)"
-                      
+
                     };
                     PostingInterest postInterest = new PostingInterest(currPostingID, Convert.ToInt32(listBoxInterests.Items[i].Value));
-                    
+
                     postingInterests.Parameters.AddWithValue("@postingID", postInterest.getPostingID());
                     postingInterests.Parameters.AddWithValue("@interestID", postInterest.getInterestID());
                     postingInterests.Parameters.AddWithValue("@LastUpdatedBy", postInterest.getLastUpdatedBy());
                     postingInterests.Parameters.AddWithValue("@LastUpdated", postInterest.getLastUpdated());
 
                     postingInterests.ExecuteNonQuery();
-                    
+
                 }
             }
         }
@@ -160,7 +162,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
                     PostingSchool postSchool = new PostingSchool(currPostingID, Convert.ToInt32(listBoxSchool.Items[i].Value));
 
                     postingSchool.Parameters.AddWithValue("@postingID", postSchool.getPostingID());
-                    postingSchool.Parameters.AddWithValue("@SchoolID", postSchool.getInterestID());
+                    postingSchool.Parameters.AddWithValue("@SchoolID", postSchool.getSchoolID());
                     postingSchool.Parameters.AddWithValue("@LastUpdatedBy", postSchool.getLastUpdatedBy());
                     postingSchool.Parameters.AddWithValue("@LastUpdated", postSchool.getLastUpdated());
 
@@ -172,7 +174,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
 
 
 
-        sc.Close();
+           sc.Close();
     }
 
 
@@ -191,7 +193,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         maxID.ExecuteNonQuery();
 
         sc.Close();
-
+       
         return result; 
     }
 
