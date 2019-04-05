@@ -38,7 +38,7 @@
 					<li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> Job Listings</a></li>
 					<li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
 				</ul>
-				<a href="/Login.aspx" class="logout-button"><em class="fa fa-power-off"></em> Signout</a>
+				<a  runat="server" class="logout-button" onServerClick="logoutClick"><em class="fa fa-power-off"></em> Signout</a>
 			</nav>
 			<main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
 				<header class="page-header row justify-center">
@@ -54,7 +54,7 @@
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="EditProfile.aspx"><em class="fa fa-user-circle mr-1"></em> View Profile</a>
 
-						     <a class="dropdown-item" href="/Login.aspx"><em class="fa fa-power-off mr-1"></em> Logout</a></div>
+						     <a class="dropdown-item" runat="server" onServerClick="logoutClick" ><em class="fa fa-power-off mr-1"></em> Logout</a></div>
 					</div>
 					<div class="clear"></div>
 				</header>
@@ -160,7 +160,7 @@
 									</div>
 								</div>--%>
 								<div class="card mb-4">
-									<div class="card-block">
+									<div class="card-block col-sm-12">
 										<h3 class="card-title">Recent Applications</h3>
 										<div class="dropdown card-title-btn-container">
 											<button class="btn btn-sm btn-subtle" type="button" runat="server"><em class="fa fa-list-ul"></em> View All</button>
@@ -333,13 +333,13 @@
     <script src="js/easypiechart-data.js"></script>
     <script src="js/bootstrap-datepicker.js"></script>
     <script src="js/custom.js"></script>
-    <script>
+    <%--<script>
 	var chart3 = document.getElementById("doughnut-chart").getContext("2d");
 	window.myDoughnut = new Chart(chart3).Doughnut(doughnutData, {
 	responsive: true,
 	segmentShowStroke: false
 	});
-	</script>
+	</script>--%>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     </form>

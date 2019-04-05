@@ -38,18 +38,18 @@
 
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
                     <ul class="nav nav-pills flex-column sidebar-nav">
-                        <li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em>Dashboard <span class="sr-only">(current)</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em>Student Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em>School Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard <span class="sr-only">(current)</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact</a></li>
                         <li class="nav-item"><a class="nav-link active" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> Job Listings</a></li>
-                        <li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em>Edit Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
                     </ul>
                     <a  runat="server" class="logout-button" onServerClick="logoutClick"><em class="fa fa-power-off"></em> Signout</a>
                 </nav>
                 <main class="col-xs-12 col-sm-8 col-lg-9 col-xl-10 pt-3 pl-4 ml-auto">
                     <header class="page-header row justify-center">
                         <div class="col-md-6 col-lg-8">
-                            <h1 class="float-left text-center text-md-left">Job Lisitings</h1>
+                            <h1 class="float-left text-center text-md-left">Job Listings</h1>
                         </div>
                         <div class="dropdown user-dropdown col-md-6 col-lg-4 text-center text-md-right">
                             <a class="btn btn-stripped dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -155,7 +155,7 @@ FROM            Posting INNER JOIN
 													</tr>
 												</tbody>
 											</table>--%>
-                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    CAST(Posting.PostingID AS VARCHAR) AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', CAST(COUNT(Application.studentID) AS VARCHAR) AS 'Number Of Applicants' FROM Posting INNER JOIN Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid" FilterExpression="[Posting ID] LIKE '%{1}%' OR [Job Listing Title] LIKE '%{0}%' OR [Number of Applicants] LIKE '%{1}%'">
+                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    CAST(Posting.PostingID AS VARCHAR) AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', CAST(COUNT(Application.studentID) AS VARCHAR) AS 'Number Of Applicants' FROM Posting FULL OUTER JOIN Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid" FilterExpression="[Posting ID] LIKE '%{1}%' OR [Job Listing Title] LIKE '%{0}%' OR [Number of Applicants] LIKE '%{1}%'">
                                         <FilterParameters>
                                                 <asp:ControlParameter Name="Posting ID" ControlID="searchbox" PropertyName="Text" />
                                                 <asp:ControlParameter Name="Job Listing Title" ControlID="searchbox" PropertyName="Text" />
@@ -175,73 +175,68 @@ FROM            Posting INNER JOIN
 
                         <div class="col-md-12 col-lg-8">
                             <div class="card mb-8">
-                                <div class="card-block">
-                                    <h3 class="card-title">Notifications</h3>
-                                    <div class="dropdown card-title-btn-container">
-                                        <button class="btn btn-sm btn-subtle" type="button"><em class="fa fa-list-ul"></em>View All</button>
-                                        <button class="btn btn-sm btn-subtle dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#"><em class="fa fa-search mr-1"></em>More info</a>
-                                            <a class="dropdown-item" href="#"><em class="fa fa-thumb-tack mr-1"></em>Pin Window</a>
-                                            <a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em>Close Window</a>
-                                        </div>
-                                    </div>
-                                    <h6 class="card-subtitle mb-2 text-muted">stay in touch</h6>
-                                    <div class="divider" style="margin-top: 1rem;"></div>
-                                    <div class="articles-container">
-                                        <div class="article border-bottom">
-                                            <div class="col-xs-12">
-                                                <div class="row">
-                                                    <div class="col-2 date">
-                                                        <div class="large">30</div>
-                                                        <div class="text-muted">Jun</div>
-                                                    </div>
-                                                    <div class="col-10">
-                                                        <h4><a href="#">Max Neil just joined cued-in and is interested in Information Technology</a></h4>
-                                                        <p>View her profile or send her a message if you think she may be a good fit for a work-based learning opportunity at your company.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                        <!--End .article-->
-
-                                        <div class="article">
-                                            <div class="col-xs-12">
-                                                <div class="row">
-                                                    <div class="col-2 date">
-                                                        <div class="large">30</div>
-                                                        <div class="text-muted">Jun</div>
-                                                    </div>
-                                                    <div class="col-10">
-                                                        <h4><a href="#">Time for a new listing!</a></h4>
-                                                        <p>You haven't posted in a while. Let students know about more opportunities. Go to your dashboard to create a new listing or update your current ones. </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                        <!--End .article-->
-
-                                        <div class="article">
-                                            <div class="col-xs-12">
-                                                <div class="row">
-                                                    <div class="col-2 date">
-                                                        <div class="large">31</div>
-                                                        <div class="text-muted">Jun</div>
-                                                    </div>
-                                                    <div class="col-10">
-                                                        <h4><a href="#">New message from Jane Smith</a></h4>
-                                                        <p>Jane Smith has contacted you inquiring about the high school seniors summer program listing. Respond as soon as possible!</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                        <!--End .article-->
-                                    </div>
+                               <div class="card-block">
+										<h3 class="card-title">Notifications</h3>
+										<div class="dropdown card-title-btn-container">
+											<button class="btn btn-sm btn-subtle" runat="server" type="button"><em class="fa fa-list-ul"></em> View All</button>
+											<button class="btn btn-sm btn-subtle dropdown-toggle" runat="server" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>
+											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#"><em class="fa fa-search mr-1"></em> More info</a>
+											    <a class="dropdown-item" href="#"><em class="fa fa-thumb-tack mr-1"></em> Pin Window</a>
+											    <a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close Window</a></div>
+										</div>
+										<h6 class="card-subtitle mb-2 text-muted">stay in touch</h6>
+										<div class="divider" style="margin-top: 1rem;"></div>
+										<div class="articles-container">
+											<div class="article border-bottom">
+												<div class="col-xs-12">
+													<div class="row">
+														<div class="col-2 date">
+															<div class="large">1</div>
+															<div class="text-muted">Apr</div>
+														</div>
+														<div class="col-10">
+															<h4><asp:Literal ID="notificationTitle1" runat="server"/></h4>
+															<p>Check the Top Candidates graph or view the student's information to see if their the right candidate for the job!</p>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div><!--End .article-->
+											
+											<div class="article">
+												<div class="col-xs-12">
+													<div class="row">
+														<div class="col-2 date">
+															<div class="large">1</div>
+															<div class="text-muted">Apr</div>
+														</div>
+														<div class="col-10">
+															<h4><asp:Literal ID="notificationTitle2" runat="server"/></h4>
+															<p>Check the Top Candidates graph or view the student's information to see if their the right candidate for the job!</p>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div><!--End .article-->
+											
+											<div class="article">
+												<div class="col-xs-12">
+													<div class="row">
+														<div class="col-2 date">
+															<div class="large">31</div>
+															<div class="text-muted">Mar</div>
+														</div>
+														<div class="col-10">
+															<h4><asp:Literal ID="notificationTitle3" runat="server"/></h4>
+															<p>Check the Top Candidates graph or view the student's information to see if their the right candidate for the job!</p>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div><!--End .article-->
+										</div>
+									</div>
                                 </div>
-                            </div>
 
                         </div>
                         <div class="col-md-12 col-lg-4">
