@@ -17,7 +17,7 @@ public class School {
 	
 	public School(String name, String streetNumber, String streetAddress, String city, String state, String country,
 			String zip) {
-		setSchoolID();
+		
 		setName(name);
 		setStreetNumber(streetNumber);
 		setStreetAddress(streetAddress);
@@ -27,6 +27,12 @@ public class School {
 		setZip(zip);
 	}
 
+    public School(String name, int id)
+    {
+        setSchoolID(id);
+        setName(name);
+    }
+
     public School(String name)
     {
         setName(name);
@@ -34,8 +40,8 @@ public class School {
 	public int getSchoolID() {
 		return this.schoolID;
 	}
-	public void setSchoolID() {
-		//implement
+	public void setSchoolID(int id) {
+        this.schoolID = id;
 	}
 	public String getName() {
 		return this.name;
