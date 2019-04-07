@@ -10,8 +10,16 @@ using System.Web.UI.WebControls;
 
 public partial class company_dashboard_EditListing : System.Web.UI.Page
 {
+
+    public static int count1 = 0;
+    public static int count2 = 0;
+
     protected void Page_Load(object sender, EventArgs e)
     {
+
+      //  Debug.WriteLine(count1);
+      //  Debug.WriteLine(count2);
+
 
 
         if (Session["username"] == null)
@@ -37,7 +45,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             txtopportunityStartDate.Value = String.Format("{0:MM/dd/yyyy}", Session["oppstart"].ToString());
          
 
-
+            
          
 
             
@@ -55,11 +63,15 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
     }
 
+   
 
     public void logoutClick(object sender, EventArgs e)
     {
+        count1 = 0;
+        count2 = 0;
         Session.Abandon();
         Response.Redirect("/Login.aspx");
+        
     }
     protected List<Interests> getPostingInterests()
     {
@@ -145,7 +157,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             result.Add(new School(reader.GetString(0)));
         }
         sc.Close();
-
+        
         return result;        
     }
 
@@ -219,12 +231,64 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         //will need this for delete logic delete from posting_interest where postingid = 9 and interestID = 3
         List<Interests> interests = getPostingInterests();
         List<School> school = getPostingSchools();
-       // List<Location> State = getPostingState();
-       // List<Location> City = getPostingCity();
+        Location State = getPostingState();
+        Location City = getPostingCity();
+
+        foreach (ListItem item in DropDownList_State.Items)
+        {
+            if (item.Text.Equals(State.getName()) && item.Selected == false)
+            {
+                System.Data.SqlClient.SqlCommand deleteState = new System.Data.SqlClient.SqlCommand
+                {
+                    Connection = sc,
+                    CommandText = "delete posting_location where postingid = @postingID and locationID = @locationID"
+                };
+                deleteState.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+                deleteState.Parameters.AddWithValue("@locationID", item.Value);
+                deleteState.ExecuteNonQuery();
+            }
+        }
+
+       
+
+            foreach (ListItem item in DropDownList_City.Items)
+        {
+            if (item.Text.Equals(City.getName()) && item.Selected == false)
+            {
+                System.Data.SqlClient.SqlCommand deleteCity = new System.Data.SqlClient.SqlCommand
+                {
+                    Connection = sc,
+                    CommandText = "delete posting_location where postingid = @postingID and locationID = @locationID"
+                };
+                deleteCity.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+                deleteCity.Parameters.AddWithValue("@locationID", item.Value);
+                deleteCity.ExecuteNonQuery();
+            }
+        }
+
+        foreach (ListItem item in DropDownList_City.Items)
+        {
+            if (item.Selected == true)
+            {
+                PostingLocation pl = new PostingLocation(Convert.ToInt32(Session["postID"].ToString()), Convert.ToInt32(item.Value));
+                Debug.WriteLine(item.Value);
+                //do the sql
+                System.Data.SqlClient.SqlCommand postingLocation = new System.Data.SqlClient.SqlCommand
+                {
+                    Connection = sc,
+                    CommandText = "Insert into Posting_Location values (@postingID, @LocationID)"
+                };
+                postingLocation.Parameters.AddWithValue("@postingID", pl.getPostingID());
+                postingLocation.Parameters.AddWithValue("@locationID", pl.getLocationID());
+
+
+                postingLocation.ExecuteNonQuery();
+            }
+        }
 
 
 
-        foreach(ListItem item in listBoxInterests.Items)
+        foreach (ListItem item in listBoxInterests.Items)
         {
             for(int i = 0; i < interests.Count; i++)
             {
@@ -346,36 +410,93 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
     protected void Page_PreRender(object sender, EventArgs e)
     {
-        
+
+   
 
         List<Interests> interests = getPostingInterests();
         List<School> school = getPostingSchools();
         Location State = getPostingState();
         Location City = getPostingCity();
 
-      
-        
-            foreach (ListItem item in DropDownList_City.Items)
-            {
-                if (item.Text.Equals(City.getName()))
-                {
-                    item.Selected = true;
-                }
-            
+       if (count1 < 1)
 
-        }
+            if (IsPostBack == false)
 
-
-        
+        {
             foreach (ListItem item in DropDownList_State.Items)
             {
                 if (item.Text.Equals(State.getName()))
                 {
                     item.Selected = true;
-                }
+                    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+
+                    System.Data.SqlClient.SqlCommand newSchool = new System.Data.SqlClient.SqlCommand();
+                    newSchool.Connection = sc;
+
+                    PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State.getName() + "' and CityCounty = '" + City.getName() + "'";
+                    PostingSchool.DataBind();
+
+                        Debug.WriteLine(State.getName());
+
+                        SqlDataSourceCity.SelectCommand = "select citycounty from cities where state = '" + State.getName() + "'";
+                        
+                        SqlDataSourceCity.DataBind();
+                       
+                    }
+
+
+
+
+            }
+
+
             
-            
+
         }
+
+        if (count2 < 1)
+
+            if (IsPostBack == false)
+
+            {
+            foreach (ListItem item in DropDownList_City.Items)
+            {
+                if (item.Text.Equals(City.getName()))
+                {
+                    item.Selected = true;
+                    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+
+                    System.Data.SqlClient.SqlCommand newSchool = new System.Data.SqlClient.SqlCommand();
+                    newSchool.Connection = sc;
+
+                    PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State.getName() + "' and CityCounty = '" + City.getName() + "'";
+                    PostingSchool.DataBind();
+                }
+
+
+
+
+            }
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         for (int i = 0; i < interests.Count; i++)
         {
@@ -403,16 +524,23 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
     }
     protected void StateSelection_Change(object sender, EventArgs e)
     {
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        count1 = 1;
+        
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         //   DataTable dt = new DataTable();
         System.Data.SqlClient.SqlCommand newCity = new System.Data.SqlClient.SqlCommand();
         newCity.Connection = sc;
-        String State = DropDownList_State.SelectedValue;
+        String State = DropDownList_State.SelectedItem.Text;
+        String City = DropDownList_City.SelectedItem.Text;
+
 
 
 
         SqlDataSourceCity.SelectCommand = "select citycounty from cities where state = '" + State + "'";
         SqlDataSourceCity.DataBind();
+
+        PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State + "' and CityCounty = '" + City + "'";
+        PostingSchool.DataBind();
 
 
 
@@ -450,12 +578,16 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
     protected void CitySelection_Change(object sender, EventArgs e)
     {
+        count2 = 1;
+
+        
+
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
 
         System.Data.SqlClient.SqlCommand newSchool = new System.Data.SqlClient.SqlCommand();
         newSchool.Connection = sc;
-        String State = DropDownList_State.SelectedValue;
-        String City = DropDownList_City.SelectedValue;
+        String State = DropDownList_State.SelectedItem.Text;
+        String City = DropDownList_City.SelectedItem.Text;
 
         PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State + "' and CityCounty = '" + City + "'";
         PostingSchool.DataBind();
