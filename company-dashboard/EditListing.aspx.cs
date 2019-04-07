@@ -43,12 +43,15 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             txtpostStart.Value = String.Format("{0:MM/dd/yyyy}", Session["poststart"].ToString());
             txtpostEnd.Value = String.Format("{0:MM/dd/yyyy}", Session["postend"].ToString());
             txtopportunityStartDate.Value = String.Format("{0:MM/dd/yyyy}", Session["oppstart"].ToString());
-         
+            //DropDownList_State.SelectedItem.Value = Session["state"].ToString();
+            //DropDownList_City.SelectedItem.Value = Session["cityCounty"].ToString();
 
-            
-         
 
-            
+
+
+
+
+
 
             //46 and 7028
 
@@ -140,15 +143,16 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         List<School> result = new List<School>();
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         sc.Open();
-
+        
         System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
         {
             Connection = sc,
 
-            CommandText = "SELECT        School.SchoolName FROM            School INNER JOIN Posting_School ON School.SchoolID = Posting_School.SchoolID INNER JOIN Posting_Location ON Posting_School.PostingID = Posting_Location.PostingID where school.state = 'VA' and School.CityCounty = 'Harrisonburg' "
-
+            CommandText = "SELECT        School.SchoolName FROM            School INNER JOIN Posting_School ON School.SchoolID = Posting_School.SchoolID INNER JOIN Posting_Location ON Posting_School.PostingID = Posting_Location.PostingID where school.state = 'VA' and School.CityCounty = 'Harrisonburg'"
+    
         };
         select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+
 
         SqlDataReader reader = select.ExecuteReader();
 
@@ -411,66 +415,39 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
     protected void Page_PreRender(object sender, EventArgs e)
     {
 
-   
+
 
         List<Interests> interests = getPostingInterests();
         List<School> school = getPostingSchools();
         Location State = getPostingState();
         Location City = getPostingCity();
 
-       if (count1 < 1)
+          if (count1 < 1)
 
-            if (IsPostBack == false)
+        if (IsPostBack == false)
 
         {
             foreach (ListItem item in DropDownList_State.Items)
             {
                 if (item.Text.Equals(State.getName()))
                 {
-                    item.Selected = true;
-                    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-
-                    System.Data.SqlClient.SqlCommand newSchool = new System.Data.SqlClient.SqlCommand();
-                    newSchool.Connection = sc;
-
-                    PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State.getName() + "' and CityCounty = '" + City.getName() + "'";
-                    PostingSchool.DataBind();
-
-                        Debug.WriteLine(State.getName());
-
-                        SqlDataSourceCity.SelectCommand = "select citycounty from cities where state = '" + State.getName() + "'";
                         
-                        SqlDataSourceCity.DataBind();
-                       
-                    }
-
-
-
-
-            }
-
-
-            
-
-        }
-
-        if (count2 < 1)
-
-            if (IsPostBack == false)
-
-            {
-            foreach (ListItem item in DropDownList_City.Items)
-            {
-                if (item.Text.Equals(City.getName()))
-                {
-                    item.Selected = true;
+                        item.Selected = true;
                     System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
 
                     System.Data.SqlClient.SqlCommand newSchool = new System.Data.SqlClient.SqlCommand();
                     newSchool.Connection = sc;
+                    
 
-                    PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State.getName() + "' and CityCounty = '" + City.getName() + "'";
+                       PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State.getName() + "' and CityCounty = '" + City.getName() + "'";
                     PostingSchool.DataBind();
+
+                    Debug.WriteLine(State.getName());
+
+                    SqlDataSourceCity.SelectCommand = "select locationID, citycounty from cities where state = '" + State.getName() + "'";
+
+                    SqlDataSourceCity.DataBind();
+
                 }
 
 
@@ -482,10 +459,43 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
 
         }
+    
+    
+
+        if (count2 < 1)
+
+            if (IsPostBack == false)
+
+            {
+            foreach (ListItem item in DropDownList_City.Items)
+            {
+                if (item.Text.Equals(City.getName()))
+                {
+                        
+                        item.Selected = true;
+                        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+
+                        System.Data.SqlClient.SqlCommand newSchool = new System.Data.SqlClient.SqlCommand();
+                        newSchool.Connection = sc;
+
+                        PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State.getName() + "' and CityCounty = '" + City.getName() + "'";
+                        PostingSchool.DataBind();
+                    }
 
 
 
 
+                }
+
+
+
+
+      }
+
+
+
+
+     
 
 
 
@@ -522,6 +532,13 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             }
         }
     }
+
+    //protected override void OnPreRender(EventArgs e)
+    //{
+    //    listBoxSchool.SelectedIndexChanged;
+
+    //    base.OnPreRender(e);
+    //}
     protected void StateSelection_Change(object sender, EventArgs e)
     {
         count1 = 1;
@@ -588,7 +605,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         newSchool.Connection = sc;
         String State = DropDownList_State.SelectedItem.Text;
         String City = DropDownList_City.SelectedItem.Text;
-
+        
         PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State + "' and CityCounty = '" + City + "'";
         PostingSchool.DataBind();
     }
