@@ -4,20 +4,20 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Summary description for PostingSchool
+/// Summary description for PostingLocation
 /// </summary>
-public class PostingSchool
+public class PostingLocation
 {
     private int postingID;
-    private int SchoolID;
+    private int LocationID;
     private string lastUpdatedBy;
     private string lastUpdated;
 
 
-    public PostingSchool(int postingID, int SchoolID)
+    public PostingLocation(int postingID, int LocationID)
     {
         setPostingID(postingID);
-        setSchoolID(SchoolID);
+        setLocationID(LocationID);
         setLastUpdatedBy();
         setLastUpdated();
 
@@ -30,13 +30,13 @@ public class PostingSchool
     {
         this.postingID = postingID;
     }
-    public int getSchoolID()
+    public int getLocationID()
     {
-        return this.SchoolID;
+        return this.LocationID;
     }
-    public void setSchoolID(int SchoolID)
+    public void setLocationID(int LocationID)
     {
-        this.SchoolID = SchoolID;
+        this.LocationID = LocationID;
     }
 
     public void setLastUpdated()

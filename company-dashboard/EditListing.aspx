@@ -81,16 +81,16 @@
                                             <div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">State</label>
 												<div runat="server" class="col-md-9">
-                                                    <asp:DropDownList ID="DropDownList_State" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceState" DataTextField="State" DataValueField="State" SelectionMode="Single" OnSelectedIndexChanged="StateSelection_Change" AutoPostBack="true"></asp:DropDownList>
-                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceState" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT DISTINCT [State] FROM [cities] ORDER BY [State]"></asp:SqlDataSource>
+                                                    <asp:DropDownList ID="DropDownList_State" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceState" DataTextField="State" DataValueField="LocationID" SelectionMode="Single" OnSelectedIndexChanged="StateSelection_Change" AutoPostBack="true"></asp:DropDownList>
+                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceState" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT [LocationID], [State] FROM (SELECT State, MIN(LocationID) LocationID FROM cities GROUP BY State) A ORDER BY State"></asp:SqlDataSource>
                                      
 												</div>
 											</div>
                                              <div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">City</label>
 												<div runat="server" class="col-md-9">
-                                                    <asp:DropDownList ID="DropDownList_City" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceCity" DataTextField="CityCounty" DataValueField="CityCounty" SelectionMode="Single" OnSelectedIndexChanged="CitySelection_Change" AutoPostBack="true"></asp:DropDownList>
-                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceCity" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT DISTINCT [CityCounty] FROM [cities] ORDER BY [CityCounty]"></asp:SqlDataSource>
+                                                    <asp:DropDownList ID="DropDownList_City" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceCity" DataTextField="CityCounty" DataValueField="LocationID" SelectionMode="Single" OnSelectedIndexChanged="CitySelection_Change" AutoPostBack="true"></asp:DropDownList>
+                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceCity" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT [LocationID], [CityCounty] FROM (SELECT CityCounty, MIN(LocationID) LocationID FROM cities GROUP BY CityCounty) A ORDER BY LocationID"></asp:SqlDataSource>
                                                     
 												</div>
 											</div>
@@ -203,6 +203,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <script type="text/javascript">
+function window.onunload()
+{
+
+
+  alert('closed');
+
+
+}
+</script>
                                             <br>
                                             <div runat="server" class="row">
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
