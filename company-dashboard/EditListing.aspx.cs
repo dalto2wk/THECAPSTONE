@@ -147,8 +147,8 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
         {
             Connection = sc,
-
-            CommandText = "SELECT        School.SchoolName FROM            School INNER JOIN Posting_School ON School.SchoolID = Posting_School.SchoolID INNER JOIN Posting_Location ON Posting_School.PostingID = Posting_Location.PostingID where school.state = 'VA' and School.CityCounty = 'Harrisonburg'"
+            
+            CommandText = "SELECT        School.SchoolName FROM            School INNER JOIN Posting_School ON School.SchoolID = Posting_School.SchoolID INNER JOIN Posting_Location ON Posting_School.PostingID = Posting_Location.PostingID where Posting_School.PostingID = @PostingID and Posting_Location.PostingID = @PostingID"
     
         };
         select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
@@ -422,9 +422,9 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         Location State = getPostingState();
         Location City = getPostingCity();
 
-          if (count1 < 1)
+       //   if (count1 < 1)
 
-        if (IsPostBack == false)
+       if (IsPostBack == false)
 
         {
             foreach (ListItem item in DropDownList_State.Items)
@@ -462,7 +462,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
     
     
 
-        if (count2 < 1)
+     //   if (count2 < 1)
 
             if (IsPostBack == false)
 
@@ -605,7 +605,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         newSchool.Connection = sc;
         String State = DropDownList_State.SelectedItem.Text;
         String City = DropDownList_City.SelectedItem.Text;
-        
+       
         PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State + "' and CityCounty = '" + City + "'";
         PostingSchool.DataBind();
     }
