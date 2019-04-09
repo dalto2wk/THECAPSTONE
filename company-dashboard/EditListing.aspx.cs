@@ -79,117 +79,150 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
     protected List<Interests> getPostingInterests()
     {
         List<Interests> result = new List<Interests>();
-
-        //query SELECT        Interest.name,interest.interestID
-        //FROM Posting INNER JOIN
-        //                 Posting_Interest ON Posting.postingID = Posting_Interest.postingID INNER JOIN
-        //                 Interest ON Posting_Interest.interestID = Interest.interestID where posting.postingID = 8
-
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-        sc.Open();
-
-        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        try
         {
-            Connection = sc,
 
-            CommandText = "SELECT        Interest.name,interest.interestID FROM Posting INNER JOIN " +
-                         "Posting_Interest ON Posting.postingID = Posting_Interest.postingID INNER JOIN " +
-                         "Interest ON Posting_Interest.interestID = Interest.interestID where posting.postingID = @postingID"
 
-        };
-        select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+            
 
-        SqlDataReader reader = select.ExecuteReader();
+            //query SELECT        Interest.name,interest.interestID
+            //FROM Posting INNER JOIN
+            //                 Posting_Interest ON Posting.postingID = Posting_Interest.postingID INNER JOIN
+            //                 Interest ON Posting_Interest.interestID = Interest.interestID where posting.postingID = 8
 
-        while (reader.Read())
-        {
-            result.Add(new Interests(reader.GetString(0), reader.GetInt32(1)));
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+            sc.Open();
+
+            System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+            {
+                Connection = sc,
+
+                CommandText = "SELECT        Interest.name,interest.interestID FROM Posting INNER JOIN " +
+                             "Posting_Interest ON Posting.postingID = Posting_Interest.postingID INNER JOIN " +
+                             "Interest ON Posting_Interest.interestID = Interest.interestID where posting.postingID = @postingID"
+
+            };
+            select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+
+            SqlDataReader reader = select.ExecuteReader();
+
+            while (reader.Read())
+            {
+                result.Add(new Interests(reader.GetString(0), reader.GetInt32(1)));
+            }
+            sc.Close();
+            
         }
-        sc.Close();
+        catch
+        {
+           
+        }
         return result;
-        
     }
 
     protected Location getPostingState()
     {
         Location result = null;
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-        sc.Open();
-
-        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        try
         {
-            Connection = sc,
 
-            CommandText = "SELECT        cities.State, cities.LocationID FROM Posting INNER JOIN " +
-                         "Posting_Location ON Posting.postingID = Posting_Location.postingID INNER JOIN " +
-                         "cities ON Posting_Location.LocationID = cities.LocationID where posting.postingID = @postingID"
 
-        };
-        select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+            
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+            sc.Open();
 
-        SqlDataReader reader = select.ExecuteReader();
+            System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+            {
+                Connection = sc,
 
-        while (reader.Read())
-        {
-            result = new Location(reader.GetString(0), reader.GetInt32(1));
+                CommandText = "SELECT        cities.State, cities.LocationID FROM Posting INNER JOIN " +
+                             "Posting_Location ON Posting.postingID = Posting_Location.postingID INNER JOIN " +
+                             "cities ON Posting_Location.LocationID = cities.LocationID where posting.postingID = @postingID"
+
+            };
+            select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+
+            SqlDataReader reader = select.ExecuteReader();
+
+            while (reader.Read())
+            {
+                result = new Location(reader.GetString(0), reader.GetInt32(1));
+            }
+            sc.Close();
+
+            
         }
-        sc.Close();
-
+        catch
+        {
+            
+        }
         return result;
     }
 
     protected List<School> getPostingSchools()
     {
         List<School> result = new List<School>();
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-        sc.Open();
-        
-        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        try
         {
-            Connection = sc,
-            
-            CommandText = "SELECT        School.SchoolName FROM            School INNER JOIN Posting_School ON School.SchoolID = Posting_School.SchoolID INNER JOIN Posting_Location ON Posting_School.PostingID = Posting_Location.PostingID where Posting_School.PostingID = @PostingID and Posting_Location.PostingID = @PostingID"
-    
-        };
-        select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+            sc.Open();
+
+            System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+            {
+                Connection = sc,
+
+                CommandText = "SELECT        School.SchoolName FROM            School INNER JOIN Posting_School ON School.SchoolID = Posting_School.SchoolID INNER JOIN Posting_Location ON Posting_School.PostingID = Posting_Location.PostingID where Posting_School.PostingID = @PostingID and Posting_Location.PostingID = @PostingID"
+
+            };
+            select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
 
 
-        SqlDataReader reader = select.ExecuteReader();
+            SqlDataReader reader = select.ExecuteReader();
 
-        while (reader.Read())
-        {
-            result.Add(new School(reader.GetString(0)));
+            while (reader.Read())
+            {
+                result.Add(new School(reader.GetString(0)));
+            }
+            sc.Close();
         }
-        sc.Close();
-        
+        catch
+        {
+
+        }
         return result;        
     }
 
     protected Location getPostingCity()
     {
         Location result = null;
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-        sc.Open();
-
-        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        try
         {
-            Connection = sc,
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+            sc.Open();
 
-            CommandText = "SELECT        cities.CityCounty, cities.LocationID FROM Posting INNER JOIN " +
-                         "Posting_Location ON Posting.postingID = Posting_Location.postingID INNER JOIN " +
-                         "cities ON Posting_Location.LocationID = cities.LocationID where posting.postingID = @postingID"
+            System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+            {
+                Connection = sc,
 
-        };
-        select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+                CommandText = "SELECT        cities.CityCounty, cities.LocationID FROM Posting INNER JOIN " +
+                             "Posting_Location ON Posting.postingID = Posting_Location.postingID INNER JOIN " +
+                             "cities ON Posting_Location.LocationID = cities.LocationID where posting.postingID = @postingID"
 
-        SqlDataReader reader = select.ExecuteReader();
+            };
+            select.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
 
-        while (reader.Read())
-        {
-            result = new Location(reader.GetString(0), reader.GetInt32(1));
+            SqlDataReader reader = select.ExecuteReader();
+
+            while (reader.Read())
+            {
+                result = new Location(reader.GetString(0), reader.GetInt32(1));
+            }
+            sc.Close();
         }
-        sc.Close();
+        catch
+        {
 
+        }
         return result;
     }
 
@@ -197,124 +230,127 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
     protected void updateBtnClick(object sender, EventArgs e)
     {
-        //Response.Redirect("Listing.aspx");
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-        sc.Open();
-
-        System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand
+        try
         {
-            Connection = sc,
-            
-            CommandText = "Update posting set " +
-             "postingTitle = @postingTitle," +
-             "description  = @description, " +
-             "jobRequirements = @jobRequirements, " +
-             "cpName = @cpName, " +
-             "cpEmail = @cpEmail, " +
-             "cpPhone = @cpPhone, " +
-             "postStart = @postStart, " +
-             "postEnd = @postEnd, " +
-             "opportunityStartDate = @opportunityStartDate, " +
-             "lastUpdated = GetDATE()" +
-             " where postingID = @postingID"
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+            sc.Open();
 
-        };
-        update.Parameters.AddWithValue("@postingTitle", txtJobTitle.Value);
-        update.Parameters.AddWithValue("@description", txtDescription.Value);
-        update.Parameters.AddWithValue("@jobRequirements", txtRequirements.Value);
-        update.Parameters.AddWithValue("@cpName", txtCpName.Value);
-        update.Parameters.AddWithValue("@cpEmail", txtCpEmail.Value);
-        update.Parameters.AddWithValue("@cpPhone", txtCpPhone.Value);
-        update.Parameters.AddWithValue("@postStart", txtpostStart.Value);
-        update.Parameters.AddWithValue("@postEnd", txtpostEnd.Value);
-        update.Parameters.AddWithValue("@opportunityStartDate", txtopportunityStartDate.Value);
-        update.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
-
-        update.ExecuteNonQuery();
-
-        //will need this for delete logic delete from posting_interest where postingid = 9 and interestID = 3
-        List<Interests> interests = getPostingInterests();
-        List<School> school = getPostingSchools();
-        Location State = getPostingState();
-        Location City = getPostingCity();
-
-        foreach (ListItem item in DropDownList_State.Items)
-        {
-            if (item.Text.Equals(State.getName()) && item.Selected == false)
+            System.Data.SqlClient.SqlCommand update = new System.Data.SqlClient.SqlCommand
             {
-                System.Data.SqlClient.SqlCommand deleteState = new System.Data.SqlClient.SqlCommand
+                Connection = sc,
+
+                CommandText = "Update posting set " +
+                 "postingTitle = @postingTitle," +
+                 "description  = @description, " +
+                 "jobRequirements = @jobRequirements, " +
+                 "cpName = @cpName, " +
+                 "cpEmail = @cpEmail, " +
+                 "cpPhone = @cpPhone, " +
+                 "postStart = @postStart, " +
+                 "postEnd = @postEnd, " +
+                 "opportunityStartDate = @opportunityStartDate, " +
+                 "lastUpdated = GetDATE()" +
+                 " where postingID = @postingID"
+
+            };
+            update.Parameters.AddWithValue("@postingTitle", txtJobTitle.Value);
+            update.Parameters.AddWithValue("@description", txtDescription.Value);
+            update.Parameters.AddWithValue("@jobRequirements", txtRequirements.Value);
+            update.Parameters.AddWithValue("@cpName", txtCpName.Value);
+            update.Parameters.AddWithValue("@cpEmail", txtCpEmail.Value);
+            update.Parameters.AddWithValue("@cpPhone", txtCpPhone.Value);
+            update.Parameters.AddWithValue("@postStart", txtpostStart.Value);
+            update.Parameters.AddWithValue("@postEnd", txtpostEnd.Value);
+            update.Parameters.AddWithValue("@opportunityStartDate", txtopportunityStartDate.Value);
+            update.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+
+            update.ExecuteNonQuery();
+
+            //will need this for delete logic delete from posting_interest where postingid = 9 and interestID = 3
+            List<Interests> interests = getPostingInterests();
+            List<School> school = getPostingSchools();
+            Location State = getPostingState();
+            Location City = getPostingCity();
+
+            foreach (ListItem item in DropDownList_State.Items)
+            {
+                if (item.Text.Equals(State.getName()) && item.Selected == false)
                 {
-                    Connection = sc,
-                    CommandText = "delete posting_location where postingid = @postingID and locationID = @locationID"
-                };
-                deleteState.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
-                deleteState.Parameters.AddWithValue("@locationID", item.Value);
-                deleteState.ExecuteNonQuery();
-            }
-        }
-
-       
-
-            foreach (ListItem item in DropDownList_City.Items)
-        {
-            if (item.Text.Equals(City.getName()) && item.Selected == false)
-            {
-                System.Data.SqlClient.SqlCommand deleteCity = new System.Data.SqlClient.SqlCommand
-                {
-                    Connection = sc,
-                    CommandText = "delete posting_location where postingid = @postingID and locationID = @locationID"
-                };
-                deleteCity.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
-                deleteCity.Parameters.AddWithValue("@locationID", item.Value);
-                deleteCity.ExecuteNonQuery();
-            }
-        }
-
-        foreach (ListItem item in DropDownList_City.Items)
-        {
-            if (item.Selected == true)
-            {
-                PostingLocation pl = new PostingLocation(Convert.ToInt32(Session["postID"].ToString()), Convert.ToInt32(item.Value));
-                Debug.WriteLine(item.Value);
-                //do the sql
-                System.Data.SqlClient.SqlCommand postingLocation = new System.Data.SqlClient.SqlCommand
-                {
-                    Connection = sc,
-                    CommandText = "Insert into Posting_Location values (@postingID, @LocationID)"
-                };
-                postingLocation.Parameters.AddWithValue("@postingID", pl.getPostingID());
-                postingLocation.Parameters.AddWithValue("@locationID", pl.getLocationID());
-
-
-                postingLocation.ExecuteNonQuery();
-            }
-        }
-
-
-
-        foreach (ListItem item in listBoxInterests.Items)
-        {
-            for(int i = 0; i < interests.Count; i++)
-            {
-                if (item.Text.Equals(interests[i].getName()) && item.Selected == false){
-                    System.Data.SqlClient.SqlCommand deleteInterests = new System.Data.SqlClient.SqlCommand
+                    System.Data.SqlClient.SqlCommand deleteState = new System.Data.SqlClient.SqlCommand
                     {
                         Connection = sc,
-                        CommandText = "delete from posting_interest where postingid = @postingID and interestID = @interestID"
+                        CommandText = "delete posting_location where postingid = @postingID and locationID = @locationID"
                     };
-                    deleteInterests.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
-                    deleteInterests.Parameters.AddWithValue("@interestID", item.Value);
-                    deleteInterests.ExecuteNonQuery();
+                    deleteState.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+                    deleteState.Parameters.AddWithValue("@locationID", item.Value);
+                    deleteState.ExecuteNonQuery();
                 }
             }
-        }
 
 
-        foreach (ListItem item in listBoxInterests.Items) {
+
+            foreach (ListItem item in DropDownList_City.Items)
+            {
+                if (item.Text.Equals(City.getName()) && item.Selected == false)
+                {
+                    System.Data.SqlClient.SqlCommand deleteCity = new System.Data.SqlClient.SqlCommand
+                    {
+                        Connection = sc,
+                        CommandText = "delete posting_location where postingid = @postingID and locationID = @locationID"
+                    };
+                    deleteCity.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+                    deleteCity.Parameters.AddWithValue("@locationID", item.Value);
+                    deleteCity.ExecuteNonQuery();
+                }
+            }
+
+            foreach (ListItem item in DropDownList_City.Items)
+            {
+                if (item.Selected == true)
+                {
+                    PostingLocation pl = new PostingLocation(Convert.ToInt32(Session["postID"].ToString()), Convert.ToInt32(item.Value));
+                    Debug.WriteLine(item.Value);
+                    //do the sql
+                    System.Data.SqlClient.SqlCommand postingLocation = new System.Data.SqlClient.SqlCommand
+                    {
+                        Connection = sc,
+                        CommandText = "Insert into Posting_Location values (@postingID, @LocationID)"
+                    };
+                    postingLocation.Parameters.AddWithValue("@postingID", pl.getPostingID());
+                    postingLocation.Parameters.AddWithValue("@locationID", pl.getLocationID());
+
+
+                    postingLocation.ExecuteNonQuery();
+                }
+            }
+
+
+
+            foreach (ListItem item in listBoxInterests.Items)
+            {
+                for (int i = 0; i < interests.Count; i++)
+                {
+                    if (item.Text.Equals(interests[i].getName()) && item.Selected == false)
+                    {
+                        System.Data.SqlClient.SqlCommand deleteInterests = new System.Data.SqlClient.SqlCommand
+                        {
+                            Connection = sc,
+                            CommandText = "delete from posting_interest where postingid = @postingID and interestID = @interestID"
+                        };
+                        deleteInterests.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+                        deleteInterests.Parameters.AddWithValue("@interestID", item.Value);
+                        deleteInterests.ExecuteNonQuery();
+                    }
+                }
+            }
+
+
+            foreach (ListItem item in listBoxInterests.Items)
+            {
 
                 if (item.Selected == true)
                 {
-                    int count = 0; 
+                    int count = 0;
                     for (int i = 0; i < interests.Count; i++)
                     {
                         if (item.Text.Equals(interests[i].getName()))
@@ -323,10 +359,11 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                         }
 
                     }
-                    if(count != 0)
+                    if (count != 0)
                     {
                         continue;
-                    } else if(count == 0)
+                    }
+                    else if (count == 0)
                     {
                         PostingInterest pi = new PostingInterest(Convert.ToInt32(Session["postID"].ToString()), Convert.ToInt32(item.Value));
                         //do the sql
@@ -344,134 +381,131 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                     }
                 }
 
-        }
-
-        //schoolforeachloops
-
-        foreach (ListItem item in listBoxSchool.Items)
-        {
-            for (int i = 0; i < school.Count; i++)
-            {
-                if (item.Text.Equals(school[i].getName()) && item.Selected == false)
-                {
-                    System.Data.SqlClient.SqlCommand deleteSchools = new System.Data.SqlClient.SqlCommand
-                    {
-                        Connection = sc,
-                        CommandText = "delete from posting_School where postingid = @postingID and SchoolID = @SchoolID"
-                    };
-                    deleteSchools.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
-                    deleteSchools.Parameters.AddWithValue("@SchoolID", item.Value);
-                    deleteSchools.ExecuteNonQuery();
-                }
             }
-        }
 
+            //schoolforeachloops
 
-        foreach (ListItem item in listBoxSchool.Items)
-        {
-
-            if (item.Selected == true)
+            foreach (ListItem item in listBoxSchool.Items)
             {
-                int count = 0;
                 for (int i = 0; i < school.Count; i++)
                 {
-                    if (item.Text.Equals(school[i].getName()))
+                    if (item.Text.Equals(school[i].getName()) && item.Selected == false)
                     {
-                        count++;
+                        System.Data.SqlClient.SqlCommand deleteSchools = new System.Data.SqlClient.SqlCommand
+                        {
+                            Connection = sc,
+                            CommandText = "delete from posting_School where postingid = @postingID and SchoolID = @SchoolID"
+                        };
+                        deleteSchools.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+                        deleteSchools.Parameters.AddWithValue("@SchoolID", item.Value);
+                        deleteSchools.ExecuteNonQuery();
                     }
-
-                }
-                if (count != 0)
-                {
-                    continue;
-                }
-                else if (count == 0)
-                {
-                    PostingSchool ps = new PostingSchool(Convert.ToInt32(Session["postID"].ToString()), Convert.ToInt32(item.Value));
-                    //do the sql
-                    System.Data.SqlClient.SqlCommand postingSchools = new System.Data.SqlClient.SqlCommand
-                    {
-                        Connection = sc,
-                        CommandText = "Insert into Posting_School values (@postingID, @SchoolID, @LastUpdatedBy, @LastUpdated)"
-                    };
-                    postingSchools.Parameters.AddWithValue("@postingID", ps.getPostingID());
-                    postingSchools.Parameters.AddWithValue("@SchoolID", ps.getSchoolID());
-                    postingSchools.Parameters.AddWithValue("@LastUpdatedBy", ps.getLastUpdatedBy());
-                    postingSchools.Parameters.AddWithValue("@LastUpdated", ps.getLastUpdated());
-
-                    postingSchools.ExecuteNonQuery();
                 }
             }
 
+
+            foreach (ListItem item in listBoxSchool.Items)
+            {
+
+                if (item.Selected == true)
+                {
+                    int count = 0;
+                    for (int i = 0; i < school.Count; i++)
+                    {
+                        if (item.Text.Equals(school[i].getName()))
+                        {
+                            count++;
+                        }
+
+                    }
+                    if (count != 0)
+                    {
+                        continue;
+                    }
+                    else if (count == 0)
+                    {
+                        PostingSchool ps = new PostingSchool(Convert.ToInt32(Session["postID"].ToString()), Convert.ToInt32(item.Value));
+                        //do the sql
+                        System.Data.SqlClient.SqlCommand postingSchools = new System.Data.SqlClient.SqlCommand
+                        {
+                            Connection = sc,
+                            CommandText = "Insert into Posting_School values (@postingID, @SchoolID, @LastUpdatedBy, @LastUpdated)"
+                        };
+                        postingSchools.Parameters.AddWithValue("@postingID", ps.getPostingID());
+                        postingSchools.Parameters.AddWithValue("@SchoolID", ps.getSchoolID());
+                        postingSchools.Parameters.AddWithValue("@LastUpdatedBy", ps.getLastUpdatedBy());
+                        postingSchools.Parameters.AddWithValue("@LastUpdated", ps.getLastUpdated());
+
+                        postingSchools.ExecuteNonQuery();
+                    }
+                }
+
+            }
+
+            sc.Close();
         }
+        catch
+        {
 
-
-
-
-
-        sc.Close();
+        }
     }
 
     protected void Page_PreRender(object sender, EventArgs e)
     {
 
 
-
-        List<Interests> interests = getPostingInterests();
-        List<School> school = getPostingSchools();
-        Location State = getPostingState();
-        Location City = getPostingCity();
-
-       //   if (count1 < 1)
-
-       if (IsPostBack == false)
-
+        try
         {
-            foreach (ListItem item in DropDownList_State.Items)
-            {
-                if (item.Text.Equals(State.getName()))
-                {
-                        
-                        item.Selected = true;
-                    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+            List<Interests> interests = getPostingInterests();
+            List<School> school = getPostingSchools();
+            Location State = getPostingState();
+            Location City = getPostingCity();
 
-                    System.Data.SqlClient.SqlCommand newSchool = new System.Data.SqlClient.SqlCommand();
-                    newSchool.Connection = sc;
+            //   if (count1 < 1)
+
+            if (IsPostBack == false)
+
+            {
+                foreach (ListItem item in DropDownList_State.Items)
+                {
+                    if (item.Text.Equals(State.getName()))
+                    {
+
+                        item.Selected = true;
+                        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+
+                        System.Data.SqlClient.SqlCommand newSchool = new System.Data.SqlClient.SqlCommand();
+                        newSchool.Connection = sc;
 
                         listBoxSchool.AutoPostBack = false;
                         PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State.getName() + "' and CityCounty = '" + City.getName() + "'";
-                    PostingSchool.DataBind();
+                        PostingSchool.DataBind();
 
-                    Debug.WriteLine(State.getName());
+                        Debug.WriteLine(State.getName());
 
-                    SqlDataSourceCity.SelectCommand = "select locationID, citycounty from cities where state = '" + State.getName() + "'";
+                        SqlDataSourceCity.SelectCommand = "select locationID, citycounty from cities where state = '" + State.getName() + "'";
 
-                    SqlDataSourceCity.DataBind();
+                        SqlDataSourceCity.DataBind();
+
+                    }
 
                 }
-
-
 
 
             }
 
 
 
-
-        }
-    
-    
-
-     //   if (count2 < 1)
+            //   if (count2 < 1)
 
             if (IsPostBack == false)
 
             {
-            foreach (ListItem item in DropDownList_City.Items)
-            {
-                if (item.Text.Equals(City.getName()))
+                foreach (ListItem item in DropDownList_City.Items)
                 {
-                        
+                    if (item.Text.Equals(City.getName()))
+                    {
+
                         item.Selected = true;
                         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
 
@@ -488,48 +522,35 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                 }
 
 
+            }
 
-
-      }
-
-
-
-
-     
-
-
-
-
-
-
-
-
-
-
-
-
-        for (int i = 0; i < interests.Count; i++)
-        {
-            foreach (ListItem item in listBoxInterests.Items)
+            for (int i = 0; i < interests.Count; i++)
             {
-                
-                if (item.Text.Equals(interests[i].getName()))
+                foreach (ListItem item in listBoxInterests.Items)
                 {
-                    item.Selected = true;
+
+                    if (item.Text.Equals(interests[i].getName()))
+                    {
+                        item.Selected = true;
+                    }
+                }
+            }
+
+            for (int i = 0; i < school.Count; i++)
+            {
+                foreach (ListItem item in listBoxSchool.Items)
+                {
+
+                    if (item.Text.Equals(school[i].getName()))
+                    {
+                        item.Selected = true;
+                    }
                 }
             }
         }
-
-        for (int i = 0; i < school.Count; i++)
+        catch
         {
-            foreach (ListItem item in listBoxSchool.Items)
-            {
 
-                if (item.Text.Equals(school[i].getName()))
-                {
-                    item.Selected = true;
-                }
-            }
         }
     }
 
