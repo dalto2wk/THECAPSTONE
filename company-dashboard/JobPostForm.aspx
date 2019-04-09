@@ -199,11 +199,11 @@
                     							<div class="input-group">
                         							<input runat="server" type="hidden" id="filename" name="filename" value="">
                                                     <%--<asp:FileUpload ID="FileUpload1" runat="server" />--%>
-                        							<input runat="server"  type="file" id="uploadedFile" name="uploadedFile" class="form-control form-control-sm" accept="application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                        						<div class="input-group-btn">
-                            						<input runat="server" type="submit" value="Upload" class="rounded-0 btn btn-primary">
+                        							<asp:fileupload ID="fileUp" CssClass="form-control form-control-sm" accept="image/bmp,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/gif,image/jpeg,application/pdf,text/plain,image/png" runat="server"></asp:fileupload>
+                        						<%--<div class="input-group-btn">--%>
+                            						<%--<input runat="server" type="submit" value="Upload" class="rounded-0 btn btn-primary">--%>
                                                     
-                        						</div>
+                        						<%--</div>--%>
                     							
                 								</div>
                 							</div>
