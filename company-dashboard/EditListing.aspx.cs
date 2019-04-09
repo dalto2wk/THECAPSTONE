@@ -437,9 +437,9 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
                     System.Data.SqlClient.SqlCommand newSchool = new System.Data.SqlClient.SqlCommand();
                     newSchool.Connection = sc;
-                    
 
-                       PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State.getName() + "' and CityCounty = '" + City.getName() + "'";
+                        listBoxSchool.AutoPostBack = false;
+                        PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State.getName() + "' and CityCounty = '" + City.getName() + "'";
                     PostingSchool.DataBind();
 
                     Debug.WriteLine(State.getName());
@@ -477,7 +477,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
                         System.Data.SqlClient.SqlCommand newSchool = new System.Data.SqlClient.SqlCommand();
                         newSchool.Connection = sc;
-
+                        listBoxSchool.AutoPostBack = false;
                         PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State.getName() + "' and CityCounty = '" + City.getName() + "'";
                         PostingSchool.DataBind();
                     }
