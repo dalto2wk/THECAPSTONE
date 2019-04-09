@@ -32,7 +32,7 @@
 
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
                 <ul class="nav nav-pills flex-column sidebar-nav">
-                    <li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em>Dashboard </a></li>
+                    <li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard </a></li>
                     <li class="nav-item"><a class="nav-link active" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact <span class="sr-only">(current)</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact</a></li>
                     <li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> Job Listings</a></li>

@@ -261,7 +261,7 @@
 												<div class="checkbox mt-1 mb-2">
 													<div class="custom-control custom-checkbox">
 														<input type="checkbox" runat="server" class="custom-control-input" id="customCheck1">
-														<label class="custom-control-label custom-control-description" runat="server" for="customCheck1">call with conselor</label>
+														<label class="custom-control-label custom-control-description" runat="server" for="customCheck1">call with counselor</label>
 													<div class="float-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
 												    </div>
                                                 </div>

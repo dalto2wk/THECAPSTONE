@@ -33,7 +33,7 @@
 
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
 				<ul class="nav nav-pills flex-column sidebar-nav">
-					<li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard </a></li>
+					<li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em>  Dashboard </a></li>
 					<li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
 					<li class="nav-item"><a class="nav-link active" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact <span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> Job Listings</a></li>
@@ -64,65 +64,15 @@
 								<div class="card mb-4">
 									<div class="card-block">
 										<div class="input-group">
-											<div class="input-group-prepend">
-												<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">State <span class="caret fa fa-search"></span></button>
-												<ul class="dropdown-menu">
-													<li><a href="#">AL</a></li>
-													<li><a href="#">AK</a></li>
-													<li><a href="#">AZ</a></li>
-													<li><a href="#">AR</a></li>
-													<li><a href="#">CA</a></li>
-													<li><a href="#">CO</a></li>
-													<li><a href="#">CT</a></li>
-													<li><a href="#">DE</a></li>
-													<li><a href="#">FL</a></li>
-													<li><a href="#">GA</a></li>
-													<li><a href="#">HI</a></li>
-													<li><a href="#">ID</a></li>
-													<li><a href="#">IL</a></li>
-													<li><a href="#">IN</a></li>
-													<li><a href="#">IA</a></li>
-													<li><a href="#">KS</a></li>
-													<li><a href="#">KY</a></li>
-													<li><a href="#">LA</a></li>
-													<li><a href="#">ME</a></li>
-													<li><a href="#">MD</a></li>
-													<li><a href="#">MA</a></li>
-													<li><a href="#">MI</a></li>
-													<li><a href="#">MN</a></li>
-													<li><a href="#">MO</a></li>
-													<li><a href="#">MS</a></li>
-													<li><a href="#">MT</a></li>
-													<li><a href="#">NE</a></li>
-													<li><a href="#">NV</a></li>
-													<li><a href="#">NH</a></li>
-													<li><a href="#">NJ</a></li>
-													<li><a href="#">NM</a></li>
-													<li><a href="#">NY</a></li>
-													<li><a href="#">NC</a></li>
-													<li><a href="#">ND</a></li>
-													<li><a href="#">OH</a></li>
-													<li><a href="#">OK</a></li>
-													<li><a href="#">OR</a></li>
-													<li><a href="#">PA</a></li>
-													<li><a href="#">RI</a></li>
-													<li><a href="#">SC</a></li>
-													<li><a href="#">SD</a></li>
-													<li><a href="#">TN</a></li>
-													<li><a href="#">TX</a></li>
-													<li><a href="#">UT</a></li>
-													<li><a href="#">VT</a></li>
-													<li><a href="#">VA</a></li>
-													<li><a href="#">WA</a></li>
-													<li><a href="#">WV</a></li>
-													<li><a href="#">WI</a></li>
-													<li><a href="#">WY</a></li>
-												</ul>
+											<div class="input-group-prepend col-sm-12">
+												<button type="button" class="btn btn-info">Search <span class="caret fa fa-search"></span></button>
+												
 
-											</div>
+											
 
-													<asp:Textbox runat="server" class="form-control" type="text" name="placeholder" id="searchbox"></asp:Textbox>
+													<asp:Textbox runat="server" class="form-control" type="text" name="placeholder" id="searchbox" placeholder="filter data by School Name or Location"></asp:Textbox>
 												</div>
+                                            </div>
 
 										</div>
 										</div>

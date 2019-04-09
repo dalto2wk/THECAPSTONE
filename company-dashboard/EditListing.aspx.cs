@@ -31,7 +31,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             loggedInUser.Text = Session["username"].ToString();
         }
         listingToEdit.Text = Session["postingTitleToEdit"].ToString();
-
+        
         if (!IsPostBack)
         {
             txtJobTitle.Value = Session["title"].ToString();
