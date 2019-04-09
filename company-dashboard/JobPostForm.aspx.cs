@@ -85,10 +85,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
 
 
 
-        String count = "";
-        count = listBoxInterests.Items.Count.ToString();
-        int counter = Int32.Parse(count);
-        int currPostingID = getMaxPostingID();
+        
 
             if(fileUp.HasFile == true)
             {

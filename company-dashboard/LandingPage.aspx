@@ -173,10 +173,10 @@
                                             <%-- Should eventually connect to DB may neeed to add more runat="server" tags --%>
                                             <asp:GridView ID="recentApplicationsGV"  runat="server" AutoGenerateColumns="False" DataKeyNames="applicationID" CssClass="table table-striped" UseAccessibleHeader="true" DataSourceID="SqlDataSource1">
                                                 <Columns>
-                                                    <asp:BoundField DataField="applicationID" HeaderText="Application ID" InsertVisible="False" ReadOnly="True" SortExpression="applicationID" />
+                                                    <asp:BoundField DataField="applicationID" HeaderText="Application ID" Visible="false" ReadOnly="True" SortExpression="applicationID" />
                                                     <asp:BoundField DataField="jobTitle" HeaderText="Job Title" SortExpression="jobTitle" />
                                                     <asp:BoundField DataField="companyName" HeaderText="Company Name" SortExpression="companyName" />
-                                                    <asp:BoundField DataField="postingID" HeaderText="Posting ID" SortExpression="postingID" />
+                                                    <asp:BoundField DataField="postingID" HeaderText="Posting ID" Visible="false" SortExpression="postingID" />
                                                 </Columns>
 
 

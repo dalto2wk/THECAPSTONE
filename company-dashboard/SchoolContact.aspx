@@ -133,7 +133,7 @@
 										<br>
                                         <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource1" OnRowCommand="viewInfo">
                                             <Columns>
-                                                <asp:BoundField DataField="SchoolID"  HeaderText="School ID" SortExpression="School"></asp:BoundField>
+                                                <asp:BoundField DataField="SchoolID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" HeaderText="School ID" SortExpression="School"></asp:BoundField>
                                                 <asp:BoundField DataField="SchoolName"  HeaderText="School" SortExpression="School"></asp:BoundField>
                                                 <asp:BoundField DataField="CityCounty" HeaderText="City" SortExpression="City"></asp:BoundField>
                                                 <asp:BoundField DataField="state" HeaderText="State" ReadOnly="True" SortExpression="State"></asp:BoundField>
