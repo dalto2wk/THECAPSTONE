@@ -531,6 +531,7 @@ code {
   border-bottom: 1px solid #dfdfdf;
   height: auto;
 }
+
 .page-header h1 {
   display: inline;
   border: none;
@@ -947,6 +948,10 @@ table, td, tr, th, thead {
 }
 .error-page h1 {
   font-size: 4rem;
+}
+
+.hiddencol {
+    display: none;
 }
 
 /*# sourceMappingURL=style.css.map */

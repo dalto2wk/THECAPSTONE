@@ -32,11 +32,11 @@
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
                     <ul class="nav nav-pills flex-column sidebar-nav">
 
-                        <li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em>Dashboard </a></li>
-                        <li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em>Student Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em>School Contact</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="Listing.aspx"><em class="fas fa-clipboard-list"></em>View Listings <span class="sr-only">(current)</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em>Edit Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard </a></li>
+                        <li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> Job Listings <span class="sr-only">(current)</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
                     </ul>
                     <a  runat="server" class="logout-button" onServerClick="logoutClick"><em class="fa fa-power-off"></em> Signout</a>
                 </nav>
@@ -81,16 +81,16 @@
                                             <div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">State</label>
 												<div runat="server" class="col-md-9">
-                                                    <asp:DropDownList ID="DropDownList_State" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceState" DataTextField="State" DataValueField="State" SelectionMode="Single" OnSelectedIndexChanged="StateSelection_Change" AutoPostBack="true"></asp:DropDownList>
-                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceState" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT DISTINCT [State] FROM [cities] ORDER BY [State]"></asp:SqlDataSource>
+                                                    <asp:DropDownList ID="DropDownList_State" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceState" DataTextField="State" DataValueField="LocationID" SelectionMode="Single" OnSelectedIndexChanged="StateSelection_Change" AutoPostBack="true"></asp:DropDownList>
+                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceState" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT [LocationID], [State] FROM (SELECT State, MIN(LocationID) LocationID FROM cities GROUP BY State) A ORDER BY State"></asp:SqlDataSource>
                                      
 												</div>
 											</div>
                                              <div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">City</label>
 												<div runat="server" class="col-md-9">
-                                                    <asp:DropDownList ID="DropDownList_City" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceCity" DataTextField="CityCounty" DataValueField="CityCounty" SelectionMode="Single" OnSelectedIndexChanged="CitySelection_Change" AutoPostBack="true"></asp:DropDownList>
-                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceCity" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT DISTINCT [CityCounty] FROM [cities] ORDER BY [CityCounty]"></asp:SqlDataSource>
+                                                    <asp:DropDownList ID="DropDownList_City" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceCity" DataTextField="CityCounty" DataValueField="LocationID" SelectionMode="Single" OnSelectedIndexChanged="CitySelection_Change" AutoPostBack="true"></asp:DropDownList>
+                                                    <asp:SqlDataSource runat="server" ID="SqlDataSourceCity" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT [LocationID], [CityCounty] FROM (SELECT CityCounty, MIN(LocationID) LocationID FROM cities GROUP BY CityCounty) A ORDER BY LocationID"></asp:SqlDataSource>
                                                     
 												</div>
 											</div>
@@ -203,11 +203,28 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <script type="text/javascript">
+function window.onunload()
+{
+
+
+  alert('closed');
+
+
+}
+</script>
                                             <br>
                                             <div runat="server" class="row">
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 
-                                                    <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Confirm Changes" runat="server" OnClick="updateBtnClick"></asp:Button>
+                                                    <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Confirm Changes" runat="server" OnClick="updateBtnClick"></asp:Button>                     
+                                                    <div>
+                                                        <br /><asp:Button ID="btnDeletePosting" class="btn btn-danger text-center" type="button" Text="Delete Listing" runat="server" OnClick="messageVisible"></asp:Button>
+                                                        <br /><br /><asp:label id="lblConfirmationDelete" Text="Are you sure that you would like to delete this posting?" runat="server" Visible="False"></asp:label>
+                                                        &nbsp;<asp:Button ID="btnYes" class="btn btn-danger text-center" type="button" Text="YES" runat="server" OnClick="deleteBtnClick" Visible="False"></asp:Button>
+                                                        &nbsp;<asp:Button ID="btnNo" class="btn btn-danger text-center" type="button" Text="NO" runat="server" OnClick="messageHide" Visible="False"></asp:Button>
+
+                                                    </div>
                                                 </div>
                                             </div>
 

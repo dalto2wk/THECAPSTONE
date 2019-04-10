@@ -929,4 +929,8 @@ table, td, tr, th, thead {
   font-size: 4rem;
 }
 
+.hiddencol {
+    display: none;
+}
+
 /*# sourceMappingURL=style.css.map */
