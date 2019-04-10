@@ -173,10 +173,10 @@
                                             <%-- Should eventually connect to DB may neeed to add more runat="server" tags --%>
                                             <asp:GridView ID="recentApplicationsGV"  runat="server" AutoGenerateColumns="False" DataKeyNames="applicationID" CssClass="table table-striped" UseAccessibleHeader="true" DataSourceID="SqlDataSource1">
                                                 <Columns>
-                                                    <asp:BoundField DataField="applicationID" HeaderText="Application ID" InsertVisible="False" ReadOnly="True" SortExpression="applicationID" />
+                                                    <asp:BoundField DataField="applicationID" HeaderText="Application ID" Visible="false" ReadOnly="True" SortExpression="applicationID" />
                                                     <asp:BoundField DataField="jobTitle" HeaderText="Job Title" SortExpression="jobTitle" />
                                                     <asp:BoundField DataField="companyName" HeaderText="Company Name" SortExpression="companyName" />
-                                                    <asp:BoundField DataField="postingID" HeaderText="Posting ID" SortExpression="postingID" />
+                                                    <asp:BoundField DataField="postingID" HeaderText="Posting ID" Visible="false" SortExpression="postingID" />
                                                 </Columns>
 
 
@@ -261,7 +261,7 @@
 												<div class="checkbox mt-1 mb-2">
 													<div class="custom-control custom-checkbox">
 														<input type="checkbox" runat="server" class="custom-control-input" id="customCheck1">
-														<label class="custom-control-label custom-control-description" runat="server" for="customCheck1">call with conselor</label>
+														<label class="custom-control-label custom-control-description" runat="server" for="customCheck1">call with counselor</label>
 													<div class="float-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
 												    </div>
                                                 </div>

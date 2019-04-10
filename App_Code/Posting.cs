@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -19,7 +20,7 @@ public class Posting {
     private string postStart;
     private string postEnd;
     private string opportunityStartDate;
-
+    private Stream file; 
 
 
     public Posting(String postingTitle, String description, String jobRequirements,
@@ -37,9 +38,19 @@ public class Posting {
         setPostStart(postStart);
         setPostEnd(postEnd);
         setOppStart(opportunityStartDate);
-        
+        this.file = null;
     }
 
+
+    public void setfile(Stream file)
+    {
+        this.file = file;
+    }
+
+    public Stream getFile()
+    {
+        return this.file;
+    }
   /*  public void setSchoolName(School schoolName)
     {
         this.schoolName = schoolName;
