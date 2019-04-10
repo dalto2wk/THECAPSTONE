@@ -32,11 +32,11 @@
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
                     <ul class="nav nav-pills flex-column sidebar-nav">
 
-                        <li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em>Dashboard </a></li>
-                        <li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em>Student Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em>School Contact</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="Listing.aspx"><em class="fas fa-clipboard-list"></em>View Listings <span class="sr-only">(current)</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em>Edit Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="LandingPage.aspx"><em class="fas fa-tachometer-alt"></em> Dashboard </a></li>
+                        <li class="nav-item"><a class="nav-link" href="StudentContact.aspx"><em class="fas fa-user-graduate"></em> Student Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="SchoolContact.aspx"><em class="fas fa-school"></em> School Contact</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="Listing.aspx"><em class="fas fa-clipboard-list"></em> Job Listings <span class="sr-only">(current)</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="EditProfile.aspx"><em class="fas fa-user-edit"></em> Edit Profile</a></li>
                     </ul>
                     <a  runat="server" class="logout-button" onServerClick="logoutClick"><em class="fa fa-power-off"></em> Signout</a>
                 </nav>
@@ -217,7 +217,14 @@ function window.onunload()
                                             <div runat="server" class="row">
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 
-                                                    <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Confirm Changes" runat="server" OnClick="updateBtnClick"></asp:Button>
+                                                    <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Confirm Changes" runat="server" OnClick="updateBtnClick"></asp:Button>                     
+                                                    <div>
+                                                        <br /><asp:Button ID="btnDeletePosting" class="btn btn-danger text-center" type="button" Text="Delete Listing" runat="server" OnClick="messageVisible"></asp:Button>
+                                                        <br /><br /><asp:label id="lblConfirmationDelete" Text="Are you sure that you would like to delete this posting?" runat="server" Visible="False"></asp:label>
+                                                        &nbsp;<asp:Button ID="btnYes" class="btn btn-danger text-center" type="button" Text="YES" runat="server" OnClick="deleteBtnClick" Visible="False"></asp:Button>
+                                                        &nbsp;<asp:Button ID="btnNo" class="btn btn-danger text-center" type="button" Text="NO" runat="server" OnClick="messageHide" Visible="False"></asp:Button>
+
+                                                    </div>
                                                 </div>
                                             </div>
 
