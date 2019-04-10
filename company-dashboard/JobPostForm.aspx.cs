@@ -87,11 +87,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
 
         
 
-            if(fileUp.HasFile == true)
-            {
-                //set file to null in constructor and then other wise use set file and call the method 
-                //post.setfile();
-            }
+            
 
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ProjectConnectionString"].ConnectionString);
@@ -101,7 +97,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand posting = new System.Data.SqlClient.SqlCommand
             {
                 Connection = sc,
-                CommandText = "Insert into Posting values (@postingTitle, @description, @jobRequirements, @cpName, @employerID, @LastUpdatedBy, @LastUpdated ,@cpEmail,@cpPhone,@postStart,@postEnd,@opportunityStartDate)"
+                CommandText = "Insert into Posting values (@postingTitle, @description, @jobRequirements, @cpName, @employerID, @LastUpdatedBy, @LastUpdated ,@cpEmail,@cpPhone,@postStart,@postEnd,@opportunityStartDate,@postFile)"
             };
             //change employer id to match that of the logged in user
 
@@ -117,7 +113,22 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
             posting.Parameters.AddWithValue("@postStart", post.getStartDate());
             posting.Parameters.AddWithValue("@postEnd", post.getPostEndDate());
             posting.Parameters.AddWithValue("@opportunityStartDate", post.getOpportunityStartDate());
+            if (fileUp.HasFile == true)
+            {
+                //set file to null in constructor and then other wise use set file and call the method 
+                //post.setfile();
+                post.setfile(fileUp.FileContent);
+                Stream fStream = post.getFile();
+                byte[] contents = new byte[fStream.Length];
+                fStream.Read(contents, 0, (int)fStream.Length);
+                fStream.Close();
 
+                posting.Parameters.AddWithValue("@postFile", contents);
+            }
+            else
+            {
+                posting.Parameters.AddWithValue("@postFile", DBNull.Value);
+            }
 
             posting.ExecuteNonQuery();
 
