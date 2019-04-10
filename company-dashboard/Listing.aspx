@@ -94,7 +94,7 @@ FROM            Posting INNER JOIN
 
                                         <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView" OnRowCommand="EditBtn">
                                             <Columns>
-                                                <asp:BoundField DataField="Posting ID"  HeaderText="Posting ID" SortExpression="Posting ID"></asp:BoundField>
+                                                <asp:BoundField DataField="Posting ID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"  HeaderText="Posting ID" SortExpression="Posting ID"></asp:BoundField>
                                                 <asp:BoundField DataField="Job Listing Title" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
                                                 <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
                                                 <asp:ButtonField ButtonType="Button"  ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Edit Listing" />
