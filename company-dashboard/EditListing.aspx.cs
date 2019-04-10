@@ -379,7 +379,56 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State + "' and CityCounty = '" + City + "'";
         PostingSchool.DataBind();
     }
+
+    protected void messageVisible(object sender, EventArgs e)
+    {
+        lblConfirmationDelete.Visible = true;
+        btnYes.Visible = true;
+        btnNo.Visible = true;
+    }
+
+    protected void messageHide(object sender, EventArgs e)
+    {
+        lblConfirmationDelete.Visible = false;
+        btnYes.Visible = false;
+        btnNo.Visible = false;
+    }
+    protected void deleteBtnClick(object sender, EventArgs e)
+    {
+        try
+        {
+
+            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+            sc.Open();
+
+            System.Data.SqlClient.SqlCommand delete = new System.Data.SqlClient.SqlCommand
+            {
+                Connection = sc,
+
+                CommandText = "delete from Posting_School where PostingID = @postingID " +
+                              "delete from Posting_Interest where postingID = @postingID " +
+                              "delete from Posting where postingID = @postingID"
+
+            };
+
+            delete.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+            delete.ExecuteNonQuery();
+
+
+            sc.Close();
+
+            Response.Redirect("Listing.aspx");
+
+
+        }
+        catch
+        {
+
+        }
+    }
+
+
 }
 
-    
-   
+
+
