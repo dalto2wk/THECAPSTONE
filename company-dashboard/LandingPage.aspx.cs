@@ -76,7 +76,7 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
         ///////////////////////////////////Top Candidate Code////////////////////////////////////////////
         ///Declare and Initialize lists
         List<TopCandidate> topCandidate = new List<TopCandidate>();
-        ArrayList postingInterest = new ArrayList();
+        List<int> postingInterest = new List<int>();
 
 
         ///Connect to database
@@ -102,12 +102,19 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
             {
                 postingInterest.Add(reader2.GetInt32(1));
             }
+
+            if (reader2.Read() == false)
+            {
+                postingInterest.Add(0);
+            }
             sc.Close();
         }
         catch
         {
             postingInterest.Add(0);
         }
+
+        
 
         sc.Open();
         System.Data.SqlClient.SqlCommand getTopCandidate = new System.Data.SqlClient.SqlCommand
@@ -177,6 +184,11 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
                         {
                             ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i-1]).getFinalValue() + .3);                          
                         }                   
+                    }
+
+                    if ((topCandidate[i]).getStudentInterestID() != postingInterest[0])
+                    {
+                        ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i]).getGPA());
                     }
 
                     topCandidate.RemoveAt(i - 1);

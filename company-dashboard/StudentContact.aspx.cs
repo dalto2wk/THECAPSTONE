@@ -137,7 +137,7 @@ public partial class company_dashboard_StudentContact : System.Web.UI.Page
         ///////////////////////////////////Top Candidate Code////////////////////////////////////////////
         ///Declare and Initialize lists
         List<TopCandidate> topCandidate = new List<TopCandidate>();
-        ArrayList postingInterest = new ArrayList();
+        List<int> postingInterest = new List<int>();
 
 
         ///Connect to database
@@ -163,12 +163,19 @@ public partial class company_dashboard_StudentContact : System.Web.UI.Page
             {
                 postingInterest.Add(reader2.GetInt32(1));
             }
+
+            if (reader2.Read() == false)
+            {
+                postingInterest.Add(0);
+            }
             sc.Close();
         }
         catch
         {
             postingInterest.Add(0);
         }
+
+
 
         sc.Open();
         System.Data.SqlClient.SqlCommand getTopCandidate = new System.Data.SqlClient.SqlCommand
@@ -210,19 +217,20 @@ public partial class company_dashboard_StudentContact : System.Web.UI.Page
         }
         sc.Close();
 
-        ///This was by far the most difficult part, here we are setting the final value equal to
-        ///the each student's GPA + .5 for each interest they have that matches the posting interest. 
+        ///here we are setting the final value equal to
+        ///each student's GPA + .3 for each interest they have that matches the interest of the job posting. 
         for (int i = 0; i < topCandidate.Count; i++)
         {
-            ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i]).getGPA());
 
             if (i == 0)
             {
+                ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i]).getGPA());
+
                 for (int j = 0; j < postingInterest.Count; j++)
                 {
                     if (((TopCandidate)topCandidate[i]).getStudentInterestID().Equals(postingInterest[j]))
                     {
-                        ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i]).getGPA() + .3);
+                        ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i]).getFinalValue() + .3);
                     }
                 }
             }
@@ -231,18 +239,33 @@ public partial class company_dashboard_StudentContact : System.Web.UI.Page
             {
                 if (((TopCandidate)topCandidate[i]).getFirstName() + ((TopCandidate)topCandidate[i]).getLastName() == ((TopCandidate)topCandidate[i - 1]).getFirstName() + ((TopCandidate)topCandidate[i - 1]).getLastName())
                 {
-                    ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i - 1]).getFinalValue() + .3);
-                    topCandidate.RemoveAt(i - 1);
-                    i--;
-                }
-
-                else
-                {
                     for (int j = 0; j < postingInterest.Count; j++)
                     {
                         if (((TopCandidate)topCandidate[i]).getStudentInterestID().Equals(postingInterest[j]))
                         {
-                            ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i]).getGPA() + .3);
+                            ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i - 1]).getFinalValue() + .3);
+                        }
+                    }
+
+                    if ((topCandidate[i]).getStudentInterestID() != postingInterest[0])
+                    {
+                        ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i]).getGPA());
+                    }
+
+                    topCandidate.RemoveAt(i - 1);
+                    i--;
+
+                }
+
+                else
+                {
+                    ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i]).getGPA());
+
+                    for (int j = 0; j < postingInterest.Count; j++)
+                    {
+                        if (((TopCandidate)topCandidate[i]).getStudentInterestID().Equals(postingInterest[j]))
+                        {
+                            ((TopCandidate)topCandidate[i]).setFinalValue(((TopCandidate)topCandidate[i]).getFinalValue() + .3);
                         }
                     }
                 }
