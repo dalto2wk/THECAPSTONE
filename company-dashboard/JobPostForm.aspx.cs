@@ -127,7 +127,8 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
             }
             else
             {
-                posting.Parameters.AddWithValue("@postFile", DBNull.Value);
+                posting.Parameters.Add("@postFile", SqlDbType.VarBinary, -1);
+                posting.Parameters["@postFile"].Value = DBNull.Value;
             }
 
             posting.ExecuteNonQuery();
@@ -237,7 +238,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         sc.Close();
 
             sc.Close();
-        }
+    }
         catch
         {
 
