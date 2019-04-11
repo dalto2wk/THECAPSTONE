@@ -14,6 +14,11 @@ using System.Diagnostics;
 
 public partial class company_dashboard_JobPostForm : System.Web.UI.Page
 {
+    /// <summary>
+    /// Sets up page session variables and ensures a user is logged in 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["username"] == null)
@@ -43,12 +48,22 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
        
 
     }
+/// <summary>
+/// Method that logs out the user and clears all session variables
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="e"></param>
     public void logoutClick(object sender, EventArgs e)
     {
         Session.Abandon();
         Response.Redirect("/Login.aspx");
     }
 
+    /// <summary>
+    /// Calls a method that inserts data into the database when the submit button is clicked 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void submitPostingBtnClick(object sender, EventArgs e)
     {
         
@@ -58,6 +73,9 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
 
     }
 
+    /// <summary>
+    /// Method that inserts data for the posting into the database
+    /// </summary>
     protected void dbInsert()
     {
         try
@@ -246,7 +264,10 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
 
     }
 
-
+    /// <summary>
+    /// Method that gets the highest posting ID from the database
+    /// </summary>
+    /// <returns></returns>
     private int getMaxPostingID()
     {
         int result = 0;
@@ -334,22 +355,5 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         PostingSchool.DataBind();
     }
 
-    protected void uploadBtnClick(object sender, EventArgs e)
-    {
-        //System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-        //cn.Open();
-        //file path 
-        //file:///C:/Users/WK/Downloads/William%20Dalton%20Resume%202018.pdf
-
-        Stream fStream = fileUp.FileContent;
-        byte[] contents = new byte[fStream.Length];
-        fStream.Read(contents, 0, (int)fStream.Length);
-        fStream.Close();
-
-        //System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("insert into savePDF values (@data)", cn);
-        //cmd.Parameters.AddWithValue("@Data", contents);
-        //cmd.ExecuteNonQuery();
-        //cn.Close();
-    }
 
 }

@@ -13,11 +13,15 @@ public partial class Register : System.Web.UI.Page
     {
         
     }
-
+    /// <summary>
+    /// Method that handles the register button being clicked. Inserts user input into the database
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void RegisterBtnClick(object sender, EventArgs e)
     {
-        //try
-        //{
+        try
+        {
 
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
@@ -58,11 +62,11 @@ public partial class Register : System.Web.UI.Page
             //double check that this works and add some emp id is getting retrieved from db
             
 
-        //}
-        //catch(Exception ex)
-        //{
+        }
+        catch(Exception ex)
+        {
 
-        //}
+        }
     }
 }
 

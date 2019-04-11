@@ -13,7 +13,11 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
     public static int count1 = 0;
     public static int count2 = 0;
-
+/// <summary>
+/// Page load method that assigns session variables that are needed to populate the form with data
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -53,7 +57,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
 
 
-            //46 and 7028
+            
 
 
 
@@ -63,7 +67,11 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
     }
 
    
-
+/// <summary>
+/// Method that logs out the user and clears all session variables
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="e"></param>
     public void logoutClick(object sender, EventArgs e)
     {
         count1 = 0;
@@ -72,6 +80,10 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         Response.Redirect("/Login.aspx");
         
     }
+    /// <summary>
+    /// Gets all the interests related to a posting from the database
+    /// </summary>
+    /// <returns>A list of interests related to the current page posting</returns>
     protected List<Interests> getPostingInterests()
     {
         List<Interests> result = new List<Interests>();
@@ -115,7 +127,10 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         }
         return result;
     }
-
+    /// <summary>
+    /// Gets the state for a posting
+    /// </summary>
+    /// <returns>Returns the location state of a posting</returns>
     protected Location getPostingState()
     {
         Location result = null;
@@ -154,7 +169,10 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         }
         return result;
     }
-
+/// <summary>
+/// Gets the schools that the current posting has been posted too
+/// </summary>
+/// <returns>A list of schools </returns>
     protected List<School> getPostingSchools()
     {
         List<School> result = new List<School>();
@@ -187,7 +205,10 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         }
         return result;        
     }
-
+/// <summary>
+/// Gets the city that a posting has been posted into 
+/// </summary>
+/// <returns>The current posting's city</returns>
     protected Location getPostingCity()
     {
         Location result = null;
@@ -223,7 +244,11 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
     }
 
 
-
+/// <summary>
+/// Handles the update button being clicked. Updates the current posting with inputted data
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="e"></param>
     protected void updateBtnClick(object sender, EventArgs e)
     {
         try
@@ -445,7 +470,11 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
         }
     }
-
+    /// <summary>
+    /// populates the page with the data from the database
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_PreRender(object sender, EventArgs e)
     {
 

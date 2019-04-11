@@ -11,7 +11,11 @@ using System.Web.UI.WebControls;
 
 public partial class company_dashboard_LandingPage : System.Web.UI.Page
 {
-    
+    /// <summary>
+    /// Sets up session variables and calls the notifications method to populate the notifications page
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
         if(Session["username"] == null)
@@ -64,7 +68,11 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
         notificationTitle3.Text = notifications[8] + " " + notifications[7] + " just applied for the " + notifications[6] + " position!";
 
     }
-
+    /// <summary>
+    /// Method that logs out the user and clears all session variables
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public void logoutClick(object sender, EventArgs e)
     {
         Session.Abandon();
