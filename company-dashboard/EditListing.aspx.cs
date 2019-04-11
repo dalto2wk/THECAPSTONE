@@ -48,7 +48,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
 
 
-
+            
 
 
 
@@ -58,12 +58,8 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
 
         }
+
         
-
-
-
-
-
     }
 
    
@@ -547,6 +543,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                     }
                 }
             }
+            
         }
         catch
         {
