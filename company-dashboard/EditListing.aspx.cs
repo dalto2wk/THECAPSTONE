@@ -479,8 +479,8 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
     {
 
 
-        try
-        {
+        //try
+        //{
             List<Interests> interests = getPostingInterests();
             List<School> school = getPostingSchools();
             Location State = getPostingState();
@@ -549,6 +549,9 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
             }
 
+            writeImage();
+            uploadedImage.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg";
+
             for (int i = 0; i < interests.Count; i++)
             {
                 foreach (ListItem item in listBoxInterests.Items)
@@ -573,11 +576,40 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                 }
             }
             
-        }
-        catch
-        {
+        //}
+        //catch
+        //{
 
+        //}
+    }
+
+    protected void writeImage()
+    {
+        string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg");
+        System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        cn.Open();
+
+        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select postFile from Posting where postingID= @postingID", cn);
+        cmd.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+
+        System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
+
+        if (dr.Read())
+        {
+            byte[] fileData = (byte[])dr.GetValue(0);
+            System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
+
+            System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
+            //Response.ContentType = "images/jpeg";
+            //Response.BinaryWrite(fileData);
+            bw.Write(fileData);
+            bw.Close();
         }
+
+        dr.Close();
+        //the below way stores to solution using response.binarywrite is better
+        //Response.Redirect("~\\Files\\Report.pdf");
+
     }
 
     //protected override void OnPreRender(EventArgs e)

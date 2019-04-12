@@ -190,8 +190,6 @@
                                             <br>
                                             <div class="row">
                                                 <asp:Image ID="uploadedImage" runat="server" />
-
-
                                             </div>
                                             <div runat="server" class="row">
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
