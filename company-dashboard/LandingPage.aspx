@@ -94,8 +94,8 @@
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">1</div>
-															<div class="text-muted">Apr</div>
+															<div class="large" ><asp:Literal ID="day1" runat="server"></asp:Literal></div>
+                                                            <div class="text-muted" ><asp:Literal ID="month1" runat="server"></asp:Literal></div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle1" runat="server"/></h4>
