@@ -77,6 +77,10 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
         notificationTitle1.Text = notifications[2] + " " + notifications[1] + " just applied for the " + notifications[0] + " position!";
         day1.Text = dy0;
         month1.Text = mn0;
+        day2.Text = dy1;
+        month2.Text = mn1;
+        day3.Text = dy2;
+        month3.Text = mn2;
         notificationTitle2.Text = notifications[5] + " " + notifications[4] + " just applied for the " + notifications[3] + " position!";
         notificationTitle3.Text = notifications[8] + " " + notifications[7] + " just applied for the " + notifications[6] + " position!";
 
@@ -352,5 +356,38 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
     protected void topCandidate(object sender, EventArgs e)
     {
         TopCandidate();
+    }
+
+    protected void btnTodoAdd_Click(object sender, EventArgs e)
+    {
+        CheckBoxListTodo.Items.Add(txtInput.Text);
+        txtInput.Text = "";
+        lblMessage.Text = "";
+
+    }
+
+    protected void btnTodoDelete_Click(object sender, EventArgs e)
+    {
+        txtInput.Text = "";
+        lblMessage.Text = "Items removed:";
+        List<String> ListItems = new List<String>();
+        foreach (ListItem li in CheckBoxListTodo.Items)
+        {
+            if (li.Selected == true)
+            {
+                ListItems.Add(li.Text.ToString());
+            }
+        }
+
+        for (int i = 0; i < ListItems.Count; i++)
+        {
+            string currentItem = (string)ListItems[i];
+            ListItem li = new ListItem();
+            li.Text = currentItem;
+            CheckBoxListTodo.Items.Remove(li);
+            lblMessage.Text += " " + currentItem;
+        }
+   
+
     }
 }
