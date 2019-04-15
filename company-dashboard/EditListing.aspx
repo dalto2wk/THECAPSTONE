@@ -188,7 +188,8 @@
                                                 </div>
                                             </div>
                                             <br>
-                                            <div class="row">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-form-label" runat="server">Pictures related to posting</label>
                                                 <asp:Image ID="uploadedImage" runat="server" />
                                             </div>
                                             <div runat="server" class="row">

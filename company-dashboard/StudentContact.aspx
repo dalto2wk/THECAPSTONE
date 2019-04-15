@@ -89,7 +89,7 @@
                                                 <asp:BoundField DataField="School Name" HeaderText="School Name" SortExpression="School Name"></asp:BoundField>
                                                 <asp:BoundField DataField="Applied to" HeaderText="Applied to" SortExpression="Applied to"></asp:BoundField>
                                              
-                                                <asp:ButtonField CommandName="viewResume" ControlStyle-CssClass="btn btn-primary" Text="View Resume" ButtonType="Button" ShowHeader="True" HeaderText="view Resume"></asp:ButtonField>                                              
+                                                <asp:ButtonField CommandName="viewResume" ControlStyle-CssClass="btn btn-primary" Text="View Resume" ButtonType="Button" ShowHeader="True" HeaderText="View Resume"></asp:ButtonField>                                              
                                                 <asp:ButtonField CommandName="viewStudentInformation" ControlStyle-CssClass="btn btn-primary" Text="View Student" ButtonType="Button" ShowHeader="True" HeaderText="Student Information"></asp:ButtonField>
                                                                                    
                                                    </Columns>
