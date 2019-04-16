@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class company_dashboard_SchoolContact : System.Web.UI.Page
 {
@@ -40,6 +42,6 @@ public partial class company_dashboard_SchoolContact : System.Web.UI.Page
 
     protected void Unnamed_Click(object sender, EventArgs e)
     {
-
+       
     }
 }
