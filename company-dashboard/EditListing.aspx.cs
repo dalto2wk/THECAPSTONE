@@ -13,7 +13,11 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
     public static int count1 = 0;
     public static int count2 = 0;
-
+/// <summary>
+/// Page load method that assigns session variables that are needed to populate the form with data
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -48,26 +52,26 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
 
 
+            
 
 
 
 
-
-            //46 and 7028
+            
 
 
 
         }
+
         
-
-
-
-
-
     }
 
    
-
+/// <summary>
+/// Method that logs out the user and clears all session variables
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="e"></param>
     public void logoutClick(object sender, EventArgs e)
     {
         count1 = 0;
@@ -76,6 +80,10 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         Response.Redirect("/Login.aspx");
         
     }
+    /// <summary>
+    /// Gets all the interests related to a posting from the database
+    /// </summary>
+    /// <returns>A list of interests related to the current page posting</returns>
     protected List<Interests> getPostingInterests()
     {
         List<Interests> result = new List<Interests>();
@@ -119,7 +127,10 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         }
         return result;
     }
-
+    /// <summary>
+    /// Gets the state for a posting
+    /// </summary>
+    /// <returns>Returns the location state of a posting</returns>
     protected Location getPostingState()
     {
         Location result = null;
@@ -158,7 +169,10 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         }
         return result;
     }
-
+/// <summary>
+/// Gets the schools that the current posting has been posted too
+/// </summary>
+/// <returns>A list of schools </returns>
     protected List<School> getPostingSchools()
     {
         List<School> result = new List<School>();
@@ -191,7 +205,10 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         }
         return result;        
     }
-
+/// <summary>
+/// Gets the city that a posting has been posted into 
+/// </summary>
+/// <returns>The current posting's city</returns>
     protected Location getPostingCity()
     {
         Location result = null;
@@ -227,7 +244,11 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
     }
 
 
-
+/// <summary>
+/// Handles the update button being clicked. Updates the current posting with inputted data
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="e"></param>
     protected void updateBtnClick(object sender, EventArgs e)
     {
         try
@@ -449,13 +470,17 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
         }
     }
-
+    /// <summary>
+    /// populates the page with the data from the database
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Page_PreRender(object sender, EventArgs e)
     {
 
 
-        try
-        {
+        //try
+        //{
             List<Interests> interests = getPostingInterests();
             List<School> school = getPostingSchools();
             Location State = getPostingState();
@@ -524,6 +549,9 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
             }
 
+            writeImage();
+            uploadedImage.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg";
+
             for (int i = 0; i < interests.Count; i++)
             {
                 foreach (ListItem item in listBoxInterests.Items)
@@ -547,11 +575,41 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                     }
                 }
             }
-        }
-        catch
-        {
+            
+        //}
+        //catch
+        //{
 
+        //}
+    }
+
+    protected void writeImage()
+    {
+        string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg");
+        System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        cn.Open();
+
+        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select postFile from Posting where postingID= @postingID", cn);
+        cmd.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+
+        System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
+
+        if (dr.Read())
+        {
+            byte[] fileData = (byte[])dr.GetValue(0);
+            System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
+
+            System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
+            //Response.ContentType = "images/jpeg";
+            //Response.BinaryWrite(fileData);
+            bw.Write(fileData);
+            bw.Close();
         }
+
+        dr.Close();
+        //the below way stores to solution using response.binarywrite is better
+        //Response.Redirect("~\\Files\\Report.pdf");
+
     }
 
     //protected override void OnPreRender(EventArgs e)
