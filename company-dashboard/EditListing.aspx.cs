@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -251,8 +253,8 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 /// <param name="e"></param>
     protected void updateBtnClick(object sender, EventArgs e)
     {
-        try
-        {
+        //try
+        //{
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
             sc.Open();
 
@@ -327,7 +329,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
             foreach (ListItem item in DropDownList_City.Items)
             {
-                if (item.Selected == true)
+                if (item.Selected == true && cityAlreadyPostedTo() == false)
                 {
                     PostingLocation pl = new PostingLocation(Convert.ToInt32(Session["postID"].ToString()), Convert.ToInt32(item.Value));
                     Debug.WriteLine(item.Value);
@@ -462,14 +464,53 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                 }
 
             }
+            if (fileUp.HasFile == true)
+            {
+                //set file to null in constructor and then other wise use set file and call the method 
+                //post.setfile();
+                //post.setfile(fileUp.FileContent);
+                System.Data.SqlClient.SqlCommand images = new System.Data.SqlClient.SqlCommand
+                {
+                    Connection = sc,
+                    CommandText = "Insert into Posting_Images values (@postingID, @imageFile)"
+                };
+                images.Parameters.AddWithValue("@postingID", getMaxPostingID());
+                images.Parameters.Add("@imageFile", SqlDbType.VarBinary);
+                HttpFileCollection fileCollection = Request.Files;
+                for (int i = 0; i < fileCollection.Count; i++)
+                {
+                    HttpPostedFile postedFile = fileCollection[i];
+                    if (postedFile.ContentLength > 0)
+                    {
+                        Stream fStream = postedFile.InputStream;
+                        byte[] contents = new byte[fStream.Length];
+                        fStream.Read(contents, 0, (int)fStream.Length);
+                        fStream.Close();
+                        images.Parameters["@imageFile"].Value = contents;
 
-            sc.Close();
-        }
-        catch
-        {
 
-        }
+                    }
+
+                    images.ExecuteNonQuery();
+                }
+
+                sc.Close();
+            }
+        //}
+        //catch
+        //{
+
+        //}
     }
+
+    private bool cityAlreadyPostedTo()
+    {
+        bool result = true;
+
+
+        return result; 
+    }
+
     /// <summary>
     /// populates the page with the data from the database
     /// </summary>
@@ -616,12 +657,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         return "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg";
     }
 
-    //protected override void OnPreRender(EventArgs e)
-    //{
-    //    listBoxSchool.SelectedIndexChanged;
-
-    //    base.OnPreRender(e);
-    //}
+  
     protected void StateSelection_Change(object sender, EventArgs e)
     {
         count1 = 1;
@@ -752,7 +788,28 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         txtRequirements.Value = "Must be interested in technology and have some basic computer skills";
     }
 
+    /// <summary>
+    /// Method that gets the highest posting ID from the database
+    /// </summary>
+    /// <returns></returns>
+    private int getMaxPostingID()
+    {
+        int result = 0;
 
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand maxID = new System.Data.SqlClient.SqlCommand();
+        maxID.Connection = sc;
+        maxID.CommandText = "select max(PostingID) from Posting";
+
+        result = Convert.ToInt32(maxID.ExecuteScalar());
+        maxID.ExecuteNonQuery();
+
+        sc.Close();
+
+        return result;
+    }
 }
 
 

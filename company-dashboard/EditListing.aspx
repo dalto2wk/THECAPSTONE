@@ -205,7 +205,30 @@
                                                     </SelectParameters>
                                                 </asp:SqlDataSource>
                                             </div>
-                                            <div runat="server" class="row">
+                                            <div class="container">
+
+                                                <fieldset>
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Media Upload</label>
+
+
+                                                            <div class="col-md-10">
+                                                                <div class="input-group">
+                                                                    <input runat="server" type="hidden" id="filename" name="filename" value="">
+
+                                                                    <asp:FileUpload ID="fileUp" CssClass="form-control form-control-sm" accept="image/bmp,image/gif,image/jpeg,image/png" AllowMultiple="true" runat="server"></asp:FileUpload>
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+
+                                            </div>
+
+                                            <%--<div runat="server" class="row">
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
                                                     <div runat="server" class="custom-control custom-radio">
                                                         <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" runat="server">
@@ -217,7 +240,7 @@
                                                         <label class="custom-control-label custom-control-description" for="customRadio2" runat="server">Save for Later</label>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>--%>
                                             <script type="text/javascript">
                                                 function window.onunload()
                                                 {
