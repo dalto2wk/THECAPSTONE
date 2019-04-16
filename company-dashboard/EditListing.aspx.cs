@@ -604,7 +604,8 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
             }
 
-        writeImage();
+        //i need to loop through the image datalist and find the element id of postImage and call writeImage or break up the write method to do an image at a time
+
         //uploadedImage.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg";
 
         for (int i = 0; i < interests.Count; i++)
@@ -642,18 +643,20 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
     {
         String result = "";
 
-        string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg");
+        
         System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         cn.Open();
 
-        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select imageFile from Posting_Images where postingID= @postingID", cn);
+        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select imageFile,postingImageID from Posting_Images where postingID= @postingID", cn);
         cmd.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
 
         System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
-
+        string postingImageID = "";
         if (dr.Read())
         {
             byte[] fileData = (byte[])dr.GetValue(0);
+            postingImageID = dr.GetInt32(1).ToString();
+            string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID+ ".jpg");
             System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
 
             System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
@@ -668,7 +671,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         //Response.Redirect("~\\Files\\Report.pdf");
 
 
-        return "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg";
+        return "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
     }
 
   

@@ -195,7 +195,8 @@
                                                     <ItemTemplate>
                                                         
                                                         <%--<asp:Label Text='<%# Eval("imageFile") %>' runat="server" ID="imageFileLabel" /><br />--%>
-                                                        <asp:Image ID="Image1" ImageUrl="<%# writeImage() %>" CssClass="imageList" runat="server" />
+                                                        <%--<asp:Image ID="Image1" ImageUrl="<%# writeImage() %>" CssClass="imageList" runat="server" />--%>
+                                                        <asp:Image ID="postImage"  CssClass="imageList" runat="server" />
                                                         <br />
                                                     </ItemTemplate>
                                                 </asp:DataList>
