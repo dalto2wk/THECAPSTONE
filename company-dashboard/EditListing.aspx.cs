@@ -735,6 +735,18 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
         }
     }
+    protected void populate_Click(object sender, EventArgs e)
+    {
+        txtJobTitle.Value = "Summer coding camp";
+        txtDescription.Value = "This is a shadowing and learning opportunity for a high school student to spend two weeks learning how to code";
+        txtpostStart.Value = "04/16/2019";
+        txtpostEnd.Value = "04/21/2019";
+        txtopportunityStartDate.Value = "04/28/2019";
+        txtCpName.Value = "John Madison";
+        txtCpEmail.Value = "jmad@gmail.com";
+        txtCpPhone.Value = "555/555-5555";
+        txtRequirements.Value = "Must be interested in technology and have some basic computer skills";
+    }
 
 
 }

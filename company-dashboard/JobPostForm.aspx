@@ -226,7 +226,8 @@
 										<div runat="server" class="row">
 											<div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 
-											<asp:Button id="btnSubmitPosting" class="btn btn-primary text-center" type="button" text="Submit" OnClick="submitPostingBtnClick" runat="server"></asp:Button>    
+											<asp:Button id="btnSubmitPosting" CssClass="btn btn-primary text-center" type="button" text="Submit" OnClick="submitPostingBtnClick" runat="server"></asp:Button>   
+                                            <asp:Button ID="populate" CssClass="btn btn-primary text-center" Text="Populate Fields" runat="server" OnClick="populate_Click" />
 											</div>
 										</div>
 									</form>		

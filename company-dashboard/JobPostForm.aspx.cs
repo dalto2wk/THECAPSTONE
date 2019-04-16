@@ -134,9 +134,10 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
                 System.Data.SqlClient.SqlCommand images = new System.Data.SqlClient.SqlCommand
                 {
                     Connection = sc,
-                    CommandText = "Insert into Posting_Images values (@posting, @imageFile)"
+                    CommandText = "Insert into Posting_Images values (@postingID, @imageFile)"
                 };
-
+            images.Parameters.AddWithValue("@postingID", getMaxPostingID());
+            images.Parameters.Add("@imageFile",SqlDbType.VarBinary);
                 HttpFileCollection fileCollection = Request.Files;
                 for (int i = 0; i < fileCollection.Count; i++)
                 {
@@ -147,12 +148,13 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
                         byte[] contents = new byte[fStream.Length];
                         fStream.Read(contents, 0, (int)fStream.Length);
                         fStream.Close();
-                        images.Parameters.AddWithValue("@posting", getMaxPostingID());
-                        images.Parameters.AddWithValue("@imageFile", contents);
-                        images.ExecuteNonQuery();
+                    images.Parameters["@imageFile"].Value = contents;
+                        
+                        
                     }
-
-                }
+                
+                images.ExecuteNonQuery();
+            }
 
             }
             
@@ -364,4 +366,17 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
     }
 
 
+
+    protected void populate_Click(object sender, EventArgs e)
+    {
+        txtJobTitle.Value = "Summer coding camp";
+        txtDescription.Value = "This is a shadowing and learning opportunity for a high school student to spend two weeks learning how to code";
+        postStart.Value = "04/16/2019";
+        postEnd.Value = "04/21/2019";
+        opportunityStartDate.Value = "04/28/2019";
+        txtCpName.Value = "John Madison";
+        txtCpEmail.Value = "jmad@gmail.com";
+        txtCpPhone.Value = "555/555-5555";
+        txtRequirements.Value = "Must be interested in technology and have some basic computer skills";
+    }
 }
