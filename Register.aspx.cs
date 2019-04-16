@@ -13,7 +13,11 @@ public partial class Register : System.Web.UI.Page
     {
         
     }
-
+    /// <summary>
+    /// Method that handles the register button being clicked. Inserts user input into the database
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void RegisterBtnClick(object sender, EventArgs e)
     {
         //try
@@ -39,8 +43,8 @@ public partial class Register : System.Web.UI.Page
             String cpPassword = password.Value;
             String cpPhone = Phone.Value;
             String cpEmail = email.Value;
-
-        Employer emp = new Employer(businessName, Convert.ToInt32(businessSize), industryName, desc, cpName, cpUsername, cpPassword, cpEmail, cpPhone, 1);
+            
+        Employer emp = new Employer(businessName, Convert.ToInt32(businessSize), industryName, desc, cpName, cpUsername, cpPassword, cpEmail, cpPhone, getNextEmpID());
 
         insert.Parameters.AddWithValue("@businessName", businessName);
             insert.Parameters.AddWithValue("@size", businessSize);
@@ -63,6 +67,24 @@ public partial class Register : System.Web.UI.Page
         //{
 
         //}
+    }
+
+    protected int getNextEmpID()
+    {
+        int result = 0;
+        System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        cn.Open();
+
+        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select max(employerID) from Employer", cn);
+
+        System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
+
+        if (dr.Read())
+        {
+            result = dr.GetInt32(0);
+        }
+
+        return result;
     }
 }
 
