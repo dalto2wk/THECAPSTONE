@@ -17,7 +17,11 @@ public partial class Login : System.Web.UI.Page
     {
       
     }
-
+    /// <summary>
+    /// Handles the login button being clicked. Validates a username and password and then logs the user in
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Unnamed2_Click(object sender, EventArgs e)
     {
        
@@ -25,17 +29,19 @@ public partial class Login : System.Web.UI.Page
         String username = email.Text;
         String pwd = password.Text;
         
-        //String validUsername = getUserName();
+        
         getPassword(pwd, username);
         
         
     }
- protected String getUserName()
-    {
-        String result ="";       
-        return result;
-    }
 
+    /// <summary>
+    /// Searches the database for the salted and hashed version of the user's password and
+    /// validates that the inputted password matches what is in the database
+    /// After validating username and password, the user is then logged in.!-- 
+    /// </summary>
+    /// <param name="pass"></param>
+    /// <param name="username"></param>
     protected void getPassword(String pass, String username)
     {
 
@@ -78,11 +84,7 @@ public partial class Login : System.Web.UI.Page
                 }
 
                 String sqlResult = select.ExecuteScalar().ToString();
-            //Debug.WriteLine(sqlResult + " is the Result: result");
-
- 
-
-            //String sqlResult = select.ExecuteScalar().ToString();
+            
 
         }
     }
@@ -91,39 +93,5 @@ public partial class Login : System.Web.UI.Page
            
         }
 
-    }
-
-    protected String getName(String password, String username)
-    {
-        String result = "";
-        try
-        {
-
-
-
-
-            System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-            sc.Open();
-
-            System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
-            {
-                Connection = sc,
-                CommandText = "select cpName from Employer where cpPassword = '" + password + "' and cpUserName = '" + username + "'"
-            };
-      
-
-            String sqlResult = select.ExecuteScalar().ToString();           
-
-            //String sqlResult = select.ExecuteScalar().ToString();
-
-            result = sqlResult;
-
-
-            return result;
-        }
-        catch
-        {
-            return result;
-        }
     }
 }
