@@ -549,10 +549,10 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
             }
 
-            writeImage();
-            uploadedImage.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg";
+        writeImage();
+        uploadedImage.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg";
 
-            for (int i = 0; i < interests.Count; i++)
+        for (int i = 0; i < interests.Count; i++)
             {
                 foreach (ListItem item in listBoxInterests.Items)
                 {

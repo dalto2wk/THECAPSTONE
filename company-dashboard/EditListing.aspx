@@ -21,7 +21,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <form class="form" method="POST" action="#" runat="server">
+    <form id="form1" runat="server">
         <div class="container-fluid" id="wrapper">
             <div class="row">
                 <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
@@ -190,7 +190,15 @@
                                             <br>
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Pictures related to posting</label>
-                                                <asp:Image ID="uploadedImage" runat="server" />
+                                                <%--<asp:Image ID="uploadedImage" runat="server" />--%>
+                                                <asp:DataList ID="DataList1" runat="server" DataSourceID="images">
+                                                    <ItemTemplate>
+                                                        <asp:Image ID="uploadedImage" runat="server" />
+                                                        <br />
+                                                        <br />
+                                                    </ItemTemplate>
+                                                </asp:DataList>
+                                                <asp:SqlDataSource runat="server" ID="images" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [imageFile] FROM [Posting_Images]"></asp:SqlDataSource>
                                             </div>
                                             <div runat="server" class="row">
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
