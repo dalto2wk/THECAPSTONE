@@ -329,7 +329,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
             foreach (ListItem item in DropDownList_City.Items)
             {
-                if (item.Selected == true && cityAlreadyPostedTo() == false)
+                if (item.Selected == true && cityAlreadyPostedTo(Convert.ToInt32(Session["postID"].ToString()), Convert.ToInt32(item.Value)) == false)
                 {
                     PostingLocation pl = new PostingLocation(Convert.ToInt32(Session["postID"].ToString()), Convert.ToInt32(item.Value));
                     Debug.WriteLine(item.Value);
@@ -503,12 +503,26 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         //}
     }
 
-    private bool cityAlreadyPostedTo()
+    private bool cityAlreadyPostedTo(int postingID, int locationID)
     {
         bool result = true;
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
 
+        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        {
+            Connection = sc,
 
-        return result; 
+            CommandText = "select postingid, locationid from Posting_Location where postingID=@postingID and locationID=@locationID"
+
+        };
+        select.Parameters.AddWithValue("@postingID", postingID);
+        select.Parameters.AddWithValue("@locationID", locationID);
+        SqlDataReader reader = select.ExecuteReader();
+
+        
+
+        return reader.Read(); 
     }
 
     /// <summary>
