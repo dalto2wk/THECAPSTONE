@@ -94,8 +94,8 @@
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">1</div>
-															<div class="text-muted">Apr</div>
+															<div class="large" ><asp:Literal ID="day1" runat="server"></asp:Literal></div>
+                                                            <div class="text-muted" ><asp:Literal ID="month1" runat="server"></asp:Literal></div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle1" runat="server"/></h4>
@@ -110,8 +110,8 @@
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">1</div>
-															<div class="text-muted">Apr</div>
+															<div class="large" ><asp:Literal ID="day2" runat="server"></asp:Literal></div>
+                                                            <div class="text-muted" ><asp:Literal ID="month2" runat="server"></asp:Literal></div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle2" runat="server"/></h4>
@@ -126,8 +126,8 @@
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">31</div>
-															<div class="text-muted">Mar</div>
+															<div class="large" ><asp:Literal ID="day3" runat="server"></asp:Literal></div>
+                                                            <div class="text-muted" ><asp:Literal ID="month3" runat="server"></asp:Literal></div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle3" runat="server"/></h4>
@@ -249,13 +249,13 @@
 									<div class="card-block">
 										<h3 class="card-title">Todo List</h3>
 										<div class="dropdown card-title-btn-container">
-											<button class="btn btn-sm btn-subtle dropdown-toggle" runat="server" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>
-											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#"><em class="fa fa-search mr-1"></em> More info</a>
-												<a class="dropdown-item" href="#"><em class="fa fa-thumb-tack mr-1"></em> Pin Window</a>
-												<a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close Window</a></div>
+											<button class="btn btn-sm btn-subtle dropdown-toggle" runat="server" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>		
 										</div>
 										<h6 class="card-subtitle mb-2 text-muted">checklist</h6>
-										<ul class="todo-list mt-2 mb-2">
+                                        <asp:CheckBoxList ID="CheckBoxListTodo" runat="server"></asp:CheckBoxList>
+                                         
+                                        
+							<%--			<ul class="todo-list mt-2 mb-2">
 											
 											<li class="todo-list-item">
 												<div class="checkbox mt-1 mb-2">
@@ -266,48 +266,14 @@
 												    </div>
                                                 </div>
 											</li>
-											<li class="todo-list-item">
-												<div class="checkbox mt-1 mb-2">
-													<div class="custom-control custom-checkbox">
-														<input type="checkbox" runat="server" class="custom-control-input" id="customCheck2">
-														<label class="custom-control-label custom-control-description" runat="server" for="customCheck2">update posting</label>
-													<div class="float-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-												    </div>
-                                                </div>
-											</li>
-											<li class="todo-list-item">
-												<div class="checkbox mt-1 mb-2">
-													<div class="custom-control custom-checkbox">
-														<input type="checkbox" runat="server" class="custom-control-input" id="customCheck3">
-														<label class="custom-control-label custom-control-description" runat="server" for="customCheck3">Reply to Jane</label>
-													<div class="float-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-												    </div>
-                                                </div>
-											</li>
-											<li class="todo-list-item" runat="server">
-												<div class="checkbox mt-1 mb-2">
-													<div class="custom-control custom-checkbox">
-														<input type="checkbox" runat="server" class="custom-control-input" id="customCheck4">
-														<label class="custom-control-label custom-control-description" runat="server" for="customCheck4">new posting</label>
-													<div class="float-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-												    </div>
-                                                </div>
-											</li>
-											<li class="todo-list-item" runat="server">
-												<div class="checkbox mt-1 mb-2">
-													<div class="custom-control custom-checkbox">
-														<input type="checkbox" runat="server" class="custom-control-input" id="customCheck5">
-														<label class="custom-control-label custom-control-description" runat="server" for="customCheck5">Get feedback</label>
-													<div class="float-right action-buttons"><a href="#" class="trash"><em class="fa fa-trash"></em></a></div>
-												    </div>
-                                                </div>
-											</li>
-										</ul>
+										</ul>--%>
 										<div class="card-footer todo-list-footer">
 											<div class="input-group">
-												<input id="btninput" runat="server" type="text" class="form-control input-md" placeholder="Add new task" /><span class="input-group-btn">
-													<button class="btn btn-primary btn-md" runat="server" id="btntodo">Add</button>
+												<asp:TextBox id="txtInput" runat="server" type="text" class="form-control input-md" placeholder="Add new task" /><span class="input-group-btn">
+													&nbsp;<asp:button id="btnTodoAdd" onClick="btnTodoAdd_Click" class="btn btn-primary btn-md" runat="server" Text="Add"></asp:button>
+                                                    <asp:button id="btnTodoDelete" onClick="btnTodoDelete_Click" class="btn btn-primary btn-md" runat="server" Text="Delete" BackColor="Red"></asp:button>                                                              
 											</span></div>
+                                            <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
 										</div>
 									</div>
 								</div>

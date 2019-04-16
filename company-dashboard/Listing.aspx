@@ -160,7 +160,7 @@ FROM            Posting INNER JOIN
                                                 <asp:ControlParameter Name="Posting ID" ControlID="searchbox" PropertyName="Text" />
                                                 <asp:ControlParameter Name="Job Listing Title" ControlID="searchbox" PropertyName="Text" />
                                                 <asp:ControlParameter Name="Number of Applicants" ControlID="searchbox" PropertyName="Text" />
-                                            </FilterParameters>
+                                        </FilterParameters>
                                         </asp:SqlDataSource>
                                     </div>
                                 </div>

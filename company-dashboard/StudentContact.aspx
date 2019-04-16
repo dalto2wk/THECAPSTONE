@@ -180,13 +180,13 @@
 										</div>
 										<h6 class="card-subtitle mb-2 text-muted">stay in touch</h6>
 										<div class="divider" style="margin-top: 1rem;"></div>
-										<div class="articles-container">
+																				<div class="articles-container">
 											<div class="article border-bottom">
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">1</div>
-															<div class="text-muted">Apr</div>
+															<div class="large" ><asp:Literal ID="day1" runat="server"></asp:Literal></div>
+                                                            <div class="text-muted" ><asp:Literal ID="month1" runat="server"></asp:Literal></div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle1" runat="server"/></h4>
@@ -201,8 +201,8 @@
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">1</div>
-															<div class="text-muted">Apr</div>
+															<div class="large" ><asp:Literal ID="day2" runat="server"></asp:Literal></div>
+                                                            <div class="text-muted" ><asp:Literal ID="month2" runat="server"></asp:Literal></div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle2" runat="server"/></h4>
@@ -217,8 +217,8 @@
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">31</div>
-															<div class="text-muted">Mar</div>
+															<div class="large" ><asp:Literal ID="day3" runat="server"></asp:Literal></div>
+                                                            <div class="text-muted" ><asp:Literal ID="month3" runat="server"></asp:Literal></div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle3" runat="server"/></h4>
