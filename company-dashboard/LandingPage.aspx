@@ -252,10 +252,10 @@
 											<button class="btn btn-sm btn-subtle dropdown-toggle" runat="server" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>		
 										</div>
 										<h6 class="card-subtitle mb-2 text-muted">checklist</h6>
-                                        <asp:CheckBoxList ID="CheckBoxListTodo" runat="server"></asp:CheckBoxList>
-                                         
-                                        
-							<%--			<ul class="todo-list mt-2 mb-2">
+                                        <asp:CheckBoxList ID="CheckBoxListTodo" runat="server" DataSourceID="SqlDataSource3" DataTextField="ItemName" DataValueField="ItemName"></asp:CheckBoxList>
+
+
+                                        <%--			<ul class="todo-list mt-2 mb-2">
 											
 											<li class="todo-list-item">
 												<div class="checkbox mt-1 mb-2">
@@ -267,7 +267,8 @@
                                                 </div>
 											</li>
 										</ul>--%>
-										<div class="card-footer todo-list-footer">
+                                        <asp:SqlDataSource runat="server" ID="SqlDataSource3" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [ItemName] FROM [Todo_List]"></asp:SqlDataSource>
+                                        <div class="card-footer todo-list-footer">
 											<div class="input-group">
 												<asp:TextBox id="txtInput" runat="server" type="text" class="form-control input-md" placeholder="Add new task" /><span class="input-group-btn">
 													&nbsp;<asp:button id="btnTodoAdd" onClick="btnTodoAdd_Click" class="btn btn-primary btn-md" runat="server" Text="Add"></asp:button>
