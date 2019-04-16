@@ -198,12 +198,9 @@
                 								<div class="col-md-10">
                     							<div class="input-group">
                         							<input runat="server" type="hidden" id="filename" name="filename" value="">
-                                                    <%--<asp:FileUpload ID="FileUpload1" runat="server" />--%>
-                        							<asp:fileupload ID="fileUp" CssClass="form-control form-control-sm" accept="image/bmp,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/gif,image/jpeg,application/pdf,text/plain,image/png" runat="server"></asp:fileupload>
-                        						<%--<div class="input-group-btn">--%>
-                            						<%--<input runat="server" type="submit" value="Upload" class="rounded-0 btn btn-primary">--%>
                                                     
-                        						<%--</div>--%>
+                        							<asp:fileupload ID="fileUp" CssClass="form-control form-control-sm" accept="image/bmp,image/gif,image/jpeg,image/png" AllowMultiple="true" runat="server"></asp:fileupload>
+                        						
                     							
                 								</div>
                 							</div>
@@ -229,7 +226,8 @@
 										<div runat="server" class="row">
 											<div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 
-											<asp:Button id="btnSubmitPosting" class="btn btn-primary text-center" type="button" text="Submit" OnClick="submitPostingBtnClick" runat="server"></asp:Button>    
+											<asp:Button id="btnSubmitPosting" CssClass="btn btn-primary text-center" type="button" text="Submit" OnClick="submitPostingBtnClick" runat="server"></asp:Button>   
+                                            <asp:Button ID="populate" CssClass="btn btn-primary text-center" Text="Populate Fields" runat="server" OnClick="populate_Click" />
 											</div>
 										</div>
 									</form>		
