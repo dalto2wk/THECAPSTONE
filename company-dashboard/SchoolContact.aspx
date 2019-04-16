@@ -65,7 +65,7 @@
 									<div class="card-block">
 										<div class="input-group">
 											<div class="input-group-prepend col-sm-12">
-												<button type="button" class="btn btn-info">Search <span class="caret fa fa-search"></span></button>
+												<asp:button runat="server" type="button" Text="Search" class="btn btn-info" OnClick="Unnamed_Click"></asp:button>
 												
 
 											
@@ -76,12 +76,56 @@
 
 										</div>
 										</div>
+                                       
 
 										
-
+                         <h3> Approval Requests</h3>
                                       <div class="table-responsive col-sm-12"></div>
 										<br>
                                         <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource1" OnRowCommand="viewInfo">
+                                            <Columns>
+                                                <asp:BoundField DataField="SchoolID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" HeaderText="School ID" SortExpression="School"></asp:BoundField>
+                                                <asp:BoundField DataField="SchoolName"  HeaderText="School" SortExpression="SchoolName"></asp:BoundField>
+                                                <asp:BoundField DataField="CityCounty" HeaderText="City" SortExpression="CityCounty"></asp:BoundField>
+                                                <asp:BoundField DataField="state" HeaderText="State" ReadOnly="True" SortExpression="state"></asp:BoundField>
+                                                <asp:BoundField DataField="Approval_Status" HeaderText="Approval Status" ReadOnly="True" SortExpression="Approval_Status"></asp:BoundField>
+                                                <asp:ButtonField CommandName="viewInfo" ControlStyle-CssClass="btn btn-primary" Text="View Info" ButtonType="Button" ShowHeader="True" HeaderText="Info"></asp:ButtonField>                                              
+                                            </Columns>
+                                        </asp:GridView>
+
+                        <asp:SqlDataSource runat="server" ID="Sqldatasource1" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  School.SchoolID,       School.SchoolName, School.CityCounty, School.state, School.Approval_Status
+FROM            School where School.Approval_Status != 'Approved'" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
+                                        <FilterParameters>
+                                                <asp:ControlParameter Name="SchoolName" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="CityCounty" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="state" ControlID="searchbox" PropertyName="Text" />
+                                               <%-- <asp:ControlParameter Name="firstName" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="lastName" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="email" ControlID="searchbox" PropertyName="Text" />--%>
+                                            </FilterParameters>
+                                        </asp:SqlDataSource>
+                        </div>
+
+                       <h3> Approved Schools</h3>
+                        <div class="col-sm-12">
+                        	<div class="card mb-4">
+									<div class="card-block">
+										<div class="input-group">
+											<div class="input-group-prepend col-sm-12">
+												<asp:button runat="server" type="button" Text="Search" class="btn btn-info" OnClick="Unnamed_Click"></asp:button>
+												
+
+											
+
+													<asp:Textbox runat="server" class="form-control" type="text" name="placeholder" id="Searchbox1" placeholder="filter data by School Name or Location"></asp:Textbox>
+												</div>
+                                            </div>
+                                        </div>
+										</div>
+										
+                         <div class="table-responsive col-sm-12"></div>
+										<br>
+                                        <asp:GridView ID="GridView2" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource2" OnRowCommand="viewInfo">
                                             <Columns>
                                                 <asp:BoundField DataField="SchoolID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" HeaderText="School ID" SortExpression="School"></asp:BoundField>
                                                 <asp:BoundField DataField="SchoolName"  HeaderText="School" SortExpression="School"></asp:BoundField>
@@ -91,17 +135,16 @@
                                                 <asp:ButtonField CommandName="viewInfo" ControlStyle-CssClass="btn btn-primary" Text="View Info" ButtonType="Button" ShowHeader="True" HeaderText="Info"></asp:ButtonField>                                              
                                             </Columns>
                                         </asp:GridView>
-                    
 
-                                        <asp:SqlDataSource runat="server" ID="Sqldatasource1" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  School.SchoolID,       School.SchoolName, School.CityCounty, School.state, School.Approval_Status
-FROM            School " FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
+                        
+                                        
+
+                             <asp:SqlDataSource runat="server" ID="Sqldatasource2" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  School.SchoolID,       School.SchoolName, School.CityCounty, School.state, School.Approval_Status
+FROM            School where School.Approval_Status = 'Approved'" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
                                         <FilterParameters>
-                                                <asp:ControlParameter Name="SchoolName" ControlID="searchbox" PropertyName="Text" />
-                                                <asp:ControlParameter Name="CityCounty" ControlID="searchbox" PropertyName="Text" />
-                                                <asp:ControlParameter Name="state" ControlID="searchbox" PropertyName="Text" />
-                                               <%-- <asp:ControlParameter Name="firstName" ControlID="searchbox" PropertyName="Text" />
-                                                <asp:ControlParameter Name="lastName" ControlID="searchbox" PropertyName="Text" />
-                                                <asp:ControlParameter Name="email" ControlID="searchbox" PropertyName="Text" />--%>
+                                                <asp:ControlParameter Name="SchoolName" ControlID="searchbox1" PropertyName="Text" />
+                                                <asp:ControlParameter Name="CityCounty" ControlID="searchbox1" PropertyName="Text" />
+                                                <asp:ControlParameter Name="state" ControlID="searchbox1" PropertyName="Text" />
                                             </FilterParameters>
                                         </asp:SqlDataSource>
 

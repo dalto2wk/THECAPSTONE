@@ -37,4 +37,9 @@ public partial class company_dashboard_SchoolContact : System.Web.UI.Page
         Session.Abandon();
         Response.Redirect("/Login.aspx");
     }
+
+    protected void Unnamed_Click(object sender, EventArgs e)
+    {
+
+    }
 }
