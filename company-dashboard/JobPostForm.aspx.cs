@@ -78,8 +78,8 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
     /// </summary>
     protected void dbInsert()
     {
-        try
-        {
+        //try
+        //{
 
 
             String postingTitle = txtJobTitle.Value;
@@ -99,14 +99,6 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
             Posting post = new Posting(postingTitle, description, requirements, cpName, emp, cpPhone, cpEmail, postingStartDate, postingEndDate, oppStartDate);
 
 
-      
-
-
-
-        
-
-            
-
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ProjectConnectionString"].ConnectionString);
             sc.Open();
@@ -115,7 +107,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand posting = new System.Data.SqlClient.SqlCommand
             {
                 Connection = sc,
-                CommandText = "Insert into Posting values (@postingTitle, @description, @jobRequirements, @cpName, @employerID, @LastUpdatedBy, @LastUpdated ,@cpEmail,@cpPhone,@postStart,@postEnd,@opportunityStartDate,@postFile)"
+                CommandText = "Insert into Posting values (@postingTitle, @description, @jobRequirements, @cpName, @employerID, @LastUpdatedBy, @LastUpdated ,@cpEmail,@cpPhone,@postStart,@postEnd,@opportunityStartDate)"
             };
             //change employer id to match that of the logged in user
 
@@ -131,25 +123,43 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
             posting.Parameters.AddWithValue("@postStart", post.getStartDate());
             posting.Parameters.AddWithValue("@postEnd", post.getPostEndDate());
             posting.Parameters.AddWithValue("@opportunityStartDate", post.getOpportunityStartDate());
-            if (fileUp.HasFile == true)
+            posting.ExecuteNonQuery();
+
+
+        if (fileUp.HasFile == true)
             {
                 //set file to null in constructor and then other wise use set file and call the method 
                 //post.setfile();
-                post.setfile(fileUp.FileContent);
-                Stream fStream = post.getFile();
-                byte[] contents = new byte[fStream.Length];
-                fStream.Read(contents, 0, (int)fStream.Length);
-                fStream.Close();
-
-                posting.Parameters.AddWithValue("@postFile", contents);
+                //post.setfile(fileUp.FileContent);
+                System.Data.SqlClient.SqlCommand images = new System.Data.SqlClient.SqlCommand
+                {
+                    Connection = sc,
+                    CommandText = "Insert into Posting_Images values (@postingID, @imageFile)"
+                };
+            images.Parameters.AddWithValue("@postingID", getMaxPostingID());
+            images.Parameters.Add("@imageFile",SqlDbType.VarBinary);
+                HttpFileCollection fileCollection = Request.Files;
+                for (int i = 0; i < fileCollection.Count; i++)
+                {
+                    HttpPostedFile postedFile = fileCollection[i];
+                    if(postedFile.ContentLength > 0)
+                    {
+                        Stream fStream = postedFile.InputStream;
+                        byte[] contents = new byte[fStream.Length];
+                        fStream.Read(contents, 0, (int)fStream.Length);
+                        fStream.Close();
+                    images.Parameters["@imageFile"].Value = contents;
+                        
+                        
+                    }
+                
+                images.ExecuteNonQuery();
             }
-            else
-            {
-                posting.Parameters.Add("@postFile", SqlDbType.VarBinary, -1);
-                posting.Parameters["@postFile"].Value = DBNull.Value;
-            }
 
-            posting.ExecuteNonQuery();
+            }
+            
+
+            
 
 
 
@@ -255,12 +265,12 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
 
         sc.Close();
 
-            sc.Close();
-    }
-        catch
-        {
+           
+    //}
+    //    catch
+    //    {
 
-        }
+    //    }
 
     }
 
@@ -356,4 +366,17 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
     }
 
 
+
+    protected void populate_Click(object sender, EventArgs e)
+    {
+        txtJobTitle.Value = "Summer coding camp";
+        txtDescription.Value = "This is a shadowing and learning opportunity for a high school student to spend two weeks learning how to code";
+        postStart.Value = "04/16/2019";
+        postEnd.Value = "04/21/2019";
+        opportunityStartDate.Value = "04/28/2019";
+        txtCpName.Value = "John Madison";
+        txtCpEmail.Value = "jmad@gmail.com";
+        txtCpPhone.Value = "555/555-5555";
+        txtRequirements.Value = "Must be interested in technology and have some basic computer skills";
+    }
 }

@@ -220,6 +220,7 @@
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 
                                                     <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Confirm Changes" runat="server" OnClick="updateBtnClick"></asp:Button>
+                                                    <asp:Button ID="populate" CssClass="btn btn-primary text-center" Text="Populate Fields" runat="server" OnClick="populate_Click" />
                                                     <div>
                                                         <br />
                                                         <asp:Button ID="btnDeletePosting" class="btn btn-danger text-center" type="button" Text="Delete Listing" runat="server" OnClick="messageVisible"></asp:Button>
