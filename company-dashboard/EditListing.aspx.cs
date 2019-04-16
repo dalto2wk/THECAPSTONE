@@ -550,7 +550,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             }
 
         writeImage();
-        uploadedImage.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg";
+        //uploadedImage.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg";
 
         for (int i = 0; i < interests.Count; i++)
             {
@@ -583,13 +583,15 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         //}
     }
 
-    protected void writeImage()
+    protected String writeImage()
     {
+        String result = "";
+
         string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg");
         System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         cn.Open();
 
-        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select postFile from Posting where postingID= @postingID", cn);
+        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select imageFile from Posting_Images where postingID= @postingID", cn);
         cmd.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
 
         System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
@@ -610,6 +612,8 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         //the below way stores to solution using response.binarywrite is better
         //Response.Redirect("~\\Files\\Report.pdf");
 
+
+        return "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg";
     }
 
     //protected override void OnPreRender(EventArgs e)

@@ -191,14 +191,19 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Pictures related to posting</label>
                                                 <%--<asp:Image ID="uploadedImage" runat="server" />--%>
-                                                <asp:DataList ID="DataList1" runat="server" DataSourceID="images">
+                                                <asp:DataList ID="DataList1" runat="server" DataSourceID="postingImages">
                                                     <ItemTemplate>
-                                                        <asp:Image ID="uploadedImage" runat="server" />
-                                                        <br />
+                                                        
+                                                        <%--<asp:Label Text='<%# Eval("imageFile") %>' runat="server" ID="imageFileLabel" /><br />--%>
+                                                        <asp:Image ID="Image1" ImageUrl="<%# writeImage() %>" CssClass="imageList" runat="server" />
                                                         <br />
                                                     </ItemTemplate>
                                                 </asp:DataList>
-                                                <asp:SqlDataSource runat="server" ID="images" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [imageFile] FROM [Posting_Images]"></asp:SqlDataSource>
+                                                <asp:SqlDataSource runat="server" ID="postingImages" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [imageFile] FROM [Posting_Images] WHERE ([postingID] = @postingID)">
+                                                    <SelectParameters>
+                                                        <asp:SessionParameter SessionField="postID" Name="postingID" Type="Int32" DefaultValue="39"></asp:SessionParameter>
+                                                    </SelectParameters>
+                                                </asp:SqlDataSource>
                                             </div>
                                             <div runat="server" class="row">
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
