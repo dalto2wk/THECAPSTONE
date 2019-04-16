@@ -198,12 +198,9 @@
                 								<div class="col-md-10">
                     							<div class="input-group">
                         							<input runat="server" type="hidden" id="filename" name="filename" value="">
-                                                    <%--<asp:FileUpload ID="FileUpload1" runat="server" />--%>
-                        							<asp:fileupload ID="fileUp" CssClass="form-control form-control-sm" accept="image/bmp,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/gif,image/jpeg,application/pdf,text/plain,image/png" runat="server"></asp:fileupload>
-                        						<%--<div class="input-group-btn">--%>
-                            						<%--<input runat="server" type="submit" value="Upload" class="rounded-0 btn btn-primary">--%>
                                                     
-                        						<%--</div>--%>
+                        							<asp:fileupload ID="fileUp" CssClass="form-control form-control-sm" accept="image/bmp,image/gif,image/jpeg,image/png" AllowMultiple="true" runat="server"></asp:fileupload>
+                        						
                     							
                 								</div>
                 							</div>
