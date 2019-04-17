@@ -37,6 +37,8 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
 
         };
 
+       
+
         Session["EmpID"] = Convert.ToString(select.ExecuteScalar());
         ///call the notifications method here in the page load
         notifications();
