@@ -65,9 +65,10 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
         Session.Abandon();
         Response.Redirect("/Login.aspx");
     }
-    protected void EditBtn(object sender, GridViewCommandEventArgs e)
+    public void EditBtn(object sender, GridViewCommandEventArgs e)
     {
- 
+        if (e.CommandName == "EditBtn")
+        {
             int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
             GridViewRow row = GridView1.Rows[buttonRowIndex];
 
@@ -82,7 +83,7 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
             dbWork();
 
             Response.Redirect("EditListing.aspx");
-        
+        }
     }
     protected void dbWork()
     {

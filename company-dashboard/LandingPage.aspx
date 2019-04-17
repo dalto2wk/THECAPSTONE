@@ -171,7 +171,7 @@
 										</div>
 										<div class="table-responsive">
                                             <%-- Should eventually connect to DB may neeed to add more runat="server" tags --%>
-                                            <asp:GridView ID="recentApplicationsGV"  runat="server" AutoGenerateColumns="False" DataKeyNames="applicationID" CssClass="table table-striped" DataSourceID="SqlDataSource1" AllowSorting="True">
+                                            <asp:GridView ID="recentApplicationsGV"  runat="server" AutoGenerateColumns="False" DataKeyNames="applicationID" CssClass="table table-striped" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True">
                                                 <Columns>
                                                     <asp:BoundField DataField="applicationID" HeaderText="Application ID" Visible="false" ReadOnly="True" SortExpression="applicationID" />
                                                     <asp:BoundField DataField="jobTitle" HeaderText="Job Title" SortExpression="jobTitle" />

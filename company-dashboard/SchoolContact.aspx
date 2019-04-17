@@ -125,7 +125,7 @@ FROM            Approval_Status inner join School ON Approval_Status.SchoolID = 
 										
                          <div class="table-responsive col-sm-12"></div>
 										<br>
-                                        <asp:GridView ID="GridView2" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource2" OnRowCommand="viewInfo" AllowSorting="True">
+                                        <asp:GridView ID="GridView2" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource2" OnRowCommand="viewInfo" AllowSorting="True" AllowPaging="True">
                                             <Columns>
                                                 <asp:BoundField DataField="SchoolID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" HeaderText="School ID" SortExpression="School"></asp:BoundField>
                                                 <asp:BoundField DataField="SchoolName"  HeaderText="School" SortExpression="SchoolName"></asp:BoundField>
