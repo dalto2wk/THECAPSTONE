@@ -82,7 +82,7 @@
                          <h3> Approval Requests</h3>
                                       <div class="table-responsive col-sm-12"></div>
 										<br>
-                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource1" OnRowCommand="viewInfo">
+                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource1" OnRowCommand="viewInfo" AllowSorting="True">
                                             <Columns>
                                                 <asp:BoundField DataField="SchoolID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" HeaderText="School ID" SortExpression="School"></asp:BoundField>
                                                 <asp:BoundField DataField="SchoolName"  HeaderText="School" SortExpression="SchoolName"></asp:BoundField>
@@ -125,13 +125,13 @@ FROM            Approval_Status inner join School ON Approval_Status.SchoolID = 
 										
                          <div class="table-responsive col-sm-12"></div>
 										<br>
-                                        <asp:GridView ID="GridView2" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource2" OnRowCommand="viewInfo">
+                                        <asp:GridView ID="GridView2" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource2" OnRowCommand="viewInfo" AllowSorting="True">
                                             <Columns>
                                                 <asp:BoundField DataField="SchoolID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" HeaderText="School ID" SortExpression="School"></asp:BoundField>
-                                                <asp:BoundField DataField="SchoolName"  HeaderText="School" SortExpression="School"></asp:BoundField>
-                                                <asp:BoundField DataField="CityCounty" HeaderText="City" SortExpression="City"></asp:BoundField>
-                                                <asp:BoundField DataField="state" HeaderText="State" ReadOnly="True" SortExpression="State"></asp:BoundField>
-                                                <asp:BoundField DataField="Approval_Status" HeaderText="Approval Status" ReadOnly="True" SortExpression="Approval Status"></asp:BoundField>
+                                                <asp:BoundField DataField="SchoolName"  HeaderText="School" SortExpression="SchoolName"></asp:BoundField>
+                                                <asp:BoundField DataField="CityCounty" HeaderText="City" SortExpression="CityCounty"></asp:BoundField>
+                                                <asp:BoundField DataField="state" HeaderText="State" ReadOnly="True" SortExpression="state"></asp:BoundField>
+                                                <asp:BoundField DataField="Approval_Status" HeaderText="Approval Status" ReadOnly="True"></asp:BoundField>
                                                 <asp:ButtonField CommandName="viewInfo" ControlStyle-CssClass="btn btn-primary" Text="View Info" ButtonType="Button" ShowHeader="True" HeaderText="Info"></asp:ButtonField>                                              
                                             </Columns>
                                         </asp:GridView>

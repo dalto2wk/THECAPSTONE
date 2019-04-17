@@ -67,23 +67,21 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
     }
     protected void EditBtn(object sender, GridViewCommandEventArgs e)
     {
-        
-        int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
-        GridViewRow row = GridView1.Rows[buttonRowIndex];
-        
-        string postingID = row.Cells[0].Text;
-        
-        string postingName = "";
-        postingName = row.Cells[1].Text;
-        
-        Session["postingTitleToEdit"] = postingName;
-        Session["postID"] = postingID;
+ 
+            int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
+            GridViewRow row = GridView1.Rows[buttonRowIndex];
 
-        dbWork();
-        
-        
+            string postingID = row.Cells[0].Text;
 
-        Response.Redirect("EditListing.aspx");
+            string postingName = "";
+            postingName = row.Cells[1].Text;
+
+            Session["postingTitleToEdit"] = postingName;
+            Session["postID"] = postingID;
+
+            dbWork();
+
+            Response.Redirect("EditListing.aspx");
         
     }
     protected void dbWork()

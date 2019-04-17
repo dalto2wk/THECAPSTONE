@@ -81,7 +81,7 @@
                                 <br>
                                 <div class="table-responsive">
                                     
-                                        <asp:GridView runat="server" CssClass="table table-striped" OnRowCommand="viewResume" AutoGenerateColumns="False" ID="studentApplicationTable" DataSourceID="StudentApplicationGridView">
+                                        <asp:GridView runat="server" CssClass="table table-striped" OnRowCommand="viewResume" AutoGenerateColumns="False" ID="studentApplicationTable" DataSourceID="StudentApplicationGridView" AllowSorting="True">
 
                                             <Columns>
 
