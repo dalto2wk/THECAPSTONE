@@ -475,7 +475,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                     Connection = sc,
                     CommandText = "Insert into Posting_Images values (@postingID, @imageFile)"
                 };
-                images.Parameters.AddWithValue("@postingID", getMaxPostingID());
+                images.Parameters.AddWithValue("@postingID", Session["postID"]);
                 images.Parameters.Add("@imageFile", SqlDbType.VarBinary);
                 HttpFileCollection fileCollection = Request.Files;
                 for (int i = 0; i < fileCollection.Count; i++)
@@ -541,6 +541,11 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             List<School> school = getPostingSchools();
             Location State = getPostingState();
             Location City = getPostingCity();
+
+        if (IsPostBack)
+        {
+            DataList1.DataBind();
+        }
 
             //   if (count1 < 1)
 
@@ -640,53 +645,53 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         //}
     }
 
-    protected String writeImage()
-    {
-        String result = "";
+    //protected String writeImage()
+    //{
+    //    String result = "";
 
         
-        System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-        cn.Open();
+    //    System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+    //    cn.Open();
 
-        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select imageFile,postingImageID from Posting_Images where postingID= @postingID", cn);
-        cmd.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+    //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select imageFile,postingImageID from Posting_Images where postingID= @postingID", cn);
+    //    cmd.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
 
-        System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
-        string postingImageID = "";
-        while (dr.Read())
-        {
-            byte[] fileData = (byte[])dr.GetValue(0);
-            postingImageID = dr.GetInt32(1).ToString();
-            string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID+ ".jpg");
-            System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
+    //    System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
+    //    string postingImageID = "";
+    //    while (dr.Read())
+    //    {
+    //        byte[] fileData = (byte[])dr.GetValue(0);
+    //        postingImageID = dr.GetInt32(1).ToString();
+    //        string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID+ ".jpg");
+    //        System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
 
-            System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
-            //Response.ContentType = "images/jpeg";
-            //Response.BinaryWrite(fileData);
-            bw.Write(fileData);
-            bw.Close();
-            //var image = (Page.FindControl("Image1") as Image).Controls.OfType<Image>();
-            
-            //foreach(Control c in image)
-            //{
-            //    if(c is Image)
-            //    {
-            //        ((Image)c).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
-            //    }
-            //}
+    //        System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
+    //        //Response.ContentType = "images/jpeg";
+    //        //Response.BinaryWrite(fileData);
+    //        bw.Write(fileData);
+    //        bw.Close();
+    //        //var image = (Page.FindControl("Image1") as Image).Controls.OfType<Image>();
 
-            
-        }
+    //        //foreach(Control c in image)
+    //        //{
+    //        //    if(c is Image)
+    //        //    {
+    //        //        ((Image)c).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+    //        //    }
+    //        //}
+
+    //        fs.Close();
+    //    }
         
         
-        //HtmlGenericControl image = DataList1.Item.FindControl("Image1") as HtmlGenericControl;
-        dr.Close();
-        //the below way stores to solution using response.binarywrite is better
-        //Response.Redirect("~\\Files\\Report.pdf");
+    //    //HtmlGenericControl image = DataList1.Item.FindControl("Image1") as HtmlGenericControl;
+    //    dr.Close();
+    //    //the below way stores to solution using response.binarywrite is better
+    //    //Response.Redirect("~\\Files\\Report.pdf");
 
 
-        return "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
-    }
+    //    return "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+    //}
 
   
     protected void StateSelection_Change(object sender, EventArgs e)
@@ -815,7 +820,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         txtopportunityStartDate.Value = "04/28/2019";
         txtCpName.Value = "John Madison";
         txtCpEmail.Value = "jmad@gmail.com";
-        txtCpPhone.Value = "555/555-5555";
+        txtCpPhone.Value = "5555555555";
         txtRequirements.Value = "Must be interested in technology and have some basic computer skills";
     }
 
@@ -842,8 +847,65 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         return result;
     }
 
-    protected void writeImage(object sender, DataListItemEventArgs e)
+    //protected void writeImage(object sender, DataListItemEventArgs e)
+    //{
+    //    System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+    //    cn.Open();
+
+    //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select imageFile,postingImageID from Posting_Images where postingID= @postingID", cn);
+    //    cmd.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+
+    //    System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
+    //    string postingImageID = "";
+    //    while (dr.Read())
+    //    {
+    //        byte[] fileData = (byte[])dr.GetValue(0);
+    //        postingImageID = dr.GetInt32(1).ToString();
+    //        string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg");
+    //        System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
+
+    //        System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
+            
+    //        bw.Write(fileData);
+    //        bw.Close();
+    //        fs.Close();
+            
+            
+            
+            
+    //        //var image = (Page.FindControl("Image1") as Image).Controls.OfType<Image>();
+
+    //        //foreach (Control c in image)
+    //        //{
+    //        //    if (c is Image)
+    //        //    {
+    //        //        ((Image)c).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+    //        //    }
+    //        //}
+
+    //        //if(e.Item.ItemType == ListItemType.Item)
+    //        //{
+    //        //    DataRowView drv = (DataRowView)(e.Item.DataItem);
+    //        //    Image image = (Image)e.Item.FindControl("Image1");
+    //        //    image.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+    //        //    //((Image)(e.Item.DataItem)).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+    //        //}
+
+
+    //    }
+
+
+        
+    //    dr.Close();
+        
+
+    //}
+
+    public String writeImage(object e)
     {
+        string result = "";
+        Byte[] img = (Byte[])e;
+
         System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         cn.Open();
 
@@ -852,46 +914,103 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
         System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
         string postingImageID = "";
+
+
         while (dr.Read())
         {
             byte[] fileData = (byte[])dr.GetValue(0);
-            postingImageID = dr.GetInt32(1).ToString();
-            string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg");
-            System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
-
-            System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
-            //Response.ContentType = "images/jpeg";
-            //Response.BinaryWrite(fileData);
-            bw.Write(fileData);
-            bw.Close();
-            fs.Close();
-            //var image = (Page.FindControl("Image1") as Image).Controls.OfType<Image>();
-
-            //foreach (Control c in image)
-            //{
-            //    if (c is Image)
-            //    {
-            //        ((Image)c).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
-            //    }
-            //}
-
-            if(e.Item.ItemType == ListItemType.Item)
+            if(byteArrayCompare(img, fileData) == true)
             {
-                DataRowView drv = (DataRowView)(e.Item.DataItem);
-                Image image = (Image)e.Item.FindControl("Image1");
-                image.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
-                //((Image)(e.Item.DataItem)).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+                postingImageID = dr.GetInt32(1).ToString();
+                string savedFilePath = Server.MapPath("/App_Data/" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg");
+                System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
+
+                System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
+
+                bw.Write(fileData);
+                bw.Close();
+                fs.Close();
+                result = "/App_Data/" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
             }
-
-
         }
 
+        return result;
+    }
 
-        //HtmlGenericControl image = DataList1.Item.FindControl("Image1") as HtmlGenericControl;
-        dr.Close();
-        //the below way stores to solution using response.binarywrite is better
-        //Response.Redirect("~\\Files\\Report.pdf");
+    public bool byteArrayCompare(byte[] array1, byte[] array2)
+    {
+        bool result = true;
+        if (array1.Length != array2.Length)
+        {
+            result = false;
+        }
+        for(int i =0; i < array1.Length; i++)
+        {
+            if(array1[i] != array2[i])
+            {
+                result = false;
+                break;
+            }
+        }
 
+        return result;
+    }
+
+    //protected void imageDeleteBtn_Click(object sender, EventArgs e)
+    //{
+    //    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+    //    sc.Open();
+
+    //    System.Data.SqlClient.SqlCommand delete = new System.Data.SqlClient.SqlCommand
+    //    {
+    //        Connection = sc,
+
+    //        CommandText = "delete from Posting_Images where Posting_Images.postingImageID = @postingImageID"
+
+    //    };
+
+        
+
+    //    delete.Parameters.AddWithValue("@postingImageID", imageID.Value);
+    //    delete.ExecuteNonQuery();
+
+    //    if (System.IO.File.Exists(ImageLocation.ImageUrl))
+    //    {
+    //        File.Delete(Server.MapPath(ImageLocation.ImageUrl));
+    //    }
+    //    DataList1.DataBind();
+
+    //    sc.Close();
+    //}
+
+    protected void DataList1_DeleteCommand(object source, DataListCommandEventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand delete = new System.Data.SqlClient.SqlCommand
+        {
+            Connection = sc,
+
+            CommandText = "delete from Posting_Images where Posting_Images.postingImageID = @postingImageID"
+
+        };
+
+        string[] args = new string[2];
+        args = e.CommandArgument.ToString().Split(';');
+        string filePath = args[0];
+        string imageID = args[1];
+
+        delete.Parameters.AddWithValue("@postingImageID", imageID);
+        delete.ExecuteNonQuery();
+
+        if (System.IO.File.Exists(filePath))
+        {
+            File.Delete(Server.MapPath(filePath));
+        }
+        DataList1.DataBind();
+
+        sc.Close();
     }
 }
 
