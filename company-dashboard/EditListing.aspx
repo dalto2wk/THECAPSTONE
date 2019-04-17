@@ -204,13 +204,16 @@
                                             <br>
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Pictures related to posting</label>
-                                                <%--<asp:Image ID="uploadedImage" runat="server" />--%>
-                                                <asp:DataList ID="DataList1" runat="server" DataSourceID="postingImages" OnItemDataBound="writeImage">
+                                                
+                                                <asp:DataList ID="DataList1" runat="server" DataSourceID="postingImages" RepeatColumns="3" RepeatDirection="Horizontal" >
                                                     <ItemTemplate>
                                                         
-                                                        <%--<asp:Label Text='<%# Eval("imageFile") %>' runat="server" ID="imageFileLabel" /><br />--%>
-                                                        <asp:Image ID="Image1" ImageUrl="<%# writeImage() %>" CssClass="imageList" runat="server" />
-                                                        <%--<asp:Image ID="postImage"  CssClass="imageList" runat="server" />--%>
+                                                        
+                                                        <asp:Image ID="Image1" ImageUrl='<%# writeImage(Eval("imageFile")) %>' CssClass="imageList" runat="server"/>
+                                                        <div>
+                                                            <asp:Button ID="imageDeleteBtn" class="btn btn-danger text-center" type="button" Text="Delete Image" runat="server" />
+                                                        </div>
+                                                        
                                                         <br />
                                                     </ItemTemplate>
                                                 </asp:DataList>
