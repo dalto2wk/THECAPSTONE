@@ -26,7 +26,7 @@
 		<div runat="server" class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 				<div class="sitelogo">
-				<a href="LandingPage.aspx"><img src="images/logo.jpg" alt="logo"></a>
+				<a href="LandingPage.aspx"><img src="img/logo.png" alt="logo"></a>
 			</div>
 													
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>

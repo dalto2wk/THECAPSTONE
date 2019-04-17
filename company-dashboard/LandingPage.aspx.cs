@@ -27,6 +27,17 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
             loggedInUser.Text = Session["username"].ToString();
         }
 
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        {
+            Connection = sc,
+
+            CommandText = "select employerID from Employer where cpUserName = '" + Session["username"].ToString() + "'"
+
+        };
+
+        Session["EmpID"] = Convert.ToString(select.ExecuteScalar());
         ///call the notifications method here in the page load
         notifications();
 
@@ -375,7 +386,7 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
 
         {
             Connection = sc,
-            CommandText = "SELECT ItemName from Todo_List" 
+            CommandText = "SELECT itemName from Todo_List" 
         };
 
         SqlDataReader reader = getTodoList.ExecuteReader();
@@ -410,11 +421,15 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
         System.Data.SqlClient.SqlCommand getTodoList = new System.Data.SqlClient.SqlCommand
         {
             Connection = sc,
-            CommandText = "Insert into Todo_List values(@ItemName)" 
+            CommandText = "Insert into Todo_List values(@itemName, @employeeID)" 
         };
 
-        getTodoList.Parameters.AddWithValue("@ItemName", txtInput.Text);
+        getTodoList.Parameters.AddWithValue("@itemName", txtInput.Text);
+        getTodoList.Parameters.AddWithValue("@employeeID", Session["EmpID"]);
+
         SqlDataReader reader = getTodoList.ExecuteReader();
+        SqlDataSource3.DataBind();
+        CheckBoxListTodo.DataBind();
 
         ///clear the textbox
         txtInput.Text = "";
@@ -433,17 +448,20 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
         {
             if (li.Selected == true)
             {
-                Debug.WriteLine(li.Text.ToString() + " Hello");
+               
                 sc.Open();
                 System.Data.SqlClient.SqlCommand getTodoList = new System.Data.SqlClient.SqlCommand
                 {
                     Connection = sc,
-                    CommandText = "Delete from Todo_List where ItemName = '" + li.Text.ToString() + "'"  
+                    CommandText = "Delete from Todo_List where itemName = '" + li.Text.ToString() + "'"  
                 };
                 SqlDataReader reader = getTodoList.ExecuteReader();
                 sc.Close();
             }
         }
+
+        SqlDataSource3.DataBind();
+        CheckBoxListTodo.DataBind();
 
     }
 }
