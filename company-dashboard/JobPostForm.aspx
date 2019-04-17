@@ -201,9 +201,7 @@
 											</div>
 											<br>
                                             <div class="container">
-											<%--<form id="fileUploadForm" 
-      												action="/"
-      												enctype="multipart/form-data">--%>
+											
     											<fieldset>
        										 	<div class="form-horizontal">
             									<div class="form-group row">
@@ -222,7 +220,7 @@
             								</div>                        
         									</div>
     										</fieldset>    
-											<%--</form>--%>
+											
 											</div>
 										<div runat="server" class="row">
 											<div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
