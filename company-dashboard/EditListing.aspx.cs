@@ -955,6 +955,63 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
         return result;
     }
+
+    //protected void imageDeleteBtn_Click(object sender, EventArgs e)
+    //{
+    //    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+    //    sc.Open();
+
+    //    System.Data.SqlClient.SqlCommand delete = new System.Data.SqlClient.SqlCommand
+    //    {
+    //        Connection = sc,
+
+    //        CommandText = "delete from Posting_Images where Posting_Images.postingImageID = @postingImageID"
+
+    //    };
+
+        
+
+    //    delete.Parameters.AddWithValue("@postingImageID", imageID.Value);
+    //    delete.ExecuteNonQuery();
+
+    //    if (System.IO.File.Exists(ImageLocation.ImageUrl))
+    //    {
+    //        File.Delete(Server.MapPath(ImageLocation.ImageUrl));
+    //    }
+    //    DataList1.DataBind();
+
+    //    sc.Close();
+    //}
+
+    protected void DataList1_DeleteCommand(object source, DataListCommandEventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand delete = new System.Data.SqlClient.SqlCommand
+        {
+            Connection = sc,
+
+            CommandText = "delete from Posting_Images where Posting_Images.postingImageID = @postingImageID"
+
+        };
+
+        string[] args = new string[2];
+        args = e.CommandArgument.ToString().Split(';');
+        string filePath = args[0];
+        string imageID = args[1];
+
+        delete.Parameters.AddWithValue("@postingImageID", imageID);
+        delete.ExecuteNonQuery();
+
+        if (System.IO.File.Exists(filePath))
+        {
+            File.Delete(Server.MapPath(filePath));
+        }
+        DataList1.DataBind();
+
+        sc.Close();
+    }
 }
 
 

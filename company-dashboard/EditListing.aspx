@@ -205,19 +205,21 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Pictures related to posting</label>
                                                 
-                                                <asp:DataList ID="DataList1" runat="server" DataSourceID="postingImages" RepeatColumns="3" RepeatDirection="Horizontal" >
+                                                <asp:DataList ID="DataList1" OnDeleteCommand="DataList1_DeleteCommand" runat="server" DataSourceID="postingImages" RepeatColumns="3" RepeatDirection="Horizontal" >
                                                     <ItemTemplate>
                                                         
                                                         
                                                         <asp:Image ID="Image1" ImageUrl='<%# writeImage(Eval("imageFile")) %>' CssClass="imageList" runat="server"/>
                                                         <div>
-                                                            
-                                                            <asp:Button ID="imageDeleteBtn" class="btn btn-danger text-center" type="button" Text="Delete Image" runat="server" />
+                                                            <asp:HiddenField ID="imageID" Value='<%#Eval("postingImageID")%>' runat="server" />
+                                                            <asp:LinkButton ID="imageDeleteBtn"  CommandName="Delete" CommandArgument='<%# writeImage(Eval("imageFile")) + ";" + Eval("postingImageID")%>' class="btn btn-danger text-center" type="button" Text="Delete Image" runat="server" />
                                                         </div>
                                                         
                                                         <br />
                                                     </ItemTemplate>
                                                 </asp:DataList>
+                                                
+                                                
                                                 <asp:SqlDataSource runat="server" ID="postingImages" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [imageFile], [postingImageID] FROM [Posting_Images] WHERE ([postingID] = @postingID)">
                                                     <SelectParameters>
                                                         <asp:SessionParameter SessionField="postID" Name="postingID" Type="Int32" DefaultValue=""></asp:SessionParameter>
@@ -275,7 +277,7 @@
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 
                                                     <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Confirm Changes" runat="server" OnClick="updateBtnClick"></asp:Button>
-                                                    <asp:Button ID="populate" CssClass="btn btn-primary text-center" Text="Populate Fields" runat="server" OnClick="populate_Click" />
+                                                    <asp:Button ID="populate" UseSubmitBehavior="false" CausesValidation="false" CssClass="btn btn-primary text-center" Text="Populate Fields" runat="server" OnClick="populate_Click" />
                                                     <div>
                                                         <br />
                                                         <asp:Button ID="btnDeletePosting" class="btn btn-danger text-center" type="button" Text="Delete Listing" runat="server" OnClick="messageVisible"></asp:Button>
