@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 public partial class company_dashboard_EditListing : System.Web.UI.Page
@@ -503,7 +504,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         //}
     }
 
-    private bool cityAlreadyPostedTo(int postingID, int locationID)
+    public bool cityAlreadyPostedTo(int postingID, int locationID)
     {
         bool result = true;
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
@@ -652,7 +653,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
         System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
         string postingImageID = "";
-        if (dr.Read())
+        while (dr.Read())
         {
             byte[] fileData = (byte[])dr.GetValue(0);
             postingImageID = dr.GetInt32(1).ToString();
@@ -664,8 +665,21 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             //Response.BinaryWrite(fileData);
             bw.Write(fileData);
             bw.Close();
-        }
+            //var image = (Page.FindControl("Image1") as Image).Controls.OfType<Image>();
+            
+            //foreach(Control c in image)
+            //{
+            //    if(c is Image)
+            //    {
+            //        ((Image)c).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+            //    }
+            //}
 
+            
+        }
+        
+        
+        //HtmlGenericControl image = DataList1.Item.FindControl("Image1") as HtmlGenericControl;
         dr.Close();
         //the below way stores to solution using response.binarywrite is better
         //Response.Redirect("~\\Files\\Report.pdf");
@@ -826,6 +840,58 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         sc.Close();
 
         return result;
+    }
+
+    protected void writeImage(object sender, DataListItemEventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        cn.Open();
+
+        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select imageFile,postingImageID from Posting_Images where postingID= @postingID", cn);
+        cmd.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+
+        System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
+        string postingImageID = "";
+        while (dr.Read())
+        {
+            byte[] fileData = (byte[])dr.GetValue(0);
+            postingImageID = dr.GetInt32(1).ToString();
+            string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg");
+            System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
+
+            System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
+            //Response.ContentType = "images/jpeg";
+            //Response.BinaryWrite(fileData);
+            bw.Write(fileData);
+            bw.Close();
+            fs.Close();
+            //var image = (Page.FindControl("Image1") as Image).Controls.OfType<Image>();
+
+            //foreach (Control c in image)
+            //{
+            //    if (c is Image)
+            //    {
+            //        ((Image)c).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+            //    }
+            //}
+
+            if(e.Item.ItemType == ListItemType.Item)
+            {
+                DataRowView drv = (DataRowView)(e.Item.DataItem);
+                Image image = (Image)e.Item.FindControl("Image1");
+                image.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+                //((Image)(e.Item.DataItem)).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+            }
+
+
+        }
+
+
+        //HtmlGenericControl image = DataList1.Item.FindControl("Image1") as HtmlGenericControl;
+        dr.Close();
+        //the below way stores to solution using response.binarywrite is better
+        //Response.Redirect("~\\Files\\Report.pdf");
+
     }
 }
 

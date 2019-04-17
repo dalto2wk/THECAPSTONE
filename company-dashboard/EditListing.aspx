@@ -191,12 +191,12 @@
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Pictures related to posting</label>
                                                 <%--<asp:Image ID="uploadedImage" runat="server" />--%>
-                                                <asp:DataList ID="DataList1" runat="server" DataSourceID="postingImages">
+                                                <asp:DataList ID="DataList1" runat="server" DataSourceID="postingImages" OnItemDataBound="writeImage">
                                                     <ItemTemplate>
                                                         
                                                         <%--<asp:Label Text='<%# Eval("imageFile") %>' runat="server" ID="imageFileLabel" /><br />--%>
-                                                        <%--<asp:Image ID="Image1" ImageUrl="<%# writeImage() %>" CssClass="imageList" runat="server" />--%>
-                                                        <asp:Image ID="postImage"  CssClass="imageList" runat="server" />
+                                                        <asp:Image ID="Image1" ImageUrl="<%# writeImage() %>" CssClass="imageList" runat="server" />
+                                                        <%--<asp:Image ID="postImage"  CssClass="imageList" runat="server" />--%>
                                                         <br />
                                                     </ItemTemplate>
                                                 </asp:DataList>
