@@ -922,7 +922,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             if(byteArrayCompare(img, fileData) == true)
             {
                 postingImageID = dr.GetInt32(1).ToString();
-                string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg");
+                string savedFilePath = Server.MapPath("/App_Data/" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg");
                 System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
 
                 System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
@@ -930,7 +930,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                 bw.Write(fileData);
                 bw.Close();
                 fs.Close();
-                result = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+                result = "/App_Data/" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
             }
         }
 
