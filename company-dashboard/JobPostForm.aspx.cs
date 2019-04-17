@@ -136,8 +136,8 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
                     Connection = sc,
                     CommandText = "Insert into Posting_Images values (@postingID, @imageFile)"
                 };
-            images.Parameters.AddWithValue("@postingID", getMaxPostingID());
-            images.Parameters.Add("@imageFile",SqlDbType.VarBinary);
+                images.Parameters.AddWithValue("@postingID", getMaxPostingID());
+                images.Parameters.Add("@imageFile",SqlDbType.VarBinary);
                 HttpFileCollection fileCollection = Request.Files;
                 for (int i = 0; i < fileCollection.Count; i++)
                 {

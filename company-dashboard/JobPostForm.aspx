@@ -26,7 +26,7 @@
 		<div runat="server" class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 				<div class="sitelogo">
-				<a href="LandingPage.aspx"><img src="images/logo.jpg" alt="logo"></a>
+				<a href="LandingPage.aspx"><img src="img/logo.png" alt="logo"></a>
 			</div>
 													
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
@@ -201,9 +201,7 @@
 											</div>
 											<br>
                                             <div class="container">
-											<%--<form id="fileUploadForm" 
-      												action="/"
-      												enctype="multipart/form-data">--%>
+											
     											<fieldset>
        										 	<div class="form-horizontal">
             									<div class="form-group row">
@@ -222,7 +220,7 @@
             								</div>                        
         									</div>
     										</fieldset>    
-											<%--</form>--%>
+											
 											</div>
 										<div runat="server" class="row">
 											<div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">

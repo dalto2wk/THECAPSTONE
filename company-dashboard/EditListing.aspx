@@ -21,12 +21,12 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <form class="form" method="POST" action="#" runat="server">
+    <form id="form1" runat="server">
         <div class="container-fluid" id="wrapper">
             <div class="row">
                 <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
                     <div class="sitelogo">
-                        <img src="images/logo.jpg" alt="logo"><a href="LandingPage.aspx"></a>
+                        <img src="img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
                     </div>
 
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
@@ -204,9 +204,46 @@
                                             <br>
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Pictures related to posting</label>
-                                                <asp:Image ID="uploadedImage" runat="server" />
+                                                <%--<asp:Image ID="uploadedImage" runat="server" />--%>
+                                                <asp:DataList ID="DataList1" runat="server" DataSourceID="postingImages" OnItemDataBound="writeImage">
+                                                    <ItemTemplate>
+                                                        
+                                                        <%--<asp:Label Text='<%# Eval("imageFile") %>' runat="server" ID="imageFileLabel" /><br />--%>
+                                                        <asp:Image ID="Image1" ImageUrl="<%# writeImage() %>" CssClass="imageList" runat="server" />
+                                                        <%--<asp:Image ID="postImage"  CssClass="imageList" runat="server" />--%>
+                                                        <br />
+                                                    </ItemTemplate>
+                                                </asp:DataList>
+                                                <asp:SqlDataSource runat="server" ID="postingImages" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [imageFile] FROM [Posting_Images] WHERE ([postingID] = @postingID)">
+                                                    <SelectParameters>
+                                                        <asp:SessionParameter SessionField="postID" Name="postingID" Type="Int32" DefaultValue="39"></asp:SessionParameter>
+                                                    </SelectParameters>
+                                                </asp:SqlDataSource>
                                             </div>
-                                            <div runat="server" class="row">
+                                            <div class="container">
+
+                                                <fieldset>
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Media Upload</label>
+
+
+                                                            <div class="col-md-10">
+                                                                <div class="input-group">
+                                                                    <input runat="server" type="hidden" id="filename" name="filename" value="">
+
+                                                                    <asp:FileUpload ID="fileUp" CssClass="form-control form-control-sm" accept="image/bmp,image/gif,image/jpeg,image/png" AllowMultiple="true" runat="server"></asp:FileUpload>
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+
+                                            </div>
+
+                                            <%--<div runat="server" class="row">
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
                                                     <div runat="server" class="custom-control custom-radio">
                                                         <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" runat="server">
@@ -218,7 +255,7 @@
                                                         <label class="custom-control-label custom-control-description" for="customRadio2" runat="server">Save for Later</label>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>--%>
                                             <script type="text/javascript">
                                                 function window.onunload()
                                                 {
