@@ -277,15 +277,15 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                  " where postingID = @postingID"
 
             };
-            update.Parameters.AddWithValue("@postingTitle", txtJobTitle.Value);
-            update.Parameters.AddWithValue("@description", txtDescription.Value);
-            update.Parameters.AddWithValue("@jobRequirements", txtRequirements.Value);
-            update.Parameters.AddWithValue("@cpName", txtCpName.Value);
-            update.Parameters.AddWithValue("@cpEmail", txtCpEmail.Value);
-            update.Parameters.AddWithValue("@cpPhone", txtCpPhone.Value);
-            update.Parameters.AddWithValue("@postStart", txtpostStart.Value);
-            update.Parameters.AddWithValue("@postEnd", txtpostEnd.Value);
-            update.Parameters.AddWithValue("@opportunityStartDate", txtopportunityStartDate.Value);
+            update.Parameters.AddWithValue("@postingTitle", HttpUtility.HtmlEncode(txtJobTitle.Value));
+            update.Parameters.AddWithValue("@description", HttpUtility.HtmlEncode(txtDescription.Value));
+            update.Parameters.AddWithValue("@jobRequirements", HttpUtility.HtmlEncode(txtRequirements.Value));
+            update.Parameters.AddWithValue("@cpName", HttpUtility.HtmlEncode(txtCpName.Value));
+            update.Parameters.AddWithValue("@cpEmail", HttpUtility.HtmlEncode(txtCpEmail.Value));
+            update.Parameters.AddWithValue("@cpPhone", HttpUtility.HtmlEncode(txtCpPhone.Value));
+            update.Parameters.AddWithValue("@postStart", HttpUtility.HtmlEncode(txtpostStart.Value));
+            update.Parameters.AddWithValue("@postEnd", HttpUtility.HtmlEncode(txtpostEnd.Value));
+            update.Parameters.AddWithValue("@opportunityStartDate", HttpUtility.HtmlEncode(txtopportunityStartDate.Value));
             update.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
 
             update.ExecuteNonQuery();
