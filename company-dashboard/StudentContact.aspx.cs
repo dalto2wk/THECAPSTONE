@@ -25,7 +25,6 @@ public partial class company_dashboard_StudentContact : System.Web.UI.Page
             loggedInUser.Text = Session["username"].ToString();
         }
 
-
         ///call the notifications method in the page load
         notifications();
     }

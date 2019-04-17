@@ -26,7 +26,7 @@
 		<div runat="server" class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 				<div class="sitelogo">
-				<a href="LandingPage.aspx"><img src="images/logo.jpg" alt="logo"></a>
+				<a href="LandingPage.aspx"><img src="img/logo.png" alt="logo"></a>
 			</div>
 													
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
@@ -70,7 +70,9 @@
 											<div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">Job Title</label>
 												<div runat="server" class="col-md-9">
-													<input id="txtJobTitle" type="text" name="regular" runat="server" class="form-control" >
+
+													<input id="txtJobTitle" type="text" name="regular" runat="server" class="form-control" maxlength="50" required >
+                                                    
 												</div>
 											</div>
                                             <div runat="server" class="form-group row">
@@ -111,7 +113,8 @@
 											<div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server"> Requirements/Credentials</label>
 												<div runat="server" class="col-md-9">
-													<input id="txtRequirements" type="text" name="regular" runat="server" class="form-control"  >
+													<input id="txtRequirements" type="text" name="regular" runat="server" class="form-control" maxlength="200" required  >
+                                                      
 												</div>
 											</div>
 											<div runat="server" class="form-group row">
@@ -134,9 +137,10 @@
 											<div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">Description</label>
 												<div runat="server" class="col-md-9">
-												<input id="txtDescription" type="text" name="regular" runat="server" class="form-control"><span class="help-block">Students will see this when viewing listings.</span></div>
+												<input id="txtDescription" type="text" name="regular" runat="server" class="form-control " maxlength="200" required><span class="help-block">Students will see this when viewing listings.</span></div>
                                                 
 											</div>
+
                                             <div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">Posting Date</label>
 												<div runat="server" class="col-md-9">
@@ -169,19 +173,30 @@
 											<div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">Contact Name</label>
 												<div runat="server" class="col-md-9">
-													<input id="txtCpName" type="text" name="regular" runat="server" class="form-control">
+													<input id="txtCpName" type="text" name="regular" runat="server" class="form-control" maxlength="50" required>
+                                                    
+                                                    <asp:RegularExpressionValidator ID="ContactNameRegularExpressionValidator" runat="server" ControlToValidate="txtCpName" ErrorMessage="(Invalid Name)" ForeColor="Red" ValidationExpression="[a-zA-Z ]*$"></asp:RegularExpressionValidator>
+                                                  
 												</div>
 											</div>
 											<div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">Phone</label>
 												<div runat="server" class="col-md-9">
-													<input id="txtCpPhone" type="text" name="regular" class="form-control" runat="server">
+													<input id="txtCpPhone" type="text" name="regular" class="form-control" runat="server" maxlength="10" required>
+                                                    
+                                                    <asp:RegularExpressionValidator ID="PhoneRegularExpressionValidator" runat="server" ControlToValidate="txtCpPhone" ErrorMessage="(Invalid Phone Number)" ForeColor="Red" ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
+                                                   
+                               
 												</div>
 											</div>
 											<div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">E-mail</label>
 												<div runat="server" class="col-md-9">
-													<input id="txtCpEmail" type="text" name="regular" class="form-control" runat="server">
+													<input id="txtCpEmail" type="text" name="regular" class="form-control" runat="server" maxlength="30" required>
+                                                    
+                                                    <asp:RegularExpressionValidator ID="EmailRegularExpressionValidator" runat="server" ControlToValidate="txtCpEmail" ErrorMessage="(Invalid Email Address)" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                                                    
+                               
 												</div>
 											</div>
 											<br>
