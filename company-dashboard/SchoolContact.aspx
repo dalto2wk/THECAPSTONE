@@ -27,7 +27,7 @@
 		<div class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 			<div class="sitelogo">
-				<img src="images/logo.jpg" alt="logo"><a href="LandingPage.aspx"></a>
+				<img src="img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
 			</div>
 
 
@@ -93,8 +93,8 @@
                                             </Columns>
                                         </asp:GridView>
 
-                        <asp:SqlDataSource runat="server" ID="Sqldatasource1" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  School.SchoolID,       School.SchoolName, School.CityCounty, School.state, School.Approval_Status
-FROM            School where School.Approval_Status != 'Approved'" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
+                        <asp:SqlDataSource runat="server" ID="Sqldatasource1" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  School.SchoolID,       School.SchoolName, School.CityCounty, School.state, Approval_Status.Approval_Status
+FROM            Approval_Status inner join School ON Approval_Status.SchoolID = School.SchoolID where Approval_Status.Approval_Status != 'Approved'" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
                                         <FilterParameters>
                                                 <asp:ControlParameter Name="SchoolName" ControlID="searchbox" PropertyName="Text" />
                                                 <asp:ControlParameter Name="CityCounty" ControlID="searchbox" PropertyName="Text" />
@@ -139,8 +139,8 @@ FROM            School where School.Approval_Status != 'Approved'" FilterExpress
                         
                                         
 
-                             <asp:SqlDataSource runat="server" ID="Sqldatasource2" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  School.SchoolID,       School.SchoolName, School.CityCounty, School.state, School.Approval_Status
-FROM            School where School.Approval_Status = 'Approved'" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
+                             <asp:SqlDataSource runat="server" ID="Sqldatasource2" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  School.SchoolID,       School.SchoolName, School.CityCounty, School.state, Approval_Status.Approval_Status
+FROM            Approval_Status inner join School ON Approval_Status.SchoolID = School.SchoolID where Approval_Status.Approval_Status = 'Approved'" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
                                         <FilterParameters>
                                                 <asp:ControlParameter Name="SchoolName" ControlID="searchbox1" PropertyName="Text" />
                                                 <asp:ControlParameter Name="CityCounty" ControlID="searchbox1" PropertyName="Text" />

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 public partial class company_dashboard_EditListing : System.Web.UI.Page
@@ -251,8 +254,8 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 /// <param name="e"></param>
     protected void updateBtnClick(object sender, EventArgs e)
     {
-        try
-        {
+        //try
+        //{
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
             sc.Open();
 
@@ -327,7 +330,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
             foreach (ListItem item in DropDownList_City.Items)
             {
-                if (item.Selected == true)
+                if (item.Selected == true && cityAlreadyPostedTo(Convert.ToInt32(Session["postID"].ToString()), Convert.ToInt32(item.Value)) == false)
                 {
                     PostingLocation pl = new PostingLocation(Convert.ToInt32(Session["postID"].ToString()), Convert.ToInt32(item.Value));
                     Debug.WriteLine(item.Value);
@@ -462,14 +465,67 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                 }
 
             }
+            if (fileUp.HasFile == true)
+            {
+                //set file to null in constructor and then other wise use set file and call the method 
+                //post.setfile();
+                //post.setfile(fileUp.FileContent);
+                System.Data.SqlClient.SqlCommand images = new System.Data.SqlClient.SqlCommand
+                {
+                    Connection = sc,
+                    CommandText = "Insert into Posting_Images values (@postingID, @imageFile)"
+                };
+                images.Parameters.AddWithValue("@postingID", getMaxPostingID());
+                images.Parameters.Add("@imageFile", SqlDbType.VarBinary);
+                HttpFileCollection fileCollection = Request.Files;
+                for (int i = 0; i < fileCollection.Count; i++)
+                {
+                    HttpPostedFile postedFile = fileCollection[i];
+                    if (postedFile.ContentLength > 0)
+                    {
+                        Stream fStream = postedFile.InputStream;
+                        byte[] contents = new byte[fStream.Length];
+                        fStream.Read(contents, 0, (int)fStream.Length);
+                        fStream.Close();
+                        images.Parameters["@imageFile"].Value = contents;
 
-            sc.Close();
-        }
-        catch
-        {
 
-        }
+                    }
+
+                    images.ExecuteNonQuery();
+                }
+
+                sc.Close();
+            }
+        //}
+        //catch
+        //{
+
+        //}
     }
+
+    public bool cityAlreadyPostedTo(int postingID, int locationID)
+    {
+        bool result = true;
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        {
+            Connection = sc,
+
+            CommandText = "select postingid, locationid from Posting_Location where postingID=@postingID and locationID=@locationID"
+
+        };
+        select.Parameters.AddWithValue("@postingID", postingID);
+        select.Parameters.AddWithValue("@locationID", locationID);
+        SqlDataReader reader = select.ExecuteReader();
+
+        
+
+        return reader.Read(); 
+    }
+
     /// <summary>
     /// populates the page with the data from the database
     /// </summary>
@@ -549,10 +605,11 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
             }
 
-            writeImage();
-            uploadedImage.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg";
+        //i need to loop through the image datalist and find the element id of postImage and call writeImage or break up the write method to do an image at a time
 
-            for (int i = 0; i < interests.Count; i++)
+        //uploadedImage.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg";
+
+        for (int i = 0; i < interests.Count; i++)
             {
                 foreach (ListItem item in listBoxInterests.Items)
                 {
@@ -583,20 +640,24 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         //}
     }
 
-    protected void writeImage()
+    protected String writeImage()
     {
-        string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg");
+        String result = "";
+
+        
         System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         cn.Open();
 
-        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select postFile from Posting where postingID= @postingID", cn);
+        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select imageFile,postingImageID from Posting_Images where postingID= @postingID", cn);
         cmd.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
 
         System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
-
-        if (dr.Read())
+        string postingImageID = "";
+        while (dr.Read())
         {
             byte[] fileData = (byte[])dr.GetValue(0);
+            postingImageID = dr.GetInt32(1).ToString();
+            string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID+ ".jpg");
             System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
 
             System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
@@ -604,20 +665,30 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             //Response.BinaryWrite(fileData);
             bw.Write(fileData);
             bw.Close();
-        }
+            //var image = (Page.FindControl("Image1") as Image).Controls.OfType<Image>();
+            
+            //foreach(Control c in image)
+            //{
+            //    if(c is Image)
+            //    {
+            //        ((Image)c).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+            //    }
+            //}
 
+            
+        }
+        
+        
+        //HtmlGenericControl image = DataList1.Item.FindControl("Image1") as HtmlGenericControl;
         dr.Close();
         //the below way stores to solution using response.binarywrite is better
         //Response.Redirect("~\\Files\\Report.pdf");
 
+
+        return "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
     }
 
-    //protected override void OnPreRender(EventArgs e)
-    //{
-    //    listBoxSchool.SelectedIndexChanged;
-
-    //    base.OnPreRender(e);
-    //}
+  
     protected void StateSelection_Change(object sender, EventArgs e)
     {
         count1 = 1;
@@ -748,7 +819,80 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         txtRequirements.Value = "Must be interested in technology and have some basic computer skills";
     }
 
+    /// <summary>
+    /// Method that gets the highest posting ID from the database
+    /// </summary>
+    /// <returns></returns>
+    private int getMaxPostingID()
+    {
+        int result = 0;
 
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand maxID = new System.Data.SqlClient.SqlCommand();
+        maxID.Connection = sc;
+        maxID.CommandText = "select max(PostingID) from Posting";
+
+        result = Convert.ToInt32(maxID.ExecuteScalar());
+        maxID.ExecuteNonQuery();
+
+        sc.Close();
+
+        return result;
+    }
+
+    protected void writeImage(object sender, DataListItemEventArgs e)
+    {
+        System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        cn.Open();
+
+        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select imageFile,postingImageID from Posting_Images where postingID= @postingID", cn);
+        cmd.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+
+        System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
+        string postingImageID = "";
+        while (dr.Read())
+        {
+            byte[] fileData = (byte[])dr.GetValue(0);
+            postingImageID = dr.GetInt32(1).ToString();
+            string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg");
+            System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
+
+            System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
+            //Response.ContentType = "images/jpeg";
+            //Response.BinaryWrite(fileData);
+            bw.Write(fileData);
+            bw.Close();
+            fs.Close();
+            //var image = (Page.FindControl("Image1") as Image).Controls.OfType<Image>();
+
+            //foreach (Control c in image)
+            //{
+            //    if (c is Image)
+            //    {
+            //        ((Image)c).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+            //    }
+            //}
+
+            if(e.Item.ItemType == ListItemType.Item)
+            {
+                DataRowView drv = (DataRowView)(e.Item.DataItem);
+                Image image = (Image)e.Item.FindControl("Image1");
+                image.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+                //((Image)(e.Item.DataItem)).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
+            }
+
+
+        }
+
+
+        //HtmlGenericControl image = DataList1.Item.FindControl("Image1") as HtmlGenericControl;
+        dr.Close();
+        //the below way stores to solution using response.binarywrite is better
+        //Response.Redirect("~\\Files\\Report.pdf");
+
+    }
 }
 
 
