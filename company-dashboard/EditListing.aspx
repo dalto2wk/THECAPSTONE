@@ -211,15 +211,16 @@
                                                         
                                                         <asp:Image ID="Image1" ImageUrl='<%# writeImage(Eval("imageFile")) %>' CssClass="imageList" runat="server"/>
                                                         <div>
+                                                            
                                                             <asp:Button ID="imageDeleteBtn" class="btn btn-danger text-center" type="button" Text="Delete Image" runat="server" />
                                                         </div>
                                                         
                                                         <br />
                                                     </ItemTemplate>
                                                 </asp:DataList>
-                                                <asp:SqlDataSource runat="server" ID="postingImages" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [imageFile] FROM [Posting_Images] WHERE ([postingID] = @postingID)">
+                                                <asp:SqlDataSource runat="server" ID="postingImages" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [imageFile], [postingImageID] FROM [Posting_Images] WHERE ([postingID] = @postingID)">
                                                     <SelectParameters>
-                                                        <asp:SessionParameter SessionField="postID" Name="postingID" Type="Int32" DefaultValue="39"></asp:SessionParameter>
+                                                        <asp:SessionParameter SessionField="postID" Name="postingID" Type="Int32" DefaultValue=""></asp:SessionParameter>
                                                     </SelectParameters>
                                                 </asp:SqlDataSource>
                                             </div>

@@ -475,7 +475,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                     Connection = sc,
                     CommandText = "Insert into Posting_Images values (@postingID, @imageFile)"
                 };
-                images.Parameters.AddWithValue("@postingID", getMaxPostingID());
+                images.Parameters.AddWithValue("@postingID", Session["postID"]);
                 images.Parameters.Add("@imageFile", SqlDbType.VarBinary);
                 HttpFileCollection fileCollection = Request.Files;
                 for (int i = 0; i < fileCollection.Count; i++)
@@ -820,7 +820,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         txtopportunityStartDate.Value = "04/28/2019";
         txtCpName.Value = "John Madison";
         txtCpEmail.Value = "jmad@gmail.com";
-        txtCpPhone.Value = "555/555-5555";
+        txtCpPhone.Value = "5555555555";
         txtRequirements.Value = "Must be interested in technology and have some basic computer skills";
     }
 
