@@ -74,22 +74,27 @@
 
 								<div class="form-group">
 									<label for="name" runat="server">Company Name</label>
-									<input id="CompanyName" type="text" class="form-control" runat="server" name="name" required autofocus>
+									<input id="CompanyName" type="text" class="form-control" runat="server" name="name" maxlength="50" required autofocus>
 								</div>
 
 								<div class="form-group">
 									<label for="industry" runat="server">Industry</label>
-									<input id="industry" type="industry" runat="server" class="form-control" name="industry" required>
+									<input id="industry" type="industry" runat="server" class="form-control" name="industry" maxlength="50" required>
+                                    <asp:RegularExpressionValidator ID="IndustryRegularExpressionValidator" runat="server" ControlToValidate="industry" ErrorMessage="(Invalid Industry)" ForeColor="Red" ValidationExpression="[a-zA-Z ]*$"></asp:RegularExpressionValidator>
+
 								</div>
 
 								<div class="form-group">
 									<label for="size" runat="server">Size</label>
-									<input id="size" type="size" class="form-control" runat="server" name="size" required data-eye>
+									<input id="size" type="size" class="form-control" runat="server" name="size" maxlength="20" required data-eye>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="size" ErrorMessage="(Invalid Size)" ForeColor="Red" ValidationExpression="[\d -]+"></asp:RegularExpressionValidator>
+
 								</div>
 
 								<div class="form-group">
 									<label for="description">Description</label>
-									<input id="description" type="description" runat="server" class="form-control" name="description" required data-eye>
+									<input id="description" type="description" runat="server" class="form-control" name="description" maxlength="200" required data-eye>
+
 								</div>
 
 				                <br>
@@ -98,32 +103,36 @@
 							
 								<div class="form-group">
 									<label for="name" runat="server">Your Name</label>
-									<input id="ContactName" type="text" class="form-control" runat="server" name="name" required autofocus>
+									<input id="ContactName" type="text" class="form-control" runat="server" name="name" maxlength="30" required autofocus>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="ContactName" ErrorMessage="(Invalid Name)" ForeColor="Red" ValidationExpression="[a-zA-Z ]*$"></asp:RegularExpressionValidator>
 								</div>
 
 								<div class="form-group">
 									<label for="title" runat="server">Title</label>
-									<input id="title" type="title" class="form-control" runat="server" name="title" required>
+									<input id="title" type="title" class="form-control" runat="server" name="title" maxlength="30" required>
 								</div>
 
 								<div class="form-group">
 									<label for="username" runat="server">Username</label>
-									<input id="username" type="username" class="form-control" runat="server" name="username" required data-eye>
+									<input id="username" type="username" class="form-control" runat="server" name="username" maxlength="30" required data-eye>
 								</div>
 
 								<div class="form-group">
 									<label for="password" runat="server">Password</label>
-									<input id="password" type="password" runat="server" class="form-control" name="password" required data-eye>
+									<input id="password" type="password" runat="server" class="form-control" name="password" maxlength="100" required data-eye>
 								</div>
 
 								<div class="form-group">
 									<label for="Phone" runat="server">Phone</label>
-									<input id="Phone" type="Phone" class="form-control" runat="server" name="Phone" required data-eye>
+									<input id="Phone" type="Phone" class="form-control" runat="server" name="Phone" maxlength="10" required data-eye>
+                                    <asp:RegularExpressionValidator ID="PhoneRegularExpressionValidator" runat="server" ControlToValidate="Phone" ErrorMessage="(Invalid Phone Number)" ForeColor="Red" ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
 								</div>
 
 								<div class="form-group">
 									<label for="email" runat="server">E-mail</label>
-									<input id="email" type="e-mail" class="form-control" runat="server" name="e-mail" required data-eye>
+									<input id="email" type="e-mail" class="form-control" runat="server" name="e-mail" maxlength="30" required data-eye>
+                                    <asp:RegularExpressionValidator ID="EmailRegularExpressionValidator" runat="server" ControlToValidate="email" ErrorMessage="(Invalid Email Address)" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+
 								</div>
 
 								
