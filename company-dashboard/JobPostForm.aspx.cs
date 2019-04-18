@@ -82,16 +82,16 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         //{
 
 
-            String postingTitle = txtJobTitle.Value;
-            String requirements = txtRequirements.Value;
+            String postingTitle = HttpUtility.HtmlEncode(txtJobTitle.Value);
+            String requirements = HttpUtility.HtmlEncode(txtRequirements.Value);
 
-            String description = txtDescription.Value;
-            String cpName = txtCpName.Value;
-            String cpPhone = txtCpPhone.Value;
-            String cpEmail = txtCpEmail.Value;
-            String postingStartDate = postStart.Value;
-            String postingEndDate = postEnd.Value;
-            String oppStartDate = opportunityStartDate.Value;
+            String description = HttpUtility.HtmlEncode(txtDescription.Value);
+            String cpName = HttpUtility.HtmlEncode(txtCpName.Value);
+            String cpPhone = HttpUtility.HtmlEncode(txtCpPhone.Value);
+            String cpEmail = HttpUtility.HtmlEncode(txtCpEmail.Value);
+            String postingStartDate = HttpUtility.HtmlEncode(postStart.Value);
+            String postingEndDate = HttpUtility.HtmlEncode(postEnd.Value);
+            String oppStartDate = HttpUtility.HtmlEncode(opportunityStartDate.Value);
 
             //fix the emp id to pull from what is in sql from the login 
             School schoolName = new School(listBoxSchool.SelectedValue);
@@ -376,7 +376,22 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         opportunityStartDate.Value = "04/28/2019";
         txtCpName.Value = "John Madison";
         txtCpEmail.Value = "jmad@gmail.com";
-        txtCpPhone.Value = "5555555555";
+
+        txtCpPhone.Value = "555-555-5555";
+
         txtRequirements.Value = "Must be interested in technology and have some basic computer skills";
+        DropDownList_State.SelectedItem.Text = "VA";
+        DropDownList_City.SelectedItem.Text = "Harrisonburg";
+
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+
+        System.Data.SqlClient.SqlCommand newSchool = new System.Data.SqlClient.SqlCommand();
+        newSchool.Connection = sc;
+        listBoxSchool.AutoPostBack = false;
+        PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + DropDownList_State.SelectedItem.Text + "' and CityCounty = '" + DropDownList_City.SelectedItem.Text + "'";
+        PostingSchool.DataBind();
+
+
+
     }
 }

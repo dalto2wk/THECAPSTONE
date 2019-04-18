@@ -30,19 +30,19 @@ public partial class Register : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand
             {
                 Connection = sc,
-                CommandText = "Insert into Employer values (@businessName, @size, @industry, @description, @cpTitle, @cpName, @cpUserName, @cpPassword, @LastUpdatedBy, GETDATE())"
+                CommandText = "Insert into Employer values (@businessName, @size, @industry, @description, @cpTitle, @cpName, @cpUserName, @cpPassword, @LastUpdatedBy, GETDATE(), @cpEmail, @cpPhone)"
             };
 
-            String businessName = CompanyName.Value;
-            String industryName = industry.Value;
-            String businessSize = size.Value;
-            String desc = description.Value;
-            String cpName = ContactName.Value;
-            String cpTitle = title.Value;
-            String cpUsername = username.Value;
-            String cpPassword = password.Value;
-            String cpPhone = Phone.Value;
-            String cpEmail = email.Value;
+            String businessName = HttpUtility.HtmlEncode(CompanyName.Value);
+            String industryName = HttpUtility.HtmlEncode(industry.Value);
+            String businessSize = HttpUtility.HtmlEncode(size.Value);
+            String desc = HttpUtility.HtmlEncode(description.Value);
+            String cpName = HttpUtility.HtmlEncode(ContactName.Value);
+            String cpTitle = HttpUtility.HtmlEncode(title.Value);
+            String cpUsername = HttpUtility.HtmlEncode(username.Value);
+            String cpPassword = HttpUtility.HtmlEncode(password.Value);
+            String cpPhone = HttpUtility.HtmlEncode(Phone.Value);
+            String cpEmail = HttpUtility.HtmlEncode(email.Value);
             
         Employer emp = new Employer(businessName, Convert.ToInt32(businessSize), industryName, desc, cpName, cpUsername, cpPassword, cpEmail, cpPhone, getNextEmpID());
 
@@ -55,7 +55,11 @@ public partial class Register : System.Web.UI.Page
             insert.Parameters.AddWithValue("@cpUsername", cpUsername);
             insert.Parameters.AddWithValue("@cpPassword", PasswordHash.HashPassword(cpPassword));
             insert.Parameters.AddWithValue("@LastUpdatedBy", "484Team");
-            insert.ExecuteNonQuery();
+            insert.Parameters.AddWithValue("@cpEmail", cpEmail);
+            insert.Parameters.AddWithValue("@cpPhone", cpPhone);
+
+
+        insert.ExecuteNonQuery();
 
         
         Response.Redirect("Login.aspx");
@@ -85,6 +89,20 @@ public partial class Register : System.Web.UI.Page
         }
 
         return result;
+    }
+
+    protected void PopulateBtnClick(object sender, EventArgs e)
+    {
+        CompanyName.Value = "James Madison University";
+        industry.Value = "Computer Information Systems";
+        size.Value = "20000";
+        description.Value = "We provide consulting to local businesses to help them build efficient information systems to drive their businesses!";
+        ContactName.Value = "John Alger";
+        title.Value = "The President";
+        username.Value = "dukes";
+        password.Value = "dukes";
+        Phone.Value = "804-123-4567";
+        email.Value = "jmu@jmu.edu";
     }
 }
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="JobPostForm.aspx.cs" Inherits="company_dashboard_JobPostForm" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="JobPostForm.aspx.cs" Inherits="company_dashboard_JobPostForm" ValidateRequest ="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +26,7 @@
 		<div runat="server" class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 				<div class="sitelogo">
-				<a href="LandingPage.aspx"><img src="img/logo.png" alt="logo"></a>
+				<a href="LandingPage.aspx"><img src="/img/logo.png" alt="logo"></a>
 			</div>
 													
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
@@ -182,7 +182,7 @@
 											<div runat="server" class="form-group row">
 												<label class="col-md-3 col-form-label" runat="server">Phone</label>
 												<div runat="server" class="col-md-9">
-													<input id="txtCpPhone" type="text" name="regular" class="form-control" runat="server" maxlength="10" required>
+													<input id="txtCpPhone" type="text" name="regular" class="form-control" runat="server" maxlength="12" required>
                                                     
                                                     <asp:RegularExpressionValidator ID="PhoneRegularExpressionValidator" runat="server" ControlToValidate="txtCpPhone" ErrorMessage="(Invalid Phone Number)" ForeColor="Red" ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
                                                    
@@ -240,7 +240,9 @@
 											<div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 
 											<asp:Button id="btnSubmitPosting" CssClass="btn btn-primary text-center" type="button" text="Submit" OnClick="submitPostingBtnClick" runat="server"></asp:Button>   
-                                            <asp:Button ID="populate" UseSubmitBehavior="false" CausesValidation="false" CssClass="btn btn-primary text-center" Text="Populate Fields" runat="server" OnClick="populate_Click" />
+
+                                            <asp:Button ID="populate" CssClass="btn btn-primary text-center" Text="Populate Fields" runat="server" UseSubmitBehavior="false" CausesValidation="False" OnClick="populate_Click" />
+
 											</div>
 										</div>
 									</form>		

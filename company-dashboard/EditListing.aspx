@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="EditListing.aspx.cs" Inherits="company_dashboard_EditListing" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="EditListing.aspx.cs" Inherits="company_dashboard_EditListing" ValidateRequest ="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +26,7 @@
             <div class="row">
                 <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
                     <div class="sitelogo">
-                        <img src="img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
+                        <img src="/img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
                     </div>
 
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
@@ -186,9 +186,9 @@
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Phone</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtCpPhone" type="text" name="regular" class="form-control" runat="server" maxlength="10" required>
+                                                    <input id="txtCpPhone" type="text" name="regular" class="form-control" runat="server" maxlength="12" required>
                                                     
-                                                    <asp:RegularExpressionValidator ID="PhoneRegularExpressionValidator" runat="server" ControlToValidate="txtCpPhone" ErrorMessage="(Invalid Phone Number)" ForeColor="Red" ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
+                                                    <asp:RegularExpressionValidator ID="PhoneRegularExpressionValidator" runat="server" ControlToValidate="txtCpPhone" ErrorMessage="(Invalid Phone Number)" ForeColor="Red" ValidationExpression="[\d -]+"></asp:RegularExpressionValidator>
                                                     
                                                 </div>
                                             </div>
