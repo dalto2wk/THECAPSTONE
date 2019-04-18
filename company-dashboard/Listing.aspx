@@ -92,67 +92,21 @@ FROM            Posting INNER JOIN
                          Application ON Posting.postingID = Application.postingID group by Posting.postingTitle --%>
 
 
-                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView" OnRowCommand="EditBtn" AllowSorting="true">
+
+                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingDataSource" OnRowCommand="EditBtn">
                                             <Columns>
-                                                <asp:BoundField DataField="Posting ID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"  HeaderText="Posting ID"></asp:BoundField>
-                                                <asp:BoundField DataField="Job Listing Title" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
+                                                <asp:BoundField DataField="postingID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"  HeaderText="Posting ID" SortExpression="Posting ID"></asp:BoundField>
+                                                <asp:BoundField DataField="jobTitle" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
+
                                                 <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
                                                 <asp:ButtonField CommandName="EditBtn" ButtonType="Button"  ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Edit Listing"></asp:ButtonField>
                                             </Columns>
                                         </asp:GridView>
-                                        <%--	<table class="table table-striped">
-												<thead>
-													<tr>
-														<th>Job Listing Title</th>
-														<th>Number of Applicants</th>
-														<th>Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>Weekly Shadowing</td>
-														<td>8</td>
-										
-														<td>
-															<div class="btn-group">
-															<p class="lead"><a class="btn btn-primary" href="forms.html"role="button">Edit Listing</a></p>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<td>High School seniors summer program</td>
-														<td>4</td>
-														
-														<td>
-															<div class="btn-group">
-															<p class="lead"><a class="btn btn-primary" href="forms.html"role="button">Edit Listing</a></p>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<td>Freshman Super Day</td>
-														<td>3</td>
-														<td>
-															<div class="btn-group">
-															<p class="lead"><a class="btn btn-primary" href="forms.html"role="button">Edit Listing</a></p>
-														</td>
-													</tr>
-													<tr>
-														<td>Rising stars program</td>
-														<td>1</td>
-													
-														<td>
-															<div class="btn-group">
-															<p class="lead"><a class="btn btn-primary" href="forms.html"role="button">Edit Listing</a></p>
-															
-														</td>
-													</tr>
-												</tbody>
-											</table>--%>
-                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    CAST(Posting.PostingID AS VARCHAR) AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', CAST(COUNT(Application.studentID) AS VARCHAR) AS 'Number Of Applicants' FROM Posting FULL OUTER JOIN Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid" FilterExpression="[Posting ID] LIKE '%{1}%' OR [Job Listing Title] LIKE '%{0}%' OR [Number of Applicants] LIKE '%{1}%'">
+                                      
+                                        <asp:SqlDataSource runat="server" ID="JobPostingDataSource" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    CAST(Posting.PostingID AS VARCHAR) AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', CAST(COUNT(Application.studentID) AS VARCHAR) AS 'Number Of Applicants' FROM Posting FULL OUTER JOIN Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid" FilterExpression="[Posting ID] LIKE '%{1}%' OR [Job Listing Title] LIKE '%{0}%' OR [Number of Applicants] LIKE '%{1}%'">
                                         <FilterParameters>
-                                                <asp:ControlParameter Name="Posting ID" ControlID="searchbox" PropertyName="Text" />
-                                                <asp:ControlParameter Name="Job Listing Title" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="postingID" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="jobTitle" ControlID="searchbox" PropertyName="Text" />
                                                 <asp:ControlParameter Name="Number of Applicants" ControlID="searchbox" PropertyName="Text" />
                                         </FilterParameters>
                                         </asp:SqlDataSource>

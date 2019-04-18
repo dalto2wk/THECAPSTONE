@@ -25,8 +25,30 @@ public partial class company_dashboard_StudentContact : System.Web.UI.Page
             loggedInUser.Text = Session["username"].ToString();
         }
 
+
+
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        {
+            Connection = sc,
+
+            CommandText = "select employerID from Employer where cpUserName = '" + Session["username"].ToString() + "'"
+
+        };
+
+
+        Session["EmpID"] = Convert.ToString(select.ExecuteScalar());
+
+
         ///call the notifications method in the page load
         notifications();
+
+       StudentApplicationDataSource.SelectCommand = "SELECT Approval_Status.EmployerID, CONCAT_WS(' ', Student.FirstName, Student.LastName) AS 'Name', School.SchoolName AS 'School Name', Application.jobTitle AS 'Applied to' FROM Approval_Status INNER JOIN School ON Approval_Status.SchoolID = School.SchoolID INNER JOIN Student ON School.SchoolID = Student.schoolID INNER JOIN Application ON Student.StudentID = Application.studentID WHERE Approval_Status.EmployerID = '" + Session["EmpID"] + "'";
+        StudentApplicationDataSource.DataBind();
+        studentApplicationTable.DataBind();
+
+
     }
 
     public void logoutClick(object sender, EventArgs e)
