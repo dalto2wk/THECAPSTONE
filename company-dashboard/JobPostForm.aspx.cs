@@ -82,20 +82,20 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         //{
 
 
-            String postingTitle = txtJobTitle.Value;
-            String requirements = txtRequirements.Value;
+        String postingTitle = txtJobTitle.Value;
+        String requirements = txtRequirements.Value;
 
-            String description = txtDescription.Value;
-            String cpName = txtCpName.Value;
-            String cpPhone = txtCpPhone.Value;
-            String cpEmail = txtCpEmail.Value;
-            String postingStartDate = postStart.Value;
-            String postingEndDate = postEnd.Value;
-            String oppStartDate = opportunityStartDate.Value;
+        String description = txtDescription.Value;
+        String cpName = txtCpName.Value;
+        String cpPhone = txtCpPhone.Value;
+        String cpEmail = txtCpEmail.Value;
+        String postingStartDate = postStart.Value;
+        String postingEndDate = postEnd.Value;
+        String oppStartDate = opportunityStartDate.Value;
 
-            //fix the emp id to pull from what is in sql from the login 
-            School schoolName = new School(listBoxSchool.SelectedValue);
-            Employer emp = new Employer("James Madison University", 20000, "Higher Education", "college", "Bill Jon", "BJ123", "password", "bj123@gmail.com", "555-555-5555", 16);
+        //fix the emp id to pull from what is in sql from the login 
+        School schoolName = new School(listBoxSchool.SelectedValue);
+        Employer emp = new Employer("James Madison University", 20000, "Higher Education", "college", "Bill Jon", "BJ123", "password", "bj123@gmail.com", "555-555-5555", Convert.ToInt16(Session["EmpID"]));
             Posting post = new Posting(postingTitle, description, requirements, cpName, emp, cpPhone, cpEmail, postingStartDate, postingEndDate, oppStartDate);
 
 

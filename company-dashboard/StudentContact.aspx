@@ -81,7 +81,7 @@
                                 <br>
                                 <div class="table-responsive">
                                     
-                                        <asp:GridView runat="server" CssClass="table table-striped" OnRowCommand="viewResume" AutoGenerateColumns="False" ID="studentApplicationTable" DataSourceID="StudentApplicationGridView">
+                                        <asp:GridView runat="server" CssClass="table table-striped" OnRowCommand="viewResume" AutoGenerateColumns="False" ID="studentApplicationTable" DataSourceID="StudentApplicationDataSource">
 
                                             <Columns>
 
@@ -94,7 +94,7 @@
                                                                                    
                                                    </Columns>
                                         </asp:GridView>
-                                        <asp:SqlDataSource runat="server" ID="StudentApplicationGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT CONCAT_WS(' ', Student.FirstName, Student.LastName) AS 'Name', School.SchoolName AS 'School Name', Application.jobTitle AS 'Applied to' FROM Student INNER JOIN School ON Student.schoolID = School.SchoolID INNER JOIN Application ON Student.StudentID = Application.studentID" FilterExpression="[Name] LIKE '%{0}%' OR [School Name] LIKE '%{0}%' OR [Applied To] LIKE '%{0}%'">
+                                        <asp:SqlDataSource runat="server" ID="StudentApplicationDataSource" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="" FilterExpression="[Name] LIKE '%{0}%' OR [School Name] LIKE '%{0}%' OR [Applied To] LIKE '%{0}%'">
                                             <FilterParameters>
                                                 <asp:ControlParameter Name="Name" ControlID="searchbox" PropertyName="Text" />
                                                 <asp:ControlParameter Name="School Name" ControlID="searchbox" PropertyName="Text" />

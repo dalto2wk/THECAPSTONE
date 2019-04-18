@@ -92,10 +92,10 @@ FROM            Posting INNER JOIN
                          Application ON Posting.postingID = Application.postingID group by Posting.postingTitle --%>
 
 
-                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView" OnRowCommand="EditBtn">
+                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingDataSource" OnRowCommand="EditBtn">
                                             <Columns>
-                                                <asp:BoundField DataField="Posting ID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"  HeaderText="Posting ID" SortExpression="Posting ID"></asp:BoundField>
-                                                <asp:BoundField DataField="Job Listing Title" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
+                                                <asp:BoundField DataField="postingID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"  HeaderText="Posting ID" SortExpression="Posting ID"></asp:BoundField>
+                                                <asp:BoundField DataField="jobTitle" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
                                                 <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
                                                 <asp:ButtonField ButtonType="Button"  ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Edit Listing" />
                                                 <%--<asp:CommandField ShowEditButton="True"  ControlStyle-CssClass="btn btn-primary" ShowHeader="True" EditText="Edit Listing" HeaderText="Action"></asp:CommandField>--%>
@@ -106,59 +106,11 @@ FROM            Posting INNER JOIN
                                                 </asp:TemplateField>--%>
                                             </Columns>
                                         </asp:GridView>
-                                        <%--	<table class="table table-striped">
-												<thead>
-													<tr>
-														<th>Job Listing Title</th>
-														<th>Number of Applicants</th>
-														<th>Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>Weekly Shadowing</td>
-														<td>8</td>
-										
-														<td>
-															<div class="btn-group">
-															<p class="lead"><a class="btn btn-primary" href="forms.html"role="button">Edit Listing</a></p>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<td>High School seniors summer program</td>
-														<td>4</td>
-														
-														<td>
-															<div class="btn-group">
-															<p class="lead"><a class="btn btn-primary" href="forms.html"role="button">Edit Listing</a></p>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<td>Freshman Super Day</td>
-														<td>3</td>
-														<td>
-															<div class="btn-group">
-															<p class="lead"><a class="btn btn-primary" href="forms.html"role="button">Edit Listing</a></p>
-														</td>
-													</tr>
-													<tr>
-														<td>Rising stars program</td>
-														<td>1</td>
-													
-														<td>
-															<div class="btn-group">
-															<p class="lead"><a class="btn btn-primary" href="forms.html"role="button">Edit Listing</a></p>
-															
-														</td>
-													</tr>
-												</tbody>
-											</table>--%>
-                                        <asp:SqlDataSource runat="server" ID="JobPostingGridView" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    CAST(Posting.PostingID AS VARCHAR) AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', CAST(COUNT(Application.studentID) AS VARCHAR) AS 'Number Of Applicants' FROM Posting FULL OUTER JOIN Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid" FilterExpression="[Posting ID] LIKE '%{1}%' OR [Job Listing Title] LIKE '%{0}%' OR [Number of Applicants] LIKE '%{1}%'">
+                                      
+                                        <asp:SqlDataSource runat="server" ID="JobPostingDataSource" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    CAST(Posting.PostingID AS VARCHAR) AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', CAST(COUNT(Application.studentID) AS VARCHAR) AS 'Number Of Applicants' FROM Posting FULL OUTER JOIN Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid" FilterExpression="[Posting ID] LIKE '%{1}%' OR [Job Listing Title] LIKE '%{0}%' OR [Number of Applicants] LIKE '%{1}%'">
                                         <FilterParameters>
-                                                <asp:ControlParameter Name="Posting ID" ControlID="searchbox" PropertyName="Text" />
-                                                <asp:ControlParameter Name="Job Listing Title" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="postingID" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="jobTitle" ControlID="searchbox" PropertyName="Text" />
                                                 <asp:ControlParameter Name="Number of Applicants" ControlID="searchbox" PropertyName="Text" />
                                         </FilterParameters>
                                         </asp:SqlDataSource>
@@ -175,7 +127,8 @@ FROM            Posting INNER JOIN
 
                         <div class="col-md-12 col-lg-8">
                             <div class="card mb-8">
-                               <div class="card-block">
+                               
+									<div class="card-block">
 										<h3 class="card-title">Notifications</h3>
 										<div class="dropdown card-title-btn-container">
 											<button class="btn btn-sm btn-subtle" runat="server" type="button"><em class="fa fa-list-ul"></em> View All</button>
@@ -191,8 +144,8 @@ FROM            Posting INNER JOIN
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">1</div>
-															<div class="text-muted">Apr</div>
+															<div class="large" ><asp:Literal ID="day1" runat="server"></asp:Literal></div>
+                                                            <div class="text-muted" ><asp:Literal ID="month1" runat="server"></asp:Literal></div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle1" runat="server"/></h4>
@@ -207,8 +160,8 @@ FROM            Posting INNER JOIN
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">1</div>
-															<div class="text-muted">Apr</div>
+															<div class="large" ><asp:Literal ID="day2" runat="server"></asp:Literal></div>
+                                                            <div class="text-muted" ><asp:Literal ID="month2" runat="server"></asp:Literal></div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle2" runat="server"/></h4>
@@ -223,8 +176,8 @@ FROM            Posting INNER JOIN
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">31</div>
-															<div class="text-muted">Mar</div>
+															<div class="large" ><asp:Literal ID="day3" runat="server"></asp:Literal></div>
+                                                            <div class="text-muted" ><asp:Literal ID="month3" runat="server"></asp:Literal></div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle3" runat="server"/></h4>

@@ -23,11 +23,14 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
         }
 
         notifications();
+
+        JobPostingDataSource.SelectCommand = "SELECT Employer.employerID, Posting.postingID, Application.jobTitle, CAST(COUNT(Application.studentID) AS VARCHAR) AS 'Number Of Applicants' FROM Application INNER JOIN Posting ON Application.postingID = Posting.postingID INNER JOIN Employer ON Posting.employerID = Employer.employerID where employer.employerID = '" + Session["EmpID"] + "' group by Employer.employerID, Posting.postingID, Application.jobTitle";
     }
 
     public void notifications()
     {
         List<String> notifications = new List<String>();
+        List<DateTime> dates = new List<DateTime>();
 
         ///Connect to database
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
@@ -49,13 +52,33 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
             notifications.Add(reader.GetString(0));
             notifications.Add(reader.GetString(1));
             notifications.Add(reader.GetString(2));
+            dates.Add(reader.GetDateTime(3));
         }
         sc.Close();
 
         notifications.Reverse();
+        dates.Reverse();
+
+        ///day and month of most recent application
+        String dy0 = dates[0].Day.ToString();
+        String mn0 = new DateTime(2019, dates[0].Month, 1).ToString("MMM", System.Globalization.CultureInfo.InvariantCulture);
+
+        ///day and month of Second-most recent application
+        String dy1 = dates[1].Day.ToString();
+        String mn1 = new DateTime(2019, dates[1].Month, 1).ToString("MMM", System.Globalization.CultureInfo.InvariantCulture);
+
+        ///day and month of Third-most recent application
+        String dy2 = dates[2].Day.ToString();
+        String mn2 = new DateTime(2019, dates[2].Month, 1).ToString("MMM", System.Globalization.CultureInfo.InvariantCulture);
 
 
         notificationTitle1.Text = notifications[2] + " " + notifications[1] + " just applied for the " + notifications[0] + " position!";
+        day1.Text = dy0;
+        month1.Text = mn0;
+        day2.Text = dy1;
+        month2.Text = mn1;
+        day3.Text = dy2;
+        month3.Text = mn2;
         notificationTitle2.Text = notifications[5] + " " + notifications[4] + " just applied for the " + notifications[3] + " position!";
         notificationTitle3.Text = notifications[8] + " " + notifications[7] + " just applied for the " + notifications[6] + " position!";
 
