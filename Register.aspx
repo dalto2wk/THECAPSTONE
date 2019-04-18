@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="Register" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="Register" ValidateRequest ="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,9 +88,9 @@
 
 								<div class="form-group">
 									<label for="Phone" runat="server">Phone</label>
-									<input id="Phone" type="Phone" class="form-control" maxlength="10" runat="server" name="Phone" required data-eye>
+									<input id="Phone" type="Phone" class="form-control" maxlength="12" runat="server" name="Phone" required data-eye>
                                     <asp:RequiredFieldValidator ID="PhoneRequiredFieldValidator" runat="server" ControlToValidate="Phone" ErrorMessage="(Required)" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="PhoneRegularExpressionValidator" runat="server" ControlToValidate="Phone" ErrorMessage="(Invalid Phone Number)" ForeColor="Red" ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
+                                    <asp:RegularExpressionValidator ID="PhoneRegularExpressionValidator" runat="server" ControlToValidate="Phone" ErrorMessage="(Invalid Phone Number)" ForeColor="Red" ValidationExpression="[\d -]+"></asp:RegularExpressionValidator>
                                     
 								</div>
 
@@ -115,7 +115,16 @@
 								<div class="form-group m-0">
 									<asp:Button type="submit" id="btnRegister" text="Register" OnClick="RegisterBtnClick" runat="server" class="btn btn-primary btn-block">
 									</asp:Button>
+
 								</div>
+                                <div>
+                                    <br />
+                                </div>
+                               <div class="form-group m-0">
+                                <asp:Button type="submit" id="btnPopulate" text="Populate" UseSubmitBehavior="false" CausesValidation="False" OnClick="PopulateBtnClick" runat="server" class="btn btn-primary btn-block">
+									</asp:Button>
+                                   </div>
+
 								<div class="mt-4 text-center">
 									Already have an account? <a href="Login.aspx">Login</a>
 								</div>

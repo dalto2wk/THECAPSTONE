@@ -26,8 +26,8 @@ public partial class Login : System.Web.UI.Page
     {
        
 
-        String username = email.Text;
-        String pwd = password.Text;
+        String username = HttpUtility.HtmlEncode(email.Text);
+        String pwd = HttpUtility.HtmlEncode(password.Text);
         
         
         getPassword(pwd, username);

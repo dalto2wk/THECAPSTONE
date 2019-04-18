@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="EditListing.aspx.cs" Inherits="company_dashboard_EditListing" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="EditListing.aspx.cs" Inherits="company_dashboard_EditListing" ValidateRequest ="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -186,9 +186,9 @@
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Phone</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtCpPhone" type="text" name="regular" class="form-control" runat="server" maxlength="10" required>
+                                                    <input id="txtCpPhone" type="text" name="regular" class="form-control" runat="server" maxlength="12" required>
                                                     
-                                                    <asp:RegularExpressionValidator ID="PhoneRegularExpressionValidator" runat="server" ControlToValidate="txtCpPhone" ErrorMessage="(Invalid Phone Number)" ForeColor="Red" ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
+                                                    <asp:RegularExpressionValidator ID="PhoneRegularExpressionValidator" runat="server" ControlToValidate="txtCpPhone" ErrorMessage="(Invalid Phone Number)" ForeColor="Red" ValidationExpression="[\d -]+"></asp:RegularExpressionValidator>
                                                     
                                                 </div>
                                             </div>
