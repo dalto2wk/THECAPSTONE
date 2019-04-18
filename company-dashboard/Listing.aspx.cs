@@ -25,6 +25,8 @@ public partial class company_dashboard_Listing : System.Web.UI.Page
         notifications();
 
         JobPostingDataSource.SelectCommand = "SELECT Employer.employerID, Posting.postingID, Application.jobTitle, CAST(COUNT(Application.studentID) AS VARCHAR) AS 'Number Of Applicants' FROM Application INNER JOIN Posting ON Application.postingID = Posting.postingID INNER JOIN Employer ON Posting.employerID = Employer.employerID where employer.employerID = '" + Session["EmpID"] + "' group by Employer.employerID, Posting.postingID, Application.jobTitle";
+       // JobPostingDataSource.DataBind();
+       // GridView1.DataBind();
     }
 
     public void notifications()

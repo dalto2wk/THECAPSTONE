@@ -95,7 +95,7 @@ FROM            Posting INNER JOIN
 
                                         <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingDataSource" OnRowCommand="EditBtn">
                                             <Columns>
-                                                <asp:BoundField DataField="postingID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"  HeaderText="Posting ID" SortExpression="Posting ID"></asp:BoundField>
+                                                <asp:BoundField DataField="postingID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"  HeaderText="Posting ID" SortExpression="postingID"></asp:BoundField>
                                                 <asp:BoundField DataField="jobTitle" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
 
                                                 <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
@@ -103,11 +103,9 @@ FROM            Posting INNER JOIN
                                             </Columns>
                                         </asp:GridView>
                                       
-                                        <asp:SqlDataSource runat="server" ID="JobPostingDataSource" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT    CAST(Posting.PostingID AS VARCHAR) AS 'Posting ID', Posting.postingTitle AS 'Job Listing Title', CAST(COUNT(Application.studentID) AS VARCHAR) AS 'Number Of Applicants' FROM Posting FULL OUTER JOIN Application ON Posting.postingID = Application.postingID group by Posting.postingTitle, posting.postingid" FilterExpression="[Posting ID] LIKE '%{1}%' OR [Job Listing Title] LIKE '%{0}%' OR [Number of Applicants] LIKE '%{1}%'">
+                                        <asp:SqlDataSource runat="server" ID="JobPostingDataSource" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="" FilterExpression="[JobTitle] LIKE '%{0}%'">
                                         <FilterParameters>
-                                                <asp:ControlParameter Name="postingID" ControlID="searchbox" PropertyName="Text" />
                                                 <asp:ControlParameter Name="jobTitle" ControlID="searchbox" PropertyName="Text" />
-                                                <asp:ControlParameter Name="Number of Applicants" ControlID="searchbox" PropertyName="Text" />
                                         </FilterParameters>
                                         </asp:SqlDataSource>
                                     </div>
