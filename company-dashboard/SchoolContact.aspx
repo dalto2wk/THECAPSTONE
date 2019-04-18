@@ -72,7 +72,7 @@
 
 											
 
-													<asp:Textbox runat="server" class="form-control" type="text" name="placeholder" id="searchbox" placeholder="filter data by School Name or Location"></asp:Textbox>
+													<asp:Textbox runat="server" class="form-control" type="text" name="placeholder" id="searchbox1" placeholder="filter data by School Name or Location"></asp:Textbox>
 												</div>
                                             </div>
 
@@ -94,15 +94,14 @@
                                         </asp:GridView>
 
 
-                       <asp:SqlDataSource runat="server" ID="Sqldatasource1" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  Approval_Status.EmployerID, School.SchoolID,       School.SchoolName, School.CityCounty, School.state, Approval_Status.Approval_Status
-
-FROM            Approval_Status inner join School ON Approval_Status.SchoolID = School.SchoolID where Approval_Status.Approval_Status != 'Approved'" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
+                                 <asp:SqlDataSource runat="server" ID="Sqldatasource1" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand = "" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
                                         <FilterParameters>
                                                 <asp:ControlParameter Name="SchoolName" ControlID="searchbox1" PropertyName="Text" />
                                                 <asp:ControlParameter Name="CityCounty" ControlID="searchbox1" PropertyName="Text" />
                                                 <asp:ControlParameter Name="state" ControlID="searchbox1" PropertyName="Text" />
                                             </FilterParameters>
                                         </asp:SqlDataSource>
+                       
                         </div>
                        <div><br /></div>
                        <h3>&nbsp;&nbsp;Approved Schools</h3>
@@ -116,7 +115,7 @@ FROM            Approval_Status inner join School ON Approval_Status.SchoolID = 
 
 											
 
-													<asp:Textbox runat="server" class="form-control" type="text" name="placeholder" id="Searchbox1" placeholder="filter data by School Name or Location"></asp:Textbox>
+													<asp:Textbox runat="server" class="form-control" type="text" name="placeholder" id="Searchbox2" placeholder="filter data by School Name or Location"></asp:Textbox>
 												</div>
                                             </div>
                                         </div>
@@ -139,13 +138,11 @@ FROM            Approval_Status inner join School ON Approval_Status.SchoolID = 
                                         
 
 
-                             <asp:SqlDataSource runat="server" ID="Sqldatasource2" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  Approval_Status.EmployerID, School.SchoolID,       School.SchoolName, School.CityCounty, School.state, Approval_Status.Approval_Status
-
-FROM            Approval_Status inner join School ON Approval_Status.SchoolID = School.SchoolID where Approval_Status.Approval_Status = 'Approved'" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
+                             <asp:SqlDataSource runat="server" ID="Sqldatasource2" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand = "" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
                                         <FilterParameters>
-                                                <asp:ControlParameter Name="SchoolName" ControlID="searchbox1" PropertyName="Text" />
-                                                <asp:ControlParameter Name="CityCounty" ControlID="searchbox1" PropertyName="Text" />
-                                                <asp:ControlParameter Name="state" ControlID="searchbox1" PropertyName="Text" />
+                                                <asp:ControlParameter Name="SchoolName" ControlID="searchbox2" PropertyName="Text" />
+                                                <asp:ControlParameter Name="CityCounty" ControlID="searchbox2" PropertyName="Text" />
+                                                <asp:ControlParameter Name="state" ControlID="searchbox2" PropertyName="Text" />
                                             </FilterParameters>
                                         </asp:SqlDataSource>
 

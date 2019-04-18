@@ -70,26 +70,18 @@ public partial class company_dashboard_SchoolContact : System.Web.UI.Page
     protected void Unnamed_Click(object sender, EventArgs e)
     {
 
-        Sqldatasource1.SelectCommand = "SELECT Approval_Status.EmployerID, School.SchoolID,       School.SchoolName, School.CityCounty, School.state, Approval_Status.Approval_Status " +
-            "FROM Approval_Status inner join School ON Approval_Status.SchoolID = School.SchoolID where Approval_Status.Approval_Status != 'Approved' AND Approval_Status.EmployerID = '" + Session["EmpID"]+"'";
-        Sqldatasource1.DataBind();
-        GridView1.DataBind();
+        //Sqldatasource1.SelectCommand = "SELECT Approval_Status.EmployerID, School.SchoolID,       School.SchoolName, School.CityCounty, School.state, Approval_Status.Approval_Status " +
+        //    "FROM Approval_Status inner join School ON Approval_Status.SchoolID = School.SchoolID where Approval_Status.Approval_Status = 'Approved' AND Approval_Status.EmployerID = '" + Session["EmpID"] + "'";
+        //Sqldatasource1.DataBind();
+        //GridView1.DataBind();
     }
 
     protected void Unnamed_Click2(object sender, EventArgs e)
     {
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-        sc.Open();
-        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
-        {
-            Connection = sc,
-
-            CommandText = "select employerID from Employer where cpUserName = '" + Session["username"].ToString() + "'"
-
-        };
-
-
-        Session["EmpID"] = Convert.ToString(select.ExecuteScalar());
+        //Sqldatasource2.SelectCommand = "SELECT Approval_Status.EmployerID, School.SchoolID,       School.SchoolName, School.CityCounty, School.state, Approval_Status.Approval_Status " +
+        //   "FROM Approval_Status inner join School ON Approval_Status.SchoolID = School.SchoolID where Approval_Status.Approval_Status != 'Approved' AND Approval_Status.EmployerID = '" + Session["EmpID"] + "'";
+        //Sqldatasource2.DataBind();
+        //GridView2.DataBind();
 
     }
 }
