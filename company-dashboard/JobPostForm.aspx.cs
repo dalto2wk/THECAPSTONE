@@ -379,7 +379,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
         txtCpName.Value = "John Madison";
         txtCpEmail.Value = "jmad@gmail.com";
 
-        txtCpPhone.Value = "555-555-5555";
+        txtCpPhone.Value = "5555555555";
 
         txtRequirements.Value = "Must be interested in technology and have some basic computer skills";
         DropDownList_State.SelectedItem.Text = "VA";
