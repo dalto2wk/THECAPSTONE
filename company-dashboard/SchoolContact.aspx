@@ -60,7 +60,7 @@
 					<div class="clear"></div>
 				</header>
 				<section class="row">
-                    <h3> Approval Requests</h3>
+                    
 					<div class="col-sm-12">
                         <h3> Approval Requests</h3>
 								<div class="card mb-4">

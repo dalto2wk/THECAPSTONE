@@ -37,27 +37,25 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
 
         };
 
-       
-
         Session["EmpID"] = Convert.ToString(select.ExecuteScalar());
         ///call the notifications method here in the page load
         notifications();
 
 
-        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-        sc.Open();
-        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
-        {
-            Connection = sc,
+        //System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        //sc.Open();
+        //System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        //{
+        //    Connection = sc,
 
-            CommandText = "select employerID from Employer where cpUserName = '" + Session["username"].ToString() + "'"
+        //    CommandText = "select employerID from Employer where cpUserName = '" + Session["username"].ToString() + "'"
 
-        };
+        //};
 
 
-        Session["EmpID"] = Convert.ToString(select.ExecuteScalar());
+        //Session["EmpID"] = Convert.ToString(select.ExecuteScalar());
 
-        ///call the notifications method in the page load
+        /////call the notifications method in the page load
 
 
         SqlDataSource1.SelectCommand = "SELECT Application.applicationID, Application.jobTitle, Application.companyName, Posting.postingID, Employer.employerID FROM Employer INNER JOIN Posting ON Employer.employerID = Posting.employerID INNER JOIN Application ON Posting.postingID = Application.postingID where Employer.employerID = '" + Session["EmpID"] + "'";
