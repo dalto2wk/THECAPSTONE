@@ -27,7 +27,7 @@
 		<div class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 			<div class="sitelogo">
-				<img src="images/logo.jpg" alt="logo"><a href="LandingPage.aspx"></a>
+				<img src="/img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
 			</div>
 
 
@@ -62,6 +62,7 @@
 				<section class="row">
                     <h3> Approval Requests</h3>
 					<div class="col-sm-12">
+                        <h3> Approval Requests</h3>
 								<div class="card mb-4">
 									<div class="card-block">
 										<div class="input-group">
@@ -77,13 +78,11 @@
 
 										</div>
 										</div>
-                                       
 
-										
-                         
+
                                       <div class="table-responsive col-sm-12"></div>
 										<br>
-                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource1" OnRowCommand="viewInfo">
+                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource1" OnRowCommand="viewInfo" AllowSorting="True">
                                             <Columns>
                                                 <asp:BoundField DataField="SchoolID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" HeaderText="School ID" SortExpression="School"></asp:BoundField>
                                                 <asp:BoundField DataField="SchoolName"  HeaderText="School" SortExpression="SchoolName"></asp:BoundField>
@@ -94,7 +93,9 @@
                                             </Columns>
                                         </asp:GridView>
 
+
                        <asp:SqlDataSource runat="server" ID="Sqldatasource1" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  Approval_Status.EmployerID, School.SchoolID,       School.SchoolName, School.CityCounty, School.state, Approval_Status.Approval_Status
+
 FROM            Approval_Status inner join School ON Approval_Status.SchoolID = School.SchoolID where Approval_Status.Approval_Status != 'Approved'" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
                                         <FilterParameters>
                                                 <asp:ControlParameter Name="SchoolName" ControlID="searchbox1" PropertyName="Text" />
@@ -103,8 +104,8 @@ FROM            Approval_Status inner join School ON Approval_Status.SchoolID = 
                                             </FilterParameters>
                                         </asp:SqlDataSource>
                         </div>
-
-                       <h3> Approved Schools</h3>
+                       <div><br /></div>
+                       <h3>&nbsp;&nbsp;Approved Schools</h3>
                         <div class="col-sm-12">
                         	<div class="card mb-4">
 									<div class="card-block">
@@ -123,13 +124,13 @@ FROM            Approval_Status inner join School ON Approval_Status.SchoolID = 
 										
                          <div class="table-responsive col-sm-12"></div>
 										<br>
-                                        <asp:GridView ID="GridView2" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource2" OnRowCommand="viewInfo">
+                                        <asp:GridView ID="GridView2" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="Sqldatasource2" OnRowCommand="viewInfo" AllowSorting="True" AllowPaging="True">
                                             <Columns>
                                                 <asp:BoundField DataField="SchoolID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" HeaderText="School ID" SortExpression="School"></asp:BoundField>
-                                                <asp:BoundField DataField="SchoolName"  HeaderText="School" SortExpression="School"></asp:BoundField>
-                                                <asp:BoundField DataField="CityCounty" HeaderText="City" SortExpression="City"></asp:BoundField>
-                                                <asp:BoundField DataField="state" HeaderText="State" ReadOnly="True" SortExpression="State"></asp:BoundField>
-                                                <asp:BoundField DataField="Approval_Status" HeaderText="Approval Status" ReadOnly="True" SortExpression="Approval Status"></asp:BoundField>
+                                                <asp:BoundField DataField="SchoolName"  HeaderText="School" SortExpression="SchoolName"></asp:BoundField>
+                                                <asp:BoundField DataField="CityCounty" HeaderText="City" SortExpression="CityCounty"></asp:BoundField>
+                                                <asp:BoundField DataField="state" HeaderText="State" ReadOnly="True" SortExpression="state"></asp:BoundField>
+                                                <asp:BoundField DataField="Approval_Status" HeaderText="Approval Status" ReadOnly="True"></asp:BoundField>
                                                 <asp:ButtonField CommandName="viewInfo" ControlStyle-CssClass="btn btn-primary" Text="View Info" ButtonType="Button" ShowHeader="True" HeaderText="Info"></asp:ButtonField>                                              
                                             </Columns>
                                         </asp:GridView>
@@ -137,7 +138,9 @@ FROM            Approval_Status inner join School ON Approval_Status.SchoolID = 
                         
                                         
 
+
                              <asp:SqlDataSource runat="server" ID="Sqldatasource2" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT  Approval_Status.EmployerID, School.SchoolID,       School.SchoolName, School.CityCounty, School.state, Approval_Status.Approval_Status
+
 FROM            Approval_Status inner join School ON Approval_Status.SchoolID = School.SchoolID where Approval_Status.Approval_Status = 'Approved'" FilterExpression="[SchoolName] LIKE '%{0}%' OR [CityCounty] LIKE '%{0}%' OR [state] LIKE '%{0}%'">
                                         <FilterParameters>
                                                 <asp:ControlParameter Name="SchoolName" ControlID="searchbox1" PropertyName="Text" />

@@ -26,6 +26,7 @@ public partial class company_dashboard_StudentContact : System.Web.UI.Page
         }
 
 
+
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         sc.Open();
         System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
@@ -38,6 +39,7 @@ public partial class company_dashboard_StudentContact : System.Web.UI.Page
 
 
         Session["EmpID"] = Convert.ToString(select.ExecuteScalar());
+
 
         ///call the notifications method in the page load
         notifications();

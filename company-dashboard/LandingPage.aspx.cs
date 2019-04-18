@@ -27,8 +27,22 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
             loggedInUser.Text = Session["username"].ToString();
         }
 
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        {
+            Connection = sc,
+
+            CommandText = "select employerID from Employer where cpUserName = '" + Session["username"].ToString() + "'"
+
+        };
+
+       
+
+        Session["EmpID"] = Convert.ToString(select.ExecuteScalar());
         ///call the notifications method here in the page load
         notifications();
+
 
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         sc.Open();
@@ -49,6 +63,7 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
         SqlDataSource1.SelectCommand = "SELECT Application.applicationID, Application.jobTitle, Application.companyName, Posting.postingID, Employer.employerID FROM Employer INNER JOIN Posting ON Employer.employerID = Posting.employerID INNER JOIN Application ON Posting.postingID = Application.postingID where Employer.employerID = '" + Session["EmpID"] + "'";
         SqlDataSource1.DataBind();
         recentApplicationsGV.DataBind();
+
 
 
 
@@ -381,43 +396,99 @@ public partial class company_dashboard_LandingPage : System.Web.UI.Page
 
     }
 
-    /// <summary>
     /// Call the method in the prerender (a page event that comes after 
     protected void topCandidate(object sender, EventArgs e)
     {
         TopCandidate();
     }
 
+    //Populate the TodoList with the items in the Todo_List database table
+    protected void populateTodoList()
+    {
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+
+        ///Grab the posting interests from the posting
+        sc.Open();
+        System.Data.SqlClient.SqlCommand getTodoList = new System.Data.SqlClient.SqlCommand
+
+        {
+            Connection = sc,
+            CommandText = "SELECT itemName from Todo_List" 
+        };
+
+        SqlDataReader reader = getTodoList.ExecuteReader();
+        //empty Todo list to avoid duplicates
+        CheckBoxListTodo.Items.Clear();
+
+        ///add the posting interests into the postingInterest arraylist
+        while (reader.Read())
+        {
+           CheckBoxListTodo.Items.Add(reader.GetString(0));
+        }
+
+        if (CheckBoxListTodo.Items.Count == 0)
+        {
+            lblMessage.Text = "No Items in Todo List";
+        }
+        sc.Close();    
+    }
+
+
+
+
     protected void btnTodoAdd_Click(object sender, EventArgs e)
     {
-        CheckBoxListTodo.Items.Add(txtInput.Text);
-        txtInput.Text = "";
+        //CheckBoxListTodo.Items.Add(txtInput.Text);
         lblMessage.Text = "";
 
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+
+        ///Insert the text in the textField into the Todo_List table
+        sc.Open();
+        System.Data.SqlClient.SqlCommand getTodoList = new System.Data.SqlClient.SqlCommand
+        {
+            Connection = sc,
+            CommandText = "Insert into Todo_List values(@itemName, @employeeID)" 
+        };
+
+        getTodoList.Parameters.AddWithValue("@itemName", txtInput.Text);
+        getTodoList.Parameters.AddWithValue("@employeeID", Session["EmpID"]);
+
+        SqlDataReader reader = getTodoList.ExecuteReader();
+        SqlDataSource3.DataBind();
+        CheckBoxListTodo.DataBind();
+
+        ///clear the textbox
+        txtInput.Text = "";
     }
+
 
     protected void btnTodoDelete_Click(object sender, EventArgs e)
     {
         txtInput.Text = "";
-        lblMessage.Text = "Items removed:";
-        List<String> ListItems = new List<String>();
+        lblMessage.Text = "";
+
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+
+        ///Delete each item in the CheckboxList that is selected
         foreach (ListItem li in CheckBoxListTodo.Items)
         {
             if (li.Selected == true)
             {
-                ListItems.Add(li.Text.ToString());
+               
+                sc.Open();
+                System.Data.SqlClient.SqlCommand getTodoList = new System.Data.SqlClient.SqlCommand
+                {
+                    Connection = sc,
+                    CommandText = "Delete from Todo_List where itemName = '" + li.Text.ToString() + "'"  
+                };
+                SqlDataReader reader = getTodoList.ExecuteReader();
+                sc.Close();
             }
         }
 
-        for (int i = 0; i < ListItems.Count; i++)
-        {
-            string currentItem = (string)ListItems[i];
-            ListItem li = new ListItem();
-            li.Text = currentItem;
-            CheckBoxListTodo.Items.Remove(li);
-            lblMessage.Text += " " + currentItem;
-        }
-   
+        SqlDataSource3.DataBind();
+        CheckBoxListTodo.DataBind();
 
     }
 }

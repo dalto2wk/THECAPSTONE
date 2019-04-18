@@ -953,5 +953,8 @@ table, td, tr, th, thead {
 .hiddencol {
     display: none;
 }
-
+.imageList {
+    width: 150px;
+    height: 150px;
+}
 /*# sourceMappingURL=style.css.map */

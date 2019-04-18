@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="EditListing.aspx.cs" Inherits="company_dashboard_EditListing" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="EditListing.aspx.cs" Inherits="company_dashboard_EditListing" ValidateRequest ="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,12 +21,12 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <form class="form" method="POST" action="#" runat="server">
+    <form id="form1" runat="server">
         <div class="container-fluid" id="wrapper">
             <div class="row">
                 <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
                     <div class="sitelogo">
-                        <img src="images/logo.jpg" alt="logo"><a href="LandingPage.aspx"></a>
+                        <img src="/img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
                     </div>
 
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
@@ -77,7 +77,9 @@
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Job Title</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtJobTitle" type="text" name="regular" runat="server" class="form-control">
+                                                    <input id="txtJobTitle" type="text" name="regular" runat="server" class="form-control" maxlength="50" required>
+                                                    
+
                                                 </div>
                                             </div>
                                             <div runat="server" class="form-group row">
@@ -117,7 +119,9 @@
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Requirements/Credentials</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtRequirements" type="text" name="regular" runat="server" class="form-control">
+                                                    <input id="txtRequirements" type="text" name="regular" runat="server" class="form-control" maxlength="200" required>
+                                                      
+
                                                 </div>
                                             </div>
                                             <div runat="server" class="form-group row">
@@ -140,7 +144,8 @@
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Description</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtDescription" type="text" name="regular" runat="server" class="form-control"><span class="help-block">Students will see this when viewing listings.</span>
+                                                    <input id="txtDescription" type="text" name="regular" runat="server" class="form-control" maxlength="200" required><span class="help-block">Students will see this when viewing listings.</span>
+                                                    
                                                 </div>
 
                                             </div>
@@ -172,27 +177,79 @@
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Contact Name</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtCpName" type="text" name="regular" runat="server" class="form-control">
+                                                    <input id="txtCpName" type="text" name="regular" runat="server" class="form-control" maxlength="50" required>
+                                                    
+                                                    <asp:RegularExpressionValidator ID="ContactNameRegularExpressionValidator" runat="server" ControlToValidate="txtCpName" ErrorMessage="(Invalid Name)" ForeColor="Red" ValidationExpression="[a-zA-Z ]*$"></asp:RegularExpressionValidator>
+                                                   
                                                 </div>
                                             </div>
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Phone</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtCpPhone" type="text" name="regular" class="form-control" runat="server">
+                                                    <input id="txtCpPhone" type="text" name="regular" class="form-control" runat="server" maxlength="12" required>
+                                                    
+                                                    <asp:RegularExpressionValidator ID="PhoneRegularExpressionValidator" runat="server" ControlToValidate="txtCpPhone" ErrorMessage="(Invalid Phone Number)" ForeColor="Red" ValidationExpression="[\d -]+"></asp:RegularExpressionValidator>
+                                                    
                                                 </div>
                                             </div>
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">E-mail</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <input id="txtCpEmail" type="text" name="regular" class="form-control" runat="server">
+                                                    <input id="txtCpEmail" type="text" name="regular" class="form-control" runat="server" maxlength="30" required>
+                                                    
+                                                    <asp:RegularExpressionValidator ID="EmailRegularExpressionValidator" runat="server" ControlToValidate="txtCpEmail" ErrorMessage="(Invalid Email Address)" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                                                    
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Pictures related to posting</label>
-                                                <asp:Image ID="uploadedImage" runat="server" />
+                                                
+                                                <asp:DataList ID="DataList1" OnDeleteCommand="DataList1_DeleteCommand" runat="server" DataSourceID="postingImages" RepeatColumns="3" RepeatDirection="Horizontal" >
+                                                    <ItemTemplate>
+                                                        
+                                                        
+                                                        <asp:Image ID="Image1" ImageUrl='<%# writeImage(Eval("imageFile")) %>' CssClass="imageList" runat="server"/>
+                                                        <div>
+                                                            <asp:HiddenField ID="imageID" Value='<%#Eval("postingImageID")%>' runat="server" />
+                                                            <asp:LinkButton ID="imageDeleteBtn"  CommandName="Delete" CommandArgument='<%# writeImage(Eval("imageFile")) + ";" + Eval("postingImageID")%>' class="btn btn-danger text-center" type="button" Text="Delete Image" runat="server" />
+                                                        </div>
+                                                        
+                                                        <br />
+                                                    </ItemTemplate>
+                                                </asp:DataList>
+                                                
+                                                
+                                                <asp:SqlDataSource runat="server" ID="postingImages" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [imageFile], [postingImageID] FROM [Posting_Images] WHERE ([postingID] = @postingID)">
+                                                    <SelectParameters>
+                                                        <asp:SessionParameter SessionField="postID" Name="postingID" Type="Int32" DefaultValue=""></asp:SessionParameter>
+                                                    </SelectParameters>
+                                                </asp:SqlDataSource>
                                             </div>
-                                            <div runat="server" class="row">
+                                            <div class="container">
+
+                                                <fieldset>
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Media Upload</label>
+
+
+                                                            <div class="col-md-10">
+                                                                <div class="input-group">
+                                                                    <input runat="server" type="hidden" id="filename" name="filename" value="">
+
+                                                                    <asp:FileUpload ID="fileUp" CssClass="form-control form-control-sm" accept="image/bmp,image/gif,image/jpeg,image/png" AllowMultiple="true" runat="server"></asp:FileUpload>
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+
+                                            </div>
+
+                                            <%--<div runat="server" class="row">
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
                                                     <div runat="server" class="custom-control custom-radio">
                                                         <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" runat="server">
@@ -204,7 +261,7 @@
                                                         <label class="custom-control-label custom-control-description" for="customRadio2" runat="server">Save for Later</label>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>--%>
                                             <script type="text/javascript">
                                                 function window.onunload()
                                                 {
@@ -220,7 +277,7 @@
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 
                                                     <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Confirm Changes" runat="server" OnClick="updateBtnClick"></asp:Button>
-                                                    <asp:Button ID="populate" CssClass="btn btn-primary text-center" Text="Populate Fields" runat="server" OnClick="populate_Click" />
+                                                    <asp:Button ID="populate" UseSubmitBehavior="false" CausesValidation="false" CssClass="btn btn-primary text-center" Text="Populate Fields" runat="server" OnClick="populate_Click" />
                                                     <div>
                                                         <br />
                                                         <asp:Button ID="btnDeletePosting" class="btn btn-danger text-center" type="button" Text="Delete Listing" runat="server" OnClick="messageVisible"></asp:Button>

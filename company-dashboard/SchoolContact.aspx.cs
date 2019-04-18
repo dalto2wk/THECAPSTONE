@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class company_dashboard_SchoolContact : System.Web.UI.Page
 {
@@ -45,16 +47,19 @@ public partial class company_dashboard_SchoolContact : System.Web.UI.Page
 
     public void viewInfo(object sender, GridViewCommandEventArgs e)
     {
-        int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
-        GridViewRow row = GridView1.Rows[buttonRowIndex];
-        string schoolid = row.Cells[0].Text;
-        string schoolname = row.Cells[1].Text;
+        if (e.CommandName == "viewInfo")
+        {
+            int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
+            GridViewRow row = GridView1.Rows[buttonRowIndex];
+            string schoolid = row.Cells[0].Text;
+            string schoolname = row.Cells[1].Text;
 
-        Session["schoolName"] = schoolname;
-        Session["schoolID"] = schoolid;
+            Session["schoolName"] = schoolname;
+            Session["schoolID"] = schoolid;
 
 
-        Response.Redirect("SchoolInformation.aspx");
+            Response.Redirect("SchoolInformation.aspx");
+        }
     }
     public void logoutClick(object sender, EventArgs e)
     {
@@ -64,6 +69,7 @@ public partial class company_dashboard_SchoolContact : System.Web.UI.Page
 
     protected void Unnamed_Click(object sender, EventArgs e)
     {
+
         Sqldatasource1.SelectCommand = "SELECT Approval_Status.EmployerID, School.SchoolID,       School.SchoolName, School.CityCounty, School.state, Approval_Status.Approval_Status " +
             "FROM Approval_Status inner join School ON Approval_Status.SchoolID = School.SchoolID where Approval_Status.Approval_Status != 'Approved' AND Approval_Status.EmployerID = '" + Session["EmpID"]+"'";
         Sqldatasource1.DataBind();
@@ -84,5 +90,6 @@ public partial class company_dashboard_SchoolContact : System.Web.UI.Page
 
 
         Session["EmpID"] = Convert.ToString(select.ExecuteScalar());
+
     }
 }

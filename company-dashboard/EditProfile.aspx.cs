@@ -11,17 +11,17 @@ public partial class EditProfile : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+
         if (Session["username"] == null)
         {
             Response.Redirect("/Login.aspx");
         }
         else
         {
-            
-           loggedInUser.Text = Session["username"].ToString();
+
+            loggedInUser.Text = Session["username"].ToString();
         }
-        
+
         industry.Value = Session["username"].ToString();
         System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
         sc.Open();
@@ -35,7 +35,7 @@ public partial class EditProfile : System.Web.UI.Page
                 CommandText = "select businessName from Employer where cpUserName = '" + Session["username"].ToString() + "'"
             };
 
-            
+
             CompanyName.Value = insert.ExecuteScalar().ToString();
 
             insert.CommandText = "select size from Employer where cpUserName = '" + Session["username"].ToString() + "'";
@@ -94,21 +94,21 @@ public partial class EditProfile : System.Web.UI.Page
              "cpPassword = @cpPassword, " +
              "email = @email, " +
              "cpPhone = @phone," +
-             "lastUpdated = @lastUpdated"+
+             "lastUpdated = @lastUpdated" +
              " where cpUserName = '" + Session["username"].ToString() + "'"
 
-    };
+        };
 
-        update.Parameters.AddWithValue("@businessName", CompanyName.Value);
-        update.Parameters.AddWithValue("@size", size.Value);
-        update.Parameters.AddWithValue("@industry", industry.Value);
-        update.Parameters.AddWithValue("@description", description.Value);
-        update.Parameters.AddWithValue("@cpTitle", title.Value);
-        update.Parameters.AddWithValue("@cpName", ContactName.Value);
-        update.Parameters.AddWithValue("@cpUserName", username.Value);
+        update.Parameters.AddWithValue("@businessName", HttpUtility.HtmlEncode(CompanyName.Value));
+        update.Parameters.AddWithValue("@size", HttpUtility.HtmlEncode(size.Value));
+        update.Parameters.AddWithValue("@industry", HttpUtility.HtmlEncode(industry.Value));
+        update.Parameters.AddWithValue("@description", HttpUtility.HtmlEncode(description.Value));
+        update.Parameters.AddWithValue("@cpTitle", HttpUtility.HtmlEncode(title.Value));
+        update.Parameters.AddWithValue("@cpName", HttpUtility.HtmlEncode(ContactName.Value));
+        update.Parameters.AddWithValue("@cpUserName", HttpUtility.HtmlEncode(username.Value));
         update.Parameters.AddWithValue("@cpPassword", PasswordHash.HashPassword(password.Value));
-        update.Parameters.AddWithValue("@email", email.Value);
-        update.Parameters.AddWithValue("@Phone", Phone.Value);
+        update.Parameters.AddWithValue("@email", HttpUtility.HtmlEncode(email.Value));
+        update.Parameters.AddWithValue("@Phone", HttpUtility.HtmlEncode(Phone.Value));
         update.Parameters.AddWithValue("@lastUpdated", DateTime.Now);
 
         update.ExecuteScalar();
@@ -154,4 +154,3 @@ public partial class EditProfile : System.Web.UI.Page
         sc.Close();
     }
 }
-

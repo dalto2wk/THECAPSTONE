@@ -29,7 +29,7 @@
 		<div class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 			<div class="sitelogo">
-				<img src="images/logo.jpg" alt="logo"><a href="LandingPage.aspx"></a>
+				<img src="/img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
 			</div>
 													
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
