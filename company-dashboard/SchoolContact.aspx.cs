@@ -23,16 +23,19 @@ public partial class company_dashboard_SchoolContact : System.Web.UI.Page
 
     public void viewInfo(object sender, GridViewCommandEventArgs e)
     {
-        int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
-        GridViewRow row = GridView1.Rows[buttonRowIndex];
-        string schoolid = row.Cells[0].Text;
-        string schoolname = row.Cells[1].Text;
+        if (e.CommandName == "viewInfo")
+        {
+            int buttonRowIndex = Convert.ToInt32(e.CommandArgument);
+            GridViewRow row = GridView1.Rows[buttonRowIndex];
+            string schoolid = row.Cells[0].Text;
+            string schoolname = row.Cells[1].Text;
 
-        Session["schoolName"] = schoolname;
-        Session["schoolID"] = schoolid;
+            Session["schoolName"] = schoolname;
+            Session["schoolID"] = schoolid;
 
 
-        Response.Redirect("SchoolInformation.aspx");
+            Response.Redirect("SchoolInformation.aspx");
+        }
     }
     public void logoutClick(object sender, EventArgs e)
     {

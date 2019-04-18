@@ -32,7 +32,7 @@
             <div class="row">
                 <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
                     <div class="sitelogo">
-                        <img src="images/logo.jpg" alt="logo"><a href="LandingPage.aspx"></a>
+                        <img src="/img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
                     </div>
 
 
@@ -92,18 +92,12 @@ FROM            Posting INNER JOIN
                          Application ON Posting.postingID = Application.postingID group by Posting.postingTitle --%>
 
 
-                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView" OnRowCommand="EditBtn">
+                                        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingGridView" OnRowCommand="EditBtn" AllowSorting="true">
                                             <Columns>
-                                                <asp:BoundField DataField="Posting ID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"  HeaderText="Posting ID" SortExpression="Posting ID"></asp:BoundField>
+                                                <asp:BoundField DataField="Posting ID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"  HeaderText="Posting ID"></asp:BoundField>
                                                 <asp:BoundField DataField="Job Listing Title" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
                                                 <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
-                                                <asp:ButtonField ButtonType="Button"  ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Edit Listing" />
-                                                <%--<asp:CommandField ShowEditButton="True"  ControlStyle-CssClass="btn btn-primary" ShowHeader="True" EditText="Edit Listing" HeaderText="Action"></asp:CommandField>--%>
-                                                <%--<asp:TemplateField ShowHeader="true" HeaderText="Action">
-                                                    <ItemTemplate>
-                                                        <asp:Button ID="Button"  CommandName="editListing"  CssClass="btn btn-primary" Text="Edit Listing"   runat="server" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>--%>
+                                                <asp:ButtonField CommandName="EditBtn" ButtonType="Button"  ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Edit Listing"></asp:ButtonField>
                                             </Columns>
                                         </asp:GridView>
                                         <%--	<table class="table table-striped">
@@ -174,15 +168,17 @@ FROM            Posting INNER JOIN
                     <section class="row">
 
                         <div class="col-md-12 col-lg-8">
+                            
                             <div class="card mb-8">
-                               <div class="card-block">
+
+									<div class="card-block">
 										<h3 class="card-title">Notifications</h3>
 										<div class="dropdown card-title-btn-container">
-											<button class="btn btn-sm btn-subtle" runat="server" type="button"><em class="fa fa-list-ul"></em> View All</button>
+											<%--<button class="btn btn-sm btn-subtle" runat="server" type="button"><em class="fa fa-list-ul"></em> View All</button>
 											<button class="btn btn-sm btn-subtle dropdown-toggle" runat="server" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>
 											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#"><em class="fa fa-search mr-1"></em> More info</a>
 											    <a class="dropdown-item" href="#"><em class="fa fa-thumb-tack mr-1"></em> Pin Window</a>
-											    <a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close Window</a></div>
+											    <a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close Window</a></div>--%>
 										</div>
 										<h6 class="card-subtitle mb-2 text-muted">stay in touch</h6>
 										<div class="divider" style="margin-top: 1rem;"></div>
@@ -191,8 +187,8 @@ FROM            Posting INNER JOIN
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">1</div>
-															<div class="text-muted">Apr</div>
+															<div class="large" ><asp:Literal ID="day1" runat="server"></asp:Literal></div>
+                                                            <div class="text-muted" ><asp:Literal ID="month1" runat="server"></asp:Literal></div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle1" runat="server"/></h4>
@@ -207,8 +203,8 @@ FROM            Posting INNER JOIN
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">1</div>
-															<div class="text-muted">Apr</div>
+															<div class="large" ><asp:Literal ID="day2" runat="server"></asp:Literal></div>
+                                                            <div class="text-muted" ><asp:Literal ID="month2" runat="server"></asp:Literal></div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle2" runat="server"/></h4>
@@ -223,8 +219,8 @@ FROM            Posting INNER JOIN
 												<div class="col-xs-12">
 													<div class="row">
 														<div class="col-2 date">
-															<div class="large">31</div>
-															<div class="text-muted">Mar</div>
+															<div class="large" ><asp:Literal ID="day3" runat="server"></asp:Literal></div>
+                                                            <div class="text-muted" ><asp:Literal ID="month3" runat="server"></asp:Literal></div>
 														</div>
 														<div class="col-10">
 															<h4><asp:Literal ID="notificationTitle3" runat="server"/></h4>
@@ -236,7 +232,8 @@ FROM            Posting INNER JOIN
 											</div><!--End .article-->
 										</div>
 									</div>
-                                </div>
+
+								</div>
 
                         </div>
                         <div class="col-md-12 col-lg-4">

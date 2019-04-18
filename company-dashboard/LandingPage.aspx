@@ -27,7 +27,7 @@
 		<div class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 			<div class="sitelogo">
-				<img src="img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
+				<img src="/img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
 			</div>
 													
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
@@ -81,11 +81,11 @@
 									<div class="card-block">
 										<h3 class="card-title">Notifications</h3>
 										<div class="dropdown card-title-btn-container">
-											<button class="btn btn-sm btn-subtle" runat="server" type="button"><em class="fa fa-list-ul"></em> View All</button>
+											<%--<button class="btn btn-sm btn-subtle" runat="server" type="button"><em class="fa fa-list-ul"></em> View All</button>
 											<button class="btn btn-sm btn-subtle dropdown-toggle" runat="server" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>
 											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#"><em class="fa fa-search mr-1"></em> More info</a>
 											    <a class="dropdown-item" href="#"><em class="fa fa-thumb-tack mr-1"></em> Pin Window</a>
-											    <a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close Window</a></div>
+											    <a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close Window</a></div>--%>
 										</div>
 										<h6 class="card-subtitle mb-2 text-muted">stay in touch</h6>
 										<div class="divider" style="margin-top: 1rem;"></div>
@@ -163,15 +163,15 @@
 									<div class="card-block col-sm-12">
 										<h3 class="card-title">Recent Applications</h3>
 										<div class="dropdown card-title-btn-container">
-											<button class="btn btn-sm btn-subtle" type="button" runat="server"><em class="fa fa-list-ul"></em> View All</button>
+											<%--<button class="btn btn-sm btn-subtle" type="button" runat="server"><em class="fa fa-list-ul"></em> View All</button>
 											<button class="btn btn-sm btn-subtle dropdown-toggle" type="button" runat="server" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>
 											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#"><em class="fa fa-search mr-1"></em> More info</a>
 											    <a class="dropdown-item" href="#"><em class="fa fa-thumb-tack mr-1"></em> Pin Window</a>
-											    <a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close Window</a></div>
+											    <a class="dropdown-item" href="#"><em class="fa fa-remove mr-1"></em> Close Window</a></div>--%>
 										</div>
 										<div class="table-responsive">
                                             <%-- Should eventually connect to DB may neeed to add more runat="server" tags --%>
-                                            <asp:GridView ID="recentApplicationsGV"  runat="server" AutoGenerateColumns="False" DataKeyNames="applicationID" CssClass="table table-striped" UseAccessibleHeader="true" DataSourceID="SqlDataSource1">
+                                            <asp:GridView ID="recentApplicationsGV"  runat="server" AutoGenerateColumns="False" DataKeyNames="applicationID" CssClass="table table-striped" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True">
                                                 <Columns>
                                                     <asp:BoundField DataField="applicationID" HeaderText="Application ID" Visible="false" ReadOnly="True" SortExpression="applicationID" />
                                                     <asp:BoundField DataField="jobTitle" HeaderText="Job Title" SortExpression="jobTitle" />
@@ -249,7 +249,7 @@
 									<div class="card-block">
 										<h3 class="card-title">Todo List</h3>
 										<div class="dropdown card-title-btn-container">
-											<button class="btn btn-sm btn-subtle dropdown-toggle" runat="server" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>		
+<%--											<button class="btn btn-sm btn-subtle dropdown-toggle" runat="server" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em class="fa fa-cog"></em></button>		--%>
 										</div>
 										<h6 class="card-subtitle mb-2 text-muted">checklist</h6>
                                         <asp:CheckBoxList ID="CheckBoxListTodo" runat="server" DataSourceID="SqlDataSource3" DataTextField="ItemName" DataValueField="ItemName"></asp:CheckBoxList>

@@ -28,7 +28,7 @@
 		<div class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 			<div class="sitelogo">
-				<img src="img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
+				<img src="/img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
 
 			</div>
 													

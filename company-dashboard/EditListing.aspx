@@ -26,7 +26,7 @@
             <div class="row">
                 <nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
                     <div class="sitelogo">
-                        <img src="img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
+                        <img src="/img/logo.png" alt="logo"><a href="LandingPage.aspx"></a>
                     </div>
 
                     <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
@@ -204,19 +204,25 @@
                                             <br>
                                             <div class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Pictures related to posting</label>
-                                                <%--<asp:Image ID="uploadedImage" runat="server" />--%>
-                                                <asp:DataList ID="DataList1" runat="server" DataSourceID="postingImages" OnItemDataBound="writeImage">
+                                                
+                                                <asp:DataList ID="DataList1" OnDeleteCommand="DataList1_DeleteCommand" runat="server" DataSourceID="postingImages" RepeatColumns="3" RepeatDirection="Horizontal" >
                                                     <ItemTemplate>
                                                         
-                                                        <%--<asp:Label Text='<%# Eval("imageFile") %>' runat="server" ID="imageFileLabel" /><br />--%>
-                                                        <asp:Image ID="Image1" ImageUrl="<%# writeImage() %>" CssClass="imageList" runat="server" />
-                                                        <%--<asp:Image ID="postImage"  CssClass="imageList" runat="server" />--%>
+                                                        
+                                                        <asp:Image ID="Image1" ImageUrl='<%# writeImage(Eval("imageFile")) %>' CssClass="imageList" runat="server"/>
+                                                        <div>
+                                                            <asp:HiddenField ID="imageID" Value='<%#Eval("postingImageID")%>' runat="server" />
+                                                            <asp:LinkButton ID="imageDeleteBtn"  CommandName="Delete" CommandArgument='<%# writeImage(Eval("imageFile")) + ";" + Eval("postingImageID")%>' class="btn btn-danger text-center" type="button" Text="Delete Image" runat="server" />
+                                                        </div>
+                                                        
                                                         <br />
                                                     </ItemTemplate>
                                                 </asp:DataList>
-                                                <asp:SqlDataSource runat="server" ID="postingImages" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [imageFile] FROM [Posting_Images] WHERE ([postingID] = @postingID)">
+                                                
+                                                
+                                                <asp:SqlDataSource runat="server" ID="postingImages" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="SELECT [imageFile], [postingImageID] FROM [Posting_Images] WHERE ([postingID] = @postingID)">
                                                     <SelectParameters>
-                                                        <asp:SessionParameter SessionField="postID" Name="postingID" Type="Int32" DefaultValue="39"></asp:SessionParameter>
+                                                        <asp:SessionParameter SessionField="postID" Name="postingID" Type="Int32" DefaultValue=""></asp:SessionParameter>
                                                     </SelectParameters>
                                                 </asp:SqlDataSource>
                                             </div>
@@ -271,7 +277,7 @@
                                                 <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 
                                                     <asp:Button ID="btnSubmitPosting" class="btn btn-primary text-center" type="button" Text="Confirm Changes" runat="server" OnClick="updateBtnClick"></asp:Button>
-                                                    <asp:Button ID="populate" CssClass="btn btn-primary text-center" Text="Populate Fields" runat="server" OnClick="populate_Click" />
+                                                    <asp:Button ID="populate" UseSubmitBehavior="false" CausesValidation="false" CssClass="btn btn-primary text-center" Text="Populate Fields" runat="server" OnClick="populate_Click" />
                                                     <div>
                                                         <br />
                                                         <asp:Button ID="btnDeletePosting" class="btn btn-danger text-center" type="button" Text="Delete Listing" runat="server" OnClick="messageVisible"></asp:Button>

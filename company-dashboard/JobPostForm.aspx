@@ -26,7 +26,7 @@
 		<div runat="server" class="row">
 			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2">
 				<div class="sitelogo">
-				<a href="LandingPage.aspx"><img src="img/logo.png" alt="logo"></a>
+				<a href="LandingPage.aspx"><img src="/img/logo.png" alt="logo"></a>
 			</div>
 													
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
@@ -240,7 +240,9 @@
 											<div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
 
 											<asp:Button id="btnSubmitPosting" CssClass="btn btn-primary text-center" type="button" text="Submit" OnClick="submitPostingBtnClick" runat="server"></asp:Button>   
+
                                             <asp:Button ID="populate" CssClass="btn btn-primary text-center" Text="Populate Fields" runat="server" UseSubmitBehavior="false" CausesValidation="False" OnClick="populate_Click" />
+
 											</div>
 										</div>
 									</form>		
