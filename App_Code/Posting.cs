@@ -20,11 +20,12 @@ public class Posting {
     private string postStart;
     private string postEnd;
     private string opportunityStartDate;
-    private Stream file; 
+    private Stream file;
+    private string isActive;
 
 
     public Posting(String postingTitle, String description, String jobRequirements,
-            String contactInfo, Employer empID,  string cpPhone,string cpEmail, string postStart, string postEnd, string opportunityStartDate) {
+            String contactInfo, Employer empID,  string cpPhone,string cpEmail, string postStart, string postEnd, string opportunityStartDate,string isActive) {
 		setPostingTitle(postingTitle);
         setDescription(description);
 		setJobRequirements(jobRequirements);
@@ -39,8 +40,18 @@ public class Posting {
         setPostEnd(postEnd);
         setOppStart(opportunityStartDate);
         this.file = null;
+        setIsActive(isActive);
     }
 
+    public void setIsActive(string isActive)
+    {
+        this.isActive = isActive;
+    }
+
+    public string getIsActive()
+    {
+        return this.isActive;
+    }
 
     public void setfile(Stream file)
     {

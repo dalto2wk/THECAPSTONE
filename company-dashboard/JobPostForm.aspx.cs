@@ -93,12 +93,13 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
             String postingStartDate = HttpUtility.HtmlEncode(postStart.Value);
             String postingEndDate = HttpUtility.HtmlEncode(postEnd.Value);
             String oppStartDate = HttpUtility.HtmlEncode(opportunityStartDate.Value);
-
+            String isActive = HttpUtility.HtmlEncode(statusRadioBtn.SelectedValue);
+            //String isActive = HttpUtility.HtmlEncode()
             //fix the emp id to pull from what is in sql from the login 
             School schoolName = new School(listBoxSchool.SelectedValue);
-            Employer emp = new Employer("James Madison University", 20000, "Higher Education", "college", "Bill Jon", "BJ123", "password", "bj123@gmail.com", "555-555-5555", Convert.ToInt16(Session["EmpID"]));
+            Employer emp = new Employer(Convert.ToInt16(Session["EmpID"]));
 
-            Posting post = new Posting(postingTitle, description, requirements, cpName, emp, cpPhone, cpEmail, postingStartDate, postingEndDate, oppStartDate);
+            Posting post = new Posting(postingTitle, description, requirements, cpName, emp, cpPhone, cpEmail, postingStartDate, postingEndDate, oppStartDate,isActive);
 
 
 
@@ -109,7 +110,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand posting = new System.Data.SqlClient.SqlCommand
             {
                 Connection = sc,
-                CommandText = "Insert into Posting values (@postingTitle, @description, @jobRequirements, @cpName, @employerID, @LastUpdatedBy, @LastUpdated ,@cpEmail,@cpPhone,@postStart,@postEnd,@opportunityStartDate)"
+                CommandText = "Insert into Posting values (@postingTitle, @description, @jobRequirements, @cpName, @employerID, @LastUpdatedBy, @LastUpdated ,@cpEmail,@cpPhone,@postStart,@postEnd,@opportunityStartDate,@isActive)"
             };
             //change employer id to match that of the logged in user
 
@@ -125,6 +126,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
             posting.Parameters.AddWithValue("@postStart", post.getStartDate());
             posting.Parameters.AddWithValue("@postEnd", post.getPostEndDate());
             posting.Parameters.AddWithValue("@opportunityStartDate", post.getOpportunityStartDate());
+            posting.Parameters.AddWithValue("@isActive", post.getIsActive());
             posting.ExecuteNonQuery();
 
 

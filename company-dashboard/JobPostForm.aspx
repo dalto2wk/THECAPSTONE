@@ -223,18 +223,22 @@
 											
 											</div>
 										<div runat="server" class="row">
-											<div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
-												<div runat="server" class="custom-control custom-radio">
-												  <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" runat="server">
-												  <label class="custom-control-label custom-control-description" for="customRadio1" runat="server">Post Now</label>
-												</div>
-												<br />
-												<div runat="server" class="custom-control custom-radio">
-												  <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" runat="server">
-												  <label class="custom-control-label custom-control-description" for="customRadio2" runat="server">Save for Later</label>
-												</div>
-											</div>
-										</div>
+                                                <div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">
+                                                    <%--<div runat="server" class="custom-control custom-radio">
+                                                        <input type="radio" id="active" value="Y" name="customRadio" class="custom-control-input" runat="server">
+                                                        <label class="custom-control-label custom-control-description" for="customRadio1" runat="server">Post Now</label>
+                                                    </div>
+                                                    <br />
+                                                    <div runat="server" class="custom-control custom-radio">
+                                                        <input type="radio" id="inactive" value="N" name="customRadio" class="custom-control-input" runat="server">
+                                                        <label class="custom-control-label custom-control-description" for="customRadio2" runat="server">Save for Later</label>
+                                                    </div>--%>
+                                                    <asp:RadioButtonList runat="server" ID="statusRadioBtn" CssClass="custom-control custom-radio">
+                                                        <asp:ListItem CssClass="custom-control-input" Value="Y" Text="Post Now"></asp:ListItem>
+                                                        <asp:ListItem CssClass="custom-control-input" Value="N" Text="Save for Later"></asp:ListItem>
+                                                    </asp:RadioButtonList>
+                                                </div>
+                                            </div>
 										<br>
 										<div runat="server" class="row">
 											<div runat="server" class="col-lg-6 mb-sm-4 mb-lg-0">

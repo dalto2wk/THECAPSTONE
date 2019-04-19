@@ -39,6 +39,10 @@ public class Employer
 
 
     }
+    public Employer(int empID)
+    {
+        setEmpID(empID);
+    }
 
     public  void setLastUpdated()
     {

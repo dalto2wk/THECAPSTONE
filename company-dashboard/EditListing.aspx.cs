@@ -273,7 +273,8 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                  "postStart = @postStart, " +
                  "postEnd = @postEnd, " +
                  "opportunityStartDate = @opportunityStartDate, " +
-                 "lastUpdated = GetDATE()" +
+                 "lastUpdated = GetDATE(), " +
+                 "isActive = @isActive" +
                  " where postingID = @postingID"
 
             };
@@ -287,6 +288,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             update.Parameters.AddWithValue("@postEnd", HttpUtility.HtmlEncode(txtpostEnd.Value));
             update.Parameters.AddWithValue("@opportunityStartDate", HttpUtility.HtmlEncode(txtopportunityStartDate.Value));
             update.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
+            update.Parameters.AddWithValue("@isActive", HttpUtility.HtmlEncode(statusRadioBtn.SelectedValue));
 
             update.ExecuteNonQuery();
 
@@ -521,9 +523,11 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         select.Parameters.AddWithValue("@locationID", locationID);
         SqlDataReader reader = select.ExecuteReader();
 
-        
+        result = reader.Read();
 
-        return reader.Read(); 
+        sc.Close();
+
+        return result; 
     }
 
     /// <summary>
@@ -541,6 +545,8 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             List<School> school = getPostingSchools();
             Location State = getPostingState();
             Location City = getPostingCity();
+
+        
 
         if (IsPostBack)
         {
@@ -572,6 +578,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                         SqlDataSourceCity.SelectCommand = "select locationID, citycounty from cities where state = '" + State.getName() + "'";
 
                         SqlDataSourceCity.DataBind();
+                        sc.Close();
 
                     }
 
@@ -600,6 +607,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                         listBoxSchool.AutoPostBack = false;
                         PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State.getName() + "' and CityCounty = '" + City.getName() + "'";
                         PostingSchool.DataBind();
+                        sc.Close();
                     }
 
 
@@ -610,9 +618,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
             }
 
-        //i need to loop through the image datalist and find the element id of postImage and call writeImage or break up the write method to do an image at a time
-
-        //uploadedImage.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + ".jpg";
+            statusRadioBtn.SelectedValue = getActiveStatus();
 
         for (int i = 0; i < interests.Count; i++)
             {
@@ -645,9 +651,31 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         }
     }
 
-  
+    protected string getActiveStatus()
+    {
+        string result = "";
 
-  
+        System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
+        sc.Open();
+
+        System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand
+        {
+            Connection = sc,
+
+            CommandText = "select isActive from posting where postingID = @postingID"
+
+        };
+        select.Parameters.AddWithValue("@postingID", Session["postID"]);
+        SqlDataReader reader = select.ExecuteReader();
+
+        while (reader.Read())
+        {
+            result = reader.GetString(0);
+        }
+
+        return result;
+    }
+
     protected void StateSelection_Change(object sender, EventArgs e)
     {
         count1 = 1;
@@ -803,59 +831,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         return result;
     }
 
-    //protected void writeImage(object sender, DataListItemEventArgs e)
-    //{
-    //    System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-    //    cn.Open();
-
-    //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select imageFile,postingImageID from Posting_Images where postingID= @postingID", cn);
-    //    cmd.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
-
-    //    System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
-    //    string postingImageID = "";
-    //    while (dr.Read())
-    //    {
-    //        byte[] fileData = (byte[])dr.GetValue(0);
-    //        postingImageID = dr.GetInt32(1).ToString();
-    //        string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg");
-    //        System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
-
-    //        System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
-            
-    //        bw.Write(fileData);
-    //        bw.Close();
-    //        fs.Close();
-            
-            
-            
-            
-    //        //var image = (Page.FindControl("Image1") as Image).Controls.OfType<Image>();
-
-    //        //foreach (Control c in image)
-    //        //{
-    //        //    if (c is Image)
-    //        //    {
-    //        //        ((Image)c).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
-    //        //    }
-    //        //}
-
-    //        //if(e.Item.ItemType == ListItemType.Item)
-    //        //{
-    //        //    DataRowView drv = (DataRowView)(e.Item.DataItem);
-    //        //    Image image = (Image)e.Item.FindControl("Image1");
-    //        //    image.ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
-    //        //    //((Image)(e.Item.DataItem)).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
-    //        //}
-
-
-    //    }
-
-
-        
-    //    dr.Close();
-        
-
-    //}
+    
 
     public String writeImage(object e)
     {
@@ -912,32 +888,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
         return result;
     }
 
-    //protected void imageDeleteBtn_Click(object sender, EventArgs e)
-    //{
-    //    System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-    //    sc.Open();
-
-    //    System.Data.SqlClient.SqlCommand delete = new System.Data.SqlClient.SqlCommand
-    //    {
-    //        Connection = sc,
-
-    //        CommandText = "delete from Posting_Images where Posting_Images.postingImageID = @postingImageID"
-
-    //    };
-
-        
-
-    //    delete.Parameters.AddWithValue("@postingImageID", imageID.Value);
-    //    delete.ExecuteNonQuery();
-
-    //    if (System.IO.File.Exists(ImageLocation.ImageUrl))
-    //    {
-    //        File.Delete(Server.MapPath(ImageLocation.ImageUrl));
-    //    }
-    //    DataList1.DataBind();
-
-    //    sc.Close();
-    //}
+    
 
     protected void DataList1_DeleteCommand(object source, DataListCommandEventArgs e)
     {
