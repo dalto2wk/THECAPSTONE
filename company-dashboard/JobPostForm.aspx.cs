@@ -21,7 +21,7 @@ public partial class company_dashboard_JobPostForm : System.Web.UI.Page
     /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["username"] == null)
+        if (Session["username"] == null || HttpContext.Current.Request.UrlReferrer == null)
         {
             Response.Redirect("/Login.aspx");
         }

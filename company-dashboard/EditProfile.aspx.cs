@@ -12,7 +12,7 @@ public partial class EditProfile : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        if (Session["username"] == null)
+        if (Session["username"] == null || HttpContext.Current.Request.UrlReferrer == null)
         {
             Response.Redirect("/Login.aspx");
         }

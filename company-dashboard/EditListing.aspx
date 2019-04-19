@@ -101,16 +101,7 @@
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">School</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <%--<select id="ddlInterest" class="custom-select form-control" runat="server">
-														<option selected runat="server">What category does this job fit to attract students</option>
-														<option value="Mechanics" runat="server">Mechanics</option>
-														<option value="Technology" runat="server">Technology</option>
-														<option value="Business - General" runat="server">Business - General</option>
-														<option value="Culinary" runat="server">Culinary</option>
-														<option value="Construction" runat="server">Construction</option>
-														<option value="Other" runat="server">Other</option>
-													</select>--%>
-                                                    <%-- <asp:CheckBoxList ID="cboxInterests" runat="server" DataSourceID="PostingInterest" DataTextField="name" DataValueField="name"></asp:CheckBoxList>--%>
+                                                    
                                                     <asp:ListBox ID="listBoxSchool" CssClass="form-control" runat="server" DataSourceID="PostingSchool" DataTextField="SchoolName" DataValueField="SchoolID" SelectionMode="Multiple" AutoPostBack="true"></asp:ListBox>
                                                     <asp:SqlDataSource runat="server" ID="PostingSchool" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand=""></asp:SqlDataSource>
                                                     <%--<asp:SqlDataSource runat="server" ID="SqlDataSourceSchool" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand=""></asp:SqlDataSource>--%>
@@ -127,16 +118,7 @@
                                             <div runat="server" class="form-group row">
                                                 <label class="col-md-3 col-form-label" runat="server">Student Interest</label>
                                                 <div runat="server" class="col-md-9">
-                                                    <%--<select id="ddlInterest" class="custom-select form-control" runat="server">
-														<option selected runat="server">What category does this job fit to attract students</option>
-														<option value="Mechanics" runat="server">Mechanics</option>
-														<option value="Technology" runat="server">Technology</option>
-														<option value="Business - General" runat="server">Business - General</option>
-														<option value="Culinary" runat="server">Culinary</option>
-														<option value="Construction" runat="server">Construction</option>
-														<option value="Other" runat="server">Other</option>
-													</select>--%>
-                                                    <%-- <asp:CheckBoxList ID="cboxInterests" runat="server" DataSourceID="PostingInterest" DataTextField="name" DataValueField="name"></asp:CheckBoxList>--%>
+                                                    
                                                     <asp:ListBox ID="listBoxInterests" CssClass="form-control" runat="server" DataSourceID="PostingInterest" DataTextField="name" DataValueField="interestID" SelectionMode="Multiple" OnPreRender="Page_PreRender"></asp:ListBox>
                                                     <asp:SqlDataSource runat="server" ID="PostingInterest" ConnectionString='<%$ ConnectionStrings:ProjectConnectionString %>' SelectCommand="SELECT [interestID], [name] FROM [Interest]"></asp:SqlDataSource>
                                                 </div>

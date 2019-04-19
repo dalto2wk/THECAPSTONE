@@ -29,7 +29,7 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
 
 
-        if (Session["username"] == null)
+        if (Session["username"] == null || HttpContext.Current.Request.UrlReferrer == null)
         {
             Response.Redirect("/Login.aspx");
         }
@@ -535,8 +535,8 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
     {
 
 
-        //try
-        //{
+        try
+        {
             List<Interests> interests = getPostingInterests();
             List<School> school = getPostingSchools();
             Location State = getPostingState();
@@ -637,61 +637,15 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
                     }
                 }
             }
-            
-        //}
-        //catch
-        //{
 
-        //}
+        }
+        catch
+        {
+
+        }
     }
 
-    //protected String writeImage()
-    //{
-    //    String result = "";
-
-        
-    //    System.Data.SqlClient.SqlConnection cn = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
-    //    cn.Open();
-
-    //    System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select imageFile,postingImageID from Posting_Images where postingID= @postingID", cn);
-    //    cmd.Parameters.AddWithValue("@postingID", Session["postID"].ToString());
-
-    //    System.Data.SqlClient.SqlDataReader dr = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
-    //    string postingImageID = "";
-    //    while (dr.Read())
-    //    {
-    //        byte[] fileData = (byte[])dr.GetValue(0);
-    //        postingImageID = dr.GetInt32(1).ToString();
-    //        string savedFilePath = Server.MapPath("~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID+ ".jpg");
-    //        System.IO.FileStream fs = new System.IO.FileStream(savedFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite);
-
-    //        System.IO.BinaryWriter bw = new System.IO.BinaryWriter(fs);
-    //        //Response.ContentType = "images/jpeg";
-    //        //Response.BinaryWrite(fileData);
-    //        bw.Write(fileData);
-    //        bw.Close();
-    //        //var image = (Page.FindControl("Image1") as Image).Controls.OfType<Image>();
-
-    //        //foreach(Control c in image)
-    //        //{
-    //        //    if(c is Image)
-    //        //    {
-    //        //        ((Image)c).ImageUrl = "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
-    //        //    }
-    //        //}
-
-    //        fs.Close();
-    //    }
-        
-        
-    //    //HtmlGenericControl image = DataList1.Item.FindControl("Image1") as HtmlGenericControl;
-    //    dr.Close();
-    //    //the below way stores to solution using response.binarywrite is better
-    //    //Response.Redirect("~\\Files\\Report.pdf");
-
-
-    //    return "~\\listingFiles\\" + Session["username"].ToString() + "_" + Session["title"].ToString() + postingImageID + ".jpg";
-    //}
+  
 
   
     protected void StateSelection_Change(object sender, EventArgs e)
@@ -708,10 +662,12 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
 
 
 
-        SqlDataSourceCity.SelectCommand = "select citycounty from cities where state = '" + State + "'";
+        //SqlDataSourceCity.SelectCommand = "select citycounty from cities where state = '" + State + "'";
+        SqlDataSourceCity.SelectCommand = "SELECT [LocationID], [CityCounty] FROM (SELECT CityCounty, MIN(LocationID) LocationID FROM cities where state = '" + State + "'"+ " GROUP BY CityCounty) A ORDER BY LocationID";
         SqlDataSourceCity.DataBind();
 
         PostingSchool.SelectCommand = "select SchoolID, SchoolName from School Where State = '" + State + "' and CityCounty = '" + City + "'";
+        
         PostingSchool.DataBind();
 
 
@@ -780,8 +736,8 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
     }
     protected void deleteBtnClick(object sender, EventArgs e)
     {
-        try
-        {
+        //try
+        //{
 
             System.Data.SqlClient.SqlConnection sc = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["AWSString"].ConnectionString);
             sc.Open();
@@ -805,11 +761,11 @@ public partial class company_dashboard_EditListing : System.Web.UI.Page
             Response.Redirect("Listing.aspx");
 
 
-        }
-        catch
-        {
+        //}
+        //catch
+        //{
 
-        }
+        //}
     }
     protected void populate_Click(object sender, EventArgs e)
     {
