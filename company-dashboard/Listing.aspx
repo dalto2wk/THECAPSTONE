@@ -96,16 +96,16 @@ FROM            Posting INNER JOIN
                                         <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="JobPostingDataSource" OnRowCommand="EditBtn">
                                             <Columns>
                                                 <asp:BoundField DataField="postingID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"  HeaderText="Posting ID" SortExpression="postingID"></asp:BoundField>
-                                                <asp:BoundField DataField="jobTitle" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
+                                                <asp:BoundField DataField="postingTitle" HeaderText="Job Listing Title" SortExpression="Job Listing Title"></asp:BoundField>
 
                                                 <asp:BoundField DataField="Number Of Applicants" HeaderText="Number Of Applicants" ReadOnly="True" SortExpression="Number Of Applicants"></asp:BoundField>
                                                 <asp:ButtonField CommandName="EditBtn" ButtonType="Button"  ControlStyle-CssClass="btn btn-primary" HeaderText="Action" Text="Edit Listing"></asp:ButtonField>
                                             </Columns>
                                         </asp:GridView>
                                       
-                                        <asp:SqlDataSource runat="server" ID="JobPostingDataSource" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="" FilterExpression="[JobTitle] LIKE '%{0}%'">
+                                        <asp:SqlDataSource runat="server" ID="JobPostingDataSource" ConnectionString='<%$ ConnectionStrings:AWSString %>' SelectCommand="" FilterExpression="[postingTitle] LIKE '%{0}%'">
                                         <FilterParameters>
-                                                <asp:ControlParameter Name="jobTitle" ControlID="searchbox" PropertyName="Text" />
+                                                <asp:ControlParameter Name="postingTitle" ControlID="searchbox" PropertyName="Text" />
                                         </FilterParameters>
                                         </asp:SqlDataSource>
                                     </div>
