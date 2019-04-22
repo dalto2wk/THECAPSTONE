@@ -81,8 +81,11 @@
 
 								<div class="form-group">
 									<label for="password" runat="server">Password</label>
-									<input id="password" type="password" runat="server" class="form-control" maxlength="100" name="password" required data-eye>
+									<input id="password" type="password" runat="server" class="form-control" maxlength="100" name="password" required data-eye><span class="help-block">8 characteres minimum.</span>
+                                    <br />
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword" runat="server" ControlToValidate="password" ErrorMessage="(Required)" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="PasswordRegularExpressionValidator" runat="server" ControlToValidate="password" ErrorMessage="(Password less than 8 characters)"  ForeColor="Red" ValidationExpression="^[\s\S]{8,}$"></asp:RegularExpressionValidator>
+
 
 								</div>
 
@@ -90,7 +93,7 @@
 									<label for="Phone" runat="server">Phone</label>
 									<input id="Phone" type="Phone" class="form-control" maxlength="12" runat="server" name="Phone" required data-eye>
                                     <asp:RequiredFieldValidator ID="PhoneRequiredFieldValidator" runat="server" ControlToValidate="Phone" ErrorMessage="(Required)" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="PhoneRegularExpressionValidator" runat="server" ControlToValidate="Phone" ErrorMessage="(Invalid Phone Number)" ForeColor="Red" ValidationExpression="[\d -]+"></asp:RegularExpressionValidator>
+                                    <asp:RegularExpressionValidator ID="PhoneRegularExpressionValidator" runat="server" ControlToValidate="Phone" ErrorMessage="(Invalid Phone Number)"  ForeColor="Red" ValidationExpression="[\d -]+"></asp:RegularExpressionValidator>
                                     
 								</div>
 
